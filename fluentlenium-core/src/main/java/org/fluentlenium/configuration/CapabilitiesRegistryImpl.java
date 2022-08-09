@@ -16,28 +16,28 @@ public class CapabilitiesRegistryImpl extends AbstractFactoryRegistryImpl<Capabi
      */
     public CapabilitiesRegistryImpl() {
         super(CapabilitiesFactory.class, ReflectiveCapabilitiesFactory.class);
-        registerDesiredCapabilities();
+        registerDriverCapabilities();
     }
 
     /**
      * Desired capabilities factory.
      */
     @DefaultFactory
-    public static class DesiredCapabilitiesFactory extends MethodInvocationReflectionFactory {
+    public static class DriverCapabilitiesFactory extends MethodInvocationReflectionFactory {
 
         /**
          * Creates a new desired capabilities factory.
          *
          * @param method method to invoke that returns a {@link Capabilities} instance
          */
-        public DesiredCapabilitiesFactory(Method method) {
+        public DriverCapabilitiesFactory(Method method) {
             super(method, null);
         }
     }
 
-    private void registerDesiredCapabilities() {
+    private void registerDriverCapabilities() {
         Arrays.stream(PredefinedDesiredCapabilities.class.getMethods())
-                .forEach(method -> register(new DesiredCapabilitiesFactory(method)));
+                .forEach(method -> register(new DriverCapabilitiesFactory(method)));
     }
 
     @Override

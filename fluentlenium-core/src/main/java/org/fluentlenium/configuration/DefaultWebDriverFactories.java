@@ -1,8 +1,14 @@
 package org.fluentlenium.configuration;
 
+import io.appium.java_client.gecko.options.GeckoOptions;
+import io.appium.java_client.safari.options.SafariOptions;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -26,7 +32,7 @@ public class DefaultWebDriverFactories {
          * Creates a new firefox WebDriver factory.
          */
         public FirefoxWebDriverFactory() {
-            super("firefox", "org.openqa.selenium.firefox.FirefoxDriver");
+            super("firefox", "org.openqa.selenium.firefox.FirefoxDriver", GeckoOptions.class);
         }
     }
 
@@ -40,7 +46,7 @@ public class DefaultWebDriverFactories {
          * Creates a new chrome WebDriver factory.
          */
         public ChromeWebDriverFactory() {
-            super("chrome", "org.openqa.selenium.chrome.ChromeDriver");
+            super("chrome", "org.openqa.selenium.chrome.ChromeDriver", ChromeOptions.class);
         }
     }
 
@@ -54,7 +60,7 @@ public class DefaultWebDriverFactories {
          * Creates a new internet explorer WebDriver factory.
          */
         public InternetExplorerWebDriverFactory() {
-            super("ie", "org.openqa.selenium.ie.InternetExplorerDriver");
+            super("ie", "org.openqa.selenium.ie.InternetExplorerDriver", InternetExplorerOptions.class);
         }
     }
 
@@ -68,7 +74,7 @@ public class DefaultWebDriverFactories {
          * Creates a new edge WebDriver factory.
          */
         public EdgeWebDriverFactory() {
-            super("edge", "org.openqa.selenium.edge.EdgeDriver");
+            super("edge", "org.openqa.selenium.edge.EdgeDriver", EdgeOptions.class);
         }
     }
 
@@ -82,7 +88,7 @@ public class DefaultWebDriverFactories {
          * Creates a new safari WebDriver factory.
          */
         public SafariWebDriverFactory() {
-            super("safari", "org.openqa.selenium.safari.SafariDriver");
+            super("safari", "org.openqa.selenium.safari.SafariDriver", SafariOptions.class);
         }
     }
 
@@ -96,7 +102,7 @@ public class DefaultWebDriverFactories {
          * Creates a new htmlUnit WebDriver factory.
          */
         public HtmlUnitWebDriverFactory() {
-            super("htmlunit", "org.openqa.selenium.htmlunit.HtmlUnitDriver");
+            super("htmlunit", "org.openqa.selenium.htmlunit.HtmlUnitDriver", Capabilities.class);
         }
 
         @Override
@@ -118,7 +124,7 @@ public class DefaultWebDriverFactories {
          * Creates a new Opera WebDriver factory.
          */
         public OperaWebDriverFactory() {
-            super("opera", "org.openqa.selenium.opera.OperaDriver");
+            super("opera", "org.openqa.selenium.opera.OperaDriver", OperaOptions.class);
         }
     }
 
@@ -136,7 +142,7 @@ public class DefaultWebDriverFactories {
 
         @Override
         protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
-                Object... args)
+                                        Object... args)
                 throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
             URL url = null;
             if (configuration != null) {

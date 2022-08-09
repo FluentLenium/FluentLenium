@@ -126,7 +126,7 @@
         <spring.version>5.3.22</spring.version>
         <slf4j.version>1.7.36</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v103</seleniumDevtools.artifactId>
-        <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage", "remote-debugging-port=9512"]}}</fluentlenium.capabilities.default>
+        <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
     </properties>
 
     <dependencyManagement>
