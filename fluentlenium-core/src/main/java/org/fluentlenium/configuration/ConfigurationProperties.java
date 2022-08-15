@@ -152,7 +152,7 @@ public interface ConfigurationProperties {
      *
      * @return Capabilities property value
      * @see Capabilities
-     * @see <a href="https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities">Selenium DesiredCapabilities Wiki Page</a>
+     * @see <a href="https://www.selenium.dev/documentation/webdriver/capabilities/">Selenium DesiredCapabilities Wiki Page</a>
      */
     Capabilities getCapabilities();
 

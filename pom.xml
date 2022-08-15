@@ -86,10 +86,10 @@
             <name>Filip Cynarski</name>
             <email>filip@cynarski.eu</email>
             <url>https://github.com/filipcynarski</url>
-            <organization>Ocado Technology</organization>
-            <organizationUrl>http://www.ocadotechnology.com/</organizationUrl>
+            <organization>Filip Cynarski Software Development</organization>
+            <organizationUrl>https://cynarski.eu/</organizationUrl>
             <roles>
-                <role>developer</role>
+                <role>maintainer</role>
             </roles>
         </developer>
         <developer>

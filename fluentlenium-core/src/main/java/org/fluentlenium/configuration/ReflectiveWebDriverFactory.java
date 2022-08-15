@@ -1,9 +1,10 @@
 package org.fluentlenium.configuration;
 
+import com.google.common.collect.ImmutableList;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -93,6 +94,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
         return null;
     }
 
+
     @Override
     public WebDriver newWebDriver(Capabilities capabilities, ConfigurationProperties configuration) {
         if (!available) {
@@ -112,7 +114,11 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
 
                 try {
                     Capabilities browserCapabilities = capabilitiesClass.getDeclaredConstructor().newInstance();
-                    browserCapabilities = browserCapabilities.merge(capabilities);
+
+                    capabilities.asMap().forEach(((ChromeOptions) browserCapabilities)::addArguments);
+
+                    ((ChromeOptions) browserCapabilities).addArguments(capabilities.asMap().get(ChromeOptions.CAPABILITY.))
+
                     return newInstance(webDriverClass, configuration, browserCapabilities);
                 } catch (NoSuchMethodException e) { // NOPMD EmptyCatchBlock
                     // Ignore capabilities.
