@@ -19,7 +19,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
     protected Object[] args;
     protected String webDriverClassName;
     protected Class<? extends WebDriver> webDriverClass;
-    protected Class<? extends Capabilities> capabilitiesClass = Capabilities.class;
+    protected Class<? extends Capabilities> capabilitiesClass;
     protected boolean available;
 
     public ReflectiveWebDriverFactory(String name, String webDriverClassName, Object... args) {
@@ -115,11 +115,13 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
                 try {
                     Capabilities browserCapabilities = capabilitiesClass.getDeclaredConstructor().newInstance();
 
-                    capabilities.asMap().forEach(((ChromeOptions) browserCapabilities)::addArguments);
 
-                    ((ChromeOptions) browserCapabilities).addArguments(capabilities.asMap().get(ChromeOptions.CAPABILITY.))
 
-                    return newInstance(webDriverClass, configuration, browserCapabilities);
+//                    capabilities.asMap().forEach(((ChromeOptions) browserCapabilities)::addArguments);
+
+//                    ((ChromeOptions) browserCapabilities).addArguments(capabilities.asMap().get(ChromeOptions.CAPABILITY.))
+
+                    return newInstance(webDriverClass, configuration, (ChromeOptions)browserCapabilities);
                 } catch (NoSuchMethodException e) { // NOPMD EmptyCatchBlock
                     // Ignore capabilities.
                 }
