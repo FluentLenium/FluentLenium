@@ -1,6 +1,7 @@
 package org.fluentlenium.configuration;
 
 import com.google.common.collect.ImmutableList;
+import io.appium.java_client.gecko.options.GeckoOptions;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
@@ -113,15 +114,16 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
                 argsList.add(0, capabilities);
 
                 try {
-                    Capabilities browserCapabilities = capabilitiesClass.getDeclaredConstructor().newInstance();
+                    Capabilities browserCapabilities;
 
-
-
-//                    capabilities.asMap().forEach(((ChromeOptions) browserCapabilities)::addArguments);
-
-//                    ((ChromeOptions) browserCapabilities).addArguments(capabilities.asMap().get(ChromeOptions.CAPABILITY.))
-
-                    return newInstance(webDriverClass, configuration, (ChromeOptions)browserCapabilities);
+                    if (capabilitiesClass == ChromeOptions.class ) {
+                        browserCapabilities = new GenericBrowserCapabilities<ChromeOptions>().getBrowserOptions(ChromeOptions.class, capabilities);
+                    } else if (capabilitiesClass == GeckoOptions.class) {
+                        browserCapabilities = new GenericBrowserCapabilities<GeckoOptions>().getBrowserOptions(GeckoOptions.class, capabilities);
+                    } else {
+                        browserCapabilities = capabilities;
+                    }
+                    return newInstance(webDriverClass, configuration, browserCapabilities);
                 } catch (NoSuchMethodException e) { // NOPMD EmptyCatchBlock
                     // Ignore capabilities.
                 }
