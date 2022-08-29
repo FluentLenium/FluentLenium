@@ -1,6 +1,5 @@
 package org.fluentlenium.core.domain;
 
-import java.util.Collections;
 import org.fluentlenium.adapter.FluentAdapter;
 import org.fluentlenium.core.components.ComponentException;
 import org.fluentlenium.core.components.ComponentsManager;
@@ -10,30 +9,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.interactions.Mouse;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 @SuppressWarnings("PMD.ExcessivePublicCount")
@@ -145,8 +133,7 @@ public class FluentWebElementTest {
     public void testClearReactInputEmpty() {
         when(fluentElement.attribute("value")).thenReturn("");
         fluentElement.clearReactInput();
-        verify(fluentElement, times(2)).attribute("value");
-        verify(driver, times(0)).executeScript(
+        verify(driver, never()).executeScript(
                 "arguments[0].value = arguments[1]",
                 element, "");
     }
@@ -155,7 +142,6 @@ public class FluentWebElementTest {
     public void testClearReactInputNonEmpty() {
         when(fluentElement.attribute("value")).thenReturn("nonEmpty");
         fluentElement.clearReactInput();
-        verify(fluentElement, times(2)).attribute("value");
         verify(driver, times(1)).executeScript(
                 "arguments[0].value = arguments[1]",
                 element, "");

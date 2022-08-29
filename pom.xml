@@ -120,10 +120,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <selenium.version>4.2.2</selenium.version>
+        <testng.version>7.6.1</testng.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
         <spring.version>5.3.22</spring.version>
-        <slf4j.version>1.7.36</slf4j.version>
+        <slf4j.version>2.0.0</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v102</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
     </properties>
@@ -183,12 +184,12 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>3.63.0</version>
+                <version>3.64.0</version>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.63.0</version>
+                <version>2.64.0</version>
             </dependency>
             <dependency>
                 <groupId>io.appium</groupId>
@@ -233,7 +234,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.5</version>
+                <version>${testng.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -263,17 +264,17 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.6.1</version>
+                <version>4.7.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>4.6.1</version>
+                <version>4.7.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.12.13</version>
+                <version>1.12.14</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -315,7 +316,7 @@
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
                 <artifactId>webdrivermanager</artifactId>
-                <version>5.2.3</version>
+                <version>5.3.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -333,13 +334,13 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.11</version>
+                <version>1.3.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.11</version>
+                <version>1.3.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -379,7 +380,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>3.4.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -387,7 +388,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.12.0</version>
+                    <version>3.12.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -431,7 +432,7 @@
                 <plugin>
                     <groupId>com.github.gantsign.maven</groupId>
                     <artifactId>ktlint-maven-plugin</artifactId>
-                    <version>1.14.0</version>
+                    <version>1.15.1</version>
                     <executions>
                         <execution>
                             <id>format-and-check</id>
@@ -483,7 +484,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.7</version>
+                <version>1.3.0</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
@@ -565,6 +566,7 @@
                 <jdk>1.8</jdk>
             </activation>
             <properties>
+                <testng.version>7.5</testng.version>
                 <java.version>1.8</java.version>
             </properties>
             <build>
@@ -652,12 +654,12 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>3.1.2</version>
+                        <version>3.2.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>10.3.2</version>
+                                <version>10.3.3</version>
                             </dependency>
                         </dependencies>
                         <executions>
@@ -683,7 +685,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>3.17.0</version>
+                        <version>3.18.0</version>
                         <configuration>
                             <failOnViolation>true</failOnViolation>
                             <failurePriority>2</failurePriority>
@@ -713,7 +715,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.4.0</version>
+                        <version>3.4.1</version>
                     </plugin>
                 </plugins>
             </build>
