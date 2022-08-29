@@ -11,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Interactive;
+import org.openqa.selenium.interactions.HasInputDevices;
+import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.Locatable;
 
 import java.util.Arrays;
@@ -93,8 +95,7 @@ public class FluentWebElementTest {
     public void testClearReactInputEmpty() {
         when(fluentElement.attribute("value")).thenReturn("");
         fluentElement.clearReactInput();
-        verify(fluentElement, times(2)).attribute("value");
-        verify(driver, times(0)).executeScript(
+        verify(driver, never()).executeScript(
                 "arguments[0].value = arguments[1]",
                 element, "");
     }
@@ -103,7 +104,6 @@ public class FluentWebElementTest {
     public void testClearReactInputNonEmpty() {
         when(fluentElement.attribute("value")).thenReturn("nonEmpty");
         fluentElement.clearReactInput();
-        verify(fluentElement, times(2)).attribute("value");
         verify(driver, times(1)).executeScript(
                 "arguments[0].value = arguments[1]",
                 element, "");

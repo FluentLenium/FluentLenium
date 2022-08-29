@@ -1,12 +1,10 @@
 package org.fluentlenium.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
 import org.fluentlenium.configuration.Configuration;
-import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -17,11 +15,17 @@ import org.openqa.selenium.WebDriver;
 import java.io.File;
 import java.io.IOException;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
+
 /**
  * Unit test for {@link FluentDriverScreenshotPersister}.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class FluentDriverScreenshotPersisterTest {
+
+    @Rule
+    public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
     @Mock
     private Configuration configuration;
@@ -36,19 +40,15 @@ public class FluentDriverScreenshotPersisterTest {
         screenshotPersister = new FluentDriverScreenshotPersister(configuration, webDriver);
     }
 
-    @After
-    public void tearDown() {
-        destinationFile.delete();
-    }
-
     @Test
     public void shouldCreateScreenshotFromDriverWithNoConfiguration() throws IOException {
         mockScreenshotFromWebDriver();
         initializeDestinationFile();
 
-        screenshotPersister.persistScreenshot(destinationFile.getAbsolutePath());
+        File screenshot = screenshotPersister.persistScreenshot(destinationFile.getAbsolutePath());
 
         assertThat(destinationFile).exists();
+        assertThat(screenshot).isEqualTo(destinationFile);
     }
 
     @Test
@@ -57,9 +57,10 @@ public class FluentDriverScreenshotPersisterTest {
         initializeDestinationFile();
         when(configuration.getScreenshotPath()).thenReturn(destinationFile.getParent());
 
-        screenshotPersister.persistScreenshot(destinationFile.getName());
+        File screenshot = screenshotPersister.persistScreenshot(destinationFile.getName());
 
         assertThat(destinationFile).exists();
+        assertThat(screenshot).isEqualTo(destinationFile);
     }
 
     private void mockScreenshotFromWebDriver() {
@@ -68,7 +69,6 @@ public class FluentDriverScreenshotPersisterTest {
     }
 
     private void initializeDestinationFile() throws IOException {
-        destinationFile = File.createTempFile("screenshot.png", "");
-        destinationFile.delete();
+        destinationFile = temporaryFolder.newFile("screenshot.png");
     }
 }

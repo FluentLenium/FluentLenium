@@ -1,10 +1,8 @@
 package org.fluentlenium.core;
 
-import static java.util.Objects.requireNonNull;
-
+import org.apache.commons.io.FileUtils;
 import org.fluentlenium.configuration.Configuration;
 import org.fluentlenium.utils.ImageUtils;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.UnhandledAlertException;
@@ -15,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Persists a screenshot to a target file.
@@ -38,9 +38,10 @@ public class FluentDriverScreenshotPersister {
      * otherwise the argument file name will be concatenated to the screenshot path to create the destination file.
      *
      * @param fileName the target file to save the screenshot to
+     * @return the screenshot file
      * @throws ScreenshotNotCreatedException when an error occurs during taking the screenshot
      */
-    public void persistScreenshot(String fileName) {
+    public File persistScreenshot(String fileName) {
         try {
             File destFile;
             if (configuration.getScreenshotPath() == null) {
@@ -50,6 +51,8 @@ public class FluentDriverScreenshotPersister {
             }
             FileUtils.writeByteArrayToFile(destFile, prepareScreenshot());
             LOGGER.info("Created screenshot at: " + destFile.getAbsolutePath());
+
+            return destFile;
         } catch (IOException e) {
             throw new ScreenshotNotCreatedException("Error when taking the screenshot", e);
         }
