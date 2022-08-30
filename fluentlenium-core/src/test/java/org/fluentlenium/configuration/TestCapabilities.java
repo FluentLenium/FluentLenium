@@ -1,7 +1,6 @@
 package org.fluentlenium.configuration;
 
 import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Platform;
 
 import java.util.Map;
 

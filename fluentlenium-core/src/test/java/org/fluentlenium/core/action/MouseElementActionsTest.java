@@ -13,7 +13,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Interactive;
 import org.openqa.selenium.interactions.Locatable;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MouseElementActionsTest {
@@ -31,7 +34,7 @@ public class MouseElementActionsTest {
     public void before() {
         actionsSpy = Mockito.spy(new Actions(driver));
 
-        actions = new MouseElementActions(driver, element){
+        actions = new MouseElementActions(driver, element) {
             @Override
             protected Actions actions() {
                 return actionsSpy;

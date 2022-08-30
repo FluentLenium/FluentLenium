@@ -11,9 +11,7 @@ import org.openqa.selenium.opera.OperaOptions;
 
 public class GenericBrowserCapabilities<T extends Capabilities> {
     public T getBrowserOptions(Class<T> browserCapabilitiesTypeToReturn, Capabilities capabilitiesToMerge) {
-        if (browserCapabilitiesTypeToReturn == ChromeOptions.class) {
-            return (T) new ChromeOptions().merge(capabilitiesToMerge);
-        } else if (browserCapabilitiesTypeToReturn == ChromiumOptions.class) {
+        if (browserCapabilitiesTypeToReturn == ChromeOptions.class || browserCapabilitiesTypeToReturn == ChromiumOptions.class) {
             return (T) new ChromeOptions().merge(capabilitiesToMerge);
         } else if (browserCapabilitiesTypeToReturn == EdgeOptions.class) {
             return (T) new EdgeOptions().merge(capabilitiesToMerge);
