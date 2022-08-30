@@ -12,7 +12,7 @@ import java.util.LinkedHashMap;
 
 public class GenericBrowserCapabilities<T extends Capabilities> {
     public T getBrowserOptions(Class<T> browserCapabilitiesTypeToReturn, Capabilities capabilitiesToMerge) {
-        T browserOptionsToReturn = null;
+        T browserOptionsToReturn;
 
         if (browserCapabilitiesTypeToReturn == ChromeOptions.class || browserCapabilitiesTypeToReturn == ChromiumOptions.class) {
             browserOptionsToReturn = mergeChromeOptions(capabilitiesToMerge);
