@@ -1,11 +1,14 @@
 package org.fluentlenium.configuration;
 
-import com.google.common.collect.ImmutableList;
 import io.appium.java_client.gecko.options.GeckoOptions;
+import io.appium.java_client.safari.options.SafariOptions;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.opera.OperaOptions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -116,10 +119,18 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
                 try {
                     Capabilities browserCapabilities;
 
-                    if (capabilitiesClass == ChromeOptions.class ) {
+                    if (capabilitiesClass == ChromeOptions.class) {
                         browserCapabilities = new GenericBrowserCapabilities<ChromeOptions>().getBrowserOptions(ChromeOptions.class, capabilities);
+                    } else if (capabilitiesClass == ChromiumOptions.class) {
+                        browserCapabilities = new GenericBrowserCapabilities<ChromiumOptions>().getBrowserOptions(ChromiumOptions.class, capabilities);
+                    } else if (capabilitiesClass == EdgeOptions.class) {
+                        browserCapabilities = new GenericBrowserCapabilities<EdgeOptions>().getBrowserOptions(EdgeOptions.class, capabilities);
+                    } else if (capabilitiesClass == SafariOptions.class) {
+                        browserCapabilities = new GenericBrowserCapabilities<SafariOptions>().getBrowserOptions(SafariOptions.class, capabilities);
                     } else if (capabilitiesClass == GeckoOptions.class) {
                         browserCapabilities = new GenericBrowserCapabilities<GeckoOptions>().getBrowserOptions(GeckoOptions.class, capabilities);
+                    } else if (capabilitiesClass == OperaOptions.class) {
+                        browserCapabilities = new GenericBrowserCapabilities<OperaOptions>().getBrowserOptions(OperaOptions.class, capabilities);
                     } else {
                         browserCapabilities = capabilities;
                     }
