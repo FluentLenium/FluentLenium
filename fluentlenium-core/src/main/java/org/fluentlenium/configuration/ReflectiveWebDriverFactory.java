@@ -11,9 +11,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.opera.OperaOptions;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * A simple {@link WebDriverFactory} that create {@link WebDriver} instances using reflection.
@@ -113,17 +111,12 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
             }
 
             if (capabilities != null && !capabilities.asMap().isEmpty()) {
-                ArrayList<Object> argsList = new ArrayList<>(Arrays.asList(args));
-                argsList.add(0, capabilities);
-
                 try {
                     Capabilities browserCapabilities;
 
                     if (capabilitiesClass == ChromeOptions.class) {
-                        browserCapabilities = new GenericBrowserCapabilities<ChromeOptions>().getBrowserOptions(ChromeOptions.class, capabilities);
-                    } else if (capabilitiesClass == ChromiumOptions.class) {
-                        browserCapabilities = new GenericBrowserCapabilities<ChromiumOptions>().getBrowserOptions(ChromiumOptions.class, capabilities);
-                    } else if (capabilitiesClass == EdgeOptions.class) {
+                        browserCapabilities = new GenericBrowserCapabilities<ChromeOptions>().getBrowserOptions(ChromeOptions.class, capabilities);;
+                    }  else if (capabilitiesClass == EdgeOptions.class) {
                         browserCapabilities = new GenericBrowserCapabilities<EdgeOptions>().getBrowserOptions(EdgeOptions.class, capabilities);
                     } else if (capabilitiesClass == SafariOptions.class) {
                         browserCapabilities = new GenericBrowserCapabilities<SafariOptions>().getBrowserOptions(SafariOptions.class, capabilities);
