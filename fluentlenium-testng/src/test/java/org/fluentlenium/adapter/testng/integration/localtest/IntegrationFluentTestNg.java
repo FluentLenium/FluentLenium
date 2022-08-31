@@ -17,7 +17,7 @@ public class IntegrationFluentTestNg extends FluentTestNg {
     }
 
     @BeforeSuite
-    public static void setUpChrome() {
+    public void setUpChrome() {
         WebDriverManager.chromedriver().setup();
     }
 }

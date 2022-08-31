@@ -3,8 +3,7 @@ package org.fluentlenium.core.action;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Execute actions with the keyboard.
@@ -27,19 +26,7 @@ public class KeyboardActions {
      * @return selenium actions
      */
     protected org.openqa.selenium.interactions.Actions actions() {
-        return new org.openqa.selenium.interactions.Actions(driver);
-    }
-
-    /**
-     * Basic keyboard operations
-     *
-     * @return low level interface to control the keyboard
-     * @deprecated Use {@link KeyboardActions#keyDown(Keys)} and {@link KeyboardActions#keyUp(Keys)}
-     * and {@link KeyboardActions#sendKeys(CharSequence...)} instead
-     */
-    @Deprecated
-    public Keyboard basic() {
-        return ((HasInputDevices) driver).getKeyboard();
+        return new Actions(driver);
     }
 
     /**

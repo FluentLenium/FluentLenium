@@ -2,8 +2,10 @@ package org.fluentlenium.configuration;
 
 import org.junit.Test;
 import org.openqa.selenium.HasCapabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -34,7 +36,7 @@ public class ReflectiveWebDriverFactoryTest {
     @Test
     public void testNonexstingClass() {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("doesnt-exists",
-                "org.fluentlenium.ThisClassDoesntExists");
+                "org.fluentlenium.ThisClassDoesntExists", new MutableCapabilities());
         assertThat(webDriverFactory.isAvailable()).isFalse();
 
         assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
@@ -45,7 +47,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testNonWebDriverClass() {
-        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("test-class", getClass().getName());
+        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("test-class", getClass().getName(), new MutableCapabilities());
         assertThat(webDriverFactory.isAvailable()).isFalse();
 
         assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
@@ -56,7 +58,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testAbstractClass() {
-        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("abstract", AbstractDriver.class);
+        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("abstract", AbstractDriver.class, new ChromeOptions());
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
@@ -65,7 +67,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testNoConstructorClass() {
-        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("no-constructor", NoConstructorDriver.class);
+        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("no-constructor", NoConstructorDriver.class, new ChromeOptions());
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         WebDriver webDriver = webDriverFactory.newWebDriver(null, null);
@@ -78,7 +80,7 @@ public class ReflectiveWebDriverFactoryTest {
 
     @Test
     public void testFailingDriverClass() {
-        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("failing", FailingDriver.class);
+        ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("failing", FailingDriver.class, MutableCapabilities.class);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
@@ -88,7 +90,7 @@ public class ReflectiveWebDriverFactoryTest {
     @Test
     public void testCustomConstructorClassInvalidArguments() {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("custom_constructor",
-                CustomConstructorDriver.class);
+                CustomConstructorDriver.class, new MutableCapabilities());
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         assertThatThrownBy(() -> webDriverFactory.newWebDriver(null, null))
@@ -98,7 +100,7 @@ public class ReflectiveWebDriverFactoryTest {
     @Test
     public void testCustomConstructorClass() {
         ReflectiveWebDriverFactory webDriverFactory = new ReflectiveWebDriverFactory("custom_constructor",
-                CustomConstructorDriver.class, true);
+                CustomConstructorDriver.class, new MutableCapabilities(), true);
         assertThat(webDriverFactory.isAvailable()).isTrue();
 
         WebDriver webDriver = webDriverFactory.newWebDriver(null, null);

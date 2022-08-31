@@ -17,8 +17,8 @@
     </modules>
 
     <properties>
-        <it.project.version>5.0.1</it.project.version>
-        <selenium.version>4.2.2</selenium.version>
+        <it.project.version>5.0.5-SNAPSHOT</it.project.version>
+        <selenium.version>4.3.0</selenium.version>
     </properties>
 
     <dependencyManagement>
@@ -47,7 +47,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-chrome-driver</artifactId>
-                <version>4.2.2</version>
+                <version>4.3.0</version>
             </dependency>
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>

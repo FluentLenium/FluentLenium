@@ -86,10 +86,10 @@
             <name>Filip Cynarski</name>
             <email>filip@cynarski.eu</email>
             <url>https://github.com/filipcynarski</url>
-            <organization>Ocado Technology</organization>
-            <organizationUrl>http://www.ocadotechnology.com/</organizationUrl>
+            <organization>Filip Cynarski Software Development</organization>
+            <organizationUrl>https://cynarski.eu/</organizationUrl>
             <roles>
-                <role>developer</role>
+                <role>maintainer</role>
             </roles>
         </developer>
         <developer>
@@ -119,7 +119,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>4.2.2</selenium.version>
+        <selenium.version>4.3.0</selenium.version>
         <testng.version>7.6.1</testng.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>

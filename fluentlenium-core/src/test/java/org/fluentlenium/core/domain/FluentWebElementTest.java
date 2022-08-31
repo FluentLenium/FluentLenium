@@ -9,11 +9,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Interactive;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.Mouse;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,12 +37,6 @@ public class FluentWebElementTest {
     @Mock
     private InputDevicesDriver driver;
 
-    @Mock
-    private Keyboard keyboard;
-
-    @Mock
-    private Mouse mouse;
-
     private FluentWebElement fluentElement;
 
     private ComponentsManager componentsManager;
@@ -50,8 +48,6 @@ public class FluentWebElementTest {
         fluentAdapter = new FluentAdapter();
         fluentAdapter.initFluent(driver);
 
-        when(driver.getMouse()).thenReturn(mouse);
-        when(driver.getKeyboard()).thenReturn(keyboard);
         when(driver.executeScript("script", "arg1", "arg2")).thenReturn(null);
 
         componentsManager = new ComponentsManager(fluentAdapter);
@@ -61,31 +57,13 @@ public class FluentWebElementTest {
 
     @After
     public void cleanUp() {
-        reset(element, driver, keyboard, mouse);
+        reset(element, driver);
     }
 
     @Test
     public void testClick() {
         fluentElement.click();
         verify(element).click();
-    }
-
-    @Test
-    public void testDoubleClick() {
-        fluentElement.doubleClick();
-        verify(mouse).doubleClick(any());
-    }
-
-    @Test
-    public void testContextClick() {
-        fluentElement.contextClick();
-        verify(mouse).contextClick(any());
-    }
-
-    @Test
-    public void testHoverOver() {
-        fluentElement.hoverOver();
-        verify(mouse).mouseMove(any());
     }
 
     @Test
@@ -97,18 +75,6 @@ public class FluentWebElementTest {
     public void testConditions() {
         when(element.isEnabled()).thenReturn(true);
         assertThat(fluentElement.conditions().enabled()).isTrue();
-    }
-
-    @Test
-    public void testMouse() {
-        fluentElement.mouse().click();
-        verify(mouse).click(any());
-    }
-
-    @Test
-    public void testKeyboard() {
-        fluentElement.keyboard().sendKeys("ABC");
-        verify(keyboard).sendKeys("ABC");
     }
 
     @Test
@@ -395,7 +361,7 @@ public class FluentWebElementTest {
     private static class InvalidComponent {
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices, JavascriptExecutor {
+    private abstract static class InputDevicesDriver implements WebDriver, Interactive, JavascriptExecutor {
     }
 
     private abstract static class LocatableElement implements WebElement, Locatable {

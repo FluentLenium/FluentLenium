@@ -29,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - run: google-chrome --version
     - name: Set up JDK 1.8
       uses: actions/setup-java@v2
       with:
@@ -36,7 +37,7 @@ jobs:
         distribution: 'zulu'
         cache: "maven"
     - name: Java 8 - unit & integration tests
-      run: mvn -T 1C -B -Pjava8 -Dfailsafe.rerunFailingTestsCount=1 clean verify
+      run: mvn -B -Pjava8 -Dfailsafe.rerunFailingTestsCount=1 clean verify
 
     - name: Publish Test reports
       uses: mikepenz/action-junit-report@v2

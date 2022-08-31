@@ -18,7 +18,7 @@ public class WebDriversRegistryImpl extends AbstractFactoryRegistryImpl<WebDrive
 
     @Override
     protected ReflectiveWebDriverFactory newReflectiveInstance(String name) {
-        return new ReflectiveWebDriverFactory(name, name);
+        return new ReflectiveWebDriverFactory(name, name, Capabilities.class);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class WebDriversRegistryImpl extends AbstractFactoryRegistryImpl<WebDrive
      * Creates a new {@link WebDriver} instance from factory of the given name
      *
      * @param name          name of the factory used to create new WebDriver instance
-     * @param capabilities  Desired capabilities for the WebDriver
+     * @param capabilities  driver capabilities for the WebDriver
      * @param configuration Configuration for the WebDriver
      * @return a new WebDriver instance
      */

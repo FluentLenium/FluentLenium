@@ -19,7 +19,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class RemoteWebDriverTest {
     private RemoteWebDriverFactory factorySpy;
-
+    private ChromeOptions chromeOptions = new ChromeOptions();
     private static final String GRID_SAMPLE_URL = "http://localhost:4444";
 
     @Mock
@@ -27,7 +27,7 @@ public class RemoteWebDriverTest {
 
     @Before
     public void before() {
-        RemoteWebDriverFactory factory = new RemoteWebDriverFactory() {
+        RemoteWebDriverFactory factory = new RemoteWebDriverFactory(chromeOptions) {
             @Override
             protected WebDriver newRemoteWebDriver(Object... args) {
                 return webDriver;
@@ -55,10 +55,11 @@ public class RemoteWebDriverTest {
         ProgrammaticConfiguration programmaticConfiguration = new ProgrammaticConfiguration();
         programmaticConfiguration.setRemoteUrl(GRID_SAMPLE_URL);
 
-        WebDriver newWebDriver = factorySpy.newWebDriver(null, programmaticConfiguration);
+        MutableCapabilities defaultCapabilities = new ChromeOptions();
+
+        WebDriver newWebDriver = factorySpy.newWebDriver(defaultCapabilities, programmaticConfiguration);
         Assertions.assertThat(newWebDriver).isSameAs(webDriver);
 
-        MutableCapabilities defaultCapabilities = new DesiredCapabilities();
 
         verify(factorySpy).newRemoteWebDriver(new URL(GRID_SAMPLE_URL), defaultCapabilities);
     }
