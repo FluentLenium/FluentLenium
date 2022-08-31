@@ -91,9 +91,9 @@ public class RemoteWebDriverTest {
 
     @Test
     public void testCustomCapabilities()
-            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, MalformedURLException {
 
-        MutableCapabilities capabilities = new ChromeOptions();
+        ChromeOptions capabilities = new ChromeOptions();
 
         WebDriver newWebDriver = factorySpy.newWebDriver(capabilities, null);
         Assertions.assertThat(newWebDriver).isSameAs(webDriver);

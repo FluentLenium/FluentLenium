@@ -124,6 +124,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
         this.webDriverClass = webDriverClass;
         this.args = args;
         webDriverClassName = webDriverClass.getName();
+        this.capabilitiesClass = capabilitiesClass;
         available = WebDriver.class.isAssignableFrom(this.webDriverClass);
     }
 
@@ -164,19 +165,23 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
                 capabilities = defaultCapabilities;
             }
 
+            if (capabilities != null) {
+                capabilitiesClass = capabilities.getClass();
+            }
+
             if (capabilities != null && !capabilities.asMap().isEmpty()) {
                 try {
                     Capabilities browserCapabilities;
 
-                    if (capabilitiesClass == ChromeOptions.class) {
+                    if (capabilitiesClass.equals(ChromeOptions.class)) {
                         browserCapabilities = new GenericBrowserCapabilities<ChromeOptions>().getBrowserOptions(ChromeOptions.class, capabilities);
-                    } else if (capabilitiesClass == EdgeOptions.class) {
+                    } else if (capabilitiesClass.equals(EdgeOptions.class)) {
                         browserCapabilities = new GenericBrowserCapabilities<EdgeOptions>().getBrowserOptions(EdgeOptions.class, capabilities);
-                    } else if (capabilitiesClass == SafariOptions.class) {
+                    } else if (capabilitiesClass.equals(SafariOptions.class)) {
                         browserCapabilities = new GenericBrowserCapabilities<SafariOptions>().getBrowserOptions(SafariOptions.class, capabilities);
-                    } else if (capabilitiesClass == GeckoOptions.class) {
+                    } else if (capabilitiesClass.equals(GeckoOptions.class)) {
                         browserCapabilities = new GenericBrowserCapabilities<GeckoOptions>().getBrowserOptions(GeckoOptions.class, capabilities);
-                    } else if (capabilitiesClass == OperaOptions.class) {
+                    } else if (capabilitiesClass.equals(OperaOptions.class)) {
                         browserCapabilities = new GenericBrowserCapabilities<OperaOptions>().getBrowserOptions(OperaOptions.class, capabilities);
                     } else {
                         browserCapabilities = capabilities;

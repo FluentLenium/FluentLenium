@@ -9,6 +9,8 @@ import org.openqa.selenium.opera.OperaOptions;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GenericBrowserCapabilities<T extends Capabilities> {
     public T getBrowserOptions(Class<T> browserCapabilitiesTypeToReturn, Capabilities capabilitiesToMerge) {
@@ -31,8 +33,11 @@ public class GenericBrowserCapabilities<T extends Capabilities> {
         ChromeOptions browserOptionsToReturn = new ChromeOptions();
 
         if (capabilitiesToMerge != null) {
-            for (Object s : (ArrayList) ((LinkedHashMap) capabilitiesToMerge.asMap().get(ChromeOptions.CAPABILITY)).get("args")) {
-                browserOptionsToReturn.addArguments((String) s);
+            List argsList = (List) ((Map) capabilitiesToMerge.asMap().get(ChromeOptions.CAPABILITY)).get("args");
+            if (argsList != null) {
+                for (Object s : argsList) {
+                    browserOptionsToReturn.addArguments((String) s);
+                }
             }
         }
 

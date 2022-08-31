@@ -4,6 +4,7 @@ import io.appium.java_client.gecko.options.GeckoOptions;
 import io.appium.java_client.safari.options.SafariOptions;
 import org.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -133,6 +134,13 @@ public class DefaultWebDriverFactories {
      */
     @DefaultFactory
     public static class RemoteWebDriverFactory extends ReflectiveWebDriverFactory {
+        /**
+         * Creates a new remote WebDriver factory with default set of mutable capabilities.
+         */
+        public RemoteWebDriverFactory() {
+            super("remote", RemoteWebDriver.class, new MutableCapabilities());
+        }
+
         /**
          * Creates a new remote WebDriver factory.
          */
