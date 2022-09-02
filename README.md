@@ -2,7 +2,7 @@
 
 ![FluentLenium CI pipeline](https://github.com/FluentLenium/FluentLenium/workflows/FluentLenium%20CI%20pipeline/badge.svg)
 [![Coveralls](https://coveralls.io/repos/github/FluentLenium/FluentLenium/badge.svg?branch=develop)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=develop)
-[![Javadoc](https://javadoc-badge.appspot.com/org.fluentlenium/fluentlenium-core.svg?label=javadoc)](https://fluentlenium.com/javadoc)
+[![javadoc](https://javadoc.io/badge2/org.fluentlenium/fluentlenium-core/5.0.4/javadoc.svg)]([https://javadoc.io/doc/org.fluentlenium/fluentlenium-core/5.0.4](https://fluentlenium.com/javadoc))
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.com.svg)](https://fluentlenium.com)
 
