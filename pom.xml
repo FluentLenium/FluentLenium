@@ -274,7 +274,7 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.12.16</version>
+                <version>1.12.17</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -295,7 +295,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>3.0.12</version>
+                <version>3.0.13</version>
                 <type>pom</type>
             </dependency>
             <dependency>
