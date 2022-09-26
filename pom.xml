@@ -295,7 +295,7 @@
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>3.0.12</version>
+                <version>3.0.13</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -432,7 +432,7 @@
                 <plugin>
                     <groupId>com.github.gantsign.maven</groupId>
                     <artifactId>ktlint-maven-plugin</artifactId>
-                    <version>1.15.1</version>
+                    <version>1.15.2</version>
                     <executions>
                         <execution>
                             <id>format-and-check</id>
