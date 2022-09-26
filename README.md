@@ -5,6 +5,8 @@
 [![javadoc](https://javadoc.io/badge2/org.fluentlenium/fluentlenium-core/javadoc.svg)](https://fluentlenium.com/javadoc)
 [![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.com.svg)](https://fluentlenium.com)
+[![kandi X-Ray](https://kandi.openweaver.com/badges/xray.svg)](https://kandi.openweaver.com/java/FluentLenium/FluentLenium)
+[![kandi Featured](https://kandi.openweaver.com/badges/featured.svg)](https://kandi.openweaver.com/collections/automation/java-automation)
 
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser and mobile
 app.
