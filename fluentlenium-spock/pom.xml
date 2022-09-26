@@ -64,7 +64,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <type>pom</type>
             <scope>compile</scope>
@@ -113,9 +113,9 @@
                 </executions>
                 <dependencies>
                     <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
+                        <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy-all</artifactId>
-                        <version>3.0.13</version>
+                        <version>4.0.5</version>
                         <type>pom</type>
                         <scope>compile</scope>
                     </dependency>
