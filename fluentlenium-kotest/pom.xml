@@ -14,7 +14,7 @@
     <properties>
         <kotlin.version>1.7.20</kotlin.version>
         <kotest.version>5.5.0</kotest.version>
-        <dokka.version>1.7.10</dokka.version>
+        <dokka.version>1.7.20</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 
