@@ -4,12 +4,14 @@ import io.kotest.common.ExperimentalKotest
 import io.kotest.core.extensions.Extension
 import io.kotest.core.listeners.AfterEachListener
 import io.kotest.core.listeners.AfterSpecListener
+import io.kotest.core.listeners.AfterTestListener
 import io.kotest.core.listeners.BeforeSpecListener
 import io.kotest.core.listeners.BeforeTestListener
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestType
+import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.fluentlenium.adapter.DefaultSharedMutator
@@ -25,7 +27,6 @@ import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.utils.ScreenshotUtil
 import org.fluentlenium.utils.SeleniumVersionChecker
-import java.util.concurrent.atomic.AtomicReference
 
 internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
     IFluentAdapter,
@@ -45,7 +46,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     override fun getConfiguration(): Configuration = configurationOverride
 
-    val extension: Extension = object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener {
+    val extension: Extension = object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener, AfterTestListener {
 
         override suspend fun beforeSpec(spec: Spec) =
             this@KoTestFluentAdapter.beforeSpec()
@@ -59,6 +60,10 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         }
 
         override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+            // is not invoked for dynamic tests https://kotlinlang.slack.com/archives/CT0G9SD7Z/p1666788639534289
+        }
+
+        override suspend fun afterAny(testCase: TestCase, result: TestResult) {
             this@KoTestFluentAdapter.afterEach(testCase, result)
         }
     }
@@ -141,7 +146,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     fun ensureTestStarted() {
         checkNotNull(currentTestName.get()) {
-            "FluentLenium is not yet available! Make sure to use FluentLenium only within the innermost Kotest test block!"
+            "FluentLenium is not available here! Make sure to use FluentLenium only within the innermost Kotest test block and in beforeTest/afterTest!"
         }
     }
 }

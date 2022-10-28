@@ -55,6 +55,12 @@
             <artifactId>kotest-runner-junit5-jvm</artifactId>
             <version>${kotest.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.kotest</groupId>
+            <artifactId>kotest-framework-datatest-jvm</artifactId>
+            <version>${kotest.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
