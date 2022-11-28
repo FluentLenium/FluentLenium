@@ -280,7 +280,7 @@
             <dependency>
                 <groupId>org.atteo.classindex</groupId>
                 <artifactId>classindex</artifactId>
-                <version>3.11</version>
+                <version>3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
