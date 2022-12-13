@@ -124,7 +124,7 @@
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
         <spring.version>5.3.23</spring.version>
-        <slf4j.version>2.0.4</slf4j.version>
+        <slf4j.version>2.0.6</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v102</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
     </properties>
