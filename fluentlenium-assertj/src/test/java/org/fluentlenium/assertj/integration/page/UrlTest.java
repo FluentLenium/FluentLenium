@@ -21,9 +21,9 @@ public class UrlTest extends IntegrationTest {
 
     @Test
     public void verifyHasUrlNegative() {
-        assertThatThrownBy(() -> assertThat(indexPage).hasUrl("https://fluentlenium.com"))
+        assertThatThrownBy(() -> assertThat(indexPage).hasUrl("https://fluentlenium.io"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessageContaining("https://fluentlenium.com")
+                .hasMessageContaining("https://fluentlenium.io")
                 .hasMessageContaining("Expected");
     }
 

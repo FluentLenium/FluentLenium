@@ -48,7 +48,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * In case local files depending on the value of the {@code value} attribute you can use additional URL query parameters
  * attached to the path. If no query parameters are used the value attribute can be left empty.
  * <p>
- * You can find further examples at <a href="https://fluentlenium.com/docs/key_features/#pages">FluentLenium Key features</a>.
+ * You can find further examples at <a href="https://fluentlenium.io/docs/key_features/#pages">FluentLenium Key features</a>.
  */
 @Retention(RUNTIME)
 public @interface PageUrl {
