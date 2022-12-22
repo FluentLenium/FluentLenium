@@ -16,7 +16,7 @@ import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
  * <p>
  * This class should also be extended by the the class that is for defining the Cucumber Before and After hooks.
  * <p>
- * See <a href="https://fluentlenium.com/docs/test-runners/#cucumber">Cucumber Test Runner</a> documentation for
+ * See <a href="https://fluentlenium.io/docs/test-runners/#cucumber">Cucumber Test Runner</a> documentation for
  * additional examples.
  */
 public class FluentCucumberTest extends FluentTestRunnerAdapter {

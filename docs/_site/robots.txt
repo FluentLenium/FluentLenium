@@ -1,1 +1,1 @@
-Sitemap: http://fluentlenium.com/sitemap.xml
+Sitemap: http://fluentlenium.io/sitemap.xml

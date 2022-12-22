@@ -89,11 +89,11 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call get/setRemoteUrl'() {
         when:
-        spockControl.setRemoteUrl("https://fluentlenium.com")
+        spockControl.setRemoteUrl("https://fluentlenium.io")
         spockControl.getRemoteUrl()
 
         then:
-        1 * mockConfiguration.setRemoteUrl("https://fluentlenium.com")
+        1 * mockConfiguration.setRemoteUrl("https://fluentlenium.io")
         1 * mockConfiguration.getRemoteUrl()
     }
 

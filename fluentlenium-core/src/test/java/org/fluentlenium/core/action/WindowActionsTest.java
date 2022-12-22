@@ -133,7 +133,7 @@ public class WindowActionsTest {
         when(fluentDriver.getDriver()).thenReturn(jsDriver);
         when(jsDriver.switchTo()).thenReturn(targetLocator);
         when(jsDriver.switchTo().window(any())).thenReturn(driver);
-        when(driver.getCurrentUrl()).thenReturn("https://fluentlenium.com");
+        when(driver.getCurrentUrl()).thenReturn("https://fluentlenium.io");
 
         String windowHandle = "WndH1";
         String windowHandle1 = "WndH2";
@@ -214,7 +214,7 @@ public class WindowActionsTest {
         when(driver.getWindowHandle()).thenReturn(windowHandle1, windowHandle2);
 
         when(fluentWebElement.click()).thenReturn(fluentWebElement);
-        when(driver.getCurrentUrl()).thenReturn("https://fluentlenium.com");
+        when(driver.getCurrentUrl()).thenReturn("https://fluentlenium.io");
 
         WindowAction windowAction = new WindowAction(fluentDriverSpy, instantiator, driver);
         windowAction.clickAndOpenNew(fluentWebElement);
