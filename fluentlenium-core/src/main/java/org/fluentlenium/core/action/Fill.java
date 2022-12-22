@@ -7,7 +7,7 @@ import org.fluentlenium.core.domain.FluentWebElement;
  * Default form filling features.
  * <p>
  * Documentation can also be found at the FluentLenium website at
- * <a href="https://fluentlenium.io/docs/locators/#filling-forms">Locators / Filling Forms</a>.
+ * <a href="https://fluentlenium.com/docs/locators/#filling-forms">Locators / Filling Forms</a>.
  *
  * @param <E> type of elements to fill
  */

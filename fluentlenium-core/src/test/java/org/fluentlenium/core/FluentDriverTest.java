@@ -67,7 +67,7 @@ public class FluentDriverTest {
     public void shouldReturnCurrentUrlFromDriverIfCurrentUrlDoesntStartWithBaseUrl() {
         fluentDriver = spy(new FluentDriver(webDriver, configuration, adapter));
         when(webDriver.getCurrentUrl()).thenReturn("https://duckduckgo.com/?q=fluentlenium&ia=web");
-        when(configuration.getBaseUrl()).thenReturn("https://fluentlenium.io/");
+        when(configuration.getBaseUrl()).thenReturn("https://fluentlenium.com/");
 
         assertThat(fluentDriver.url()).isEqualTo("https://duckduckgo.com/?q=fluentlenium&ia=web");
     }

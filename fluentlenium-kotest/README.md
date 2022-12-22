@@ -20,5 +20,5 @@ supported Kotest [testing styles](https://kotest.io/docs/framework/testing-style
 
 # Extension functions
 
-In Kotlin usage of the fluentlenium method [$](https://fluentlenium.io/javadoc/org/fluentlenium/core/search/SearchControl.html#$(org.fluentlenium.core.search.SearchFilter...)) method
+In Kotlin usage of the fluentlenium method [$](https://fluentlenium.com/javadoc/org/fluentlenium/core/search/SearchControl.html#$(org.fluentlenium.core.search.SearchFilter...)) method
 must be escaped. As an alternative this library offers the extension function `jq`.

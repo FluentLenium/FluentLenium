@@ -7,7 +7,7 @@ import org.fluentlenium.core.domain.FluentWebElement
 import org.fluentlenium.examples.components.fluentlenium.Header
 import org.openqa.selenium.support.FindBy
 
-@PageUrl("https://fluentlenium.io")
+@PageUrl("https://fluentlenium.com")
 class MainPage : FluentPage() {
 
     fun perform(fn: MainPage.() -> Unit) = this.apply(fn)

@@ -7,7 +7,7 @@ import org.fluentlenium.core.domain.FluentWebElement
 import org.fluentlenium.examples.components.fluentlenium.Header
 import org.openqa.selenium.support.FindBy
 
-@PageUrl("https://fluentlenium.io/quickstart/")
+@PageUrl("https://fluentlenium.com/quickstart/")
 class QuickStartPage : FluentPage() {
 
     fun perform(fn: QuickStartPage.() -> Unit) = this.apply(fn)

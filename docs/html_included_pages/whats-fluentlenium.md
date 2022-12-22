@@ -9,7 +9,7 @@ FluentLenium best integrates with [AssertJ](http://joel-costigliola.github.io/as
 the assertion framework you want.
 
 ### Javadoc
-Complete FluentLenium Javadoc is available on [fluentlenium.io/javadoc](https://fluentlenium.io/javadoc)
+Complete FluentLenium Javadoc is available on [fluentlenium.com/javadoc](https://fluentlenium.com/javadoc)
 
 ### Contact us
 If you have any comment, remark or issue, please open an issue on

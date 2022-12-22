@@ -76,7 +76,7 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
     @Test
     public void shouldFailWithExceptionWhenURLCannotBeRead() {
         assertThatExceptionOfType(ConfigurationException.class)
-                .isThrownBy(() -> retriever.getCapabilitiesProperty("https://www.fluentlenium.io/", null))
-                .withMessage("Can't read Capabilities defined at https://www.fluentlenium.io/");
+                .isThrownBy(() -> retriever.getCapabilitiesProperty("https://www.fluentlenium.com/", null))
+                .withMessage("Can't read Capabilities defined at https://www.fluentlenium.com/");
     }
 }

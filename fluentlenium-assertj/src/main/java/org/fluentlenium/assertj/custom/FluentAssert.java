@@ -241,7 +241,7 @@ public interface FluentAssert {
      * <p>
      * For a {@link org.fluentlenium.core.domain.FluentWebElement} it can be:
      * <pre>
-     * assertThat(element).hasAttributeValue("href", "https://fluentlenium.io");
+     * assertThat(element).hasAttributeValue("href", "https://fluentlenium.com");
      * </pre>
      *
      * @param attribute attribute to find
