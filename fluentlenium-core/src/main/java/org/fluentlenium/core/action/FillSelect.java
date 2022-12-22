@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  * Provides functionality to select values in {@code <select>} elements.
  * <p>
  * Documentation can also be found at the FluentLenium website at
- * <a href="https://fluentlenium.com/docs/locators/#filling-forms">Locators / Filling Forms</a>.
+ * <a href="https://fluentlenium.io/docs/locators/#filling-forms">Locators / Filling Forms</a>.
  *
  * @param <E> type of element to fill
  */

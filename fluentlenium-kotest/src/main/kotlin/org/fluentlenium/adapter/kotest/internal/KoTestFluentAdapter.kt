@@ -11,7 +11,6 @@ import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestType
-import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.fluentlenium.adapter.DefaultSharedMutator
@@ -27,6 +26,7 @@ import org.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
 import org.fluentlenium.configuration.Configuration
 import org.fluentlenium.utils.ScreenshotUtil
 import org.fluentlenium.utils.SeleniumVersionChecker
+import java.util.concurrent.atomic.AtomicReference
 
 internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
     IFluentAdapter,

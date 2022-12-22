@@ -11,7 +11,7 @@
     <name>FluentLenium Examples Spring</name>
 
     <properties>
-        <fluentlenium.version>5.0.5-SNAPSHOT</fluentlenium.version>
+        <fluentlenium.version>6.0.0-SNAPSHOT</fluentlenium.version>
         <selenium.version>4.2.2</selenium.version>
     </properties>
 

@@ -109,16 +109,16 @@ public class PageAssertTest {
 
     @Test
     public void hasUrlOk() {
-        String url = "https://fluentlenium.com";
+        String url = "https://fluentlenium.io";
         doReturn(url).when(driver).getCurrentUrl();
         pageAssert.hasUrl(url);
     }
 
     @Test
     public void hasUrlKo() {
-        doReturn("https://fluentlenium.com").when(driver).getCurrentUrl();
+        doReturn("https://fluentlenium.io").when(driver).getCurrentUrl();
         assertThatAssertionErrorIsThrownBy(() -> pageAssert.hasUrl("https://awesome-testing.com"))
-                .hasMessage("Current page url is https://fluentlenium.com. Expected https://awesome-testing.com");
+                .hasMessage("Current page url is https://fluentlenium.io. Expected https://awesome-testing.com");
     }
 
     @Test
@@ -143,7 +143,7 @@ public class PageAssertTest {
 
     @Test
     public void testHasExpectedUrl() {
-        String url = "https://fluentlenium.com";
+        String url = "https://fluentlenium.io";
         when(fluentPage.getUrl()).thenReturn(url);
         pageAssert.hasExpectedUrl();
         verify(fluentPage).isAtUsingUrl(url);

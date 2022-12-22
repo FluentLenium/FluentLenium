@@ -10,7 +10,7 @@ fluentlenium:
 selenium:
   version: "4.0.0-alpha-1"
 
-url: "http://fluentlenium.com"
+url: "http://fluentlenium.io"
 baseurl: ""
 
 # If you are building a GitHub project page then use these settings:
@@ -39,7 +39,7 @@ navbar-links:
     - Test methods: "docs/test-methods"
     - Assertion libraries: "docs/assertion-libraries"
     - Appium support: "docs/appium-support"
-    - Javadoc: "https://fluentlenium.com/javadoc"
+    - Javadoc: "https://fluentlenium.io/javadoc"
   Migration:
     - to 3.0: "migration/from-0.13.2-to-1.0-or-3.0"
     - from 3.0 to 4.0: "migration/3.0-to-4.0"
@@ -97,7 +97,7 @@ share-links-active:
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "fluentlenium.com"  # eg. "deanattali.com/beautiful-jekyll"
+url-pretty: "fluentlenium.io"  # eg. "deanattali.com/beautiful-jekyll"
 
 # --- Misc --- #
 
