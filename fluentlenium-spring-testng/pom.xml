@@ -79,7 +79,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>${seleniumDevtools.artifactId}</artifactId>
+            <artifactId>selenium-devtools-v95</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
