@@ -25,28 +25,7 @@ jobs:
         if: "${{ env.REPO_TOKEN != '' }}"
         run: echo "::set-output name=defined::true"
 
-  java8-build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v2
-      with:
-        java-version: 8
-        distribution: 'zulu'
-        cache: "maven"
-    - name: Java 8 - unit & integration tests
-      run: mvn -T 1C -B -Pjava8 -Dfailsafe.rerunFailingTestsCount=1 clean verify
-
-    - name: Publish Test reports
-      uses: mikepenz/action-junit-report@v2
-      if: always() # always run even if the previous step fails
-      with:
-        check_name: Java 8 Test Reports
-        report_paths: '**/target/*-reports/TEST-*.xml'
-
   java11-build:
-    needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -56,60 +35,81 @@ jobs:
         java-version: 11
         distribution: 'zulu'
         cache: "maven"
-    - name: Java 11 - unit & integration tests code coverage
-      run: |
-        mvn -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+    - name: Java 11 - unit & integration tests
+      run: mvn -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify
+
     - name: Publish Test reports
       uses: mikepenz/action-junit-report@v2
       if: always() # always run even if the previous step fails
       with:
         check_name: Java 11 Test Reports
         report_paths: '**/target/*-reports/TEST-*.xml'
+
+  java17-build:
+    needs: [ check-env ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+        distribution: 'zulu'
+        cache: "maven"
+    - name: Java 17 - unit & integration tests code coverage
+      run: |
+        mvn -T 1C -B -Pjava17 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+    - name: Publish Test reports
+      uses: mikepenz/action-junit-report@v2
+      if: always() # always run even if the previous step fails
+      with:
+        check_name: Java 17 Test Reports
+        report_paths: '**/target/*-reports/TEST-*.xml'
     - name: Coveralls report
       if: needs.check-env.outputs.repo-token-available == 'true'
       env:
         REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
       run: |
-        mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
+        mvn -B -Pjava17 -DrepoToken=$REPO_TOKEN coveralls:report
 
-  java11-parallelism-tests:
+  java17-parallelism-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: 'zulu'
           cache: "maven"
 
       - name: determine Fluentlenium version
         run: echo "FLUENTLENIUM_VERSION=$(mvn -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
 
-      - name: Java 11 - unit & integration tests
-        run: mvn -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java11 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
+      - name: Java 17 - unit & integration tests
+        run: mvn -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
-  java11-javadoc:
+  java17-javadoc:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 11
+    - name: Set up JDK 17
       uses: actions/setup-java@v2
       with:
-        java-version: 11
+        java-version: 17
         distribution: 'zulu'
         cache: "maven"
     - name: Java 11 - JavaDoc
-      run: mvn -B -Pjava11 javadoc:aggregate
+      run: mvn -B -Pjava17 javadoc:aggregate
 
   compile-gradle-example:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: 'zulu'
           cache: "maven"
       - name: Install Fluentlenium
@@ -127,10 +127,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
-          java-version: 11
+          java-version: 17
           distribution: 'zulu'
           cache: "maven"
       - name: Install Fluentlenium

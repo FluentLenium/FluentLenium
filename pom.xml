@@ -561,21 +561,17 @@
 
     <profiles>
         <profile>
-            <id>java8</id>
+            <id>java11</id>
             <activation>
-                <jdk>1.8</jdk>
+                <jdk>11</jdk>
             </activation>
-            <properties>
-                <testng.version>7.5</testng.version>
-                <java.version>1.8</java.version>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
-                            <source>${java.version}</source>
-                            <target>${java.version}</target>
+                            <source>11.0.10</source>
+                            <target>11.0.10</target>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -583,12 +579,12 @@
         </profile>
 
         <profile>
-            <id>java11</id>
+            <id>java17</id>
             <activation>
-                <jdk>11</jdk>
+                <jdk>17</jdk>
             </activation>
             <properties>
-                <java.version>11</java.version>
+                <java.version>17</java.version>
             </properties>
             <build>
                 <pluginManagement>
