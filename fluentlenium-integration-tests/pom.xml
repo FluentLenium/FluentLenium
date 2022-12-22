@@ -4,7 +4,7 @@
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
         <groupId>org.fluentlenium</groupId>
-        <version>5.0.5-SNAPSHOT</version>
+        <version>5.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>fluentlenium-integration-tests</artifactId>
     <packaging>jar</packaging>
@@ -76,7 +76,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>${seleniumDevtools.artifactId}</artifactId>
+            <artifactId>selenium-devtools-v95</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -92,10 +92,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
 
                 <configuration>
-                    <forkCount>2</forkCount>
-
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
+                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
                         <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
                         <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
                     </systemPropertyVariables>

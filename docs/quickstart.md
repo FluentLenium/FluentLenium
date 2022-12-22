@@ -41,7 +41,7 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 ```xml
 <properties>
     <fluentlenium.version>5.0.1</fluentlenium.version>
-    <selenium.version>4.2.2</selenium.version>
+    <selenium.version>4.1.1</selenium.version>
 </properties>
 
 <dependency>

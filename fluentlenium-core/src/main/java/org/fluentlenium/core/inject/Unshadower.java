@@ -6,11 +6,9 @@ import static java.util.stream.Collectors.toList;
 import com.google.common.collect.ImmutableSet;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Unshadow;
@@ -28,28 +26,18 @@ public class Unshadower {
 
     private final WebDriver webDriver;
     private final FluentPage page;
-    private final FluentWebElement fluentWebElement;
 
     public Unshadower(WebDriver webDriver, FluentPage page) {
         this.webDriver = webDriver;
         this.page = page;
-        this.fluentWebElement = null;
-    }
-
-    public Unshadower(WebDriver webDriver, FluentWebElement fluentWebElement) {
-        this.webDriver = webDriver;
-        this.page = null;
-        this.fluentWebElement = fluentWebElement;
-    }
-
-    public Object getContext() {
-        return (page != null) ? page : fluentWebElement;
     }
 
     public void unshadowAllAnnotatedFields() {
-        Arrays.stream(getContext().getClass().getDeclaredFields())
-                .filter(field -> field.isAnnotationPresent(Unshadow.class))
-                .forEach(this::unshadowField);
+        for (Field field : page.getClass().getDeclaredFields()) {
+            if (field.isAnnotationPresent(Unshadow.class)) {
+                unshadowField(field);
+            }
+        }
     }
 
     private void unshadowField(Field field) {
@@ -60,29 +48,23 @@ public class Unshadower {
     }
 
     private List<FluentWebElement> convertToFluentWebElementList(List<WebElement> lastShadowRoots) {
-        if (getContext() instanceof FluentPage) {
-            return lastShadowRoots.stream()
-                    .map(element -> new FluentWebElement(element, page.getFluentControl(), page.getFluentControl()))
-                    .collect(toList());
-        } else {
-            return lastShadowRoots.stream()
-                    .map(element -> new FluentWebElement(element, fluentWebElement.getFluentControl(), fluentWebElement.getFluentControl()))
-                    .collect(Collectors.toList());
-        }
+        return lastShadowRoots.stream()
+                .map(element -> new FluentWebElement(element, page.getFluentControl(), page.getFluentControl()))
+                .collect(toList());
     }
 
     private List<List<WebElement>> extractShadowRoots(String[] cssSelectors) {
         WebElement domRoot = webDriver.findElement(By.xpath("/*"));
-        List<List<WebElement>> currentShadowRootsInContext = singletonList(singletonList(domRoot));
+        List<List<WebElement>> acc = singletonList(singletonList(domRoot));
 
         if (cssSelectors.length == 1) {
-            currentShadowRootsInContext = extractElementsFromShadowRoot(currentShadowRootsInContext, cssSelectors[0], By.xpath("/*"));
+            acc = extractElementsFromShadowRoot(acc, cssSelectors[0], By.xpath("/*"));
         } else {
             for (int i = 0; cssSelectors.length - 1 > i; i++) {
-                currentShadowRootsInContext = extractElementsFromShadowRoot(currentShadowRootsInContext, cssSelectors[i], By.cssSelector(cssSelectors[i + 1]));
+                acc = extractElementsFromShadowRoot(acc, cssSelectors[i], By.cssSelector(cssSelectors[i + 1]));
             }
         }
-        return currentShadowRootsInContext;
+        return acc;
     }
 
     private List<List<WebElement>> extractElementsFromShadowRoot(List<List<WebElement>> previousNodes,
@@ -114,11 +96,7 @@ public class Unshadower {
         boolean isAccessible = field.isAccessible();
         try {
             field.setAccessible(true);
-            if (getContext() instanceof FluentPage) {
-                field.set(page, value);
-            } else {
-                field.set(fluentWebElement, value);
-            }
+            field.set(page, value);
         } catch (IllegalAccessException e) {
             LOGGER.error("Couldn't set value to field", e);
         } finally {

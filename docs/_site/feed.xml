@@ -3,8 +3,8 @@
   <channel>
     <title>FluentLenium</title>
     <description>FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests.</description>
-    <link>http://fluentlenium.com</link>
-    <atom:link href="http://fluentlenium.com/feed.xml" rel="self" type="application/rss+xml" />
+    <link>http://fluentlenium.io</link>
+    <atom:link href="http://fluentlenium.io/feed.xml" rel="self" type="application/rss+xml" />
     
   </channel>
 </rss>

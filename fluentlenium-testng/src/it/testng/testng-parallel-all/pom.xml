@@ -7,7 +7,6 @@
         <groupId>org.fluentlenium.it</groupId>
         <artifactId>testng</artifactId>
         <version>testing</version>
-        <relativePath>..</relativePath>
     </parent>
 
     <artifactId>testng-parallel-all</artifactId>
@@ -41,7 +40,7 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.11</version>
+            <version>1.2.10</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -57,6 +56,9 @@
                 <configuration>
                     <parallel>all</parallel>
                     <threadCount>4</threadCount>
+                    <systemPropertyVariables>
+                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
