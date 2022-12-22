@@ -77,6 +77,6 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
     public void shouldFailWithExceptionWhenURLCannotBeRead() {
         assertThatExceptionOfType(ConfigurationException.class)
                 .isThrownBy(() -> retriever.getCapabilitiesProperty("https://www.fluentlenium.io/", null))
-                .withMessage("Can't read Capabilities defined at https://www.fluentlenium.io/");
+                .withMessage("Can't convert JSON Capabilities to Object.");
     }
 }
