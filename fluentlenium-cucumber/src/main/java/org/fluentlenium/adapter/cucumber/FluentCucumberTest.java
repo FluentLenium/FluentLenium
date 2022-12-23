@@ -60,7 +60,7 @@ public class FluentCucumberTest extends FluentTestRunnerAdapter {
      *
      * @param scenario Cucumber scenario
      */
-    public void before(io.cucumber.java.Scenario scenario) {
+    public void before(Scenario scenario) {
         SeleniumVersionChecker.checkSeleniumVersion();
         starting(scenario.getName());
     }
