@@ -1,19 +1,18 @@
 package org.fluentlenium.core.inject;
 
-import static java.util.Objects.requireNonNull;
-import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isNoInject;
-import static org.fluentlenium.utils.CollectionUtils.isList;
-
 import org.fluentlenium.core.components.ComponentsManager;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.fluentlenium.utils.ReflectionUtils;
-
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
+import static org.fluentlenium.core.inject.InjectionAnnotationSupport.isNoInject;
+import static org.fluentlenium.utils.CollectionUtils.isList;
 
 /**
  * Provides method for validating whether the injection of a field into a container is supported,
@@ -35,7 +34,8 @@ final class FluentElementInjectionSupportValidator {
      * @return true if injection is supported, false otherwise
      */
     boolean isSupported(Object container, Field field) {
-        return isFieldExist(container, field)
+        return !isInJdkModule(field)
+                && isFieldExist(container, field)
                 && !isNoInject(field)
                 && !Modifier.isFinal(field.getModifiers())
                 && (isListOfFluentWebElement(field)
@@ -44,6 +44,11 @@ final class FluentElementInjectionSupportValidator {
                 || isComponentList(field)
                 || isWebElement(field)
                 || isListOfWebElement(field));
+    }
+
+    boolean isInJdkModule(Field field) {
+        return field.getDeclaringClass().getName().startsWith("java.")
+                || field.getDeclaringClass().getName().startsWith("jdk.");
     }
 
     private static boolean isFieldExist(Object container, Field field) {
