@@ -599,6 +599,24 @@
         </profile>
 
         <profile>
+            <id>java17</id>
+            <properties>
+                <java.version>17</java.version>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <release>${java.version}</release>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
             <id>examples</id>
             <modules>
                 <module>examples/appium</module>
