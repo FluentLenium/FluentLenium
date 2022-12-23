@@ -89,23 +89,7 @@ mvn -Pjava11 release:perform -s settings.xml -Darguments="-DskipTests=true"
 
 Tests are ignored in second step because we don't want them to run twice
 
-**3. Java 8 release**
-
-Unfortunately Java 8 does not support one of our Javadoc JOption.
-This commit has to be done before:
-
-[Link to example](https://github.com/FluentLenium/FluentLenium/commit/d798e250aca231bf8d5a92d0e3ae670fbee48ebc)
-
-```
-git checkout -b java8/v3.8.1
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-mvn -Pjava8 release:prepare -Dresume=false
-mvn -Pjava8 release:perform -s settings.xml -Darguments="-DskipTests=true"
-```
-
-Tests are ignored in second step because we don't want them to run twice
-
-**4. Staging**
+**3. Staging**
 
 - Connect to [https://oss.sonatype.org](https://oss.sonatype.org)
 
