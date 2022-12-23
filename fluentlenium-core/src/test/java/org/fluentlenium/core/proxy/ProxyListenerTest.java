@@ -14,11 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.refEq;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProxyListenerTest {
@@ -45,7 +42,7 @@ public class ProxyListenerTest {
         proxy.click();
 
         verify(listener).proxyElementSearch(refEq(proxy), any(ElementLocator.class));
-        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), refEq(Arrays.asList(element1)));
+        verify(listener).proxyElementFound(refEq(proxy), any(ElementLocator.class), eq(Arrays.asList(element1)));
 
         LocatorProxies.removeProxyListener(proxy, listener);
 
