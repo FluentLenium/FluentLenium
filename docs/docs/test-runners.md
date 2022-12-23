@@ -231,7 +231,7 @@ public class FluentHooks extends FluentCucumberTest {
 }
 ```
 
-When using Cucumber with Java 8 (package `cucumber-java8`), hooks can be added like this:
+Hooks can be added like this:
 
 ```java
 public class FluentHooks extends FluentCucumberTest {

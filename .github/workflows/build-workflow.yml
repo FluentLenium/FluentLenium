@@ -25,26 +25,6 @@ jobs:
         if: "${{ env.REPO_TOKEN != '' }}"
         run: echo "::set-output name=defined::true"
 
-  java8-build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v2
-      with:
-        java-version: 8
-        distribution: 'zulu'
-        cache: "maven"
-    - name: Java 8 - unit & integration tests
-      run: mvn -T 1C -B -Pjava8 -Dfailsafe.rerunFailingTestsCount=1 clean verify
-
-    - name: Publish Test reports
-      uses: mikepenz/action-junit-report@v2
-      if: always() # always run even if the previous step fails
-      with:
-        check_name: Java 8 Test Reports
-        report_paths: '**/target/*-reports/TEST-*.xml'
-
   java11-build:
     needs: [ check-env ]
     runs-on: ubuntu-latest
