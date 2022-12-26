@@ -1,5 +1,6 @@
 package org.fluentlenium.example.spock
 
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import org.fluentlenium.adapter.spock.FluentSpecification
 import org.fluentlenium.core.hook.wait.Wait
 import org.openqa.selenium.Capabilities
@@ -11,6 +12,10 @@ class DuckDuckGoSpec extends FluentSpecification {
     def SEARCH_TEXT = "FluentLenium"
     def SCREENSHOT_TEMP_PATH = "/tmp"
     def PNG_FILTER = new PngFilter()
+
+    def setupSpec() {
+        ChromeDriverManager.chromedriver().setup()
+    }
 
     @Override
     String getWebDriver() {
