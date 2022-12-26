@@ -15,7 +15,7 @@
     <properties>
         <fluentlenium.version>6.0.0-SNAPSHOT</fluentlenium.version>
         <spring.version>6.0.3</spring.version>
-        <selenium.version>4.2.2</selenium.version>
+        <selenium.version>4.7.2</selenium.version>
     </properties>
 
     <build>
