@@ -571,6 +571,7 @@
             </activation>
             <properties>
                 <java.version>11</java.version>
+                <spring.version>5.3.23</spring.version>
             </properties>
             <build>
                 <pluginManagement>
