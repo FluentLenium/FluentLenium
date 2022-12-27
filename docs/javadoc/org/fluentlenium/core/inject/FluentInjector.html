@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.inject, class: FluentInjector">
+<meta name="description" content="declaration: package: io.fluentlenium.core.inject, class: FluentInjector">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,25 +89,25 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.inject</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.inject</a></div>
 <h1 title="Class FluentInjector" class="title">Class FluentInjector</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.fluentlenium.core.inject.FluentInjector</div>
+<div class="inheritance">io.fluentlenium.core.inject.FluentInjector</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="FluentInjectControl.html" title="interface in org.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
+<dd><code><a href="FluentInjectControl.html" title="interface in io.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FluentInjector</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="FluentInjectControl.html" title="interface in org.fluentlenium.core.inject">FluentInjectControl</a></span></div>
-<div class="block">Handle injection of element proxies, <a href="../annotation/Page.html" title="annotation interface in org.fluentlenium.core.annotation"><code>Page</code></a> objects, <a href="Parent.html" title="annotation interface in org.fluentlenium.core.inject"><code>Parent</code></a> objects and
+implements <a href="FluentInjectControl.html" title="interface in io.fluentlenium.core.inject">FluentInjectControl</a></span></div>
+<div class="block">Handle injection of element proxies, <a href="../annotation/Page.html" title="annotation interface in io.fluentlenium.core.annotation"><code>Page</code></a> objects, <a href="Parent.html" title="annotation interface in io.fluentlenium.core.inject"><code>Parent</code></a> objects and
  <code>FindBy</code>.
  <p>
- Excludes fields from injection that are marked as <a href="NoInject.html" title="annotation interface in org.fluentlenium.core.inject"><code>NoInject</code></a>.</div>
+ Excludes fields from injection that are marked as <a href="NoInject.html" title="annotation interface in io.fluentlenium.core.inject"><code>NoInject</code></a>.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -119,10 +119,10 @@ implements <a href="FluentInjectControl.html" title="interface in org.fluentleni
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.fluentlenium.core.FluentControl,org.fluentlenium.core.events.EventsRegistry,org.fluentlenium.core.components.ComponentsManager,org.fluentlenium.core.inject.ContainerInstantiator)" class="member-name-link">FluentInjector</a><wbr>(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control,
- <a href="../events/EventsRegistry.html" title="class in org.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry,
- <a href="../components/ComponentsManager.html" title="class in org.fluentlenium.core.components">ComponentsManager</a>&nbsp;componentsManager,
- <a href="ContainerInstantiator.html" title="interface in org.fluentlenium.core.inject">ContainerInstantiator</a>&nbsp;instantiator)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.fluentlenium.core.FluentControl,io.fluentlenium.core.events.EventsRegistry,io.fluentlenium.core.components.ComponentsManager,io.fluentlenium.core.inject.ContainerInstantiator)" class="member-name-link">FluentInjector</a><wbr>(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control,
+ <a href="../events/EventsRegistry.html" title="class in io.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry,
+ <a href="../components/ComponentsManager.html" title="class in io.fluentlenium.core.components">ComponentsManager</a>&nbsp;componentsManager,
+ <a href="ContainerInstantiator.html" title="interface in io.fluentlenium.core.inject">ContainerInstantiator</a>&nbsp;instantiator)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a new injector.</div>
 </div>
@@ -140,12 +140,12 @@ implements <a href="FluentInjectControl.html" title="interface in org.fluentleni
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ContainerContext.html" title="interface in org.fluentlenium.core.inject">ContainerContext</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ContainerContext.html" title="interface in io.fluentlenium.core.inject">ContainerContext</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#inject(java.lang.Object)" class="member-name-link">inject</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;container)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Inject object with FluentLenium resources.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ContainerContext.html" title="interface in org.fluentlenium.core.inject">ContainerContext</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ContainerContext.html" title="interface in io.fluentlenium.core.inject">ContainerContext</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#injectComponent(java.lang.Object,java.lang.Object,org.openqa.selenium.SearchContext)" class="member-name-link">injectComponent</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;componentContainer,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parentContainer,
  org.openqa.selenium.SearchContext&nbsp;searchContext)</code></div>
@@ -180,12 +180,12 @@ implements <a href="FluentInjectControl.html" title="interface in org.fluentleni
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.fluentlenium.core.FluentControl,org.fluentlenium.core.events.EventsRegistry,org.fluentlenium.core.components.ComponentsManager,org.fluentlenium.core.inject.ContainerInstantiator)">
+<section class="detail" id="&lt;init&gt;(io.fluentlenium.core.FluentControl,io.fluentlenium.core.events.EventsRegistry,io.fluentlenium.core.components.ComponentsManager,io.fluentlenium.core.inject.ContainerInstantiator)">
 <h3>FluentInjector</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">FluentInjector</span><wbr><span class="parameters">(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control,
- <a href="../events/EventsRegistry.html" title="class in org.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry,
- <a href="../components/ComponentsManager.html" title="class in org.fluentlenium.core.components">ComponentsManager</a>&nbsp;componentsManager,
- <a href="ContainerInstantiator.html" title="interface in org.fluentlenium.core.inject">ContainerInstantiator</a>&nbsp;instantiator)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">FluentInjector</span><wbr><span class="parameters">(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control,
+ <a href="../events/EventsRegistry.html" title="class in io.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry,
+ <a href="../components/ComponentsManager.html" title="class in io.fluentlenium.core.components">ComponentsManager</a>&nbsp;componentsManager,
+ <a href="ContainerInstantiator.html" title="interface in io.fluentlenium.core.inject">ContainerInstantiator</a>&nbsp;instantiator)</span></div>
 <div class="block">Creates a new injector.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -219,7 +219,7 @@ implements <a href="FluentInjectControl.html" title="interface in org.fluentleni
 <div class="block">Creates a new instance of a class inject it.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="FluentInjectControl.html#newInstance(java.lang.Class)">newInstance</a></code>&nbsp;in interface&nbsp;<code><a href="FluentInjectControl.html" title="interface in org.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
+<dd><code><a href="FluentInjectControl.html#newInstance(java.lang.Class)">newInstance</a></code>&nbsp;in interface&nbsp;<code><a href="FluentInjectControl.html" title="interface in io.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - type of the object</dd>
 <dt>Parameters:</dt>
@@ -238,12 +238,12 @@ implements <a href="FluentInjectControl.html" title="interface in org.fluentleni
 <li>
 <section class="detail" id="inject(java.lang.Object)">
 <h3>inject</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ContainerContext.html" title="interface in org.fluentlenium.core.inject">ContainerContext</a></span>&nbsp;<span class="element-name">inject</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;container)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ContainerContext.html" title="interface in io.fluentlenium.core.inject">ContainerContext</a></span>&nbsp;<span class="element-name">inject</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;container)</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="FluentInjectControl.html#inject(java.lang.Object)">FluentInjectControl</a></code></span></div>
 <div class="block">Inject object with FluentLenium resources.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="FluentInjectControl.html#inject(java.lang.Object)">inject</a></code>&nbsp;in interface&nbsp;<code><a href="FluentInjectControl.html" title="interface in org.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
+<dd><code><a href="FluentInjectControl.html#inject(java.lang.Object)">inject</a></code>&nbsp;in interface&nbsp;<code><a href="FluentInjectControl.html" title="interface in io.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>container</code> - container to inject with FluentLenium resources</dd>
 <dt>Returns:</dt>
@@ -254,14 +254,14 @@ implements <a href="FluentInjectControl.html" title="interface in org.fluentleni
 <li>
 <section class="detail" id="injectComponent(java.lang.Object,java.lang.Object,org.openqa.selenium.SearchContext)">
 <h3>injectComponent</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ContainerContext.html" title="interface in org.fluentlenium.core.inject">ContainerContext</a></span>&nbsp;<span class="element-name">injectComponent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;componentContainer,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ContainerContext.html" title="interface in io.fluentlenium.core.inject">ContainerContext</a></span>&nbsp;<span class="element-name">injectComponent</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;componentContainer,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&nbsp;parentContainer,
  org.openqa.selenium.SearchContext&nbsp;searchContext)</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="FluentInjectControl.html#injectComponent(java.lang.Object,java.lang.Object,org.openqa.selenium.SearchContext)">FluentInjectControl</a></code></span></div>
 <div class="block">Inject object with FluentLenium resources, using given search context and parent container.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="FluentInjectControl.html#injectComponent(java.lang.Object,java.lang.Object,org.openqa.selenium.SearchContext)">injectComponent</a></code>&nbsp;in interface&nbsp;<code><a href="FluentInjectControl.html" title="interface in org.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
+<dd><code><a href="FluentInjectControl.html#injectComponent(java.lang.Object,java.lang.Object,org.openqa.selenium.SearchContext)">injectComponent</a></code>&nbsp;in interface&nbsp;<code><a href="FluentInjectControl.html" title="interface in io.fluentlenium.core.inject">FluentInjectControl</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>componentContainer</code> - container to inject with FluentLenium resources</dd>
 <dd><code>parentContainer</code> - parent container</dd>

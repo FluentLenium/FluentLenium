@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.hook</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.hook</a></div>
 <h2 title="Class DefaultHookChainBuilder" class="title">Class DefaultHookChainBuilder</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.hook.DefaultHookChainBuilder</li>
+<li>io.fluentlenium.core.hook.DefaultHookChainBuilder</li>
 </ul>
 </li>
 </ul>
@@ -134,12 +134,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="HookChainBuilder.html" title="interface in org.fluentlenium.core.hook">HookChainBuilder</a></code></dd>
+<dd><code><a href="HookChainBuilder.html" title="interface in io.fluentlenium.core.hook">HookChainBuilder</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">DefaultHookChainBuilder</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="HookChainBuilder.html" title="interface in org.fluentlenium.core.hook">HookChainBuilder</a></pre>
+implements <a href="HookChainBuilder.html" title="interface in io.fluentlenium.core.hook">HookChainBuilder</a></pre>
 <div class="block">Builder of hook chains from element supplier, element locator supplier and hook definitions list.</div>
 </li>
 </ul>
@@ -161,8 +161,8 @@ implements <a href="HookChainBuilder.html" title="interface in org.fluentlenium.
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.fluentlenium.core.FluentControl,org.fluentlenium.core.components.ComponentInstantiator)">DefaultHookChainBuilder</a></span>&#8203;(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control,
-                       <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(io.fluentlenium.core.FluentControl,io.fluentlenium.core.components.ComponentInstantiator)">DefaultHookChainBuilder</a></span>&#8203;(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control,
+                       <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator)</code></th>
 <td class="colLast">
 <div class="block">Creates a new default hook chain builder</div>
 </td>
@@ -186,20 +186,20 @@ implements <a href="HookChainBuilder.html" title="interface in org.fluentlenium.
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;</code></td>
+<td class="colFirst"><code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#build(java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.util.List)">build</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elementSupplier,
      <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.support.pagefactory.ElementLocator&gt;&nbsp;locator,
      <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;toStringSupplier,
-     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="HookDefinition.html" title="class in org.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hooks)</code></th>
+     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="HookDefinition.html" title="class in io.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hooks)</code></th>
 <td class="colLast">
 <div class="block">Build the hook chain.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>protected <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newInstance(java.lang.Class,org.fluentlenium.core.FluentControl,org.fluentlenium.core.components.ComponentInstantiator,java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.lang.Object)">newInstance</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;&gt;&nbsp;hookClass,
-           <a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;fluentControl,
-           <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
+<td class="colFirst"><code>protected <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newInstance(java.lang.Class,io.fluentlenium.core.FluentControl,io.fluentlenium.core.components.ComponentInstantiator,java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.lang.Object)">newInstance</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;&gt;&nbsp;hookClass,
+           <a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;fluentControl,
+           <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
            <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elementSupplier,
            <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.support.pagefactory.ElementLocator&gt;&nbsp;locatorSupplier,
            <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;toStringSupplier,
@@ -232,14 +232,14 @@ implements <a href="HookChainBuilder.html" title="interface in org.fluentlenium.
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.fluentlenium.core.FluentControl,org.fluentlenium.core.components.ComponentInstantiator)">
+<a id="&lt;init&gt;(io.fluentlenium.core.FluentControl,io.fluentlenium.core.components.ComponentInstantiator)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>DefaultHookChainBuilder</h4>
-<pre>public&nbsp;DefaultHookChainBuilder&#8203;(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control,
-                               <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator)</pre>
+<pre>public&nbsp;DefaultHookChainBuilder&#8203;(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control,
+                               <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator)</pre>
 <div class="block">Creates a new default hook chain builder</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -264,15 +264,15 @@ implements <a href="HookChainBuilder.html" title="interface in org.fluentlenium.
 <ul class="blockList">
 <li class="blockList">
 <h4>build</h4>
-<pre class="methodSignature">public&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;&nbsp;build&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elementSupplier,
+<pre class="methodSignature">public&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;&nbsp;build&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elementSupplier,
                               <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.support.pagefactory.ElementLocator&gt;&nbsp;locator,
                               <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;toStringSupplier,
-                              <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="HookDefinition.html" title="class in org.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hooks)</pre>
+                              <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="HookDefinition.html" title="class in io.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hooks)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="HookChainBuilder.html#build(java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.util.List)">HookChainBuilder</a></code></span></div>
 <div class="block">Build the hook chain.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="HookChainBuilder.html#build(java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.util.List)">build</a></code>&nbsp;in interface&nbsp;<code><a href="HookChainBuilder.html" title="interface in org.fluentlenium.core.hook">HookChainBuilder</a></code></dd>
+<dd><code><a href="HookChainBuilder.html#build(java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.util.List)">build</a></code>&nbsp;in interface&nbsp;<code><a href="HookChainBuilder.html" title="interface in io.fluentlenium.core.hook">HookChainBuilder</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>elementSupplier</code> - element supplier</dd>
 <dd><code>locator</code> - element locator supplier</dd>
@@ -283,15 +283,15 @@ implements <a href="HookChainBuilder.html" title="interface in org.fluentlenium.
 </dl>
 </li>
 </ul>
-<a id="newInstance(java.lang.Class,org.fluentlenium.core.FluentControl,org.fluentlenium.core.components.ComponentInstantiator,java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.lang.Object)">
+<a id="newInstance(java.lang.Class,io.fluentlenium.core.FluentControl,io.fluentlenium.core.components.ComponentInstantiator,java.util.function.Supplier,java.util.function.Supplier,java.util.function.Supplier,java.lang.Object)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>newInstance</h4>
-<pre class="methodSignature">protected&nbsp;<a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;&nbsp;newInstance&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;&gt;&nbsp;hookClass,
-                                    <a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;fluentControl,
-                                    <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
+<pre class="methodSignature">protected&nbsp;<a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;&nbsp;newInstance&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;?&gt;&gt;&nbsp;hookClass,
+                                    <a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;fluentControl,
+                                    <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
                                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elementSupplier,
                                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;org.openqa.selenium.support.pagefactory.ElementLocator&gt;&nbsp;locatorSupplier,
                                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;toStringSupplier,

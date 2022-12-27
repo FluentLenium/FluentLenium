@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.configuration, class: ComposedConfiguration">
+<meta name="description" content="declaration: package: io.fluentlenium.configuration, class: ComposedConfiguration">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,27 +89,27 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.configuration</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.configuration</a></div>
 <h1 title="Class ComposedConfiguration" class="title">Class ComposedConfiguration</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.fluentlenium.configuration.ComposedConfiguration</div>
+<div class="inheritance">io.fluentlenium.configuration.ComposedConfiguration</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="Configuration.html" title="interface in org.fluentlenium.configuration">Configuration</a></code>, <code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code>, <code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="Configuration.html" title="interface in io.fluentlenium.configuration">Configuration</a></code>, <code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code>, <code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ComposedConfiguration</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="Configuration.html" title="interface in org.fluentlenium.configuration">Configuration</a></span></div>
+implements <a href="Configuration.html" title="interface in io.fluentlenium.configuration">Configuration</a></span></div>
 <div class="block">A configuration composed with a writable configuration and list of read configurations.
  <p>
- When writing a value, it will go in the writable configuration (<a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration"><code>ConfigurationMutator</code></a>).
+ When writing a value, it will go in the writable configuration (<a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration"><code>ConfigurationMutator</code></a>).
  <p>
  When reading a value, it will get the first value found in the composition of read configurations
- (<a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration"><code>ConfigurationProperties</code></a>).</div>
+ (<a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration"><code>ConfigurationProperties</code></a>).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -118,8 +118,8 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <section class="nested-class-summary" id="nested-class-summary">
 <h2>Nested Class Summary</h2>
 <div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-org.fluentlenium.configuration.ConfigurationProperties">Nested classes/interfaces inherited from interface&nbsp;org.fluentlenium.configuration.<a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></h2>
-<code><a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>, <a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></code></div>
+<h2 id="nested-classes-inherited-from-class-io.fluentlenium.configuration.ConfigurationProperties">Nested classes/interfaces inherited from interface&nbsp;io.fluentlenium.configuration.<a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></h2>
+<code><a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>, <a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -130,8 +130,8 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.fluentlenium.configuration.ConfigurationMutator,org.fluentlenium.configuration.ConfigurationProperties...)" class="member-name-link">ComposedConfiguration</a><wbr>(<a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a>&nbsp;writableConfiguration,
- <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>...&nbsp;configurations)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.fluentlenium.configuration.ConfigurationMutator,io.fluentlenium.configuration.ConfigurationProperties...)" class="member-name-link">ComposedConfiguration</a><wbr>(<a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a>&nbsp;writableConfiguration,
+ <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>...&nbsp;configurations)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a new composed configuration</div>
 </div>
@@ -179,12 +179,12 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">capabilities</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigurationDefaults()" class="member-name-link">getConfigurationDefaults</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">configurationDefaults</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in org.fluentlenium.configuration">ConfigurationFactory</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in io.fluentlenium.configuration">ConfigurationFactory</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigurationFactory()" class="member-name-link">getConfigurationFactory</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">configurationFactory</div>
@@ -199,7 +199,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">deleteCookies</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getDriverLifecycle()" class="member-name-link">getDriverLifecycle</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">driverLifecycle</div>
@@ -209,7 +209,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">eventsEnabled</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHtmlDumpMode()" class="member-name-link">getHtmlDumpMode</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">htmlDumpMode</div>
@@ -234,7 +234,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">remoteUrl</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getScreenshotMode()" class="member-name-link">getScreenshotMode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">screenshotMode</div>
@@ -285,7 +285,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setConfigurationFactory(java.lang.Class)" class="member-name-link">setConfigurationFactory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in org.fluentlenium.configuration">ConfigurationFactory</a>&gt;&nbsp;configurationFactory)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setConfigurationFactory(java.lang.Class)" class="member-name-link">setConfigurationFactory</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in io.fluentlenium.configuration">ConfigurationFactory</a>&gt;&nbsp;configurationFactory)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the value of</div>
 </div>
@@ -301,7 +301,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDriverLifecycle(org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)" class="member-name-link">setDriverLifecycle</a><wbr>(<a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setDriverLifecycle(io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)" class="member-name-link">setDriverLifecycle</a><wbr>(<a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the value of</div>
 </div>
@@ -311,7 +311,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHtmlDumpMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)" class="member-name-link">setHtmlDumpMode</a><wbr>(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;htmlDumpMode)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setHtmlDumpMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)" class="member-name-link">setHtmlDumpMode</a><wbr>(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;htmlDumpMode)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the value of</div>
 </div>
@@ -336,7 +336,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScreenshotMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)" class="member-name-link">setScreenshotMode</a><wbr>(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;screenshotMode)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setScreenshotMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)" class="member-name-link">setScreenshotMode</a><wbr>(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;screenshotMode)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the value of</div>
 </div>
@@ -373,10 +373,10 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.fluentlenium.configuration.ConfigurationMutator,org.fluentlenium.configuration.ConfigurationProperties...)">
+<section class="detail" id="&lt;init&gt;(io.fluentlenium.configuration.ConfigurationMutator,io.fluentlenium.configuration.ConfigurationProperties...)">
 <h3>ComposedConfiguration</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ComposedConfiguration</span><wbr><span class="parameters">(<a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a>&nbsp;writableConfiguration,
- <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>...&nbsp;configurations)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ComposedConfiguration</span><wbr><span class="parameters">(<a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a>&nbsp;writableConfiguration,
+ <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>...&nbsp;configurations)</span></div>
 <div class="block">Creates a new composed configuration</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -396,38 +396,38 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <li>
 <section class="detail" id="getConfigurationFactory()">
 <h3>getConfigurationFactory</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in org.fluentlenium.configuration">ConfigurationFactory</a>&gt;</span>&nbsp;<span class="element-name">getConfigurationFactory</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in io.fluentlenium.configuration">ConfigurationFactory</a>&gt;</span>&nbsp;<span class="element-name">getConfigurationFactory</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationProperties.html#getConfigurationFactory()">ConfigurationProperties</a></code></span></div>
 <div class="block"><pre>configurationFactory</pre> property.
 
- Set this to a class implementing <a href="ConfigurationFactory.html" title="interface in org.fluentlenium.configuration"><code>ConfigurationFactory</code></a> to customize the ways properties are read.
+ Set this to a class implementing <a href="ConfigurationFactory.html" title="interface in io.fluentlenium.configuration"><code>ConfigurationFactory</code></a> to customize the ways properties are read.
  This allow to configure properties from sources that are not supported by default FluentLenium.
 
- Default value is <a href="DefaultConfigurationFactory.html" title="class in org.fluentlenium.configuration"><code>DefaultConfigurationFactory</code></a> class.</div>
+ Default value is <a href="DefaultConfigurationFactory.html" title="class in io.fluentlenium.configuration"><code>DefaultConfigurationFactory</code></a> class.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getConfigurationFactory()">getConfigurationFactory</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getConfigurationFactory()">getConfigurationFactory</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
-<dd>Custom <a href="ConfigurationFactory.html" title="interface in org.fluentlenium.configuration"><code>ConfigurationFactory</code></a> class.</dd>
+<dd>Custom <a href="ConfigurationFactory.html" title="interface in io.fluentlenium.configuration"><code>ConfigurationFactory</code></a> class.</dd>
 </dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getConfigurationDefaults()">
 <h3>getConfigurationDefaults</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>&gt;</span>&nbsp;<span class="element-name">getConfigurationDefaults</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>&gt;</span>&nbsp;<span class="element-name">getConfigurationDefaults</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationProperties.html#getConfigurationDefaults()">ConfigurationProperties</a></code></span></div>
 <div class="block"><pre>configurationDefaults</pre> property.
 
- Set this to a class implementing <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration"><code>ConfigurationProperties</code></a> to provide the default values
+ Set this to a class implementing <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration"><code>ConfigurationProperties</code></a> to provide the default values
  of the configuration properties.
 
- Default value is <a href="ConfigurationDefaults.html" title="class in org.fluentlenium.configuration"><code>ConfigurationDefaults</code></a></div>
+ Default value is <a href="ConfigurationDefaults.html" title="class in io.fluentlenium.configuration"><code>ConfigurationDefaults</code></a></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getConfigurationDefaults()">getConfigurationDefaults</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getConfigurationDefaults()">getConfigurationDefaults</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
-<dd>Custom <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration"><code>ConfigurationProperties</code></a> instance with default values.</dd>
+<dd>Custom <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration"><code>ConfigurationProperties</code></a> instance with default values.</dd>
 </dl>
 </section>
 </li>
@@ -442,7 +442,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  <p>
  When FluentLenium needs to create a new <code>WebDriver</code> instance, it calls <a href="../adapter/IFluentAdapter.html#newWebDriver()"><code>IFluentAdapter.newWebDriver()</code></a>
  which delegates to
- <a href="WebDriversRegistryImpl.html#newWebDriver(java.lang.String,org.openqa.selenium.Capabilities,org.fluentlenium.configuration.ConfigurationProperties)"><code>WebDriversRegistryImpl.newWebDriver(String, Capabilities, ConfigurationProperties)</code></a>
+ <a href="WebDriversRegistryImpl.html#newWebDriver(java.lang.String,org.openqa.selenium.Capabilities,io.fluentlenium.configuration.ConfigurationProperties)"><code>WebDriversRegistryImpl.newWebDriver(String, Capabilities, ConfigurationProperties)</code></a>
  registry using the value stored in webDriver and capabilities property.
  <p>
  Possible values are "firefox", "chrome", "ie", "edge", "htmlunit", "safari", "opera", "remote"
@@ -452,14 +452,14 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is "firefox".</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getWebDriver()">getWebDriver</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getWebDriver()">getWebDriver</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>webDriver property value</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
 <li><a href="../adapter/IFluentAdapter.html#newWebDriver()"><code>IFluentAdapter.newWebDriver()</code></a></li>
-<li><a href="DefaultWebDriverFactories.html" title="class in org.fluentlenium.configuration"><code>DefaultWebDriverFactories</code></a></li>
+<li><a href="DefaultWebDriverFactories.html" title="class in io.fluentlenium.configuration"><code>DefaultWebDriverFactories</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -475,7 +475,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Sets the remoteUrl for "remote" webDriver.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getRemoteUrl()">getRemoteUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getRemoteUrl()">getRemoteUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>remoteUrl property value</dd>
 <dt>See Also:</dt>
@@ -500,7 +500,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is "null".</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getCapabilities()">getCapabilities</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getCapabilities()">getCapabilities</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>Capabilities property value</dd>
 <dt>See Also:</dt>
@@ -516,7 +516,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <li>
 <section class="detail" id="getDriverLifecycle()">
 <h3>getDriverLifecycle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a></span>&nbsp;<span class="element-name">getDriverLifecycle</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a></span>&nbsp;<span class="element-name">getDriverLifecycle</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationProperties.html#getDriverLifecycle()">ConfigurationProperties</a></code></span></div>
 <div class="block"><pre>driverLifecycle</pre> property.
 
@@ -529,7 +529,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is METHOD.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getDriverLifecycle()">getDriverLifecycle</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getDriverLifecycle()">getDriverLifecycle</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>driverLifecycle property value</dd>
 </dl>
@@ -547,7 +547,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is 60 seconds.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getBrowserTimeout()">getBrowserTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getBrowserTimeout()">getBrowserTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>long</dd>
 </dl>
@@ -565,7 +565,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is 2 times.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getBrowserTimeoutRetries()">getBrowserTimeoutRetries</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getBrowserTimeoutRetries()">getBrowserTimeoutRetries</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>Integer</dd>
 </dl>
@@ -584,7 +584,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is false.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getDeleteCookies()">getDeleteCookies</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getDeleteCookies()">getDeleteCookies</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>deleteCookies property value.</dd>
 </dl>
@@ -602,7 +602,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getBaseUrl()">getBaseUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getBaseUrl()">getBaseUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>baseUrl property value</dd>
 </dl>
@@ -621,7 +621,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getPageLoadTimeout()">getPageLoadTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getPageLoadTimeout()">getPageLoadTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>pageLoadTimeout property value</dd>
 <dt>See Also:</dt>
@@ -646,7 +646,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getImplicitlyWait()">getImplicitlyWait</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getImplicitlyWait()">getImplicitlyWait</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>implicitlyWait property value</dd>
 <dt>See Also:</dt>
@@ -672,7 +672,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getScriptTimeout()">getScriptTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getScriptTimeout()">getScriptTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>scriptTimeout property value</dd>
 <dt>See Also:</dt>
@@ -692,10 +692,10 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block"><pre>awaitAtMost</pre> property.
 
  Sets the default timeout in millisecond when using <a href="../core/FluentControl.html#await()"><code>FluentControl.await()</code></a> or
- <a href="../core/hook/wait/Wait.html" title="annotation interface in org.fluentlenium.core.hook.wait"><code>Wait</code></a> hook.</div>
+ <a href="../core/hook/wait/Wait.html" title="annotation interface in io.fluentlenium.core.hook.wait"><code>Wait</code></a> hook.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getAwaitAtMost()">getAwaitAtMost</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getAwaitAtMost()">getAwaitAtMost</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>awaitTimeout property value</dd>
 <dt>See Also:</dt>
@@ -716,10 +716,10 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block"><pre>awaitPollingEvery</pre> property.
 
  Sets the default polling frequency in millisecond when using <a href="../core/FluentControl.html#await()"><code>FluentControl.await()</code></a> or
- <a href="../core/hook/wait/Wait.html" title="annotation interface in org.fluentlenium.core.hook.wait"><code>Wait</code></a> hook.</div>
+ <a href="../core/hook/wait/Wait.html" title="annotation interface in io.fluentlenium.core.hook.wait"><code>Wait</code></a> hook.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getAwaitPollingEvery()">getAwaitPollingEvery</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getAwaitPollingEvery()">getAwaitPollingEvery</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>awaitPollingEvery property value</dd>
 <dt>See Also:</dt>
@@ -745,7 +745,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is true.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getEventsEnabled()">getEventsEnabled</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getEventsEnabled()">getEventsEnabled</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>eventsEnabled property value.</dd>
 </dl>
@@ -764,7 +764,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getScreenshotPath()">getScreenshotPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getScreenshotPath()">getScreenshotPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>screenshotPath property value</dd>
 </dl>
@@ -783,7 +783,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getHtmlDumpPath()">getHtmlDumpPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getHtmlDumpPath()">getHtmlDumpPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>htmlDumpPath property value</dd>
 </dl>
@@ -792,7 +792,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <li>
 <section class="detail" id="getScreenshotMode()">
 <h3>getScreenshotMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></span>&nbsp;<span class="element-name">getScreenshotMode</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></span>&nbsp;<span class="element-name">getScreenshotMode</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationProperties.html#getScreenshotMode()">ConfigurationProperties</a></code></span></div>
 <div class="block"><pre>screenshotMode</pre> property.
 
@@ -801,13 +801,13 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getScreenshotMode()">getScreenshotMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getScreenshotMode()">getScreenshotMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>screenshotMode property value.</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list-long">
-<li><a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration"><code>ConfigurationProperties.TriggerMode</code></a></li>
+<li><a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration"><code>ConfigurationProperties.TriggerMode</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -816,7 +816,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <li>
 <section class="detail" id="getHtmlDumpMode()">
 <h3>getHtmlDumpMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></span>&nbsp;<span class="element-name">getHtmlDumpMode</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a></span>&nbsp;<span class="element-name">getHtmlDumpMode</span>()</div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationProperties.html#getHtmlDumpMode()">ConfigurationProperties</a></code></span></div>
 <div class="block"><pre>htmlDumpMode</pre> property.
 
@@ -825,13 +825,13 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
  Default value is null.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getHtmlDumpMode()">getHtmlDumpMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getHtmlDumpMode()">getHtmlDumpMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Returns:</dt>
 <dd>htmlDumpMode property value.</dd>
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list-long">
-<li><a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration"><code>ConfigurationProperties.TriggerMode</code></a></li>
+<li><a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration"><code>ConfigurationProperties.TriggerMode</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -845,7 +845,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Get custom property value.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationProperties.html#getCustomProperty(java.lang.String)">getCustomProperty</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
+<dd><code><a href="ConfigurationProperties.html#getCustomProperty(java.lang.String)">getCustomProperty</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>propertyName</code> - name of the property</dd>
 <dt>Returns:</dt>
@@ -856,12 +856,12 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <li>
 <section class="detail" id="setConfigurationFactory(java.lang.Class)">
 <h3>setConfigurationFactory</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setConfigurationFactory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in org.fluentlenium.configuration">ConfigurationFactory</a>&gt;&nbsp;configurationFactory)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setConfigurationFactory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="ConfigurationFactory.html" title="interface in io.fluentlenium.configuration">ConfigurationFactory</a>&gt;&nbsp;configurationFactory)</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationMutator.html#setConfigurationFactory(java.lang.Class)">ConfigurationMutator</a></code></span></div>
 <div class="block">Sets the value of <pre>configurationFactory</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setConfigurationFactory(java.lang.Class)">setConfigurationFactory</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setConfigurationFactory(java.lang.Class)">setConfigurationFactory</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>configurationFactory</code> - property value</dd>
 <dt>See Also:</dt>
@@ -881,7 +881,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>deleteCookies</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setDeleteCookies(java.lang.Boolean)">setDeleteCookies</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setDeleteCookies(java.lang.Boolean)">setDeleteCookies</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>deleteCookies</code> - property value</dd>
 <dt>See Also:</dt>
@@ -902,7 +902,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets custom value for a custom property key</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setCustomProperty(java.lang.String,java.lang.String)">setCustomProperty</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setCustomProperty(java.lang.String,java.lang.String)">setCustomProperty</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>key</code> - custom property key</dd>
 <dd><code>value</code> - custom property value</dd>
@@ -917,7 +917,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>baseUrl</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setBaseUrl(java.lang.String)">setBaseUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setBaseUrl(java.lang.String)">setBaseUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>baseUrl</code> - property value</dd>
 <dt>See Also:</dt>
@@ -937,7 +937,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>webDriver</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setWebDriver(java.lang.String)">setWebDriver</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setWebDriver(java.lang.String)">setWebDriver</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>webDriver</code> - property value</dd>
 <dt>See Also:</dt>
@@ -957,7 +957,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>pageLoadTimeout</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setPageLoadTimeout(java.lang.Long)">setPageLoadTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setPageLoadTimeout(java.lang.Long)">setPageLoadTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>pageLoadTimeout</code> - property value</dd>
 <dt>See Also:</dt>
@@ -970,14 +970,14 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 </section>
 </li>
 <li>
-<section class="detail" id="setHtmlDumpMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">
+<section class="detail" id="setHtmlDumpMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">
 <h3>setHtmlDumpMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setHtmlDumpMode</span><wbr><span class="parameters">(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;htmlDumpMode)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationMutator.html#setHtmlDumpMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">ConfigurationMutator</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setHtmlDumpMode</span><wbr><span class="parameters">(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;htmlDumpMode)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationMutator.html#setHtmlDumpMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">ConfigurationMutator</a></code></span></div>
 <div class="block">Sets the value of <pre>htmlDumpMode</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setHtmlDumpMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">setHtmlDumpMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setHtmlDumpMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">setHtmlDumpMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>htmlDumpMode</code> - property value</dd>
 <dt>See Also:</dt>
@@ -997,7 +997,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>screenshotPath</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setScreenshotPath(java.lang.String)">setScreenshotPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setScreenshotPath(java.lang.String)">setScreenshotPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>screenshotPath</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1017,7 +1017,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>browserTimeoutRetries</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setBrowserTimeoutRetries(java.lang.Integer)">setBrowserTimeoutRetries</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setBrowserTimeoutRetries(java.lang.Integer)">setBrowserTimeoutRetries</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>retriesNumber</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1037,7 +1037,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>remoteUrl</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setRemoteUrl(java.lang.String)">setRemoteUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setRemoteUrl(java.lang.String)">setRemoteUrl</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>remoteUrl</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1057,7 +1057,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>implicitlyWait</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setImplicitlyWait(java.lang.Long)">setImplicitlyWait</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setImplicitlyWait(java.lang.Long)">setImplicitlyWait</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>implicitlyWait</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1070,14 +1070,14 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 </section>
 </li>
 <li>
-<section class="detail" id="setDriverLifecycle(org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">
+<section class="detail" id="setDriverLifecycle(io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">
 <h3>setDriverLifecycle</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDriverLifecycle</span><wbr><span class="parameters">(<a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationMutator.html#setDriverLifecycle(org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">ConfigurationMutator</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDriverLifecycle</span><wbr><span class="parameters">(<a href="ConfigurationProperties.DriverLifecycle.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationMutator.html#setDriverLifecycle(io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">ConfigurationMutator</a></code></span></div>
 <div class="block">Sets the value of <pre>driverLifecycle</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setDriverLifecycle(org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">setDriverLifecycle</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setDriverLifecycle(io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">setDriverLifecycle</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driverLifecycle</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1097,7 +1097,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>awaitPollingEvery</pre> property</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setAwaitPollingEvery(java.lang.Long)">setAwaitPollingEvery</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setAwaitPollingEvery(java.lang.Long)">setAwaitPollingEvery</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>awaitPollingEvery</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1117,7 +1117,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>capabilities</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setCapabilities(org.openqa.selenium.Capabilities)">setCapabilities</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setCapabilities(org.openqa.selenium.Capabilities)">setCapabilities</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>capabilities</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1130,14 +1130,14 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 </section>
 </li>
 <li>
-<section class="detail" id="setScreenshotMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">
+<section class="detail" id="setScreenshotMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">
 <h3>setScreenshotMode</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setScreenshotMode</span><wbr><span class="parameters">(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;screenshotMode)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationMutator.html#setScreenshotMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">ConfigurationMutator</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setScreenshotMode</span><wbr><span class="parameters">(<a href="ConfigurationProperties.TriggerMode.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.TriggerMode</a>&nbsp;screenshotMode)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ConfigurationMutator.html#setScreenshotMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">ConfigurationMutator</a></code></span></div>
 <div class="block">Sets the value of <pre>screenshotMode</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setScreenshotMode(org.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">setScreenshotMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setScreenshotMode(io.fluentlenium.configuration.ConfigurationProperties.TriggerMode)">setScreenshotMode</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>screenshotMode</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1157,7 +1157,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>htmlDumpPath</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setHtmlDumpPath(java.lang.String)">setHtmlDumpPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setHtmlDumpPath(java.lang.String)">setHtmlDumpPath</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>htmlDumpPath</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1177,7 +1177,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>awaitAtMost</pre> property</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setAwaitAtMost(java.lang.Long)">setAwaitAtMost</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setAwaitAtMost(java.lang.Long)">setAwaitAtMost</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>awaitAtMost</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1197,7 +1197,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>browserTimeout</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setBrowserTimeout(java.lang.Long)">setBrowserTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setBrowserTimeout(java.lang.Long)">setBrowserTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>timeout</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1217,7 +1217,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>scriptTimeout</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setScriptTimeout(java.lang.Long)">setScriptTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setScriptTimeout(java.lang.Long)">setScriptTimeout</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>scriptTimeout</code> - property value</dd>
 <dt>See Also:</dt>
@@ -1237,7 +1237,7 @@ implements <a href="Configuration.html" title="interface in org.fluentlenium.con
 <div class="block">Sets the value of <pre>eventsEnabled</pre> property.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ConfigurationMutator.html#setEventsEnabled(java.lang.Boolean)">setEventsEnabled</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in org.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
+<dd><code><a href="ConfigurationMutator.html#setEventsEnabled(java.lang.Boolean)">setEventsEnabled</a></code>&nbsp;in interface&nbsp;<code><a href="ConfigurationMutator.html" title="interface in io.fluentlenium.configuration">ConfigurationMutator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>eventsEnabled</code> - property value</dd>
 </dl>

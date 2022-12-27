@@ -2,8 +2,8 @@
 
 ![FluentLenium CI pipeline](https://github.com/FluentLenium/FluentLenium/workflows/FluentLenium%20CI%20pipeline/badge.svg)
 [![Coveralls](https://coveralls.io/repos/github/FluentLenium/FluentLenium/badge.svg?branch=develop)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=develop)
-[![javadoc](https://javadoc.io/badge2/org.fluentlenium/fluentlenium-core/javadoc.svg)](https://fluentlenium.io/javadoc)
-[![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
+[![javadoc](https://javadoc.io/badge2/io.fluentlenium/fluentlenium-core/javadoc.svg)](https://fluentlenium.io/javadoc)
+[![Maven Central](https://img.shields.io/maven-central/v/io.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.io.svg)](https://fluentlenium.io)
 
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser and mobile

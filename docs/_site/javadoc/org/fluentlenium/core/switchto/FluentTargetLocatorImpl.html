@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.switchto</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.switchto</a></div>
 <h2 title="Class FluentTargetLocatorImpl" class="title">Class FluentTargetLocatorImpl&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.switchto.FluentTargetLocatorImpl&lt;T&gt;</li>
+<li>io.fluentlenium.core.switchto.FluentTargetLocatorImpl&lt;T&gt;</li>
 </ul>
 </li>
 </ul>
@@ -138,12 +138,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;T&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;T&gt;</code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">FluentTargetLocatorImpl&lt;T&gt;</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;T&gt;</pre>
+implements <a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;T&gt;</pre>
 <div class="block">Fluent wrapper for <code>WebDriver.TargetLocator</code>.</div>
 </li>
 </ul>
@@ -165,8 +165,8 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(T,org.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver.TargetLocator)">FluentTargetLocatorImpl</a></span>&#8203;(<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&nbsp;self,
-                       <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;componentInstantiator,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(T,io.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver.TargetLocator)">FluentTargetLocatorImpl</a></span>&#8203;(<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&nbsp;self,
+                       <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;componentInstantiator,
                        org.openqa.selenium.WebDriver.TargetLocator&nbsp;targetLocator)</code></th>
 <td class="colLast">
 <div class="block">Creates a new fluent target locator</div>
@@ -191,7 +191,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a></code></td>
+<td class="colFirst"><code><a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#activeElement()">activeElement</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Switches to the element that currently has focus within the document currently "switched to",
@@ -199,7 +199,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../alert/AlertImpl.html" title="class in org.fluentlenium.core.alert">AlertImpl</a></code></td>
+<td class="colFirst"><code><a href="../alert/AlertImpl.html" title="class in io.fluentlenium.core.alert">AlertImpl</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#alert()">alert</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Switches to the currently active modal dialog for this particular driver instance.</div>
@@ -229,7 +229,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#frame(org.fluentlenium.core.domain.FluentWebElement)">frame</a></span>&#8203;(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;frameElement)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#frame(io.fluentlenium.core.domain.FluentWebElement)">frame</a></span>&#8203;(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;frameElement)</code></th>
 <td class="colLast">
 <div class="block">Select a frame using its previously located <code>WebElement</code>.</div>
 </td>
@@ -279,16 +279,16 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(java.lang.Object,org.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver.TargetLocator)">
+<a id="&lt;init&gt;(java.lang.Object,io.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver.TargetLocator)">
 <!--   -->
-</a><a id="&lt;init&gt;(T,org.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver.TargetLocator)">
+</a><a id="&lt;init&gt;(T,io.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver.TargetLocator)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>FluentTargetLocatorImpl</h4>
 <pre>public&nbsp;FluentTargetLocatorImpl&#8203;(<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&nbsp;self,
-                               <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;componentInstantiator,
+                               <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;componentInstantiator,
                                org.openqa.selenium.WebDriver.TargetLocator&nbsp;targetLocator)</pre>
 <div class="block">Creates a new fluent target locator</div>
 <dl>
@@ -323,7 +323,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
  interface are made to that frame.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#frame(int)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#frame(int)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>index</code> - (zero-based) index</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -343,7 +343,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
  precedence over those matched by ID.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#frame(java.lang.String)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#frame(java.lang.String)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>nameOrId</code> - the name of the frame window, the id of the &lt;frame&gt; or &lt;iframe&gt;
                  element, or the (zero-based) index</dd>
@@ -363,7 +363,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 <div class="block">Select a frame using its previously located <code>WebElement</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#frame(org.openqa.selenium.WebElement)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#frame(org.openqa.selenium.WebElement)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>frameElement</code> - The frame element to switch to.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -371,18 +371,18 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 </dl>
 </li>
 </ul>
-<a id="frame(org.fluentlenium.core.domain.FluentWebElement)">
+<a id="frame(io.fluentlenium.core.domain.FluentWebElement)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>frame</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&nbsp;frame&#8203;(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;frameElement)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentTargetLocator.html#frame(org.fluentlenium.core.domain.FluentWebElement)">FluentTargetLocator</a></code></span></div>
+<pre class="methodSignature">public&nbsp;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&nbsp;frame&#8203;(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;frameElement)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentTargetLocator.html#frame(io.fluentlenium.core.domain.FluentWebElement)">FluentTargetLocator</a></code></span></div>
 <div class="block">Select a frame using its previously located <code>WebElement</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#frame(org.fluentlenium.core.domain.FluentWebElement)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#frame(io.fluentlenium.core.domain.FluentWebElement)">frame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>frameElement</code> - The frame element to switch to.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -402,7 +402,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
  the context remains unchanged.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#parentFrame()">parentFrame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#parentFrame()">parentFrame</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This driver focused on the parent frame</dd>
 </dl>
@@ -419,7 +419,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 <div class="block">Switch the focus of future commands for this driver to the window with the given name/handle.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#window(java.lang.String)">window</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#window(java.lang.String)">window</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>nameOrHandle</code> - The name of the window or the handle as returned by
                      <code>WebDriver.getWindowHandle()</code></dd>
@@ -440,7 +440,7 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
  iframes.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#defaultContent()">defaultContent</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#defaultContent()">defaultContent</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>This driver focused on the top window/first frame.</dd>
 </dl>
@@ -452,14 +452,14 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 <ul class="blockList">
 <li class="blockList">
 <h4>activeElement</h4>
-<pre class="methodSignature">public&nbsp;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;activeElement()</pre>
+<pre class="methodSignature">public&nbsp;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;activeElement()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentTargetLocator.html#activeElement()">FluentTargetLocator</a></code></span></div>
 <div class="block">Switches to the element that currently has focus within the document currently "switched to",
  or the body element if this cannot be detected. This matches the semantics of calling
  "document.activeElement" in Javascript.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#activeElement()">activeElement</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#activeElement()">activeElement</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The WebElement with focus, or the body element if no element with focus can be
  detected.</dd>
@@ -472,12 +472,12 @@ implements <a href="FluentTargetLocator.html" title="interface in org.fluentleni
 <ul class="blockListLast">
 <li class="blockList">
 <h4>alert</h4>
-<pre class="methodSignature">public&nbsp;<a href="../alert/AlertImpl.html" title="class in org.fluentlenium.core.alert">AlertImpl</a>&nbsp;alert()</pre>
+<pre class="methodSignature">public&nbsp;<a href="../alert/AlertImpl.html" title="class in io.fluentlenium.core.alert">AlertImpl</a>&nbsp;alert()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentTargetLocator.html#alert()">FluentTargetLocator</a></code></span></div>
 <div class="block">Switches to the currently active modal dialog for this particular driver instance.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentTargetLocator.html#alert()">alert</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
+<dd><code><a href="FluentTargetLocator.html#alert()">alert</a></code>&nbsp;in interface&nbsp;<code><a href="FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="FluentTargetLocatorImpl.html" title="type parameter in FluentTargetLocatorImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>A handle to the dialog.</dd>
 </dl>

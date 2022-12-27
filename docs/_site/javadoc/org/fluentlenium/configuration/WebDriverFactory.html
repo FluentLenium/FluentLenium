@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.configuration</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.configuration</a></div>
 <h2 title="Interface WebDriverFactory" class="title">Interface WebDriverFactory</h2>
 </div>
 <div class="contentContainer">
@@ -126,17 +126,17 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><code><a href="Factory.html" title="interface in org.fluentlenium.configuration">Factory</a></code></dd>
+<dd><code><a href="Factory.html" title="interface in io.fluentlenium.configuration">Factory</a></code></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="DefaultWebDriverFactories.ChromeWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.ChromeWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.EdgeWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.EdgeWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.FirefoxWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.FirefoxWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.HtmlUnitWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.HtmlUnitWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.InternetExplorerWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.InternetExplorerWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.OperaWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.OperaWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.PhantomJSWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.PhantomJSWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.RemoteWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.RemoteWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.SafariWebDriverFactory.html" title="class in org.fluentlenium.configuration">DefaultWebDriverFactories.SafariWebDriverFactory</a></code>, <code><a href="ReflectiveWebDriverFactory.html" title="class in org.fluentlenium.configuration">ReflectiveWebDriverFactory</a></code></dd>
+<dd><code><a href="DefaultWebDriverFactories.ChromeWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.ChromeWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.EdgeWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.EdgeWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.FirefoxWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.FirefoxWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.HtmlUnitWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.HtmlUnitWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.InternetExplorerWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.InternetExplorerWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.OperaWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.OperaWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.PhantomJSWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.PhantomJSWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.RemoteWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.RemoteWebDriverFactory</a></code>, <code><a href="DefaultWebDriverFactories.SafariWebDriverFactory.html" title="class in io.fluentlenium.configuration">DefaultWebDriverFactories.SafariWebDriverFactory</a></code>, <code><a href="ReflectiveWebDriverFactory.html" title="class in io.fluentlenium.configuration">ReflectiveWebDriverFactory</a></code></dd>
 </dl>
 <hr>
 <pre>@IndexSubclasses
 public interface <span class="typeNameLabel">WebDriverFactory</span>
-extends <a href="Factory.html" title="interface in org.fluentlenium.configuration">Factory</a></pre>
-<div class="block">Factory of <code>WebDriver</code>, that can be registered in <a href="WebDrivers.html" title="enum in org.fluentlenium.configuration"><code>WebDrivers</code></a> registry.</div>
+extends <a href="Factory.html" title="interface in io.fluentlenium.configuration">Factory</a></pre>
+<div class="block">Factory of <code>WebDriver</code>, that can be registered in <a href="WebDrivers.html" title="enum in io.fluentlenium.configuration"><code>WebDrivers</code></a> registry.</div>
 </li>
 </ul>
 </div>
@@ -159,8 +159,8 @@ extends <a href="Factory.html" title="interface in org.fluentlenium.configuratio
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>org.openqa.selenium.WebDriver</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newWebDriver(org.openqa.selenium.Capabilities,org.fluentlenium.configuration.ConfigurationProperties)">newWebDriver</a></span>&#8203;(org.openqa.selenium.Capabilities&nbsp;desiredCapabilities,
-            <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newWebDriver(org.openqa.selenium.Capabilities,io.fluentlenium.configuration.ConfigurationProperties)">newWebDriver</a></span>&#8203;(org.openqa.selenium.Capabilities&nbsp;desiredCapabilities,
+            <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</code></th>
 <td class="colLast">
 <div class="block">Creates a new instance of <code>WebDriver</code>.</div>
 </td>
@@ -182,14 +182,14 @@ extends <a href="Factory.html" title="interface in org.fluentlenium.configuratio
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="newWebDriver(org.openqa.selenium.Capabilities,org.fluentlenium.configuration.ConfigurationProperties)">
+<a id="newWebDriver(org.openqa.selenium.Capabilities,io.fluentlenium.configuration.ConfigurationProperties)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>newWebDriver</h4>
 <pre class="methodSignature">org.openqa.selenium.WebDriver&nbsp;newWebDriver&#8203;(org.openqa.selenium.Capabilities&nbsp;desiredCapabilities,
-                                           <a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</pre>
+                                           <a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</pre>
 <div class="block">Creates a new instance of <code>WebDriver</code>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

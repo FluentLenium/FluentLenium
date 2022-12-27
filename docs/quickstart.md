@@ -45,13 +45,13 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 </properties>
 
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
     <version>${fluentlenium.version}</version>
     <scope>test</scope>
 </dependency>
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
     <version>${fluentlenium.version}</version>
     <scope>test</scope>
@@ -69,8 +69,8 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 To see FluentLenium in action run this test as Junit.
 
 ```java
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.core.hook.wait.Wait;
+import io.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.core.hook.wait.Wait;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -96,8 +96,8 @@ In order to take advantage of FluentLenium magic please use Page Object Pattern.
 Test:
 
 ```java
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.core.annotation.Page;
+import io.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.core.annotation.Page;
 import org.junit.Test;
 
 public class DuckDuckGoTest extends FluentTest {
@@ -123,9 +123,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.concurrent.TimeUnit;
 
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.PageUrl;
+import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
 @PageUrl("https://duckduckgo.com")

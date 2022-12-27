@@ -117,15 +117,15 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.configuration</a></div>
-<h2 title="Class AbstractFactoryRegistryImpl" class="title">Class AbstractFactoryRegistryImpl&lt;T extends <a href="Factory.html" title="interface in org.fluentlenium.configuration">Factory</a>,&#8203;R extends <a href="ReflectiveFactory.html" title="interface in org.fluentlenium.configuration">ReflectiveFactory</a>&gt;</h2>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.configuration</a></div>
+<h2 title="Class AbstractFactoryRegistryImpl" class="title">Class AbstractFactoryRegistryImpl&lt;T extends <a href="Factory.html" title="interface in io.fluentlenium.configuration">Factory</a>,&#8203;R extends <a href="ReflectiveFactory.html" title="interface in io.fluentlenium.configuration">ReflectiveFactory</a>&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.configuration.AbstractFactoryRegistryImpl&lt;T,&#8203;R&gt;</li>
+<li>io.fluentlenium.configuration.AbstractFactoryRegistryImpl&lt;T,&#8203;R&gt;</li>
 </ul>
 </li>
 </ul>
@@ -139,10 +139,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="CapabilitiesRegistryImpl.html" title="class in org.fluentlenium.configuration">CapabilitiesRegistryImpl</a></code>, <code><a href="WebDriversRegistryImpl.html" title="class in org.fluentlenium.configuration">WebDriversRegistryImpl</a></code></dd>
+<dd><code><a href="CapabilitiesRegistryImpl.html" title="class in io.fluentlenium.configuration">CapabilitiesRegistryImpl</a></code>, <code><a href="WebDriversRegistryImpl.html" title="class in io.fluentlenium.configuration">WebDriversRegistryImpl</a></code></dd>
 </dl>
 <hr>
-<pre>public abstract class <span class="typeNameLabel">AbstractFactoryRegistryImpl&lt;T extends <a href="Factory.html" title="interface in org.fluentlenium.configuration">Factory</a>,&#8203;R extends <a href="ReflectiveFactory.html" title="interface in org.fluentlenium.configuration">ReflectiveFactory</a>&gt;</span>
+<pre>public abstract class <span class="typeNameLabel">AbstractFactoryRegistryImpl&lt;T extends <a href="Factory.html" title="interface in io.fluentlenium.configuration">Factory</a>,&#8203;R extends <a href="ReflectiveFactory.html" title="interface in io.fluentlenium.configuration">ReflectiveFactory</a>&gt;</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a></pre>
 <div class="block">Abstract registry of FluentLenium factories.</div>
 </li>
@@ -294,7 +294,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <ul class="blockList">
 <li class="blockList">
 <h4>factoryType</h4>
-<pre>protected final&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;<a href="AbstractFactoryRegistryImpl.html" title="type parameter in AbstractFactoryRegistryImpl">T</a> extends <a href="Factory.html" title="interface in org.fluentlenium.configuration">Factory</a>&gt; factoryType</pre>
+<pre>protected final&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;<a href="AbstractFactoryRegistryImpl.html" title="type parameter in AbstractFactoryRegistryImpl">T</a> extends <a href="Factory.html" title="interface in io.fluentlenium.configuration">Factory</a>&gt; factoryType</pre>
 </li>
 </ul>
 <a id="reflectiveFactoryType">
@@ -303,7 +303,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <ul class="blockList">
 <li class="blockList">
 <h4>reflectiveFactoryType</h4>
-<pre>protected final&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;<a href="AbstractFactoryRegistryImpl.html" title="type parameter in AbstractFactoryRegistryImpl">R</a> extends <a href="ReflectiveFactory.html" title="interface in org.fluentlenium.configuration">ReflectiveFactory</a>&gt; reflectiveFactoryType</pre>
+<pre>protected final&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;<a href="AbstractFactoryRegistryImpl.html" title="type parameter in AbstractFactoryRegistryImpl">R</a> extends <a href="ReflectiveFactory.html" title="interface in io.fluentlenium.configuration">ReflectiveFactory</a>&gt; reflectiveFactoryType</pre>
 </li>
 </ul>
 <a id="factories">
@@ -312,7 +312,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <ul class="blockListLast">
 <li class="blockList">
 <h4>factories</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="AbstractFactoryRegistryImpl.html" title="type parameter in AbstractFactoryRegistryImpl">T</a> extends <a href="Factory.html" title="interface in org.fluentlenium.configuration">Factory</a>&gt; factories</pre>
+<pre>protected&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html?is-external=true" title="class or interface in java.util" class="externalLink">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>,&#8203;<a href="AbstractFactoryRegistryImpl.html" title="type parameter in AbstractFactoryRegistryImpl">T</a> extends <a href="Factory.html" title="interface in io.fluentlenium.configuration">Factory</a>&gt; factories</pre>
 </li>
 </ul>
 </li>
@@ -427,7 +427,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 </dl>
 </li>
 </ul>
-<a id="register(org.fluentlenium.configuration.Factory)">
+<a id="register(io.fluentlenium.configuration.Factory)">
 <!--   -->
 </a><a id="register(T)">
 <!--   -->
@@ -438,10 +438,10 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <pre class="methodSignature">public final&nbsp;void&nbsp;register&#8203;(<a href="AbstractFactoryRegistryImpl.html" title="type parameter in AbstractFactoryRegistryImpl">T</a>&nbsp;factory)</pre>
 <div class="block">Register a new factory.
  <p>
- It will use <a href="FactoryName.html" title="annotation in org.fluentlenium.configuration"><code>FactoryName</code></a> value as the default name.
+ It will use <a href="FactoryName.html" title="annotation in io.fluentlenium.configuration"><code>FactoryName</code></a> value as the default name.
  <p>
  It will also register the factory under names returned by <a href="FactoryNames.html#getNames()"><code>FactoryNames.getNames()</code></a>} if
- it implements <a href="FactoryNames.html" title="interface in org.fluentlenium.configuration"><code>FactoryNames</code></a>.</div>
+ it implements <a href="FactoryNames.html" title="interface in io.fluentlenium.configuration"><code>FactoryNames</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>factory</code> - factory to register</dd>

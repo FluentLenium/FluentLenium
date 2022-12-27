@@ -37,8 +37,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     val fluentleniumVersion = properties["fluentlenium.version"] ?: "6.0.0-SNAPSHOT"
-    testImplementation("org.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
-    testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
+    testImplementation("io.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
+    testImplementation("io.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
     val koTestVersion = "5.5.4"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))

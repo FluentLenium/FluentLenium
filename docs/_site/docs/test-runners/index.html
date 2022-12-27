@@ -65,7 +65,7 @@
   <meta name="twitter:site" content="@FluentLenium" />
   <meta name="twitter:creator" content="@FluentLenium" />
   <meta name="twitter:title" content="Test runners" />
-  <meta name="twitter:description" content="## Supported Test Runners - [Junit 4](#junit-4) - [Junit 5 Jupiter](#junit-5-jupiter) - [TestNG](#testng) - [Cucumber](#cucumber) - [Spock](#spock) - [Spring TestNG](#spring-testng) ## Standalone mode (no 3rd party test-runner) - [Standalone mode](#standalone-mode) ## JUnit 4 - Import this maven dependency. ```xml org.fluentlenium fluentlenium-junit 4.5.1 test ``` - Extends FluentTest. Fluent Test is..." />
+  <meta name="twitter:description" content="## Supported Test Runners - [Junit 4](#junit-4) - [Junit 5 Jupiter](#junit-5-jupiter) - [TestNG](#testng) - [Cucumber](#cucumber) - [Spock](#spock) - [Spring TestNG](#spring-testng) ## Standalone mode (no 3rd party test-runner) - [Standalone mode](#standalone-mode) ## JUnit 4 - Import this maven dependency. ```xml io.fluentlenium fluentlenium-junit 4.5.1 test ``` - Extends FluentTest. Fluent Test is..." />
   
   <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png" />
   
@@ -419,7 +419,7 @@
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-junit<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
@@ -474,7 +474,7 @@ Enable them by activating <code class="language-plaintext highlighter-rouge">fra
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-junit-jupiter<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
@@ -495,7 +495,7 @@ Enable them by activating <code class="language-plaintext highlighter-rouge">fra
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-testng<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
@@ -568,7 +568,7 @@ Enable them by activating <code class="language-plaintext highlighter-rouge">fra
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-cucumber<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.4.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
@@ -729,9 +729,9 @@ state between many steps classes.</p>
 scenarios in feature, change DriverLifecycle to JVM level:</li>
 </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.fluentlenium.adapter.cucumber.FluentCucumberTest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.configuration.ConfigurationProperties</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.configuration.FluentConfiguration</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.fluentlenium.adapter.cucumber.FluentCucumberTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.configuration.ConfigurationProperties</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.configuration.FluentConfiguration</span><span class="o">;</span>
 
 <span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span class="o">=</span> <span class="s">"chrome"</span><span class="o">,</span> <span class="n">driverLifecycle</span> <span class="o">=</span> <span class="nc">ConfigurationProperties</span><span class="o">.</span><span class="na">DriverLifecycle</span><span class="o">.</span><span class="na">JVM</span><span class="o">)</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseTest</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
@@ -759,7 +759,7 @@ however the <code class="language-plaintext highlighter-rouge">FluentCucumberTes
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-spock<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
@@ -780,7 +780,7 @@ Enable it by activating <code class="language-plaintext highlighter-rouge">examp
 </ul>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-spring-testng<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>

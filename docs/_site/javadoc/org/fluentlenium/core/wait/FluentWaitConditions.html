@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.wait</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.wait</a></div>
 <h2 title="Interface FluentWaitConditions" class="title">Interface FluentWaitConditions&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
@@ -130,7 +130,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a></code>, <code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code>, <code><a href="FluentWaitElementList.html" title="class in org.fluentlenium.core.wait">FluentWaitElementList</a></code></dd>
+<dd><code><a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a></code>, <code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code>, <code><a href="FluentWaitElementList.html" title="class in io.fluentlenium.core.wait">FluentWaitElementList</a></code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">FluentWaitConditions&lt;T&gt;</span></pre>
@@ -171,63 +171,63 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(java.util.List)">until</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(java.util.List)">until</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(org.fluentlenium.core.domain.FluentWebElement)">until</a></span>&#8203;(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(io.fluentlenium.core.domain.FluentWebElement)">until</a></span>&#8203;(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for condition on given element.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEach(java.util.List)">untilEach</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEach(java.util.List)">untilEach</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEachElements(java.util.function.Supplier)">untilEachElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEachElements(java.util.function.Supplier)">untilEachElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElement(java.util.function.Supplier)">untilElement</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;element)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElement(java.util.function.Supplier)">untilElement</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;element)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given element.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElements(java.util.function.Supplier)">untilElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElements(java.util.function.Supplier)">untilElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPage()">untilPage</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a condition object used to wait for a page condition.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPage(org.fluentlenium.core.FluentPage)">untilPage</a></span>&#8203;(<a href="../FluentPage.html" title="class in org.fluentlenium.core">FluentPage</a>&nbsp;page)</code></th>
+<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPage(io.fluentlenium.core.FluentPage)">untilPage</a></span>&#8203;(<a href="../FluentPage.html" title="class in io.fluentlenium.core">FluentPage</a>&nbsp;page)</code></th>
 <td class="colLast">
 <div class="block">Get a condition object used to wait for a page condition.</div>
 </td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitWindowConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitWindowConditions</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitWindowConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitWindowConditions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilWindow(java.lang.String)">untilWindow</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;windowName)</code></th>
 <td class="colLast">
 <div class="block">Get a condition object used to wait for a window condition.</div>
@@ -250,13 +250,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="until(org.fluentlenium.core.domain.FluentWebElement)">
+<a id="until(io.fluentlenium.core.domain.FluentWebElement)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature"><a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a>&nbsp;until&#8203;(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</pre>
+<pre class="methodSignature"><a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a>&nbsp;until&#8203;(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</pre>
 <div class="block">Get a conditions object used to wait for condition on given element.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -272,7 +272,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;until&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
+<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;until&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  At least one element must verify the condition to be verified.</div>
@@ -290,7 +290,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>untilEach</h4>
-<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEach&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
+<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEach&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  Each element must verify the condition to be verified.</div>
@@ -308,7 +308,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>untilElement</h4>
-<pre class="methodSignature"><a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a>&nbsp;untilElement&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;element)</pre>
+<pre class="methodSignature"><a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a>&nbsp;untilElement&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;element)</pre>
 <div class="block">Get a conditions object used to wait for a condition on given element.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -324,7 +324,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>untilElements</h4>
-<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</pre>
+<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</pre>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  At least one element must verify the condition to be verified.</div>
@@ -342,7 +342,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>untilEachElements</h4>
-<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEachElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</pre>
+<pre class="methodSignature"><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEachElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;elements)</pre>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  Each element must verify the condition to be verified.</div>
@@ -360,7 +360,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>untilWindow</h4>
-<pre class="methodSignature"><a href="FluentWaitWindowConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitWindowConditions</a>&nbsp;untilWindow&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;windowName)</pre>
+<pre class="methodSignature"><a href="FluentWaitWindowConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitWindowConditions</a>&nbsp;untilWindow&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;windowName)</pre>
 <div class="block">Get a condition object used to wait for a window condition.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -376,7 +376,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>untilPage</h4>
-<pre class="methodSignature"><a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage()</pre>
+<pre class="methodSignature"><a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage()</pre>
 <div class="block">Get a condition object used to wait for a page condition.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -384,13 +384,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 </li>
 </ul>
-<a id="untilPage(org.fluentlenium.core.FluentPage)">
+<a id="untilPage(io.fluentlenium.core.FluentPage)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>untilPage</h4>
-<pre class="methodSignature"><a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage&#8203;(<a href="../FluentPage.html" title="class in org.fluentlenium.core">FluentPage</a>&nbsp;page)</pre>
+<pre class="methodSignature"><a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage&#8203;(<a href="../FluentPage.html" title="class in io.fluentlenium.core">FluentPage</a>&nbsp;page)</pre>
 <div class="block">Get a condition object used to wait for a page condition.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

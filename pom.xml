@@ -6,7 +6,7 @@
         <artifactId>oss-parent</artifactId>
         <version>9</version>
     </parent>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
     <version>6.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -132,7 +132,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.fluentlenium</groupId>
+                <groupId>io.fluentlenium</groupId>
                 <artifactId>fluentlenium-testing-private</artifactId>
                 <version>${project.version}</version>
             </dependency>

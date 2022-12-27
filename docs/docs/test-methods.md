@@ -404,7 +404,7 @@ takeHtmlDump(pathAndFileName);
 Screenshot and HTML Dump can be automatically performed on test fail using configuration properties.
 
 When using `AUTOMATIC_ON_FAIL` with JUnit, you should use custom `@After` annotation from
-`org.fluentlenium.adapter.junit` package for screenshot and HTML dump to be performed
+`io.fluentlenium.adapter.junit` package for screenshot and HTML dump to be performed
 just after an exception occurs, before methods annotated with `@After` invocation.
 
 ## Iframe

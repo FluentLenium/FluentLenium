@@ -1,10 +1,10 @@
-package org.fluentlenium.it;
+package io.fluentlenium.it;
 
 import java.util.Date;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.fluentlenium.adapter.junit.jupiter.FluentTest;
-import org.fluentlenium.core.FluentControl;
+import io.fluentlenium.adapter.junit.jupiter.FluentTest;
+import io.fluentlenium.core.FluentControl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

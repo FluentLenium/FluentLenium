@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.filter, class: PredicateFilter">
+<meta name="description" content="declaration: package: io.fluentlenium.core.filter, class: PredicateFilter">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,21 +89,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.filter</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.filter</a></div>
 <h1 title="Class PredicateFilter" class="title">Class PredicateFilter</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.fluentlenium.core.filter.PredicateFilter</div>
+<div class="inheritance">io.fluentlenium.core.filter.PredicateFilter</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../search/SearchFilter.html" title="interface in org.fluentlenium.core.search">SearchFilter</a></code></dd>
+<dd><code><a href="../search/SearchFilter.html" title="interface in io.fluentlenium.core.search">SearchFilter</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PredicateFilter</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../search/SearchFilter.html" title="interface in org.fluentlenium.core.search">SearchFilter</a></span></div>
+implements <a href="../search/SearchFilter.html" title="interface in io.fluentlenium.core.search">SearchFilter</a></span></div>
 <div class="block">Search filter based on a predicate.</div>
 </section>
 <section class="summary">
@@ -119,8 +119,8 @@ implements <a href="../search/SearchFilter.html" title="interface in org.fluentl
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#applyFilter(java.util.Collection)" class="member-name-link">applyFilter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#applyFilter(java.util.Collection)" class="member-name-link">applyFilter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Apply the filter.</div>
 </div>
@@ -159,7 +159,7 @@ implements <a href="../search/SearchFilter.html" title="interface in org.fluentl
 <div class="block">Get the CSS string used by CSS search time filtering.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../search/SearchFilter.html#getCssFilter()">getCssFilter</a></code>&nbsp;in interface&nbsp;<code><a href="../search/SearchFilter.html" title="interface in org.fluentlenium.core.search">SearchFilter</a></code></dd>
+<dd><code><a href="../search/SearchFilter.html#getCssFilter()">getCssFilter</a></code>&nbsp;in interface&nbsp;<code><a href="../search/SearchFilter.html" title="interface in io.fluentlenium.core.search">SearchFilter</a></code></dd>
 <dt>Returns:</dt>
 <dd>css filter string</dd>
 </dl>
@@ -173,7 +173,7 @@ implements <a href="../search/SearchFilter.html" title="interface in org.fluentl
 <div class="block">Does this filter support filtering at search time with CSS selector.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../search/SearchFilter.html#isCssFilterSupported()">isCssFilterSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../search/SearchFilter.html" title="interface in org.fluentlenium.core.search">SearchFilter</a></code></dd>
+<dd><code><a href="../search/SearchFilter.html#isCssFilterSupported()">isCssFilterSupported</a></code>&nbsp;in interface&nbsp;<code><a href="../search/SearchFilter.html" title="interface in io.fluentlenium.core.search">SearchFilter</a></code></dd>
 <dt>Returns:</dt>
 <dd>true if CSS filtering is supported, else false</dd>
 </dl>
@@ -182,12 +182,12 @@ implements <a href="../search/SearchFilter.html" title="interface in org.fluentl
 <li>
 <section class="detail" id="applyFilter(java.util.Collection)">
 <h3>applyFilter</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">applyFilter</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">applyFilter</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</span></div>
 <div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../search/SearchFilter.html#applyFilter(java.util.Collection)">SearchFilter</a></code></span></div>
 <div class="block">Apply the filter.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../search/SearchFilter.html#applyFilter(java.util.Collection)">applyFilter</a></code>&nbsp;in interface&nbsp;<code><a href="../search/SearchFilter.html" title="interface in org.fluentlenium.core.search">SearchFilter</a></code></dd>
+<dd><code><a href="../search/SearchFilter.html#applyFilter(java.util.Collection)">applyFilter</a></code>&nbsp;in interface&nbsp;<code><a href="../search/SearchFilter.html" title="interface in io.fluentlenium.core.search">SearchFilter</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>elements</code> - input elements</dd>
 <dt>Returns:</dt>

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.components, interface: LazyComponents">
+<meta name="description" content="declaration: package: io.fluentlenium.core.components, interface: LazyComponents">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,7 +89,7 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.components</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.components</a></div>
 <h1 title="Interface LazyComponents" class="title">Interface LazyComponents&lt;T&gt;</h1>
 </div>
 <section class="class-description" id="class-description">
@@ -99,7 +99,7 @@ loadScripts(document, 'script');</script>
 </dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a></code>, <code><a href="../domain/FluentListImpl.html" title="class in org.fluentlenium.core.domain">FluentListImpl</a></code>, <code><a href="LazyComponentList.html" title="class in org.fluentlenium.core.components">LazyComponentList</a></code>, <code><a href="../domain/NotLazyComponents.html" title="class in org.fluentlenium.core.domain">NotLazyComponents</a></code></dd>
+<dd><code><a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a></code>, <code><a href="../domain/FluentListImpl.html" title="class in io.fluentlenium.core.domain">FluentListImpl</a></code>, <code><a href="LazyComponentList.html" title="class in io.fluentlenium.core.components">LazyComponentList</a></code>, <code><a href="../domain/NotLazyComponents.html" title="class in io.fluentlenium.core.domain">NotLazyComponents</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">LazyComponents&lt;T&gt;</span></div>
@@ -119,7 +119,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addLazyComponentsListener(org.fluentlenium.core.components.LazyComponentsListener)" class="member-name-link">addLazyComponentsListener</a><wbr>(<a href="LazyComponentsListener.html" title="interface in org.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#addLazyComponentsListener(io.fluentlenium.core.components.LazyComponentsListener)" class="member-name-link">addLazyComponentsListener</a><wbr>(<a href="LazyComponentsListener.html" title="interface in io.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Add a lazy components initialization listener.</div>
 </div>
@@ -134,7 +134,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Check if the underlying lazy components are initialized.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeLazyComponentsListener(org.fluentlenium.core.components.LazyComponentsListener)" class="member-name-link">removeLazyComponentsListener</a><wbr>(<a href="LazyComponentsListener.html" title="interface in org.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#removeLazyComponentsListener(io.fluentlenium.core.components.LazyComponentsListener)" class="member-name-link">removeLazyComponentsListener</a><wbr>(<a href="LazyComponentsListener.html" title="interface in io.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Remove an existing lazy components initialization listener.</div>
 </div>
@@ -175,9 +175,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="addLazyComponentsListener(org.fluentlenium.core.components.LazyComponentsListener)">
+<section class="detail" id="addLazyComponentsListener(io.fluentlenium.core.components.LazyComponentsListener)">
 <h3>addLazyComponentsListener</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">addLazyComponentsListener</span><wbr><span class="parameters">(<a href="LazyComponentsListener.html" title="interface in org.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</span></div>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">addLazyComponentsListener</span><wbr><span class="parameters">(<a href="LazyComponentsListener.html" title="interface in io.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</span></div>
 <div class="block">Add a lazy components initialization listener.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -188,9 +188,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="removeLazyComponentsListener(org.fluentlenium.core.components.LazyComponentsListener)">
+<section class="detail" id="removeLazyComponentsListener(io.fluentlenium.core.components.LazyComponentsListener)">
 <h3>removeLazyComponentsListener</h3>
-<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">removeLazyComponentsListener</span><wbr><span class="parameters">(<a href="LazyComponentsListener.html" title="interface in org.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</span></div>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">removeLazyComponentsListener</span><wbr><span class="parameters">(<a href="LazyComponentsListener.html" title="interface in io.fluentlenium.core.components">LazyComponentsListener</a>&lt;<a href="LazyComponents.html" title="type parameter in LazyComponents">T</a>&gt;&nbsp;listener)</span></div>
 <div class="block">Remove an existing lazy components initialization listener.</div>
 <dl class="notes">
 <dt>Parameters:</dt>

@@ -13,7 +13,7 @@ This sections contains a list of templates that you can use in your test automat
 
 #### FluentConfiguration has remoteUrl but webDriver is not defined as "remote"
 ```xml
-<searchConfiguration name="FluentConfiguration has remoteUrl but webDriver is not defined as &quot;remote&quot;" text="@org.fluentlenium.configuration.FluentConfiguration(webDriver = &quot;$NOT_REMOTE$&quot;, remoteUrl = $REMOTE_URL$)" recursive="true" caseInsensitive="true" type="JAVA">
+<searchConfiguration name="FluentConfiguration has remoteUrl but webDriver is not defined as &quot;remote&quot;" text="@io.fluentlenium.configuration.FluentConfiguration(webDriver = &quot;$NOT_REMOTE$&quot;, remoteUrl = $REMOTE_URL$)" recursive="true" caseInsensitive="true" type="JAVA">
     <constraint name="__context__" within="" contains="" />
     <constraint name="NOT_REMOTE" regexp="remote" target="true" negateName="true" within="" contains="" />
     <constraint name="REMOTE_URL" within="" contains="" />
@@ -22,7 +22,7 @@ This sections contains a list of templates that you can use in your test automat
 
 #### FluentConfiguration has webDriver defined as "remote" but there is no remoteUrl
 ```xml
-<searchConfiguration name="FluentConfiguration has webDriver defined as &quot;remote&quot; but there is no remoteUrl." text="@org.fluentlenium.configuration.FluentConfiguration(webDriver = &quot;$REMOTE$&quot;, $REMOTE_URL_ATTR$ = $REMOTE_URL$)" recursive="true" caseInsensitive="true" type="JAVA">
+<searchConfiguration name="FluentConfiguration has webDriver defined as &quot;remote&quot; but there is no remoteUrl." text="@io.fluentlenium.configuration.FluentConfiguration(webDriver = &quot;$REMOTE$&quot;, $REMOTE_URL_ATTR$ = $REMOTE_URL$)" recursive="true" caseInsensitive="true" type="JAVA">
     <constraint name="__context__" within="" contains="" />
     <constraint name="REMOTE_URL" minCount="0" maxCount="0" within="" contains="" />
     <constraint name="REMOTE" regexp="remote" target="true" within="" contains="" />
@@ -54,7 +54,7 @@ This sections contains a list of templates that you can use in your test automat
 ```xml
 <replaceConfiguration name="You can call id() on a FluentWebElement instead of attribute(&quot;id&quot;)." text="$FluentWebElement$.attribute(&quot;id&quot;)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="false" replacement="$FluentWebElement$.id()">
     <constraint name="__context__" within="" contains="" />
-    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="org.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
+    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="io.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
 </replaceConfiguration>
 ```
 
@@ -62,7 +62,7 @@ This sections contains a list of templates that you can use in your test automat
 ```xml
 <replaceConfiguration name="You can call textContent() on a FluentWebElement instead of attribute(&quot;textContent&quot;)." text="$FluentWebElement$.attribute(&quot;textContent&quot;)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="false" replacement="$FluentWebElement$.textContent()">
     <constraint name="__context__" within="" contains="" />
-    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="org.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
+    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="io.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
 </replaceConfiguration>
 ```
 
@@ -70,7 +70,7 @@ This sections contains a list of templates that you can use in your test automat
 ```xml
 <replaceConfiguration name="You can call value() on a FluentWebElement instead of attribute(&quot;value&quot;)." text="$FluentWebElement$.attribute(&quot;value&quot;)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="false" replacement="$FluentWebElement$.value()">
     <constraint name="__context__" within="" contains="" />
-    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="org.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
+    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="io.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
 </replaceConfiguration>
 ```
 
@@ -78,7 +78,7 @@ This sections contains a list of templates that you can use in your test automat
 ```xml
 <replaceConfiguration name="You can call name() on a FluentWebElement instead of attribute(&quot;name&quot;)." text="$FluentWebElement$.attribute(&quot;name&quot;)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="false" replacement="$FluentWebElement$.name()">
     <constraint name="__context__" within="" contains="" />
-    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="org.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
+    <constraint name="FluentWebElement" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentWebElement" expressionTypes="io.fluentlenium.core.domain.FluentWebElement" within="" contains="" />
 </replaceConfiguration>
 ```
 
@@ -86,7 +86,7 @@ This sections contains a list of templates that you can use in your test automat
 ```xml
 <replaceConfiguration name="You can call first() on a FluentList instead of get(0)." text="$FluentList$.get(0)" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="false" shortenFQN="false" replacement="$FluentList$.first()">
     <constraint name="__context__" within="" contains="" />
-    <constraint name="FluentList" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentList" expressionTypes="org.fluentlenium.core.domain.FluentList" within="" contains="" />
+    <constraint name="FluentList" nameOfExprType="org\.fluentlenium\.core\.domain\.FluentList" expressionTypes="io.fluentlenium.core.domain.FluentList" within="" contains="" />
 </replaceConfiguration>
 ```
 
@@ -102,7 +102,7 @@ This sections contains a list of templates that you can use in your test automat
 
 #### There is no actual assertion called from FluentLeniumAssertions
 ```xml
-<searchConfiguration name="There is no actual assertion called from FluentLeniumAssertions." text="org.fluentlenium.assertj.FluentLeniumAssertions.$ASSERTION_METHOD$($PARAMETER$);" recursive="true" caseInsensitive="true" type="JAVA">
+<searchConfiguration name="There is no actual assertion called from FluentLeniumAssertions." text="io.fluentlenium.assertj.FluentLeniumAssertions.$ASSERTION_METHOD$($PARAMETER$);" recursive="true" caseInsensitive="true" type="JAVA">
     <constraint name="ASSERTION_METHOD" regexp="assertThat" within="" contains="" />
     <constraint name="PARAMETER" within="" contains="" />
     <constraint name="__context__" within="" contains="" />

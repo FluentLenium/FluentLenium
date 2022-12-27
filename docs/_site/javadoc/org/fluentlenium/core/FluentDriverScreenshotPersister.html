@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core</a></div>
 <h2 title="Class FluentDriverScreenshotPersister" class="title">Class FluentDriverScreenshotPersister</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.FluentDriverScreenshotPersister</li>
+<li>io.fluentlenium.core.FluentDriverScreenshotPersister</li>
 </ul>
 </li>
 </ul>
@@ -156,7 +156,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.fluentlenium.configuration.Configuration,org.openqa.selenium.WebDriver)">FluentDriverScreenshotPersister</a></span>&#8203;(<a href="../configuration/Configuration.html" title="interface in org.fluentlenium.configuration">Configuration</a>&nbsp;configuration,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(io.fluentlenium.configuration.Configuration,org.openqa.selenium.WebDriver)">FluentDriverScreenshotPersister</a></span>&#8203;(<a href="../configuration/Configuration.html" title="interface in io.fluentlenium.configuration">Configuration</a>&nbsp;configuration,
                                org.openqa.selenium.WebDriver&nbsp;driver)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -182,7 +182,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#persistScreenshot(java.lang.String)">persistScreenshot</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;fileName)</code></th>
 <td class="colLast">
-<div class="block">Persists a screenshot to the argument target file using the screenshot path from <a href="../configuration/Configuration.html" title="interface in org.fluentlenium.configuration"><code>Configuration</code></a>.</div>
+<div class="block">Persists a screenshot to the argument target file using the screenshot path from <a href="../configuration/Configuration.html" title="interface in io.fluentlenium.configuration"><code>Configuration</code></a>.</div>
 </td>
 </tr>
 </table>
@@ -209,13 +209,13 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.fluentlenium.configuration.Configuration,org.openqa.selenium.WebDriver)">
+<a id="&lt;init&gt;(io.fluentlenium.configuration.Configuration,org.openqa.selenium.WebDriver)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>FluentDriverScreenshotPersister</h4>
-<pre>public&nbsp;FluentDriverScreenshotPersister&#8203;(<a href="../configuration/Configuration.html" title="interface in org.fluentlenium.configuration">Configuration</a>&nbsp;configuration,
+<pre>public&nbsp;FluentDriverScreenshotPersister&#8203;(<a href="../configuration/Configuration.html" title="interface in io.fluentlenium.configuration">Configuration</a>&nbsp;configuration,
                                        org.openqa.selenium.WebDriver&nbsp;driver)</pre>
 </li>
 </ul>
@@ -236,7 +236,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <li class="blockList">
 <h4>persistScreenshot</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;persistScreenshot&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;fileName)</pre>
-<div class="block">Persists a screenshot to the argument target file using the screenshot path from <a href="../configuration/Configuration.html" title="interface in org.fluentlenium.configuration"><code>Configuration</code></a>.
+<div class="block">Persists a screenshot to the argument target file using the screenshot path from <a href="../configuration/Configuration.html" title="interface in io.fluentlenium.configuration"><code>Configuration</code></a>.
  <p>
  If there is no screenshot path set in the configuration, the file will be the argument file name,
  otherwise the argument file name will be concatenated to the screenshot path to create the destination file.</div>
@@ -244,7 +244,7 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>fileName</code> - the target file to save the screenshot to</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="ScreenshotNotCreatedException.html" title="class in org.fluentlenium.core">ScreenshotNotCreatedException</a></code> - when an error occurs during taking the screenshot</dd>
+<dd><code><a href="ScreenshotNotCreatedException.html" title="class in io.fluentlenium.core">ScreenshotNotCreatedException</a></code> - when an error occurs during taking the screenshot</dd>
 </dl>
 </li>
 </ul>

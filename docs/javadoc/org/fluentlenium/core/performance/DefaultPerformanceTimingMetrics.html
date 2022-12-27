@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.performance, class: DefaultPerformanceTimingMetrics">
+<meta name="description" content="declaration: package: io.fluentlenium.core.performance, class: DefaultPerformanceTimingMetrics">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,22 +89,22 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.performance</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.performance</a></div>
 <h1 title="Class DefaultPerformanceTimingMetrics" class="title">Class DefaultPerformanceTimingMetrics</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.fluentlenium.core.performance.DefaultPerformanceTimingMetrics</div>
+<div class="inheritance">io.fluentlenium.core.performance.DefaultPerformanceTimingMetrics</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">DefaultPerformanceTimingMetrics</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</span></div>
-<div class="block">Default implementation of <a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> storing the metrics value as a <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link"><code>Map</code></a>.
+implements <a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</span></div>
+<div class="block">Default implementation of <a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> storing the metrics value as a <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link"><code>Map</code></a>.
  <p>
  It also provides an option to convert all values in the current object to an arbitrary <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link"><code>TimeUnit</code></a>.
  For that you can call <a href="#in(java.util.concurrent.TimeUnit)"><code>in(TimeUnit)</code></a> on the current object.
@@ -125,7 +125,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <dt>See Also:</dt>
 <dd>
 <ul class="see-list">
-<li><a href="DefaultPerformanceTiming.html" title="class in org.fluentlenium.core.performance"><code>DefaultPerformanceTiming</code></a></li>
+<li><a href="DefaultPerformanceTiming.html" title="class in io.fluentlenium.core.performance"><code>DefaultPerformanceTiming</code></a></li>
 </ul>
 </dd>
 </dl>
@@ -144,13 +144,13 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="col-first even-row-color"><code>&nbsp;</code></div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.Map)" class="member-name-link">DefaultPerformanceTimingMetrics</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;timingMetrics)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument epoch values.</div>
+<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument epoch values.</div>
 </div>
 <div class="col-first odd-row-color"><code>protected </code></div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.Map,java.util.concurrent.TimeUnit)" class="member-name-link">DefaultPerformanceTimingMetrics</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;timingMetrics,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;timeUnit)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument metrics (in the given time unit).</div>
+<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument metrics (in the given time unit).</div>
 </div>
 </div>
 </section>
@@ -239,7 +239,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>long</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUnloadEventStart()" class="member-name-link">getUnloadEventStart</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#in(java.util.concurrent.TimeUnit)" class="member-name-link">in</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;targetTimeUnit)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns a new metrics object having all metric values converted to the target <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link"><code>TimeUnit</code></a>.</div>
@@ -265,7 +265,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <section class="detail" id="&lt;init&gt;(java.util.Map)">
 <h3>DefaultPerformanceTimingMetrics</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">DefaultPerformanceTimingMetrics</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;timingMetrics)</span></div>
-<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument epoch values.
+<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument epoch values.
  <p>
  It calculates and converts the epoch values into the differences/times passed since <code>navigationStart</code>.</div>
 <dl class="notes">
@@ -279,7 +279,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <h3>DefaultPerformanceTimingMetrics</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="element-name">DefaultPerformanceTimingMetrics</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>,<wbr><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;timingMetrics,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;timeUnit)</span></div>
-<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument metrics (in the given time unit).</div>
+<div class="block">Creates a new <a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance"><code>DefaultPerformanceTimingMetrics</code></a> object from the argument metrics (in the given time unit).</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>timingMetrics</code> - the metrics</dd>
@@ -298,14 +298,14 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <li>
 <section class="detail" id="in(java.util.concurrent.TimeUnit)">
 <h3>in</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a></span>&nbsp;<span class="element-name">in</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;targetTimeUnit)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a></span>&nbsp;<span class="element-name">in</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;targetTimeUnit)</span></div>
 <div class="block">Returns a new metrics object having all metric values converted to the target <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link"><code>TimeUnit</code></a>.
  <p>
  Values that can have other than long values are converted if they are <code>long</code> values,
  otherwise added to the new metrics object unchanged.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#in(java.util.concurrent.TimeUnit)">in</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#in(java.util.concurrent.TimeUnit)">in</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 <dt>Parameters:</dt>
 <dd><code>targetTimeUnit</code> - the time unit to convert the metrics to</dd>
 <dt>Returns:</dt>
@@ -331,7 +331,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getUnloadEventStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getUnloadEventStart()">getUnloadEventStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getUnloadEventStart()">getUnloadEventStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -341,7 +341,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getUnloadEventEnd</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getUnloadEventEnd()">getUnloadEventEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getUnloadEventEnd()">getUnloadEventEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -351,7 +351,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getRedirectStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getRedirectStart()">getRedirectStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getRedirectStart()">getRedirectStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -361,7 +361,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getRedirectEnd</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getRedirectEnd()">getRedirectEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getRedirectEnd()">getRedirectEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -371,7 +371,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getNavigationStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getNavigationStart()">getNavigationStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getNavigationStart()">getNavigationStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -381,7 +381,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getFetchStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getFetchStart()">getFetchStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getFetchStart()">getFetchStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -391,7 +391,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDomainLookupStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getDomainLookupStart()">getDomainLookupStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getDomainLookupStart()">getDomainLookupStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -401,7 +401,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDomainLookupEnd</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getDomainLookupEnd()">getDomainLookupEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getDomainLookupEnd()">getDomainLookupEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -411,7 +411,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getConnectStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getConnectStart()">getConnectStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getConnectStart()">getConnectStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -421,7 +421,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getConnectEnd</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getConnectEnd()">getConnectEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getConnectEnd()">getConnectEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -437,7 +437,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
  It is up to the user of this method to check whether it is present and convert it accordingly.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getSecureConnectionStart()">getSecureConnectionStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getSecureConnectionStart()">getSecureConnectionStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 <dt>Returns:</dt>
 <dd>the metrics value</dd>
 </dl>
@@ -449,7 +449,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getRequestStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getRequestStart()">getRequestStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getRequestStart()">getRequestStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -459,7 +459,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getResponseStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getResponseStart()">getResponseStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getResponseStart()">getResponseStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -469,7 +469,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getResponseEnd</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getResponseEnd()">getResponseEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getResponseEnd()">getResponseEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -479,7 +479,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDomLoading</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getDomLoading()">getDomLoading</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getDomLoading()">getDomLoading</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -489,7 +489,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDomInteractive</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getDomInteractive()">getDomInteractive</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getDomInteractive()">getDomInteractive</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -499,7 +499,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDomContentLoadedEventStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getDomContentLoadedEventStart()">getDomContentLoadedEventStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getDomContentLoadedEventStart()">getDomContentLoadedEventStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -509,7 +509,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDomContentLoadedEventEnd</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getDomContentLoadedEventEnd()">getDomContentLoadedEventEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getDomContentLoadedEventEnd()">getDomContentLoadedEventEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -519,7 +519,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getDomComplete</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getDomComplete()">getDomComplete</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getDomComplete()">getDomComplete</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -529,7 +529,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getLoadEventStart</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getLoadEventStart()">getLoadEventStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getLoadEventStart()">getLoadEventStart</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
@@ -539,7 +539,7 @@ implements <a href="PerformanceTimingMetrics.html" title="interface in org.fluen
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getLoadEventEnd</span>()</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="PerformanceTimingMetrics.html#getLoadEventEnd()">getLoadEventEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
+<dd><code><a href="PerformanceTimingMetrics.html#getLoadEventEnd()">getLoadEventEnd</a></code>&nbsp;in interface&nbsp;<code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a>&lt;<a href="DefaultPerformanceTimingMetrics.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTimingMetrics</a>&gt;</code></dd>
 </dl>
 </section>
 </li>

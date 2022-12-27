@@ -31,7 +31,7 @@ sidebar:
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
     <version>5.0.1</version>
     <scope>test</scope>
@@ -85,7 +85,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
     <version>5.0.1</version>
     <scope>test</scope>
@@ -103,7 +103,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
     <version>5.0.1</version>
     <scope>test</scope>
@@ -175,7 +175,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
     <version>4.4.1</version>
 </dependency>
@@ -338,9 +338,9 @@ public class FluentHooks extends FluentCucumberTest {
 scenarios in feature, change DriverLifecycle to JVM level:
 
 ```java
-import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
-import org.fluentlenium.configuration.ConfigurationProperties;
-import org.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import io.fluentlenium.configuration.ConfigurationProperties;
+import io.fluentlenium.configuration.FluentConfiguration;
 
 @FluentConfiguration(webDriver = "chrome", driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM)
 public class BaseTest extends FluentCucumberTest {
@@ -363,7 +363,7 @@ however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectF
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
     <version>5.0.1</version>
     <scope>test</scope>
@@ -381,7 +381,7 @@ Enable it by activating ```examples``` Maven profile.
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-spring-testng</artifactId>
     <version>5.0.1</version>
     <scope>test</scope>
@@ -400,7 +400,7 @@ Enable it by activating ```examples``` Maven profile.
 ### Maven
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-kotest</artifactId>
     <version>5.0.1</version>
     <scope>test</scope>
@@ -409,7 +409,7 @@ Enable it by activating ```examples``` Maven profile.
 
 ### Gradle
 ```gradle
-    testImplementation("org.fluentlenium:fluentlenium-kotest:5.0.1")
+    testImplementation("io.fluentlenium:fluentlenium-kotest:5.0.1")
 ```
 
 - There are baseclasses available for all [Kotest testing styles](https://kotest.io/docs/framework/testing-styles.html). Choose

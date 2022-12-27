@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.components, interface: ComponentInstantiator">
+<meta name="description" content="declaration: package: io.fluentlenium.core.components, interface: ComponentInstantiator">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,17 +89,17 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.components</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.components</a></div>
 <h1 title="Interface ComponentInstantiator" class="title">Interface ComponentInstantiator</h1>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Known Subinterfaces:</dt>
-<dd><code><a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a></code>, <code><a href="../FluentPageControl.html" title="interface in org.fluentlenium.core">FluentPageControl</a></code>, <code><a href="../../adapter/IFluentAdapter.html" title="interface in org.fluentlenium.adapter">IFluentAdapter</a></code></dd>
+<dd><code><a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a></code>, <code><a href="../FluentPageControl.html" title="interface in io.fluentlenium.core">FluentPageControl</a></code>, <code><a href="../../adapter/IFluentAdapter.html" title="interface in io.fluentlenium.adapter">IFluentAdapter</a></code></dd>
 </dl>
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="AbstractComponentInstantiator.html" title="class in org.fluentlenium.core.components">AbstractComponentInstantiator</a></code>, <code><a href="../hook/BaseFluentHook.html" title="class in org.fluentlenium.core.hook">BaseFluentHook</a></code>, <code><a href="../hook/BaseHook.html" title="class in org.fluentlenium.core.hook">BaseHook</a></code>, <code><a href="ComponentsManager.html" title="class in org.fluentlenium.core.components">ComponentsManager</a></code>, <code><a href="../inject/ContainerFluentControl.html" title="class in org.fluentlenium.core.inject">ContainerFluentControl</a></code>, <code><a href="DefaultComponentInstantiator.html" title="class in org.fluentlenium.core.components">DefaultComponentInstantiator</a></code>, <code><a href="../DefaultFluentContainer.html" title="class in org.fluentlenium.core">DefaultFluentContainer</a></code>, <code><a href="../../adapter/FluentAdapter.html" title="class in org.fluentlenium.adapter">FluentAdapter</a></code>, <code><a href="../FluentControlImpl.html" title="class in org.fluentlenium.core">FluentControlImpl</a></code>, <code><a href="../../adapter/cucumber/FluentCucumberTest.html" title="class in org.fluentlenium.adapter.cucumber">FluentCucumberTest</a></code>, <code><a href="../FluentDriver.html" title="class in org.fluentlenium.core">FluentDriver</a></code>, <code><a href="../FluentPage.html" title="class in org.fluentlenium.core">FluentPage</a></code>, <code><a href="../../adapter/FluentStandalone.html" title="class in org.fluentlenium.adapter">FluentStandalone</a></code>, <code><a href="../../adapter/FluentStandaloneRunnable.html" title="class in org.fluentlenium.adapter">FluentStandaloneRunnable</a></code>, <code><a href="../../adapter/junit/FluentTest.html" title="class in org.fluentlenium.adapter.junit">FluentTest</a></code>, <code><a href="../../adapter/junit/jupiter/FluentTest.html" title="class in org.fluentlenium.adapter.junit.jupiter">FluentTest</a></code>, <code><a href="../../adapter/testng/FluentTestNg.html" title="class in org.fluentlenium.adapter.testng">FluentTestNg</a></code>, <code><a href="../../adapter/testng/FluentTestNgSpringTest.html" title="class in org.fluentlenium.adapter.testng">FluentTestNgSpringTest</a></code>, <code><a href="../../adapter/FluentTestRunnerAdapter.html" title="class in org.fluentlenium.adapter">FluentTestRunnerAdapter</a></code>, <code><a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a></code>, <code><a href="../../adapter/IsolatedTest.html" title="class in org.fluentlenium.adapter">IsolatedTest</a></code>, <code><a href="../hook/wait/WaitHook.html" title="class in org.fluentlenium.core.hook.wait">WaitHook</a></code></dd>
+<dd><code><a href="AbstractComponentInstantiator.html" title="class in io.fluentlenium.core.components">AbstractComponentInstantiator</a></code>, <code><a href="../hook/BaseFluentHook.html" title="class in io.fluentlenium.core.hook">BaseFluentHook</a></code>, <code><a href="../hook/BaseHook.html" title="class in io.fluentlenium.core.hook">BaseHook</a></code>, <code><a href="ComponentsManager.html" title="class in io.fluentlenium.core.components">ComponentsManager</a></code>, <code><a href="../inject/ContainerFluentControl.html" title="class in io.fluentlenium.core.inject">ContainerFluentControl</a></code>, <code><a href="DefaultComponentInstantiator.html" title="class in io.fluentlenium.core.components">DefaultComponentInstantiator</a></code>, <code><a href="../DefaultFluentContainer.html" title="class in io.fluentlenium.core">DefaultFluentContainer</a></code>, <code><a href="../../adapter/FluentAdapter.html" title="class in io.fluentlenium.adapter">FluentAdapter</a></code>, <code><a href="../FluentControlImpl.html" title="class in io.fluentlenium.core">FluentControlImpl</a></code>, <code><a href="../../adapter/cucumber/FluentCucumberTest.html" title="class in io.fluentlenium.adapter.cucumber">FluentCucumberTest</a></code>, <code><a href="../FluentDriver.html" title="class in io.fluentlenium.core">FluentDriver</a></code>, <code><a href="../FluentPage.html" title="class in io.fluentlenium.core">FluentPage</a></code>, <code><a href="../../adapter/FluentStandalone.html" title="class in io.fluentlenium.adapter">FluentStandalone</a></code>, <code><a href="../../adapter/FluentStandaloneRunnable.html" title="class in io.fluentlenium.adapter">FluentStandaloneRunnable</a></code>, <code><a href="../../adapter/junit/FluentTest.html" title="class in io.fluentlenium.adapter.junit">FluentTest</a></code>, <code><a href="../../adapter/junit/jupiter/FluentTest.html" title="class in io.fluentlenium.adapter.junit.jupiter">FluentTest</a></code>, <code><a href="../../adapter/testng/FluentTestNg.html" title="class in io.fluentlenium.adapter.testng">FluentTestNg</a></code>, <code><a href="../../adapter/testng/FluentTestNgSpringTest.html" title="class in io.fluentlenium.adapter.testng">FluentTestNgSpringTest</a></code>, <code><a href="../../adapter/FluentTestRunnerAdapter.html" title="class in io.fluentlenium.adapter">FluentTestRunnerAdapter</a></code>, <code><a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a></code>, <code><a href="../../adapter/IsolatedTest.html" title="class in io.fluentlenium.adapter">IsolatedTest</a></code>, <code><a href="../hook/wait/WaitHook.html" title="class in io.fluentlenium.core.hook.wait">WaitHook</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">ComponentInstantiator</span></div>
@@ -142,53 +142,53 @@ T&gt;<br>L</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asComponentList(java.lang.Class,java.lang.Iterable)" class="member-name-link">asComponentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asComponentList(java.lang.Class,java.util.List)" class="member-name-link">asComponentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asComponentList(java.lang.Class,org.openqa.selenium.WebElement...)" class="member-name-link">asComponentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  org.openqa.selenium.WebElement...&nbsp;elements)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asFluentList(java.lang.Class,java.lang.Iterable)" class="member-name-link">asFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asFluentList(java.lang.Class,java.util.List)" class="member-name-link">asFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asFluentList(java.lang.Class,org.openqa.selenium.WebElement...)" class="member-name-link">asFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  org.openqa.selenium.WebElement...&nbsp;elements)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asFluentList(java.lang.Iterable)" class="member-name-link">asFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list from the argument collection of WebElements.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asFluentList(java.util.List)" class="member-name-link">asFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list from the argument list of WebElements.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#asFluentList(org.openqa.selenium.WebElement...)" class="member-name-link">asFluentList</a><wbr>(org.openqa.selenium.WebElement...&nbsp;elements)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list from the argument WebElements.</div>
@@ -232,57 +232,57 @@ T&gt;<br>L</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new list of component from the given component list.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newComponentList(java.lang.Class)" class="member-name-link">newComponentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register an empty list of component.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newComponentList(java.lang.Class,java.util.List)" class="member-name-link">newComponentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;componentsList)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new list of component from the given component list.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T&gt;&nbsp;<a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newComponentList(java.lang.Class,T...)" class="member-name-link">newComponentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  T...&nbsp;componentsList)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new list of component from the given component list.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluent(org.openqa.selenium.WebElement)" class="member-name-link">newFluent</a><wbr>(org.openqa.selenium.WebElement&nbsp;element)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new <code>FluentWebElement</code> from the given <code>WebElement</code>.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList()" class="member-name-link">newFluentList</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register an empty fluent list.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList(java.lang.Class)" class="member-name-link">newFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register an empty fluent list of the provided type.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList(java.lang.Class,java.util.List)" class="member-name-link">newFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;elements)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;<br><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList(java.lang.Class,T...)" class="member-name-link">newFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  T...&nbsp;elements)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList(java.util.List)" class="member-name-link">newFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList(java.util.List)" class="member-name-link">newFluentList</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list from the argument list of FluentWebElements.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList(org.fluentlenium.core.domain.FluentWebElement...)" class="member-name-link">newFluentList</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>...&nbsp;elements)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#newFluentList(io.fluentlenium.core.domain.FluentWebElement...)" class="member-name-link">newFluentList</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>...&nbsp;elements)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Create and register a new fluent list from the argument FluentWebElements.</div>
 </div>
@@ -303,7 +303,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newFluent(org.openqa.selenium.WebElement)">
 <h3>newFluent</h3>
-<div class="member-signature"><span class="return-type"><a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a></span>&nbsp;<span class="element-name">newFluent</span><wbr><span class="parameters">(org.openqa.selenium.WebElement&nbsp;element)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a></span>&nbsp;<span class="element-name">newFluent</span><wbr><span class="parameters">(org.openqa.selenium.WebElement&nbsp;element)</span></div>
 <div class="block">Create and register a new <code>FluentWebElement</code> from the given <code>WebElement</code>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -333,7 +333,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newFluentList()">
 <h3>newFluentList</h3>
-<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">newFluentList</span>()</div>
+<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">newFluentList</span>()</div>
 <div class="block">Create and register an empty fluent list.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -342,9 +342,9 @@ T&gt;<br>L</code></div>
 </section>
 </li>
 <li>
-<section class="detail" id="newFluentList(org.fluentlenium.core.domain.FluentWebElement...)">
+<section class="detail" id="newFluentList(io.fluentlenium.core.domain.FluentWebElement...)">
 <h3>newFluentList</h3>
-<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>...&nbsp;elements)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>...&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list from the argument FluentWebElements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -357,7 +357,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newFluentList(java.util.List)">
 <h3>newFluentList</h3>
-<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list from the argument list of FluentWebElements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -370,7 +370,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asFluentList(org.openqa.selenium.WebElement...)">
 <h3>asFluentList</h3>
-<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(org.openqa.selenium.WebElement...&nbsp;elements)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(org.openqa.selenium.WebElement...&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list from the argument WebElements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -383,7 +383,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asFluentList(java.lang.Iterable)">
 <h3>asFluentList</h3>
-<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list from the argument collection of WebElements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -396,7 +396,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asFluentList(java.util.List)">
 <h3>asFluentList</h3>
-<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
+<div class="member-signature"><span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list from the argument list of WebElements.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -409,7 +409,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newFluentList(java.lang.Class)">
 <h3>newFluentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass)</span></div>
+<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass)</span></div>
 <div class="block">Create and register an empty fluent list of the provided type.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -423,8 +423,8 @@ T&gt;<br>L</code></div>
 </li>
 <li>
 <section class="detail" id="newFluentList(java.lang.Class,T...)">
-<h3 id="newFluentList(java.lang.Class,org.fluentlenium.core.domain.FluentWebElement[])">newFluentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<h3 id="newFluentList(java.lang.Class,io.fluentlenium.core.domain.FluentWebElement[])">newFluentList</h3>
+<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  T...&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list.</div>
 <dl class="notes">
@@ -441,7 +441,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newFluentList(java.lang.Class,java.util.List)">
 <h3>newFluentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list.</div>
 <dl class="notes">
@@ -458,7 +458,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asFluentList(java.lang.Class,org.openqa.selenium.WebElement...)">
 <h3>asFluentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  org.openqa.selenium.WebElement...&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list.</div>
 <dl class="notes">
@@ -475,7 +475,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asFluentList(java.lang.Class,java.lang.Iterable)">
 <h3>asFluentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list.</div>
 <dl class="notes">
@@ -492,7 +492,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asFluentList(java.lang.Class,java.util.List)">
 <h3>asFluentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;</span>&nbsp;<span class="return-type"><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asFluentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new fluent list.</div>
 <dl class="notes">
@@ -509,7 +509,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newComponentList(java.lang.Class)">
 <h3>newComponentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass)</span></div>
+<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass)</span></div>
 <div class="block">Create and register an empty list of component.</div>
 <dl class="notes">
 <dt>Type Parameters:</dt>
@@ -524,7 +524,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asComponentList(java.lang.Class,org.openqa.selenium.WebElement...)">
 <h3>asComponentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  org.openqa.selenium.WebElement...&nbsp;elements)</span></div>
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 <dl class="notes">
@@ -541,7 +541,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asComponentList(java.lang.Class,java.lang.Iterable)">
 <h3>asComponentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Iterable.html" title="class or interface in java.lang" class="external-link">Iterable</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 <dl class="notes">
@@ -558,7 +558,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="asComponentList(java.lang.Class,java.util.List)">
 <h3>asComponentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">asComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;org.openqa.selenium.WebElement&gt;&nbsp;elements)</span></div>
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 <dl class="notes">
@@ -575,7 +575,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newComponentList(java.lang.Class,T...)">
 <h3 id="newComponentList(java.lang.Class,java.lang.Object[])">newComponentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  T...&nbsp;componentsList)</span></div>
 <div class="block">Create and register a new list of component from the given component list.</div>
 <dl class="notes">
@@ -592,7 +592,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="newComponentList(java.lang.Class,java.util.List)">
 <h3>newComponentList</h3>
-<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in org.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
+<div class="member-signature"><span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../domain/ComponentList.html" title="class in io.fluentlenium.core.domain">ComponentList</a>&lt;T&gt;</span>&nbsp;<span class="element-name">newComponentList</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;componentClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&nbsp;componentsList)</span></div>
 <div class="block">Create and register a new list of component from the given component list.</div>
 <dl class="notes">

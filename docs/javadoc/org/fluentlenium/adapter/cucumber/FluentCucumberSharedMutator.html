@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.adapter.cucumber, class: FluentCucumberSharedMutator">
+<meta name="description" content="declaration: package: io.fluentlenium.adapter.cucumber, class: FluentCucumberSharedMutator">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,24 +89,24 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.adapter.cucumber</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.adapter.cucumber</a></div>
 <h1 title="Class FluentCucumberSharedMutator" class="title">Class FluentCucumberSharedMutator</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.fluentlenium.adapter.cucumber.FluentCucumberSharedMutator</div>
+<div class="inheritance">io.fluentlenium.adapter.cucumber.FluentCucumberSharedMutator</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../SharedMutator.html" title="interface in org.fluentlenium.adapter">SharedMutator</a></code></dd>
+<dd><code><a href="../SharedMutator.html" title="interface in io.fluentlenium.adapter">SharedMutator</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">FluentCucumberSharedMutator</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="../SharedMutator.html" title="interface in org.fluentlenium.adapter">SharedMutator</a></span></div>
-<div class="block">Cucumber implementation of <a href="../SharedMutator.html" title="interface in org.fluentlenium.adapter"><code>SharedMutator</code></a>, replacing <code>testClass</code> with a null reference
+implements <a href="../SharedMutator.html" title="interface in io.fluentlenium.adapter">SharedMutator</a></span></div>
+<div class="block">Cucumber implementation of <a href="../SharedMutator.html" title="interface in io.fluentlenium.adapter"><code>SharedMutator</code></a>, replacing <code>testClass</code> with a null reference
  as it doesn't make sense in case of Cucumber tests, and raising a
- <a href="../../configuration/ConfigurationException.html" title="class in org.fluentlenium.configuration"><code>ConfigurationException</code></a> when <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html#CLASS"><code>ConfigurationProperties.DriverLifecycle.CLASS</code></a> is given
+ <a href="../../configuration/ConfigurationException.html" title="class in io.fluentlenium.configuration"><code>ConfigurationException</code></a> when <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html#CLASS"><code>ConfigurationProperties.DriverLifecycle.CLASS</code></a> is given
  to link <code>WebDriver</code> instances with classes defining step definitions.</div>
 </section>
 <section class="summary">
@@ -116,8 +116,8 @@ implements <a href="../SharedMutator.html" title="interface in org.fluentlenium.
 <section class="nested-class-summary" id="nested-class-summary">
 <h2>Nested Class Summary</h2>
 <div class="inherited-list">
-<h2 id="nested-classes-inherited-from-class-org.fluentlenium.adapter.SharedMutator">Nested classes/interfaces inherited from interface&nbsp;org.fluentlenium.adapter.<a href="../SharedMutator.html" title="interface in org.fluentlenium.adapter">SharedMutator</a></h2>
-<code><a href="../SharedMutator.EffectiveParameters.html" title="class in org.fluentlenium.adapter">SharedMutator.EffectiveParameters</a>&lt;<a href="../SharedMutator.EffectiveParameters.html" title="type parameter in SharedMutator.EffectiveParameters">T</a>&gt;</code></div>
+<h2 id="nested-classes-inherited-from-class-io.fluentlenium.adapter.SharedMutator">Nested classes/interfaces inherited from interface&nbsp;io.fluentlenium.adapter.<a href="../SharedMutator.html" title="interface in io.fluentlenium.adapter">SharedMutator</a></h2>
+<code><a href="../SharedMutator.EffectiveParameters.html" title="class in io.fluentlenium.adapter">SharedMutator.EffectiveParameters</a>&lt;<a href="../SharedMutator.EffectiveParameters.html" title="type parameter in SharedMutator.EffectiveParameters">T</a>&gt;</code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -144,12 +144,12 @@ implements <a href="../SharedMutator.html" title="interface in org.fluentlenium.
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;<a href="../SharedMutator.EffectiveParameters.html" title="class in org.fluentlenium.adapter">SharedMutator.EffectiveParameters</a>&lt;T&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEffectiveParameters(java.lang.Class,java.lang.String,org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)" class="member-name-link">getEffectiveParameters</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;testClass,
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>&lt;T&gt;&nbsp;<a href="../SharedMutator.EffectiveParameters.html" title="class in io.fluentlenium.adapter">SharedMutator.EffectiveParameters</a>&lt;T&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getEffectiveParameters(java.lang.Class,java.lang.String,io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)" class="member-name-link">getEffectiveParameters</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;testClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;testName,
- <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</code></div>
+ <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Effective parameters to use for <a href="../sharedwebdriver/SharedWebDriverContainer.html" title="enum class in org.fluentlenium.adapter.sharedwebdriver"><code>SharedWebDriverContainer</code></a>.</div>
+<div class="block">Effective parameters to use for <a href="../sharedwebdriver/SharedWebDriverContainer.html" title="enum class in io.fluentlenium.adapter.sharedwebdriver"><code>SharedWebDriverContainer</code></a>.</div>
 </div>
 </div>
 </div>
@@ -183,16 +183,16 @@ implements <a href="../SharedMutator.html" title="interface in org.fluentlenium.
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="getEffectiveParameters(java.lang.Class,java.lang.String,org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">
+<section class="detail" id="getEffectiveParameters(java.lang.Class,java.lang.String,io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">
 <h3>getEffectiveParameters</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../SharedMutator.EffectiveParameters.html" title="class in org.fluentlenium.adapter">SharedMutator.EffectiveParameters</a>&lt;T&gt;</span>&nbsp;<span class="element-name">getEffectiveParameters</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;testClass,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="../SharedMutator.EffectiveParameters.html" title="class in io.fluentlenium.adapter">SharedMutator.EffectiveParameters</a>&lt;T&gt;</span>&nbsp;<span class="element-name">getEffectiveParameters</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;T&gt;&nbsp;testClass,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;testName,
- <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html" title="enum class in org.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../SharedMutator.html#getEffectiveParameters(java.lang.Class,java.lang.String,org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">SharedMutator</a></code></span></div>
-<div class="block">Effective parameters to use for <a href="../sharedwebdriver/SharedWebDriverContainer.html" title="enum class in org.fluentlenium.adapter.sharedwebdriver"><code>SharedWebDriverContainer</code></a>.</div>
+ <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html" title="enum class in io.fluentlenium.configuration">ConfigurationProperties.DriverLifecycle</a>&nbsp;driverLifecycle)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="../SharedMutator.html#getEffectiveParameters(java.lang.Class,java.lang.String,io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">SharedMutator</a></code></span></div>
+<div class="block">Effective parameters to use for <a href="../sharedwebdriver/SharedWebDriverContainer.html" title="enum class in io.fluentlenium.adapter.sharedwebdriver"><code>SharedWebDriverContainer</code></a>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../SharedMutator.html#getEffectiveParameters(java.lang.Class,java.lang.String,org.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">getEffectiveParameters</a></code>&nbsp;in interface&nbsp;<code><a href="../SharedMutator.html" title="interface in org.fluentlenium.adapter">SharedMutator</a></code></dd>
+<dd><code><a href="../SharedMutator.html#getEffectiveParameters(java.lang.Class,java.lang.String,io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle)">getEffectiveParameters</a></code>&nbsp;in interface&nbsp;<code><a href="../SharedMutator.html" title="interface in io.fluentlenium.adapter">SharedMutator</a></code></dd>
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - type of the test class</dd>
 <dt>Parameters:</dt>

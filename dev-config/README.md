@@ -8,7 +8,7 @@ Before release
 
 * Create account on [Sonatype](https://oss.sonatype.org/)
 
-* Request access to org.fluentlenium
+* Request access to io.fluentlenium
 
   [Example request - OSSRH-18426](https://issues.sonatype.org/browse/OSSRH-18426)
   

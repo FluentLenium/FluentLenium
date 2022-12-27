@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.proxy</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.proxy</a></div>
 <h2 title="Class AbstractLocatorHandler" class="title">Class AbstractLocatorHandler&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.proxy.AbstractLocatorHandler&lt;T&gt;</li>
+<li>io.fluentlenium.core.proxy.AbstractLocatorHandler&lt;T&gt;</li>
 </ul>
 </li>
 </ul>
@@ -138,16 +138,16 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;T&gt;</code>, <code><a href="LocatorStatusHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
+<dd><code><a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;T&gt;</code>, <code><a href="LocatorStatusHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="AbstractLocatorAndInvocationHandler.html" title="class in org.fluentlenium.core.proxy">AbstractLocatorAndInvocationHandler</a></code></dd>
+<dd><code><a href="AbstractLocatorAndInvocationHandler.html" title="class in io.fluentlenium.core.proxy">AbstractLocatorAndInvocationHandler</a></code></dd>
 </dl>
 <hr>
 <pre>public abstract class <span class="typeNameLabel">AbstractLocatorHandler&lt;T&gt;</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;T&gt;</pre>
+implements <a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;T&gt;</pre>
 <div class="block">Abstract proxy handler supporting lazy loading and hooks on <code>WebElement</code>.
  <p>
  Contains the locator handling related logic.</div>
@@ -172,17 +172,17 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="../hook/HookChainBuilder.html" title="interface in org.fluentlenium.core.hook">HookChainBuilder</a></code></td>
+<td class="colFirst"><code>protected <a href="../hook/HookChainBuilder.html" title="interface in io.fluentlenium.core.hook">HookChainBuilder</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hookChainBuilder">hookChainBuilder</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in org.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;</code></td>
+<td class="colFirst"><code>protected <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in io.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hookDefinitions">hookDefinitions</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hooks">hooks</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -244,7 +244,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addListener(org.fluentlenium.core.proxy.ProxyElementListener)">addListener</a></span>&#8203;(<a href="ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addListener(io.fluentlenium.core.proxy.ProxyElementListener)">addListener</a></span>&#8203;(<a href="ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</code></th>
 <td class="colLast">
 <div class="block">Add a listener for this locator handler.</div>
 </td>
@@ -335,7 +335,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeListener(org.fluentlenium.core.proxy.ProxyElementListener)">removeListener</a></span>&#8203;(<a href="ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#removeListener(io.fluentlenium.core.proxy.ProxyElementListener)">removeListener</a></span>&#8203;(<a href="ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</code></th>
 <td class="colLast">
 <div class="block">Removes a proxy element listener.</div>
 </td>
@@ -356,8 +356,8 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHooks(org.fluentlenium.core.hook.HookChainBuilder,java.util.List)">setHooks</a></span>&#8203;(<a href="../hook/HookChainBuilder.html" title="interface in org.fluentlenium.core.hook">HookChainBuilder</a>&nbsp;hookChainBuilder,
-        <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in org.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hookDefinitions)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setHooks(io.fluentlenium.core.hook.HookChainBuilder,java.util.List)">setHooks</a></span>&#8203;(<a href="../hook/HookChainBuilder.html" title="interface in io.fluentlenium.core.hook">HookChainBuilder</a>&nbsp;hookChainBuilder,
+        <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in io.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hookDefinitions)</code></th>
 <td class="colLast">
 <div class="block">Apply this hook list.</div>
 </td>
@@ -378,10 +378,10 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang" class="externalLink">clone</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang" class="externalLink">equals</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang" class="externalLink">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang" class="externalLink">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang" class="externalLink">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang" class="externalLink">notify</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang" class="externalLink">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang" class="externalLink">toString</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang" class="externalLink">wait</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang" class="externalLink">wait</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#wait(long,int)" title="class or interface in java.lang" class="externalLink">wait</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.org.fluentlenium.core.proxy.LocatorHandler">
+<li class="blockList"><a id="methods.inherited.from.class.io.fluentlenium.core.proxy.LocatorHandler">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;org.fluentlenium.core.proxy.<a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a></h3>
+<h3>Methods inherited from interface&nbsp;io.fluentlenium.core.proxy.<a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a></h3>
 <code><a href="LocatorHandler.html#getInvocationTarget(java.lang.reflect.Method)">getInvocationTarget</a>, <a href="LocatorHandler.html#getMessageContext()">getMessageContext</a>, <a href="LocatorHandler.html#noSuchElement()">noSuchElement</a>, <a href="LocatorHandler.html#now()">now</a></code></li>
 </ul>
 </li>
@@ -415,7 +415,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <ul class="blockList">
 <li class="blockList">
 <h4>hookChainBuilder</h4>
-<pre>protected&nbsp;<a href="../hook/HookChainBuilder.html" title="interface in org.fluentlenium.core.hook">HookChainBuilder</a> hookChainBuilder</pre>
+<pre>protected&nbsp;<a href="../hook/HookChainBuilder.html" title="interface in io.fluentlenium.core.hook">HookChainBuilder</a> hookChainBuilder</pre>
 </li>
 </ul>
 <a id="hookDefinitions">
@@ -424,7 +424,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <ul class="blockList">
 <li class="blockList">
 <h4>hookDefinitions</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in org.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt; hookDefinitions</pre>
+<pre>protected&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in io.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt; hookDefinitions</pre>
 </li>
 </ul>
 <a id="hooks">
@@ -433,7 +433,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <ul class="blockList">
 <li class="blockList">
 <h4>hooks</h4>
-<pre>protected&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt; hooks</pre>
+<pre>protected&nbsp;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt; hooks</pre>
 </li>
 </ul>
 <a id="proxy">
@@ -488,18 +488,18 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="addListener(org.fluentlenium.core.proxy.ProxyElementListener)">
+<a id="addListener(io.fluentlenium.core.proxy.ProxyElementListener)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>addListener</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;addListener&#8203;(<a href="ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="LocatorHandler.html#addListener(org.fluentlenium.core.proxy.ProxyElementListener)">LocatorHandler</a></code></span></div>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;addListener&#8203;(<a href="ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="LocatorHandler.html#addListener(io.fluentlenium.core.proxy.ProxyElementListener)">LocatorHandler</a></code></span></div>
 <div class="block">Add a listener for this locator handler.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorHandler.html#addListener(org.fluentlenium.core.proxy.ProxyElementListener)">addListener</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
+<dd><code><a href="LocatorHandler.html#addListener(io.fluentlenium.core.proxy.ProxyElementListener)">addListener</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>listener</code> - listener to add, which will be notified when result is searched and found</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -507,18 +507,18 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 </dl>
 </li>
 </ul>
-<a id="removeListener(org.fluentlenium.core.proxy.ProxyElementListener)">
+<a id="removeListener(io.fluentlenium.core.proxy.ProxyElementListener)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>removeListener</h4>
-<pre class="methodSignature">public&nbsp;boolean&nbsp;removeListener&#8203;(<a href="ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="LocatorHandler.html#removeListener(org.fluentlenium.core.proxy.ProxyElementListener)">LocatorHandler</a></code></span></div>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;removeListener&#8203;(<a href="ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a>&nbsp;listener)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="LocatorHandler.html#removeListener(io.fluentlenium.core.proxy.ProxyElementListener)">LocatorHandler</a></code></span></div>
 <div class="block">Removes a proxy element listener.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorHandler.html#removeListener(org.fluentlenium.core.proxy.ProxyElementListener)">removeListener</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
+<dd><code><a href="LocatorHandler.html#removeListener(io.fluentlenium.core.proxy.ProxyElementListener)">removeListener</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>listener</code> - listener to remove</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -538,25 +538,25 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
  It also raise events.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorHandler.html#getLocatorResult()">getLocatorResult</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
+<dd><code><a href="LocatorHandler.html#getLocatorResult()">getLocatorResult</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>result of the locator</dd>
 </dl>
 </li>
 </ul>
-<a id="setHooks(org.fluentlenium.core.hook.HookChainBuilder,java.util.List)">
+<a id="setHooks(io.fluentlenium.core.hook.HookChainBuilder,java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setHooks</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setHooks&#8203;(<a href="../hook/HookChainBuilder.html" title="interface in org.fluentlenium.core.hook">HookChainBuilder</a>&nbsp;hookChainBuilder,
-                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in org.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hookDefinitions)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="LocatorHandler.html#setHooks(org.fluentlenium.core.hook.HookChainBuilder,java.util.List)">LocatorHandler</a></code></span></div>
+<pre class="methodSignature">public&nbsp;void&nbsp;setHooks&#8203;(<a href="../hook/HookChainBuilder.html" title="interface in io.fluentlenium.core.hook">HookChainBuilder</a>&nbsp;hookChainBuilder,
+                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;<a href="../hook/HookDefinition.html" title="class in io.fluentlenium.core.hook">HookDefinition</a>&lt;?&gt;&gt;&nbsp;hookDefinitions)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="LocatorHandler.html#setHooks(io.fluentlenium.core.hook.HookChainBuilder,java.util.List)">LocatorHandler</a></code></span></div>
 <div class="block">Apply this hook list.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorHandler.html#setHooks(org.fluentlenium.core.hook.HookChainBuilder,java.util.List)">setHooks</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
+<dd><code><a href="LocatorHandler.html#setHooks(io.fluentlenium.core.hook.HookChainBuilder,java.util.List)">setHooks</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>hookChainBuilder</code> - hook chain builder</dd>
 <dd><code>hookDefinitions</code> - hook definitions</dd>
@@ -574,7 +574,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <div class="block">Retrieve the element locator used by this proxy, without any hook applied.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorHandler.html#getLocator()">getLocator</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
+<dd><code><a href="LocatorHandler.html#getLocator()">getLocator</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>element locator</dd>
 </dl>
@@ -591,7 +591,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <div class="block">Retrieve the element locator used by this proxy, with hooks applied.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorHandler.html#getHookLocator()">getHookLocator</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
+<dd><code><a href="LocatorHandler.html#getHookLocator()">getHookLocator</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorHandler</a>&lt;<a href="AbstractLocatorHandler.html" title="type parameter in AbstractLocatorHandler">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>element locator wrapped with hooks</dd>
 </dl>
@@ -608,7 +608,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <div class="block">Check if this handler has loaded it's result.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorStatusHandler.html#loaded()">loaded</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorStatusHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
+<dd><code><a href="LocatorStatusHandler.html#loaded()">loaded</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorStatusHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if the result is loaded, false otherwise</dd>
 </dl>
@@ -625,7 +625,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <div class="block">Check if the result is present.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorStatusHandler.html#present()">present</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorStatusHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
+<dd><code><a href="LocatorStatusHandler.html#present()">present</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorStatusHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if result is present, false otherwise</dd>
 </dl>
@@ -642,7 +642,7 @@ implements <a href="LocatorHandler.html" title="interface in org.fluentlenium.co
 <div class="block">Reset the loaded data.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="LocatorStatusHandler.html#reset()">reset</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorStatusHandler.html" title="interface in org.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
+<dd><code><a href="LocatorStatusHandler.html#reset()">reset</a></code>&nbsp;in interface&nbsp;<code><a href="LocatorStatusHandler.html" title="interface in io.fluentlenium.core.proxy">LocatorStatusHandler</a></code></dd>
 </dl>
 </li>
 </ul>

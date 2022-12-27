@@ -58,7 +58,7 @@ You can use Filters to make your Fluent Selection easier to read and more powerf
 
 ```java
 // Required import to make filters available
-import static org.fluentlenium.core.filter.FilterConstructor.*;
+import static io.fluentlenium.core.filter.FilterConstructor.*;
 ```
 
 ```java

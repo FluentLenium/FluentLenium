@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.inject</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.inject</a></div>
 <h2 title="Class InjectionElementLocator" class="title">Class InjectionElementLocator</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.inject.InjectionElementLocator</li>
+<li>io.fluentlenium.core.inject.InjectionElementLocator</li>
 </ul>
 </li>
 </ul>
@@ -134,12 +134,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../label/FluentLabelProvider.html" title="interface in org.fluentlenium.core.label">FluentLabelProvider</a></code>, <code>org.openqa.selenium.support.pagefactory.ElementLocator</code></dd>
+<dd><code><a href="../label/FluentLabelProvider.html" title="interface in io.fluentlenium.core.label">FluentLabelProvider</a></code>, <code>org.openqa.selenium.support.pagefactory.ElementLocator</code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">InjectionElementLocator</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements org.openqa.selenium.support.pagefactory.ElementLocator, <a href="../label/FluentLabelProvider.html" title="interface in org.fluentlenium.core.label">FluentLabelProvider</a></pre>
+implements org.openqa.selenium.support.pagefactory.ElementLocator, <a href="../label/FluentLabelProvider.html" title="interface in io.fluentlenium.core.label">FluentLabelProvider</a></pre>
 <div class="block">The injection element locator, which will lazily locate an element or an element list on a page. This class is
  designed for use with the <code>PageFactory</code> and understands the
  annotations <code>FindBy</code> and <code>CacheLookup</code>.</div>
@@ -163,8 +163,8 @@ implements org.openqa.selenium.support.pagefactory.ElementLocator, <a href="../l
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.openqa.selenium.SearchContext,org.fluentlenium.core.inject.InjectionAnnotations,boolean)">InjectionElementLocator</a></span>&#8203;(org.openqa.selenium.SearchContext&nbsp;searchContext,
-                       <a href="InjectionAnnotations.html" title="class in org.fluentlenium.core.inject">InjectionAnnotations</a>&nbsp;annotations,
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.openqa.selenium.SearchContext,io.fluentlenium.core.inject.InjectionAnnotations,boolean)">InjectionElementLocator</a></span>&#8203;(org.openqa.selenium.SearchContext&nbsp;searchContext,
+                       <a href="InjectionAnnotations.html" title="class in io.fluentlenium.core.inject">InjectionAnnotations</a>&nbsp;annotations,
                        boolean&nbsp;isFirst)</code></th>
 <td class="colLast">
 <div class="block">Use this constructor in order to process custom annotaions.</div>
@@ -245,14 +245,14 @@ implements org.openqa.selenium.support.pagefactory.ElementLocator, <a href="../l
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.openqa.selenium.SearchContext,org.fluentlenium.core.inject.InjectionAnnotations,boolean)">
+<a id="&lt;init&gt;(org.openqa.selenium.SearchContext,io.fluentlenium.core.inject.InjectionAnnotations,boolean)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>InjectionElementLocator</h4>
 <pre>public&nbsp;InjectionElementLocator&#8203;(org.openqa.selenium.SearchContext&nbsp;searchContext,
-                               <a href="InjectionAnnotations.html" title="class in org.fluentlenium.core.inject">InjectionAnnotations</a>&nbsp;annotations,
+                               <a href="InjectionAnnotations.html" title="class in io.fluentlenium.core.inject">InjectionAnnotations</a>&nbsp;annotations,
                                boolean&nbsp;isFirst)</pre>
 <div class="block">Use this constructor in order to process custom annotaions.</div>
 <dl>
@@ -329,7 +329,7 @@ implements org.openqa.selenium.support.pagefactory.ElementLocator, <a href="../l
 <div class="block">Get defined definition.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../label/FluentLabelProvider.html#getLabel()">getLabel</a></code>&nbsp;in interface&nbsp;<code><a href="../label/FluentLabelProvider.html" title="interface in org.fluentlenium.core.label">FluentLabelProvider</a></code></dd>
+<dd><code><a href="../label/FluentLabelProvider.html#getLabel()">getLabel</a></code>&nbsp;in interface&nbsp;<code><a href="../label/FluentLabelProvider.html" title="interface in io.fluentlenium.core.label">FluentLabelProvider</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>defined label</dd>
 </dl>
@@ -346,7 +346,7 @@ implements org.openqa.selenium.support.pagefactory.ElementLocator, <a href="../l
 <div class="block">Get defined label hints.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../label/FluentLabelProvider.html#getLabelHints()">getLabelHints</a></code>&nbsp;in interface&nbsp;<code><a href="../label/FluentLabelProvider.html" title="interface in org.fluentlenium.core.label">FluentLabelProvider</a></code></dd>
+<dd><code><a href="../label/FluentLabelProvider.html#getLabelHints()">getLabelHints</a></code>&nbsp;in interface&nbsp;<code><a href="../label/FluentLabelProvider.html" title="interface in io.fluentlenium.core.label">FluentLabelProvider</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>array of label hints</dd>
 </dl>

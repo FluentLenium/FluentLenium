@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.adapter.sharedwebdriver</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.adapter.sharedwebdriver</a></div>
 <h2 title="Interface FluentLeniumDriver" class="title">Interface FluentLeniumDriver</h2>
 </div>
 <div class="contentContainer">
@@ -126,12 +126,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="ClassDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">ClassDriver</a></code>, <code><a href="JvmDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">JvmDriver</a></code>, <code><a href="MethodDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">MethodDriver</a></code>, <code><a href="ThreadDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">ThreadDriver</a></code></dd>
+<dd><code><a href="ClassDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">ClassDriver</a></code>, <code><a href="JvmDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">JvmDriver</a></code>, <code><a href="MethodDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">MethodDriver</a></code>, <code><a href="ThreadDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">ThreadDriver</a></code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">FluentLeniumDriver</span></pre>
-<div class="block">Driver interface for <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html" title="enum in org.fluentlenium.configuration"><code>ConfigurationProperties.DriverLifecycle</code></a> based
- <a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver"><code>SharedWebDriver</code></a> handling.</div>
+<div class="block">Driver interface for <a href="../../configuration/ConfigurationProperties.DriverLifecycle.html" title="enum in io.fluentlenium.configuration"><code>ConfigurationProperties.DriverLifecycle</code></a> based
+ <a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver"><code>SharedWebDriver</code></a> handling.</div>
 </li>
 </ul>
 </div>
@@ -154,22 +154,22 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addDriver(org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">addDriver</a></span>&#8203;(<a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;driver)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#addDriver(io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">addDriver</a></span>&#8203;(<a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;driver)</code></th>
 <td class="colLast">
 <div class="block">Adds this driver to the collection of shared webdrivers according to the driver lifecycle.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#quitDriver(org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">quitDriver</a></span>&#8203;(<a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#quitDriver(io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">quitDriver</a></span>&#8203;(<a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver)</code></th>
 <td class="colLast">
 <div class="block">Quits the argument shared webdriver.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>default void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#quitDriver(org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver,org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">quitDriver</a></span>&#8203;(<a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver,
-          <a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;testDriver)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#quitDriver(io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver,io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">quitDriver</a></span>&#8203;(<a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver,
+          <a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;testDriver)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </table>
@@ -189,23 +189,23 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="quitDriver(org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver,org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">
+<a id="quitDriver(io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver,io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>quitDriver</h4>
-<pre class="methodSignature">default&nbsp;void&nbsp;quitDriver&#8203;(<a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver,
-                        <a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;testDriver)</pre>
+<pre class="methodSignature">default&nbsp;void&nbsp;quitDriver&#8203;(<a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver,
+                        <a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;testDriver)</pre>
 </li>
 </ul>
-<a id="quitDriver(org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">
+<a id="quitDriver(io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>quitDriver</h4>
-<pre class="methodSignature">void&nbsp;quitDriver&#8203;(<a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver)</pre>
+<pre class="methodSignature">void&nbsp;quitDriver&#8203;(<a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;sharedWebDriver)</pre>
 <div class="block">Quits the argument shared webdriver.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -213,13 +213,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 </li>
 </ul>
-<a id="addDriver(org.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">
+<a id="addDriver(io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>addDriver</h4>
-<pre class="methodSignature">void&nbsp;addDriver&#8203;(<a href="SharedWebDriver.html" title="class in org.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;driver)</pre>
+<pre class="methodSignature">void&nbsp;addDriver&#8203;(<a href="SharedWebDriver.html" title="class in io.fluentlenium.adapter.sharedwebdriver">SharedWebDriver</a>&nbsp;driver)</pre>
 <div class="block">Adds this driver to the collection of shared webdrivers according to the driver lifecycle.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.components, class: ComponentsManager">
+<meta name="description" content="declaration: package: io.fluentlenium.core.components, class: ComponentsManager">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,29 +89,29 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.components</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.components</a></div>
 <h1 title="Class ComponentsManager" class="title">Class ComponentsManager</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="AbstractComponentInstantiator.html" title="class in org.fluentlenium.core.components">org.fluentlenium.core.components.AbstractComponentInstantiator</a>
-<div class="inheritance">org.fluentlenium.core.components.ComponentsManager</div>
+<div class="inheritance"><a href="AbstractComponentInstantiator.html" title="class in io.fluentlenium.core.components">io.fluentlenium.core.components.AbstractComponentInstantiator</a>
+<div class="inheritance">io.fluentlenium.core.components.ComponentsManager</div>
 </div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></code>, <code><a href="ComponentsAccessor.html" title="interface in org.fluentlenium.core.components">ComponentsAccessor</a></code>, <code><a href="../proxy/ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a></code></dd>
+<dd><code><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></code>, <code><a href="ComponentsAccessor.html" title="interface in io.fluentlenium.core.components">ComponentsAccessor</a></code>, <code><a href="../proxy/ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">ComponentsManager</span>
-<span class="extends-implements">extends <a href="AbstractComponentInstantiator.html" title="class in org.fluentlenium.core.components">AbstractComponentInstantiator</a>
-implements <a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>, <a href="ComponentsAccessor.html" title="interface in org.fluentlenium.core.components">ComponentsAccessor</a>, <a href="../proxy/ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a></span></div>
+<span class="extends-implements">extends <a href="AbstractComponentInstantiator.html" title="class in io.fluentlenium.core.components">AbstractComponentInstantiator</a>
+implements <a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>, <a href="ComponentsAccessor.html" title="interface in io.fluentlenium.core.components">ComponentsAccessor</a>, <a href="../proxy/ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a></span></div>
 <div class="block">Manage living components for a WebDriver instance.
  <p>
  A component is an Object implementing no particular interface, but capable of wrapping
  a <code>WebElement</code>.
  <p>
- <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain"><code>FluentWebElement</code></a> is the most common component.</div>
+ <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain"><code>FluentWebElement</code></a> is the most common component.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -123,7 +123,7 @@ implements <a href="ComponentInstantiator.html" title="interface in org.fluentle
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.fluentlenium.core.FluentControl)" class="member-name-link">ComponentsManager</a><wbr>(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.fluentlenium.core.FluentControl)" class="member-name-link">ComponentsManager</a><wbr>(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a new components manager.</div>
 </div>
@@ -142,7 +142,7 @@ implements <a href="ComponentInstantiator.html" title="interface in org.fluentle
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addComponentsListener(org.fluentlenium.core.components.ComponentsListener)" class="member-name-link">addComponentsListener</a><wbr>(<a href="ComponentsListener.html" title="interface in org.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addComponentsListener(io.fluentlenium.core.components.ComponentsListener)" class="member-name-link">addComponentsListener</a><wbr>(<a href="ComponentsListener.html" title="interface in io.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Add a component listener to be notified when a component is registered or unregistered.</div>
 </div>
@@ -171,7 +171,7 @@ T&gt;<br>L</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get the related components from the given element.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getInstantiator()" class="member-name-link">getInstantiator</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get the component instantiator used by this components manager.</div>
@@ -219,7 +219,7 @@ T&gt;<br>L</code></div>
 <div class="block">Release this manager.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeComponentsListener(org.fluentlenium.core.components.ComponentsListener)" class="member-name-link">removeComponentsListener</a><wbr>(<a href="ComponentsListener.html" title="interface in org.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#removeComponentsListener(io.fluentlenium.core.components.ComponentsListener)" class="member-name-link">removeComponentsListener</a><wbr>(<a href="ComponentsListener.html" title="interface in io.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Remove a component listener.</div>
 </div>
@@ -227,14 +227,14 @@ T&gt;<br>L</code></div>
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-org.fluentlenium.core.components.AbstractComponentInstantiator">Methods inherited from class&nbsp;org.fluentlenium.core.components.<a href="AbstractComponentInstantiator.html" title="class in org.fluentlenium.core.components">AbstractComponentInstantiator</a></h3>
-<code><a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.util.List)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Iterable)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.util.List)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Class,java.lang.Iterable)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Class,java.util.List)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Class,org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Iterable)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.util.List)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class,T...)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,java.util.List)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,T...)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newFluent(org.openqa.selenium.WebElement)">newFluent</a>, <a href="AbstractComponentInstantiator.html#newFluentList()">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.lang.Class)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.lang.Class,java.util.List)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.lang.Class,T...)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.util.List)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(org.fluentlenium.core.domain.FluentWebElement...)">newFluentList</a></code></div>
+<h3 id="methods-inherited-from-class-io.fluentlenium.core.components.AbstractComponentInstantiator">Methods inherited from class&nbsp;io.fluentlenium.core.components.<a href="AbstractComponentInstantiator.html" title="class in io.fluentlenium.core.components">AbstractComponentInstantiator</a></h3>
+<code><a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.util.List)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Iterable)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.util.List)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Class,java.lang.Iterable)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Class,java.util.List)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Class,org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.lang.Iterable)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(java.util.List)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#asFluentList(org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class,T...)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,java.util.List)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newComponentList(java.lang.Class,T...)">newComponentList</a>, <a href="AbstractComponentInstantiator.html#newFluent(org.openqa.selenium.WebElement)">newFluent</a>, <a href="AbstractComponentInstantiator.html#newFluentList()">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.lang.Class)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.lang.Class,java.util.List)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.lang.Class,T...)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(java.util.List)">newFluentList</a>, <a href="AbstractComponentInstantiator.html#newFluentList(io.fluentlenium.core.domain.FluentWebElement...)">newFluentList</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-org.fluentlenium.core.components.ComponentInstantiator">Methods inherited from interface&nbsp;org.fluentlenium.core.components.<a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></h3>
-<code><a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.util.List)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Iterable)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.util.List)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Class,java.lang.Iterable)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Class,java.util.List)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Class,org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Iterable)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.util.List)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class,T...)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.util.List)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,T...)">newComponentList</a>, <a href="ComponentInstantiator.html#newFluent(org.openqa.selenium.WebElement)">newFluent</a>, <a href="ComponentInstantiator.html#newFluentList()">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.lang.Class)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.lang.Class,java.util.List)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.lang.Class,T...)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.util.List)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(org.fluentlenium.core.domain.FluentWebElement...)">newFluentList</a></code></div>
+<h3 id="methods-inherited-from-class-io.fluentlenium.core.components.ComponentInstantiator">Methods inherited from interface&nbsp;io.fluentlenium.core.components.<a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></h3>
+<code><a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.util.List)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Iterable)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.util.List)">asComponentList</a>, <a href="ComponentInstantiator.html#asComponentList(java.lang.Class,org.openqa.selenium.WebElement...)">asComponentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Class,java.lang.Iterable)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Class,java.util.List)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Class,org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.lang.Iterable)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(java.util.List)">asFluentList</a>, <a href="ComponentInstantiator.html#asFluentList(org.openqa.selenium.WebElement...)">asFluentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class,T...)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.util.List)">newComponentList</a>, <a href="ComponentInstantiator.html#newComponentList(java.lang.Class,T...)">newComponentList</a>, <a href="ComponentInstantiator.html#newFluent(org.openqa.selenium.WebElement)">newFluent</a>, <a href="ComponentInstantiator.html#newFluentList()">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.lang.Class)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.lang.Class,java.util.List)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.lang.Class,T...)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(java.util.List)">newFluentList</a>, <a href="ComponentInstantiator.html#newFluentList(io.fluentlenium.core.domain.FluentWebElement...)">newFluentList</a></code></div>
 </section>
 </li>
 </ul>
@@ -247,9 +247,9 @@ T&gt;<br>L</code></div>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.fluentlenium.core.FluentControl)">
+<section class="detail" id="&lt;init&gt;(io.fluentlenium.core.FluentControl)">
 <h3>ComponentsManager</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ComponentsManager</span><wbr><span class="parameters">(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ComponentsManager</span><wbr><span class="parameters">(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control)</span></div>
 <div class="block">Creates a new components manager.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -268,7 +268,7 @@ T&gt;<br>L</code></div>
 <li>
 <section class="detail" id="getInstantiator()">
 <h3>getInstantiator</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></span>&nbsp;<span class="element-name">getInstantiator</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></span>&nbsp;<span class="element-name">getInstantiator</span>()</div>
 <div class="block">Get the component instantiator used by this components manager.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -284,7 +284,7 @@ T&gt;<br>L</code></div>
 <div class="block">Get the related components from the given element.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentsAccessor.html#getComponents(org.openqa.selenium.WebElement)">getComponents</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentsAccessor.html" title="interface in org.fluentlenium.core.components">ComponentsAccessor</a></code></dd>
+<dd><code><a href="ComponentsAccessor.html#getComponents(org.openqa.selenium.WebElement)">getComponents</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentsAccessor.html" title="interface in io.fluentlenium.core.components">ComponentsAccessor</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>element</code> - selenium element</dd>
 <dt>Returns:</dt>
@@ -300,7 +300,7 @@ T&gt;<br>L</code></div>
 <div class="block">Check if this class is a component class.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentInstantiator.html#isComponentClass(java.lang.Class)">isComponentClass</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
+<dd><code><a href="ComponentInstantiator.html#isComponentClass(java.lang.Class)">isComponentClass</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>componentClass</code> - class to check</dd>
 <dt>Returns:</dt>
@@ -316,7 +316,7 @@ T&gt;<br>L</code></div>
 <div class="block">Check if this class is a component list class.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentInstantiator.html#isComponentListClass(java.lang.Class)">isComponentListClass</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
+<dd><code><a href="ComponentInstantiator.html#isComponentListClass(java.lang.Class)">isComponentListClass</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>componentListClass</code> - class to check</dd>
 <dt>Returns:</dt>
@@ -333,7 +333,7 @@ T&gt;<br>L</code></div>
 <div class="block">Create and register a new component of the provided type from the given <code>WebElement</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentInstantiator.html#newComponent(java.lang.Class,org.openqa.selenium.WebElement)">newComponent</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
+<dd><code><a href="ComponentInstantiator.html#newComponent(java.lang.Class,org.openqa.selenium.WebElement)">newComponent</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
 <dt>Type Parameters:</dt>
 <dd><code>T</code> - type of the component</dd>
 <dt>Parameters:</dt>
@@ -345,14 +345,14 @@ T&gt;<br>L</code></div>
 </section>
 </li>
 <li>
-<section class="detail" id="addComponentsListener(org.fluentlenium.core.components.ComponentsListener)">
+<section class="detail" id="addComponentsListener(io.fluentlenium.core.components.ComponentsListener)">
 <h3>addComponentsListener</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addComponentsListener</span><wbr><span class="parameters">(<a href="ComponentsListener.html" title="interface in org.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ComponentsAccessor.html#addComponentsListener(org.fluentlenium.core.components.ComponentsListener)">ComponentsAccessor</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">addComponentsListener</span><wbr><span class="parameters">(<a href="ComponentsListener.html" title="interface in io.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ComponentsAccessor.html#addComponentsListener(io.fluentlenium.core.components.ComponentsListener)">ComponentsAccessor</a></code></span></div>
 <div class="block">Add a component listener to be notified when a component is registered or unregistered.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentsAccessor.html#addComponentsListener(org.fluentlenium.core.components.ComponentsListener)">addComponentsListener</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentsAccessor.html" title="interface in org.fluentlenium.core.components">ComponentsAccessor</a></code></dd>
+<dd><code><a href="ComponentsAccessor.html#addComponentsListener(io.fluentlenium.core.components.ComponentsListener)">addComponentsListener</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentsAccessor.html" title="interface in io.fluentlenium.core.components">ComponentsAccessor</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>listener</code> - components listener</dd>
 <dt>Returns:</dt>
@@ -361,14 +361,14 @@ T&gt;<br>L</code></div>
 </section>
 </li>
 <li>
-<section class="detail" id="removeComponentsListener(org.fluentlenium.core.components.ComponentsListener)">
+<section class="detail" id="removeComponentsListener(io.fluentlenium.core.components.ComponentsListener)">
 <h3>removeComponentsListener</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeComponentsListener</span><wbr><span class="parameters">(<a href="ComponentsListener.html" title="interface in org.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ComponentsAccessor.html#removeComponentsListener(org.fluentlenium.core.components.ComponentsListener)">ComponentsAccessor</a></code></span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">removeComponentsListener</span><wbr><span class="parameters">(<a href="ComponentsListener.html" title="interface in io.fluentlenium.core.components">ComponentsListener</a>&nbsp;listener)</span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="ComponentsAccessor.html#removeComponentsListener(io.fluentlenium.core.components.ComponentsListener)">ComponentsAccessor</a></code></span></div>
 <div class="block">Remove a component listener.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentsAccessor.html#removeComponentsListener(org.fluentlenium.core.components.ComponentsListener)">removeComponentsListener</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentsAccessor.html" title="interface in org.fluentlenium.core.components">ComponentsAccessor</a></code></dd>
+<dd><code><a href="ComponentsAccessor.html#removeComponentsListener(io.fluentlenium.core.components.ComponentsListener)">removeComponentsListener</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentsAccessor.html" title="interface in io.fluentlenium.core.components">ComponentsAccessor</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>listener</code> - components listener to remove</dd>
 <dt>Returns:</dt>
@@ -413,7 +413,7 @@ T&gt;</span>&nbsp;<span class="return-type">L</span>&nbsp;<span class="element-n
 <div class="block">Create and register a new list of component from the given component list.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class,java.util.List)">newComponentList</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
+<dd><code><a href="ComponentInstantiator.html#newComponentList(java.lang.Class,java.lang.Class,java.util.List)">newComponentList</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
 <dt>Type Parameters:</dt>
 <dd><code>L</code> - type of the list</dd>
 <dd><code>T</code> - type of the component</dd>
@@ -437,9 +437,9 @@ T&gt;</span>&nbsp;<span class="return-type">L</span>&nbsp;<span class="element-n
 <div class="block">Create and register a new list of component from the given element iterable.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.lang.Iterable)">asComponentList</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
+<dd><code><a href="ComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.lang.Iterable)">asComponentList</a></code>&nbsp;in interface&nbsp;<code><a href="ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a></code></dd>
 <dt>Overrides:</dt>
-<dd><code><a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.lang.Iterable)">asComponentList</a></code>&nbsp;in class&nbsp;<code><a href="AbstractComponentInstantiator.html" title="class in org.fluentlenium.core.components">AbstractComponentInstantiator</a></code></dd>
+<dd><code><a href="AbstractComponentInstantiator.html#asComponentList(java.lang.Class,java.lang.Class,java.lang.Iterable)">asComponentList</a></code>&nbsp;in class&nbsp;<code><a href="AbstractComponentInstantiator.html" title="class in io.fluentlenium.core.components">AbstractComponentInstantiator</a></code></dd>
 <dt>Type Parameters:</dt>
 <dd><code>L</code> - type of the list</dd>
 <dd><code>T</code> - type of the component</dd>
@@ -461,7 +461,7 @@ T&gt;</span>&nbsp;<span class="return-type">L</span>&nbsp;<span class="element-n
 <div class="block">Invoked when proxy element search is starting.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../proxy/ProxyElementListener.html#proxyElementSearch(java.lang.Object,org.openqa.selenium.support.pagefactory.ElementLocator)">proxyElementSearch</a></code>&nbsp;in interface&nbsp;<code><a href="../proxy/ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a></code></dd>
+<dd><code><a href="../proxy/ProxyElementListener.html#proxyElementSearch(java.lang.Object,org.openqa.selenium.support.pagefactory.ElementLocator)">proxyElementSearch</a></code>&nbsp;in interface&nbsp;<code><a href="../proxy/ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>proxy</code> - proxy</dd>
 <dd><code>locator</code> - element locator</dd>
@@ -478,7 +478,7 @@ T&gt;</span>&nbsp;<span class="return-type">L</span>&nbsp;<span class="element-n
 <div class="block">Invoked when proxy element search is over and elements were found.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="../proxy/ProxyElementListener.html#proxyElementFound(java.lang.Object,org.openqa.selenium.support.pagefactory.ElementLocator,java.util.List)">proxyElementFound</a></code>&nbsp;in interface&nbsp;<code><a href="../proxy/ProxyElementListener.html" title="interface in org.fluentlenium.core.proxy">ProxyElementListener</a></code></dd>
+<dd><code><a href="../proxy/ProxyElementListener.html#proxyElementFound(java.lang.Object,org.openqa.selenium.support.pagefactory.ElementLocator,java.util.List)">proxyElementFound</a></code>&nbsp;in interface&nbsp;<code><a href="../proxy/ProxyElementListener.html" title="interface in io.fluentlenium.core.proxy">ProxyElementListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>proxy</code> - proxy</dd>
 <dd><code>locator</code> - element locator</dd>

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.events, class: EventsSupport">
+<meta name="description" content="declaration: package: io.fluentlenium.core.events, class: EventsSupport">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,21 +89,21 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.events</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.events</a></div>
 <h1 title="Class EventsSupport" class="title">Class EventsSupport</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.fluentlenium.core.events.EventsSupport</div>
+<div class="inheritance">io.fluentlenium.core.events.EventsSupport</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">EventsSupport</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
-implements <a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></span></div>
+implements <a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></span></div>
 <div class="block">EventsSupport can be registered in Selenium <code>EventFiringWebDriver</code> to provide an
  easier to use events interface.</div>
 </section>
@@ -117,7 +117,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.fluentlenium.core.events.EventsRegistry)" class="member-name-link">EventsSupport</a><wbr>(<a href="EventsRegistry.html" title="class in org.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.fluentlenium.core.events.EventsRegistry)" class="member-name-link">EventsSupport</a><wbr>(<a href="EventsRegistry.html" title="class in io.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a new events support</div>
 </div>
@@ -146,7 +146,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  after <code>Alert.dismiss()</code></div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)" class="member-name-link">afterChangeValueOf</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)" class="member-name-link">afterChangeValueOf</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>[]&nbsp;charSequence)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -155,14 +155,14 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  <code>WebElement.sendKeys(CharSequence...)</code> .</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">afterClickOn</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">afterClickOn</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called after <code>WebElement.click()</code>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">afterFindBy</a><wbr>(org.openqa.selenium.By&nbsp;by,
- <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">afterFindBy</a><wbr>(org.openqa.selenium.By&nbsp;by,
+ <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called after <code>WebDriver.findElement(...)</code>,
@@ -175,7 +175,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  after <code>TakesScreenshot.getScreenshotAs(OutputType)</code> ()}</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)" class="member-name-link">afterGetText</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#afterGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)" class="member-name-link">afterGetText</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
  org.openqa.selenium.WebDriver&nbsp;webDriver,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -228,7 +228,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  before <code>Alert.dismiss()</code></div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)" class="member-name-link">beforeChangeValueOf</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)" class="member-name-link">beforeChangeValueOf</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>[]&nbsp;charSequence)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
@@ -237,14 +237,14 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  <code>WebElement.sendKeys(CharSequence...)</code>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">beforeClickOn</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">beforeClickOn</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called before <code>WebElement.click()</code>.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">beforeFindBy</a><wbr>(org.openqa.selenium.By&nbsp;by,
- <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">beforeFindBy</a><wbr>(org.openqa.selenium.By&nbsp;by,
+ <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called before <code>WebDriver.findElement(...)</code>,
@@ -256,7 +256,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  before <code>TakesScreenshot.getScreenshotAs(OutputType)</code> ()}</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">beforeGetText</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#beforeGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)" class="member-name-link">beforeGetText</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
  org.openqa.selenium.WebDriver&nbsp;webDriver)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Called  before <code>WebElement.getText()</code> ()}</div>
@@ -320,9 +320,9 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.fluentlenium.core.events.EventsRegistry)">
+<section class="detail" id="&lt;init&gt;(io.fluentlenium.core.events.EventsRegistry)">
 <h3>EventsSupport</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">EventsSupport</span><wbr><span class="parameters">(<a href="EventsRegistry.html" title="class in org.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">EventsSupport</span><wbr><span class="parameters">(<a href="EventsRegistry.html" title="class in io.fluentlenium.core.events">EventsRegistry</a>&nbsp;eventsRegistry)</span></div>
 <div class="block">Creates a new events support</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -348,7 +348,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  <code>navigate().to(String url)</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeNavigateTo(java.lang.String,org.openqa.selenium.WebDriver)">beforeNavigateTo</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeNavigateTo(java.lang.String,org.openqa.selenium.WebDriver)">beforeNavigateTo</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>url</code> - URL</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -366,7 +366,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  an exception is thrown.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterNavigateTo(java.lang.String,org.openqa.selenium.WebDriver)">afterNavigateTo</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterNavigateTo(java.lang.String,org.openqa.selenium.WebDriver)">afterNavigateTo</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>url</code> - URL</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -381,7 +381,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called before <code>navigate().back()</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeNavigateBack(org.openqa.selenium.WebDriver)">beforeNavigateBack</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeNavigateBack(org.openqa.selenium.WebDriver)">beforeNavigateBack</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -397,7 +397,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  exception is thrown.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterNavigateBack(org.openqa.selenium.WebDriver)">afterNavigateBack</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterNavigateBack(org.openqa.selenium.WebDriver)">afterNavigateBack</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -411,7 +411,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called before <code>navigate().forward()</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeNavigateForward(org.openqa.selenium.WebDriver)">beforeNavigateForward</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeNavigateForward(org.openqa.selenium.WebDriver)">beforeNavigateForward</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -427,7 +427,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  if an exception is thrown.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterNavigateForward(org.openqa.selenium.WebDriver)">afterNavigateForward</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterNavigateForward(org.openqa.selenium.WebDriver)">afterNavigateForward</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -441,7 +441,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called before <code>navigate().refresh()</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeNavigateRefresh(org.openqa.selenium.WebDriver)">beforeNavigateRefresh</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeNavigateRefresh(org.openqa.selenium.WebDriver)">beforeNavigateRefresh</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -456,24 +456,24 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  if an exception is thrown.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterNavigateRefresh(org.openqa.selenium.WebDriver)">afterNavigateRefresh</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterNavigateRefresh(org.openqa.selenium.WebDriver)">afterNavigateRefresh</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="beforeFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
+<section class="detail" id="beforeFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
 <h3>beforeFindBy</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">beforeFindBy</span><wbr><span class="parameters">(org.openqa.selenium.By&nbsp;by,
- <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+ <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
 <div class="block">Called before <code>WebDriver.findElement(...)</code>,
  <code>WebDriver.findElements(...)</code>, <code>WebElement.findElement(...)</code>, <code>#findElement WebElement.findElements(...)</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">beforeFindBy</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">beforeFindBy</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>by</code> - locator being used</dd>
 <dd><code>element</code> - will be <code>null</code>, if a find method of <code>WebDriver</code> is called.</dd>
@@ -482,17 +482,17 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 </section>
 </li>
 <li>
-<section class="detail" id="afterFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
+<section class="detail" id="afterFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
 <h3>afterFindBy</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">afterFindBy</span><wbr><span class="parameters">(org.openqa.selenium.By&nbsp;by,
- <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+ <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
 <div class="block">Called after <code>WebDriver.findElement(...)</code>,
  <code>WebDriver.findElements(...)</code>, <code>WebElement.findElement(...)</code>, <code>WebElement.findElements(...)</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterFindBy(org.openqa.selenium.By,org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">afterFindBy</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterFindBy(org.openqa.selenium.By,io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">afterFindBy</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>by</code> - locator being used</dd>
 <dd><code>element</code> - will be <code>null</code>, if a find method of <code>WebDriver</code> is called.</dd>
@@ -501,15 +501,15 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 </section>
 </li>
 <li>
-<section class="detail" id="beforeClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
+<section class="detail" id="beforeClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
 <h3>beforeClickOn</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">beforeClickOn</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">beforeClickOn</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
 <div class="block">Called before <code>WebElement.click()</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">beforeClickOn</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">beforeClickOn</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>element</code> - the WebElement being used for the action</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -517,16 +517,16 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 </section>
 </li>
 <li>
-<section class="detail" id="afterClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
+<section class="detail" id="afterClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
 <h3>afterClickOn</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">afterClickOn</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">afterClickOn</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
 <div class="block">Called after <code>WebElement.click()</code>. Not called, if an exception is
  thrown.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterClickOn(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">afterClickOn</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterClickOn(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">afterClickOn</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>element</code> - the WebElement being used for the action</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -534,18 +534,18 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 </section>
 </li>
 <li>
-<section class="detail" id="beforeChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence[])">
+<section class="detail" id="beforeChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence[])">
 <h3>beforeChangeValueOf</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">beforeChangeValueOf</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">beforeChangeValueOf</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>[]&nbsp;charSequence)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">EventListener</a></code></span></div>
 <div class="block">Called before <code>WebElement.clear()</code>,
  <code>WebElement.sendKeys(java.lang.CharSequence...)</code>,
  <code>WebElement.sendKeys(CharSequence...)</code>.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">beforeChangeValueOf</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">beforeChangeValueOf</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>element</code> - the WebElement being used for the action</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -554,18 +554,18 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 </section>
 </li>
 <li>
-<section class="detail" id="afterChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence[])">
+<section class="detail" id="afterChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence[])">
 <h3>afterChangeValueOf</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">afterChangeValueOf</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">afterChangeValueOf</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element,
  org.openqa.selenium.WebDriver&nbsp;driver,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/CharSequence.html" title="class or interface in java.lang" class="external-link">CharSequence</a>[]&nbsp;charSequence)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">EventListener</a></code></span></div>
 <div class="block">Called after <code>WebElement.clear()</code>,
  <code>WebElement.sendKeys(java.lang.CharSequence...)</code>,
  <code>WebElement.sendKeys(CharSequence...)</code> . Not called, if an exception is thrown.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterChangeValueOf(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">afterChangeValueOf</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterChangeValueOf(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.CharSequence%5B%5D)">afterChangeValueOf</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>element</code> - the WebElement being used for the action</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -574,15 +574,15 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 </section>
 </li>
 <li>
-<section class="detail" id="beforeGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
+<section class="detail" id="beforeGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">
 <h3>beforeGetText</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">beforeGetText</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">beforeGetText</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
  org.openqa.selenium.WebDriver&nbsp;webDriver)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#beforeGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">EventListener</a></code></span></div>
 <div class="block">Called  before <code>WebElement.getText()</code> ()}</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">beforeGetText</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver)">beforeGetText</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>webElement</code> - WebElement</dd>
 <dd><code>webDriver</code> - WebDriver</dd>
@@ -590,16 +590,16 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 </section>
 </li>
 <li>
-<section class="detail" id="afterGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)">
+<section class="detail" id="afterGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)">
 <h3>afterGetText</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">afterGetText</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">afterGetText</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;webElement,
  org.openqa.selenium.WebDriver&nbsp;webDriver,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;s)</span></div>
-<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)">EventListener</a></code></span></div>
+<div class="block"><span class="description-from-type-label">Description copied from interface:&nbsp;<code><a href="EventListener.html#afterGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)">EventListener</a></code></span></div>
 <div class="block">Called  after <code>WebElement.getText()</code> ()}</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterGetText(org.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)">afterGetText</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterGetText(io.fluentlenium.core.domain.FluentWebElement,org.openqa.selenium.WebDriver,java.lang.String)">afterGetText</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>webElement</code> - WebElement</dd>
 <dd><code>webDriver</code> - WebDriver</dd>
@@ -617,7 +617,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  <code>JavascriptExecutor.executeScript(String, Object[])</code></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeScript(java.lang.String,org.openqa.selenium.WebDriver)">beforeScript</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeScript(java.lang.String,org.openqa.selenium.WebDriver)">beforeScript</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>script</code> - the script to be executed</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -636,7 +636,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
  Not called if an exception is thrown</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterScript(java.lang.String,org.openqa.selenium.WebDriver)">afterScript</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterScript(java.lang.String,org.openqa.selenium.WebDriver)">afterScript</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>script</code> - the script that was executed</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -652,7 +652,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called whenever an exception would be thrown.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#onException(java.lang.Throwable,org.openqa.selenium.WebDriver)">onException</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#onException(java.lang.Throwable,org.openqa.selenium.WebDriver)">onException</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>throwable</code> - the exception that will be thrown</dd>
 <dd><code>driver</code> - WebDriver</dd>
@@ -667,7 +667,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  before <code>Alert.accept()</code></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeAlertAccept(org.openqa.selenium.WebDriver)">beforeAlertAccept</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeAlertAccept(org.openqa.selenium.WebDriver)">beforeAlertAccept</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -681,7 +681,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  after <code>Alert.accept()</code></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterAlertAccept(org.openqa.selenium.WebDriver)">afterAlertAccept</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterAlertAccept(org.openqa.selenium.WebDriver)">afterAlertAccept</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -695,7 +695,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  before <code>Alert.dismiss()</code></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeAlertDismiss(org.openqa.selenium.WebDriver)">beforeAlertDismiss</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeAlertDismiss(org.openqa.selenium.WebDriver)">beforeAlertDismiss</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -709,7 +709,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  after <code>Alert.dismiss()</code></div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterAlertDismiss(org.openqa.selenium.WebDriver)">afterAlertDismiss</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterAlertDismiss(org.openqa.selenium.WebDriver)">afterAlertDismiss</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>driver</code> - WebDriver</dd>
 </dl>
@@ -724,7 +724,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  before <code>WebDriver.switchTo()</code> ()}</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeSwitchToWindow(java.lang.String,org.openqa.selenium.WebDriver)">beforeSwitchToWindow</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeSwitchToWindow(java.lang.String,org.openqa.selenium.WebDriver)">beforeSwitchToWindow</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>s</code> - String</dd>
 <dd><code>webDriver</code> - WebDriver</dd>
@@ -740,7 +740,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  after <code>WebDriver.switchTo()</code> ()}</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterSwitchToWindow(java.lang.String,org.openqa.selenium.WebDriver)">afterSwitchToWindow</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterSwitchToWindow(java.lang.String,org.openqa.selenium.WebDriver)">afterSwitchToWindow</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>s</code> - String</dd>
 <dd><code>webDriver</code> - WebDriver</dd>
@@ -755,7 +755,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  before <code>TakesScreenshot.getScreenshotAs(OutputType)</code> ()}</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#beforeGetScreenshotAs(org.openqa.selenium.OutputType)">beforeGetScreenshotAs</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#beforeGetScreenshotAs(org.openqa.selenium.OutputType)">beforeGetScreenshotAs</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Type Parameters:</dt>
 <dd><code>X</code> - object</dd>
 <dt>Parameters:</dt>
@@ -772,7 +772,7 @@ implements <a href="EventListener.html" title="interface in org.fluentlenium.cor
 <div class="block">Called  after <code>TakesScreenshot.getScreenshotAs(OutputType)</code> ()}</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="EventListener.html#afterGetScreenshotAs(org.openqa.selenium.OutputType,X)">afterGetScreenshotAs</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in org.fluentlenium.core.events">EventListener</a></code></dd>
+<dd><code><a href="EventListener.html#afterGetScreenshotAs(org.openqa.selenium.OutputType,X)">afterGetScreenshotAs</a></code>&nbsp;in interface&nbsp;<code><a href="EventListener.html" title="interface in io.fluentlenium.core.events">EventListener</a></code></dd>
 <dt>Type Parameters:</dt>
 <dd><code>X</code> - object</dd>
 <dt>Parameters:</dt>

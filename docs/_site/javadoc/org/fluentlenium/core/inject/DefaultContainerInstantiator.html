@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.inject</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.inject</a></div>
 <h2 title="Class DefaultContainerInstantiator" class="title">Class DefaultContainerInstantiator</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.inject.DefaultContainerInstantiator</li>
+<li>io.fluentlenium.core.inject.DefaultContainerInstantiator</li>
 </ul>
 </li>
 </ul>
@@ -134,12 +134,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="ContainerInstantiator.html" title="interface in org.fluentlenium.core.inject">ContainerInstantiator</a></code></dd>
+<dd><code><a href="ContainerInstantiator.html" title="interface in io.fluentlenium.core.inject">ContainerInstantiator</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">DefaultContainerInstantiator</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="ContainerInstantiator.html" title="interface in org.fluentlenium.core.inject">ContainerInstantiator</a></pre>
+implements <a href="ContainerInstantiator.html" title="interface in io.fluentlenium.core.inject">ContainerInstantiator</a></pre>
 <div class="block">Creates container instances</div>
 </li>
 </ul>
@@ -161,7 +161,7 @@ implements <a href="ContainerInstantiator.html" title="interface in org.fluentle
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.fluentlenium.core.FluentControl)">DefaultContainerInstantiator</a></span>&#8203;(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(io.fluentlenium.core.FluentControl)">DefaultContainerInstantiator</a></span>&#8203;(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control)</code></th>
 <td class="colLast">
 <div class="block">Creates a new container instantiator</div>
 </td>
@@ -186,8 +186,8 @@ implements <a href="ContainerInstantiator.html" title="interface in org.fluentle
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newInstance(java.lang.Class,org.fluentlenium.core.inject.ContainerContext)">newInstance</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;T&gt;&nbsp;cls,
-           <a href="ContainerContext.html" title="interface in org.fluentlenium.core.inject">ContainerContext</a>&nbsp;context)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newInstance(java.lang.Class,io.fluentlenium.core.inject.ContainerContext)">newInstance</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;T&gt;&nbsp;cls,
+           <a href="ContainerContext.html" title="interface in io.fluentlenium.core.inject">ContainerContext</a>&nbsp;context)</code></th>
 <td class="colLast">
 <div class="block">Creates a new instance of a container class and inject it.</div>
 </td>
@@ -216,13 +216,13 @@ implements <a href="ContainerInstantiator.html" title="interface in org.fluentle
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.fluentlenium.core.FluentControl)">
+<a id="&lt;init&gt;(io.fluentlenium.core.FluentControl)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>DefaultContainerInstantiator</h4>
-<pre>public&nbsp;DefaultContainerInstantiator&#8203;(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control)</pre>
+<pre>public&nbsp;DefaultContainerInstantiator&#8203;(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control)</pre>
 <div class="block">Creates a new container instantiator</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -240,19 +240,19 @@ implements <a href="ContainerInstantiator.html" title="interface in org.fluentle
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a id="newInstance(java.lang.Class,org.fluentlenium.core.inject.ContainerContext)">
+<a id="newInstance(java.lang.Class,io.fluentlenium.core.inject.ContainerContext)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>newInstance</h4>
 <pre class="methodSignature">public&nbsp;&lt;T&gt;&nbsp;T&nbsp;newInstance&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;T&gt;&nbsp;cls,
-                         <a href="ContainerContext.html" title="interface in org.fluentlenium.core.inject">ContainerContext</a>&nbsp;context)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="ContainerInstantiator.html#newInstance(java.lang.Class,org.fluentlenium.core.inject.ContainerContext)">ContainerInstantiator</a></code></span></div>
+                         <a href="ContainerContext.html" title="interface in io.fluentlenium.core.inject">ContainerContext</a>&nbsp;context)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="ContainerInstantiator.html#newInstance(java.lang.Class,io.fluentlenium.core.inject.ContainerContext)">ContainerInstantiator</a></code></span></div>
 <div class="block">Creates a new instance of a container class and inject it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="ContainerInstantiator.html#newInstance(java.lang.Class,org.fluentlenium.core.inject.ContainerContext)">newInstance</a></code>&nbsp;in interface&nbsp;<code><a href="ContainerInstantiator.html" title="interface in org.fluentlenium.core.inject">ContainerInstantiator</a></code></dd>
+<dd><code><a href="ContainerInstantiator.html#newInstance(java.lang.Class,io.fluentlenium.core.inject.ContainerContext)">newInstance</a></code>&nbsp;in interface&nbsp;<code><a href="ContainerInstantiator.html" title="interface in io.fluentlenium.core.inject">ContainerInstantiator</a></code></dd>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - type of the container</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>

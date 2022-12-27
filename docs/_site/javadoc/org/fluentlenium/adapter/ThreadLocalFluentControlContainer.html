@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.adapter</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.adapter</a></div>
 <h2 title="Class ThreadLocalFluentControlContainer" class="title">Class ThreadLocalFluentControlContainer</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.adapter.ThreadLocalFluentControlContainer</li>
+<li>io.fluentlenium.adapter.ThreadLocalFluentControlContainer</li>
 </ul>
 </li>
 </ul>
@@ -134,14 +134,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="FluentControlContainer.html" title="interface in org.fluentlenium.adapter">FluentControlContainer</a></code>, <code><a href="../core/FluentControlProvider.html" title="interface in org.fluentlenium.core">FluentControlProvider</a></code></dd>
+<dd><code><a href="FluentControlContainer.html" title="interface in io.fluentlenium.adapter">FluentControlContainer</a></code>, <code><a href="../core/FluentControlProvider.html" title="interface in io.fluentlenium.core">FluentControlProvider</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">ThreadLocalFluentControlContainer</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="FluentControlContainer.html" title="interface in org.fluentlenium.adapter">FluentControlContainer</a></pre>
-<div class="block">Alternative <a href="FluentControlContainer.html" title="interface in org.fluentlenium.adapter"><code>FluentControlContainer</code></a> implementation, using a ThreadLocal variable to store the
- <a href="../core/FluentDriver.html" title="class in org.fluentlenium.core"><code>FluentDriver</code></a> instance.</div>
+implements <a href="FluentControlContainer.html" title="interface in io.fluentlenium.adapter">FluentControlContainer</a></pre>
+<div class="block">Alternative <a href="FluentControlContainer.html" title="interface in io.fluentlenium.adapter"><code>FluentControlContainer</code></a> implementation, using a ThreadLocal variable to store the
+ <a href="../core/FluentDriver.html" title="class in io.fluentlenium.core"><code>FluentDriver</code></a> instance.</div>
 </li>
 </ul>
 </div>
@@ -184,13 +184,13 @@ implements <a href="FluentControlContainer.html" title="interface in org.fluentl
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../core/FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a></code></td>
+<td class="colFirst"><code><a href="../core/FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getFluentControl()">getFluentControl</a></span>()</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFluentControl(org.fluentlenium.core.FluentControl)">setFluentControl</a></span>&#8203;(<a href="../core/FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;fluentControl)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#setFluentControl(io.fluentlenium.core.FluentControl)">setFluentControl</a></span>&#8203;(<a href="../core/FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;fluentControl)</code></th>
 <td class="colLast">
 <div class="block">Set the FluentControl for actual test.</div>
 </td>
@@ -244,27 +244,27 @@ implements <a href="FluentControlContainer.html" title="interface in org.fluentl
 <ul class="blockList">
 <li class="blockList">
 <h4>getFluentControl</h4>
-<pre class="methodSignature">public&nbsp;<a href="../core/FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;getFluentControl()</pre>
+<pre class="methodSignature">public&nbsp;<a href="../core/FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;getFluentControl()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../core/FluentControlProvider.html#getFluentControl()">getFluentControl</a></code>&nbsp;in interface&nbsp;<code><a href="../core/FluentControlProvider.html" title="interface in org.fluentlenium.core">FluentControlProvider</a></code></dd>
+<dd><code><a href="../core/FluentControlProvider.html#getFluentControl()">getFluentControl</a></code>&nbsp;in interface&nbsp;<code><a href="../core/FluentControlProvider.html" title="interface in io.fluentlenium.core">FluentControlProvider</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>FluentControl for actual test.</dd>
 </dl>
 </li>
 </ul>
-<a id="setFluentControl(org.fluentlenium.core.FluentControl)">
+<a id="setFluentControl(io.fluentlenium.core.FluentControl)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>setFluentControl</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;setFluentControl&#8203;(<a href="../core/FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;fluentControl)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentControlContainer.html#setFluentControl(org.fluentlenium.core.FluentControl)">FluentControlContainer</a></code></span></div>
+<pre class="methodSignature">public&nbsp;void&nbsp;setFluentControl&#8203;(<a href="../core/FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;fluentControl)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentControlContainer.html#setFluentControl(io.fluentlenium.core.FluentControl)">FluentControlContainer</a></code></span></div>
 <div class="block">Set the FluentControl for actual test.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentControlContainer.html#setFluentControl(org.fluentlenium.core.FluentControl)">setFluentControl</a></code>&nbsp;in interface&nbsp;<code><a href="FluentControlContainer.html" title="interface in org.fluentlenium.adapter">FluentControlContainer</a></code></dd>
+<dd><code><a href="FluentControlContainer.html#setFluentControl(io.fluentlenium.core.FluentControl)">setFluentControl</a></code>&nbsp;in interface&nbsp;<code><a href="FluentControlContainer.html" title="interface in io.fluentlenium.adapter">FluentControlContainer</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>fluentControl</code> - FluentControl intialized for actual test.</dd>
 </dl>

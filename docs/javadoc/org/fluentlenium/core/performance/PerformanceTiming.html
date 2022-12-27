@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.performance, interface: PerformanceTiming">
+<meta name="description" content="declaration: package: io.fluentlenium.core.performance, interface: PerformanceTiming">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,13 +89,13 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.performance</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.performance</a></div>
 <h1 title="Interface PerformanceTiming" class="title">Interface PerformanceTiming</h1>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="DefaultPerformanceTiming.html" title="class in org.fluentlenium.core.performance">DefaultPerformanceTiming</a></code></dd>
+<dd><code><a href="DefaultPerformanceTiming.html" title="class in io.fluentlenium.core.performance">DefaultPerformanceTiming</a></code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">PerformanceTiming</span></div>
@@ -106,7 +106,7 @@ loadScripts(document, 'script');</script>
  <code>window.performance.timing.&lt;attribute&gt;</code>.
  <p>
  To query the entire timing object in one Javascript query, you can call <a href="#getMetrics()"><code>getMetrics()</code></a> which returns
- a <a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> object wrapping the timing metrics.
+ a <a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> object wrapping the timing metrics.
  <p>
  Though the default implementation in FluentLenium returns relative values, this interface is flexible enough
  so that custom implementations may be created.</div>
@@ -227,21 +227,21 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the value that corresponds to the <code>fetchStart</code> event, converted to the given time unit.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>long</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getEventValue(org.fluentlenium.core.performance.PerformanceTimingEvent)" class="member-name-link">getEventValue</a><wbr>(<a href="PerformanceTimingEvent.html" title="enum class in org.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getEventValue(io.fluentlenium.core.performance.PerformanceTimingEvent)" class="member-name-link">getEventValue</a><wbr>(<a href="PerformanceTimingEvent.html" title="enum class in io.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Returns the value for the argument event type.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default long</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getEventValue(org.fluentlenium.core.performance.PerformanceTimingEvent,java.util.concurrent.TimeUnit)" class="member-name-link">getEventValue</a><wbr>(<a href="PerformanceTimingEvent.html" title="enum class in org.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#getEventValue(io.fluentlenium.core.performance.PerformanceTimingEvent,java.util.concurrent.TimeUnit)" class="member-name-link">getEventValue</a><wbr>(<a href="PerformanceTimingEvent.html" title="enum class in io.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;timeUnit)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5">
 <div class="block">Returns the value for the argument event type converted to the given time unit.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getMetrics()" class="member-name-link">getMetrics</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">Return all timing metrics, in particular the <code>window.performance.timing</code> object wrapped in a
- <a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> object.</div>
+ <a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> object.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code>default long</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab5"><code><a href="#loadEventEnd()" class="member-name-link">loadEventEnd</a>()</code></div>
@@ -874,9 +874,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getEventValue(org.fluentlenium.core.performance.PerformanceTimingEvent)">
+<section class="detail" id="getEventValue(io.fluentlenium.core.performance.PerformanceTimingEvent)">
 <h3>getEventValue</h3>
-<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">getEventValue</span><wbr><span class="parameters">(<a href="PerformanceTimingEvent.html" title="enum class in org.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event)</span></div>
+<div class="member-signature"><span class="return-type">long</span>&nbsp;<span class="element-name">getEventValue</span><wbr><span class="parameters">(<a href="PerformanceTimingEvent.html" title="enum class in io.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event)</span></div>
 <div class="block">Returns the value for the argument event type.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -887,9 +887,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getEventValue(org.fluentlenium.core.performance.PerformanceTimingEvent,java.util.concurrent.TimeUnit)">
+<section class="detail" id="getEventValue(io.fluentlenium.core.performance.PerformanceTimingEvent,java.util.concurrent.TimeUnit)">
 <h3>getEventValue</h3>
-<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getEventValue</span><wbr><span class="parameters">(<a href="PerformanceTimingEvent.html" title="enum class in org.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event,
+<div class="member-signature"><span class="modifiers">default</span>&nbsp;<span class="return-type">long</span>&nbsp;<span class="element-name">getEventValue</span><wbr><span class="parameters">(<a href="PerformanceTimingEvent.html" title="enum class in io.fluentlenium.core.performance">PerformanceTimingEvent</a>&nbsp;event,
  <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/util/concurrent/TimeUnit.html" title="class or interface in java.util.concurrent" class="external-link">TimeUnit</a>&nbsp;timeUnit)</span></div>
 <div class="block">Returns the value for the argument event type converted to the given time unit.</div>
 <dl class="notes">
@@ -904,9 +904,9 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getMetrics()">
 <h3>getMetrics</h3>
-<div class="member-signature"><span class="return-type"><a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance">PerformanceTimingMetrics</a></span>&nbsp;<span class="element-name">getMetrics</span>()</div>
+<div class="member-signature"><span class="return-type"><a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance">PerformanceTimingMetrics</a></span>&nbsp;<span class="element-name">getMetrics</span>()</div>
 <div class="block">Return all timing metrics, in particular the <code>window.performance.timing</code> object wrapped in a
- <a href="PerformanceTimingMetrics.html" title="interface in org.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> object.</div>
+ <a href="PerformanceTimingMetrics.html" title="interface in io.fluentlenium.core.performance"><code>PerformanceTimingMetrics</code></a> object.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the performance timing metrics</dd>

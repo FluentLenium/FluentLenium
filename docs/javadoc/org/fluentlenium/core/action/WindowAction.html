@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="dc.created" content="2022-12-23">
-<meta name="description" content="declaration: package: org.fluentlenium.core.action, class: WindowAction">
+<meta name="description" content="declaration: package: io.fluentlenium.core.action, class: WindowAction">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -89,11 +89,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.action</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.action</a></div>
 <h1 title="Class WindowAction" class="title">Class WindowAction</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">org.fluentlenium.core.action.WindowAction</div>
+<div class="inheritance">io.fluentlenium.core.action.WindowAction</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
@@ -111,8 +111,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(org.fluentlenium.core.FluentControl,org.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver)" class="member-name-link">WindowAction</a><wbr>(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control,
- <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.fluentlenium.core.FluentControl,io.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver)" class="member-name-link">WindowAction</a><wbr>(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control,
+ <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
  org.openqa.selenium.WebDriver&nbsp;driver)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates a new window action.</div>
@@ -132,13 +132,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clickAndCloseCurrent(org.fluentlenium.core.domain.FluentWebElement)" class="member-name-link">clickAndCloseCurrent</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clickAndCloseCurrent(io.fluentlenium.core.domain.FluentWebElement)" class="member-name-link">clickAndCloseCurrent</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Clicks button, which closes current window and switches to last window (in set returned by
  <code>WebDriver.getWindowHandles()</code>).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clickAndOpenNew(org.fluentlenium.core.domain.FluentWebElement)" class="member-name-link">clickAndOpenNew</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#clickAndOpenNew(io.fluentlenium.core.domain.FluentWebElement)" class="member-name-link">clickAndOpenNew</a><wbr>(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Clicks button, which opens new window and switches to newly opened window.</div>
 </div>
@@ -147,7 +147,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Close the current window.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#fullscreen()" class="member-name-link">fullscreen</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">FullScreen the current window.</div>
@@ -167,7 +167,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Gets the current window object.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#maximize()" class="member-name-link">maximize</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Maximize the current window.</div>
@@ -177,32 +177,32 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Opens new window.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPosition(org.openqa.selenium.Point)" class="member-name-link">setPosition</a><wbr>(org.openqa.selenium.Point&nbsp;position)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the current window position.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSize(org.openqa.selenium.Dimension)" class="member-name-link">setSize</a><wbr>(org.openqa.selenium.Dimension&nbsp;size)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the current window size.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../switchto/FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../switchto/FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#switchTo()" class="member-name-link">switchTo</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Create a switch target locator.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#switchTo(java.lang.String)" class="member-name-link">switchTo</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameOrHandle)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Switches to particular window by handle.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#switchToLast()" class="member-name-link">switchToLast</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Switches to lastly opened window.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#switchToLast(java.lang.String)" class="member-name-link">switchToLast</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameOrHandleToExclude)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Switches to lastly opened window excluding the one provided as a parameter.</div>
@@ -230,10 +230,10 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(org.fluentlenium.core.FluentControl,org.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver)">
+<section class="detail" id="&lt;init&gt;(io.fluentlenium.core.FluentControl,io.fluentlenium.core.components.ComponentInstantiator,org.openqa.selenium.WebDriver)">
 <h3>WindowAction</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">WindowAction</span><wbr><span class="parameters">(<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&nbsp;control,
- <a href="../components/ComponentInstantiator.html" title="interface in org.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">WindowAction</span><wbr><span class="parameters">(<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&nbsp;control,
+ <a href="../components/ComponentInstantiator.html" title="interface in io.fluentlenium.core.components">ComponentInstantiator</a>&nbsp;instantiator,
  org.openqa.selenium.WebDriver&nbsp;driver)</span></div>
 <div class="block">Creates a new window action.</div>
 <dl class="notes">
@@ -266,7 +266,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="maximize()">
 <h3>maximize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">maximize</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">maximize</span>()</div>
 <div class="block">Maximize the current window.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -277,7 +277,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="fullscreen()">
 <h3>fullscreen</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">fullscreen</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">fullscreen</span>()</div>
 <div class="block">FullScreen the current window.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -288,7 +288,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="setSize(org.openqa.selenium.Dimension)">
 <h3>setSize</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">setSize</span><wbr><span class="parameters">(org.openqa.selenium.Dimension&nbsp;size)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">setSize</span><wbr><span class="parameters">(org.openqa.selenium.Dimension&nbsp;size)</span></div>
 <div class="block">Sets the current window size.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -312,7 +312,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="setPosition(org.openqa.selenium.Point)">
 <h3>setPosition</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">setPosition</span><wbr><span class="parameters">(org.openqa.selenium.Point&nbsp;position)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">setPosition</span><wbr><span class="parameters">(org.openqa.selenium.Point&nbsp;position)</span></div>
 <div class="block">Sets the current window position.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -334,9 +334,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="clickAndOpenNew(org.fluentlenium.core.domain.FluentWebElement)">
+<section class="detail" id="clickAndOpenNew(io.fluentlenium.core.domain.FluentWebElement)">
 <h3>clickAndOpenNew</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">clickAndOpenNew</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">clickAndOpenNew</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</span></div>
 <div class="block">Clicks button, which opens new window and switches to newly opened window.
  <p>
  This method doesn't force opening window in new window, we assume the code under test will open new window.</div>
@@ -360,9 +360,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="clickAndCloseCurrent(org.fluentlenium.core.domain.FluentWebElement)">
+<section class="detail" id="clickAndCloseCurrent(io.fluentlenium.core.domain.FluentWebElement)">
 <h3>clickAndCloseCurrent</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clickAndCloseCurrent</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">clickAndCloseCurrent</span><wbr><span class="parameters">(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;button)</span></div>
 <div class="block">Clicks button, which closes current window and switches to last window (in set returned by
  <code>WebDriver.getWindowHandles()</code>).
  <p>
@@ -384,7 +384,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="switchTo()">
 <h3>switchTo</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../switchto/FluentTargetLocator.html" title="interface in org.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a>&gt;</span>&nbsp;<span class="element-name">switchTo</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../switchto/FluentTargetLocator.html" title="interface in io.fluentlenium.core.switchto">FluentTargetLocator</a>&lt;<a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a>&gt;</span>&nbsp;<span class="element-name">switchTo</span>()</div>
 <div class="block">Create a switch target locator.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -395,7 +395,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="switchToLast()">
 <h3>switchToLast</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">switchToLast</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">switchToLast</span>()</div>
 <div class="block">Switches to lastly opened window.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -406,7 +406,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="switchToLast(java.lang.String)">
 <h3>switchToLast</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">switchToLast</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameOrHandleToExclude)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">switchToLast</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameOrHandleToExclude)</span></div>
 <div class="block">Switches to lastly opened window excluding the one provided as a parameter.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -419,7 +419,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="switchTo(java.lang.String)">
 <h3>switchTo</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in org.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">switchTo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameOrHandle)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="WindowAction.html" title="class in io.fluentlenium.core.action">WindowAction</a></span>&nbsp;<span class="element-name">switchTo</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;nameOrHandle)</span></div>
 <div class="block">Switches to particular window by handle.</div>
 <dl class="notes">
 <dt>Parameters:</dt>

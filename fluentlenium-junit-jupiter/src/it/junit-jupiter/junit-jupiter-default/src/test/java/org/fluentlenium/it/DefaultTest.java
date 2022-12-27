@@ -1,9 +1,9 @@
-package org.fluentlenium.it;
+package io.fluentlenium.it;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.fluentlenium.adapter.junit.jupiter.FluentTest;
+import io.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

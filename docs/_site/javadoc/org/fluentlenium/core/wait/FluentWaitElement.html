@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.wait</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.wait</a></div>
 <h2 title="Class FluentWaitElement" class="title">Class FluentWaitElement</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.wait.FluentWaitElement</li>
+<li>io.fluentlenium.core.wait.FluentWaitElement</li>
 </ul>
 </li>
 </ul>
@@ -134,12 +134,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code>, <code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code>, <code><a href="FluentWaitFunctional.html" title="interface in org.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;</code>, <code>org.openqa.selenium.support.ui.Wait&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code>, <code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code>, <code><a href="FluentWaitFunctional.html" title="interface in io.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;</code>, <code>org.openqa.selenium.support.ui.Wait&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;</code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">FluentWaitElement</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;, <a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;, <a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</pre>
+implements <a href="FluentWaitFunctional.html" title="interface in io.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;, <a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;, <a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</pre>
 <div class="block">A wait object wrapping default selenium <code>FluentWait</code> object into a more
  complete API, allowing to wait for any condition to be verified on an underlying element.</div>
 </li>
@@ -162,8 +162,8 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.fluentlenium.core.wait.FluentWait,org.fluentlenium.core.domain.FluentWebElement)">FluentWaitElement</a></span>&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;controlWait,
-                 <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(io.fluentlenium.core.wait.FluentWait,io.fluentlenium.core.domain.FluentWebElement)">FluentWaitElement</a></span>&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;controlWait,
+                 <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</code></th>
 <td class="colLast">
 <div class="block">Creates a new fluent wait for a given element.</div>
 </td>
@@ -187,14 +187,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#atMost(java.time.Duration)">atMost</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html?is-external=true" title="class or interface in java.time" class="externalLink">Duration</a>&nbsp;duration)</code></th>
 <td class="colLast">
 <div class="block">Configure timeout for this wait object.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#explicitlyFor(long,java.util.concurrent.TimeUnit)">explicitlyFor</a></span>&#8203;(long&nbsp;amount,
              <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/TimeUnit.html?is-external=true" title="class or interface in java.util.concurrent" class="externalLink">TimeUnit</a>&nbsp;timeUnit)</code></th>
 <td class="colLast">
@@ -216,21 +216,21 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ignoreAll(java.util.Collection)">ignoreAll</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Throwable</a>&gt;&gt;&nbsp;types)</code></th>
 <td class="colLast">
 <div class="block">Add given exceptions to ignore list to avoid breaking the wait when they occurs in the underlying condition evaluation.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ignoring(java.lang.Class)">ignoring</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;exceptionType)</code></th>
 <td class="colLast">
 <div class="block">Add given exception to ignore list to avoid breaking the wait when they occurs in the underlying condition evaluation.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#ignoring(java.lang.Class,java.lang.Class)">ignoring</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;firstType,
         <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;secondType)</code></th>
 <td class="colLast">
@@ -238,14 +238,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#pollingEvery(java.time.Duration)">pollingEvery</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html?is-external=true" title="class or interface in java.time" class="externalLink">Duration</a>&nbsp;duration)</code></th>
 <td class="colLast">
 <div class="block">Configure polling time for this wait object.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a></code></td>
+<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until()">until</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for condition on current element.</div>
@@ -253,7 +253,7 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(java.util.function.Function)">until</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;? super <a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>,&#8203;T&gt;&nbsp;function)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(java.util.function.Function)">until</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;? super <a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>,&#8203;T&gt;&nbsp;function)</code></th>
 <td class="colLast">
 <div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
 </td>
@@ -266,84 +266,84 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 </td>
 </tr>
 <tr id="i11" class="rowColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(java.util.List)">until</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(java.util.List)">until</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(org.fluentlenium.core.domain.FluentWebElement)">until</a></span>&#8203;(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(io.fluentlenium.core.domain.FluentWebElement)">until</a></span>&#8203;(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for condition on given element.</div>
 </td>
 </tr>
 <tr id="i13" class="rowColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEach(java.util.List)">untilEach</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEach(java.util.List)">untilEach</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i14" class="altColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEachElements(java.util.function.Supplier)">untilEachElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilEachElements(java.util.function.Supplier)">untilEachElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i15" class="rowColor">
-<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElement(java.util.function.Supplier)">untilElement</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;selector)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElement(java.util.function.Supplier)">untilElement</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;selector)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given element.</div>
 </td>
 </tr>
 <tr id="i16" class="altColor">
-<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElements(java.util.function.Supplier)">untilElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</code></th>
+<td class="colFirst"><code><a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilElements(java.util.function.Supplier)">untilElements</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</code></th>
 <td class="colLast">
 <div class="block">Get a conditions object used to wait for a condition on given elements.</div>
 </td>
 </tr>
 <tr id="i17" class="rowColor">
-<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPage()">untilPage</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Get a condition object used to wait for a page condition.</div>
 </td>
 </tr>
 <tr id="i18" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPage(org.fluentlenium.core.FluentPage)">untilPage</a></span>&#8203;(<a href="../FluentPage.html" title="class in org.fluentlenium.core">FluentPage</a>&nbsp;page)</code></th>
+<td class="colFirst"><code><a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPage(io.fluentlenium.core.FluentPage)">untilPage</a></span>&#8203;(<a href="../FluentPage.html" title="class in io.fluentlenium.core">FluentPage</a>&nbsp;page)</code></th>
 <td class="colLast">
 <div class="block">Get a condition object used to wait for a page condition.</div>
 </td>
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPredicate(java.util.function.Predicate)">untilPredicate</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;&nbsp;predicate)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilPredicate(java.util.function.Predicate)">untilPredicate</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;&nbsp;predicate)</code></th>
 <td class="colLast">
 <div class="block">Wait until the predicate returns true.</div>
 </td>
 </tr>
 <tr id="i20" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitWindowConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitWindowConditions</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitWindowConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitWindowConditions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#untilWindow(java.lang.String)">untilWindow</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;windowName)</code></th>
 <td class="colLast">
 <div class="block">Get a condition object used to wait for a window condition.</div>
 </td>
 </tr>
 <tr id="i21" class="rowColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withMessage(java.util.function.Supplier)">withMessage</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;message)</code></th>
 <td class="colLast">
 <div class="block">Configures a custom message supplier to be used if the condition fails during the timeout duration.</div>
 </td>
 </tr>
 <tr id="i22" class="altColor">
-<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a></code></td>
+<td class="colFirst"><code><a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withNoDefaultsException()">withNoDefaultsException</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Removes default exceptions from exceptions ignore list.</div>
@@ -358,17 +358,17 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <code><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang" class="externalLink">clone</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang" class="externalLink">equals</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang" class="externalLink">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang" class="externalLink">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang" class="externalLink">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang" class="externalLink">notify</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang" class="externalLink">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang" class="externalLink">toString</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang" class="externalLink">wait</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang" class="externalLink">wait</a>, <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true#wait(long,int)" title="class or interface in java.lang" class="externalLink">wait</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.org.fluentlenium.core.wait.FluentWaitConditions">
+<li class="blockList"><a id="methods.inherited.from.class.io.fluentlenium.core.wait.FluentWaitConditions">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;org.fluentlenium.core.wait.<a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a></h3>
+<h3>Methods inherited from interface&nbsp;io.fluentlenium.core.wait.<a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a></h3>
 <code><a href="FluentWaitConditions.html#explicitlyFor(long)">explicitlyFor</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a id="methods.inherited.from.class.org.fluentlenium.core.wait.FluentWaitConfiguration">
+<li class="blockList"><a id="methods.inherited.from.class.io.fluentlenium.core.wait.FluentWaitConfiguration">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;org.fluentlenium.core.wait.<a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a></h3>
+<h3>Methods inherited from interface&nbsp;io.fluentlenium.core.wait.<a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a></h3>
 <code><a href="FluentWaitConfiguration.html#atMost(long)">atMost</a>, <a href="FluentWaitConfiguration.html#atMost(long,java.util.concurrent.TimeUnit)">atMost</a>, <a href="FluentWaitConfiguration.html#pollingEvery(long)">pollingEvery</a>, <a href="FluentWaitConfiguration.html#pollingEvery(long,java.util.concurrent.TimeUnit)">pollingEvery</a>, <a href="FluentWaitConfiguration.html#withMessage(java.lang.String)">withMessage</a></code></li>
 </ul>
 </li>
@@ -387,14 +387,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.fluentlenium.core.wait.FluentWait,org.fluentlenium.core.domain.FluentWebElement)">
+<a id="&lt;init&gt;(io.fluentlenium.core.wait.FluentWait,io.fluentlenium.core.domain.FluentWebElement)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>FluentWaitElement</h4>
-<pre>public&nbsp;FluentWaitElement&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;controlWait,
-                         <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</pre>
+<pre>public&nbsp;FluentWaitElement&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;controlWait,
+                         <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</pre>
 <div class="block">Creates a new fluent wait for a given element.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -419,7 +419,7 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a>&nbsp;until()</pre>
+<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a>&nbsp;until()</pre>
 <div class="block">Get a conditions object used to wait for condition on current element.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -438,7 +438,7 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <div class="block">Get the underlying selenium wait object</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#getWait()">getWait</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#getWait()">getWait</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>selenium wait</dd>
 </dl>
@@ -450,12 +450,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>atMost</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;atMost&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html?is-external=true" title="class or interface in java.time" class="externalLink">Duration</a>&nbsp;duration)</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;atMost&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html?is-external=true" title="class or interface in java.time" class="externalLink">Duration</a>&nbsp;duration)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConfiguration.html#atMost(java.time.Duration)">FluentWaitConfiguration</a></code></span></div>
 <div class="block">Configure timeout for this wait object.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#atMost(java.time.Duration)">atMost</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#atMost(java.time.Duration)">atMost</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>duration</code> - duration</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -469,12 +469,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>pollingEvery</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;pollingEvery&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html?is-external=true" title="class or interface in java.time" class="externalLink">Duration</a>&nbsp;duration)</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;pollingEvery&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html?is-external=true" title="class or interface in java.time" class="externalLink">Duration</a>&nbsp;duration)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConfiguration.html#pollingEvery(java.time.Duration)">FluentWaitConfiguration</a></code></span></div>
 <div class="block">Configure polling time for this wait object.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#pollingEvery(java.time.Duration)">pollingEvery</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#pollingEvery(java.time.Duration)">pollingEvery</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>duration</code> - duration between each condition invocation</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -488,12 +488,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>ignoreAll</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;ignoreAll&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Throwable</a>&gt;&gt;&nbsp;types)</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;ignoreAll&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Collection.html?is-external=true" title="class or interface in java.util" class="externalLink">Collection</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang" class="externalLink">Throwable</a>&gt;&gt;&nbsp;types)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConfiguration.html#ignoreAll(java.util.Collection)">FluentWaitConfiguration</a></code></span></div>
 <div class="block">Add given exceptions to ignore list to avoid breaking the wait when they occurs in the underlying condition evaluation.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#ignoreAll(java.util.Collection)">ignoreAll</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#ignoreAll(java.util.Collection)">ignoreAll</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>types</code> - collection of exception type to ignore</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -507,12 +507,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>ignoring</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;ignoring&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;exceptionType)</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;ignoring&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;exceptionType)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConfiguration.html#ignoring(java.lang.Class)">FluentWaitConfiguration</a></code></span></div>
 <div class="block">Add given exception to ignore list to avoid breaking the wait when they occurs in the underlying condition evaluation.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#ignoring(java.lang.Class)">ignoring</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#ignoring(java.lang.Class)">ignoring</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>exceptionType</code> - exception type to ignore</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -526,13 +526,13 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>ignoring</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;ignoring&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;firstType,
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;ignoring&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;firstType,
                                   <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang" class="externalLink">RuntimeException</a>&gt;&nbsp;secondType)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConfiguration.html#ignoring(java.lang.Class,java.lang.Class)">FluentWaitConfiguration</a></code></span></div>
 <div class="block">Add given exceptions to ignore list to avoid breaking the wait when they occurs in the underlying condition evaluation.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#ignoring(java.lang.Class,java.lang.Class)">ignoring</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#ignoring(java.lang.Class,java.lang.Class)">ignoring</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>firstType</code> - exception type to ignore</dd>
 <dd><code>secondType</code> - exception type to ignore</dd>
@@ -547,12 +547,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>withMessage</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;withMessage&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;message)</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;withMessage&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;message)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConfiguration.html#withMessage(java.util.function.Supplier)">FluentWaitConfiguration</a></code></span></div>
 <div class="block">Configures a custom message supplier to be used if the condition fails during the timeout duration.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#withMessage(java.util.function.Supplier)">withMessage</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#withMessage(java.util.function.Supplier)">withMessage</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>message</code> - failing message</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -571,7 +571,7 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <div class="block">Check if a message is defined.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#hasMessageDefined()">hasMessageDefined</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#hasMessageDefined()">hasMessageDefined</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if this fluent wait use a custom message, false otherwise</dd>
 </dl>
@@ -583,12 +583,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>withNoDefaultsException</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;withNoDefaultsException()</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;withNoDefaultsException()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConfiguration.html#withNoDefaultsException()">FluentWaitConfiguration</a></code></span></div>
 <div class="block">Removes default exceptions from exceptions ignore list.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConfiguration.html#withNoDefaultsException()">withNoDefaultsException</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in org.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConfiguration.html#withNoDefaultsException()">withNoDefaultsException</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConfiguration.html" title="interface in io.fluentlenium.core.wait">FluentWaitConfiguration</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd><code>this</code> object to chain method calls</dd>
 </dl>
@@ -600,12 +600,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>untilPredicate</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;untilPredicate&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;&nbsp;predicate)</pre>
+<pre class="methodSignature">public&nbsp;void&nbsp;untilPredicate&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;&nbsp;predicate)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitFunctional.html#untilPredicate(java.util.function.Predicate)">FluentWaitFunctional</a></code></span></div>
 <div class="block">Wait until the predicate returns true.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitFunctional.html#untilPredicate(java.util.function.Predicate)">untilPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitFunctional.html" title="interface in org.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitFunctional.html#untilPredicate(java.util.function.Predicate)">untilPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitFunctional.html" title="interface in io.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>predicate</code> - predicate condition to wait for</dd>
 </dl>
@@ -622,24 +622,24 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <div class="block">Wait until the supplier returns true.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitFunctional.html#until(java.util.function.Supplier)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitFunctional.html" title="interface in org.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitFunctional.html#until(java.util.function.Supplier)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitFunctional.html" title="interface in io.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>isTrue</code> - supplier condition to wait for.</dd>
 </dl>
 </li>
 </ul>
-<a id="until(org.fluentlenium.core.domain.FluentWebElement)">
+<a id="until(io.fluentlenium.core.domain.FluentWebElement)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a>&nbsp;until&#8203;(<a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#until(org.fluentlenium.core.domain.FluentWebElement)">FluentWaitConditions</a></code></span></div>
+<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a>&nbsp;until&#8203;(<a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&nbsp;element)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#until(io.fluentlenium.core.domain.FluentWebElement)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a conditions object used to wait for condition on given element.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#until(org.fluentlenium.core.domain.FluentWebElement)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#until(io.fluentlenium.core.domain.FluentWebElement)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>element</code> - element to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -653,14 +653,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;until&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;until&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#until(java.util.List)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  At least one element must verify the condition to be verified.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#until(java.util.List)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#until(java.util.List)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>elements</code> - elements to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -674,14 +674,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>untilEach</h4>
-<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEach&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEach&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;elements)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilEach(java.util.List)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  Each element must verify the condition to be verified.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#untilEach(java.util.List)">untilEach</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#untilEach(java.util.List)">untilEach</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>elements</code> - elements to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -695,12 +695,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>untilElement</h4>
-<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentConditions.html" title="interface in org.fluentlenium.core.conditions">FluentConditions</a>&nbsp;untilElement&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;selector)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentConditions.html" title="interface in io.fluentlenium.core.conditions">FluentConditions</a>&nbsp;untilElement&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&nbsp;selector)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilElement(java.util.function.Supplier)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a conditions object used to wait for a condition on given element.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#untilElement(java.util.function.Supplier)">untilElement</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#untilElement(java.util.function.Supplier)">untilElement</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>selector</code> - element to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -714,14 +714,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>untilElements</h4>
-<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilElements(java.util.function.Supplier)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  At least one element must verify the condition to be verified.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#untilElements(java.util.function.Supplier)">untilElements</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#untilElements(java.util.function.Supplier)">untilElements</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>selector</code> - elements to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -735,14 +735,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>untilEachElements</h4>
-<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in org.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEachElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</pre>
+<pre class="methodSignature">public&nbsp;<a href="../conditions/FluentListConditions.html" title="interface in io.fluentlenium.core.conditions">FluentListConditions</a>&nbsp;untilEachElements&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html?is-external=true" title="class or interface in java.util" class="externalLink">List</a>&lt;? extends <a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a>&gt;&gt;&nbsp;selector)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilEachElements(java.util.function.Supplier)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a conditions object used to wait for a condition on given elements.
  <p>
  Each element must verify the condition to be verified.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#untilEachElements(java.util.function.Supplier)">untilEachElements</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#untilEachElements(java.util.function.Supplier)">untilEachElements</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>selector</code> - elements to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -756,12 +756,12 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>untilWindow</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitWindowConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitWindowConditions</a>&nbsp;untilWindow&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;windowName)</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitWindowConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitWindowConditions</a>&nbsp;untilWindow&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;windowName)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilWindow(java.lang.String)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a condition object used to wait for a window condition.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#untilWindow(java.lang.String)">untilWindow</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#untilWindow(java.lang.String)">untilWindow</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>windowName</code> - name of the window to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -775,29 +775,29 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>untilPage</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage()</pre>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilPage()">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a condition object used to wait for a page condition.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#untilPage()">untilPage</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#untilPage()">untilPage</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>page conditions object</dd>
 </dl>
 </li>
 </ul>
-<a id="untilPage(org.fluentlenium.core.FluentPage)">
+<a id="untilPage(io.fluentlenium.core.FluentPage)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>untilPage</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage&#8203;(<a href="../FluentPage.html" title="class in org.fluentlenium.core">FluentPage</a>&nbsp;page)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilPage(org.fluentlenium.core.FluentPage)">FluentWaitConditions</a></code></span></div>
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a>&nbsp;untilPage&#8203;(<a href="../FluentPage.html" title="class in io.fluentlenium.core">FluentPage</a>&nbsp;page)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#untilPage(io.fluentlenium.core.FluentPage)">FluentWaitConditions</a></code></span></div>
 <div class="block">Get a condition object used to wait for a page condition.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#untilPage(org.fluentlenium.core.FluentPage)">untilPage</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#untilPage(io.fluentlenium.core.FluentPage)">untilPage</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>page</code> - page to wait for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -811,7 +811,7 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <ul class="blockList">
 <li class="blockList">
 <h4>explicitlyFor</h4>
-<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;explicitlyFor&#8203;(long&nbsp;amount,
+<pre class="methodSignature">public&nbsp;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&nbsp;explicitlyFor&#8203;(long&nbsp;amount,
                                        <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/TimeUnit.html?is-external=true" title="class or interface in java.util.concurrent" class="externalLink">TimeUnit</a>&nbsp;timeUnit)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="FluentWaitConditions.html#explicitlyFor(long,java.util.concurrent.TimeUnit)">FluentWaitConditions</a></code></span></div>
 <div class="block">Waits unconditionally for an explicit amount of time.
@@ -821,7 +821,7 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
  In most cases you should wait for some condition, e.g. visibility of particular element on the page.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitConditions.html#explicitlyFor(long,java.util.concurrent.TimeUnit)">explicitlyFor</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in org.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in org.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitConditions.html#explicitlyFor(long,java.util.concurrent.TimeUnit)">explicitlyFor</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitConditions.html" title="interface in io.fluentlenium.core.wait">FluentWaitConditions</a>&lt;<a href="FluentWaitElement.html" title="class in io.fluentlenium.core.wait">FluentWaitElement</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>amount</code> - amount of time</dd>
 <dd><code>timeUnit</code> - unit of time</dd>
@@ -837,14 +837,14 @@ implements <a href="FluentWaitFunctional.html" title="interface in org.fluentlen
 <li class="blockList">
 <h4>until</h4>
 <pre class="methodSignature"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang" class="externalLink">@Deprecated</a>
-public&nbsp;&lt;T&gt;&nbsp;T&nbsp;until&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;? super <a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>,&#8203;T&gt;&nbsp;function)</pre>
+public&nbsp;&lt;T&gt;&nbsp;T&nbsp;until&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;? super <a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>,&#8203;T&gt;&nbsp;function)</pre>
 <div class="deprecationBlock"><span class="deprecatedLabel">Deprecated.</span></div>
 <div class="block">Wait until function returns true</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FluentWaitFunctional.html#until(java.util.function.Function)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitFunctional.html" title="interface in org.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;</code></dd>
+<dd><code><a href="FluentWaitFunctional.html#until(java.util.function.Function)">until</a></code>&nbsp;in interface&nbsp;<code><a href="FluentWaitFunctional.html" title="interface in io.fluentlenium.core.wait">FluentWaitFunctional</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>until</code>&nbsp;in interface&nbsp;<code>org.openqa.selenium.support.ui.Wait&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;</code></dd>
+<dd><code>until</code>&nbsp;in interface&nbsp;<code>org.openqa.selenium.support.ui.Wait&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;</code></dd>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - FluentWaitElement</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>

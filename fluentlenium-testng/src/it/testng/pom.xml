@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.fluentlenium.it</groupId>
+    <groupId>io.fluentlenium.it</groupId>
     <artifactId>testng</artifactId>
     <version>testing</version>
     <packaging>pom</packaging>
@@ -24,12 +24,12 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.fluentlenium</groupId>
+                <groupId>io.fluentlenium</groupId>
                 <artifactId>fluentlenium-testng</artifactId>
                 <version>${it.project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.fluentlenium</groupId>
+                <groupId>io.fluentlenium</groupId>
                 <artifactId>fluentlenium-assertj</artifactId>
                 <version>${it.project.version}</version>
             </dependency>
@@ -40,7 +40,7 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.fluentlenium.it</groupId>
+                <groupId>io.fluentlenium.it</groupId>
                 <artifactId>testng-common</artifactId>
                 <version>testing</version>
             </dependency>

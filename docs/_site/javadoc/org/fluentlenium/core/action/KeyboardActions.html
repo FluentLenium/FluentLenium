@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.action</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.action</a></div>
 <h2 title="Class KeyboardActions" class="title">Class KeyboardActions</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.action.KeyboardActions</li>
+<li>io.fluentlenium.core.action.KeyboardActions</li>
 </ul>
 </li>
 </ul>
@@ -197,21 +197,21 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="KeyboardActions.html" title="class in org.fluentlenium.core.action">KeyboardActions</a></code></td>
+<td class="colFirst"><code><a href="KeyboardActions.html" title="class in io.fluentlenium.core.action">KeyboardActions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#keyDown(org.openqa.selenium.Keys)">keyDown</a></span>&#8203;(org.openqa.selenium.Keys&nbsp;theKey)</code></th>
 <td class="colLast">
 <div class="block">Performs a modifier key press.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="KeyboardActions.html" title="class in org.fluentlenium.core.action">KeyboardActions</a></code></td>
+<td class="colFirst"><code><a href="KeyboardActions.html" title="class in io.fluentlenium.core.action">KeyboardActions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#keyUp(org.openqa.selenium.Keys)">keyUp</a></span>&#8203;(org.openqa.selenium.Keys&nbsp;theKey)</code></th>
 <td class="colLast">
 <div class="block">Performs a modifier key release.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="KeyboardActions.html" title="class in org.fluentlenium.core.action">KeyboardActions</a></code></td>
+<td class="colFirst"><code><a href="KeyboardActions.html" title="class in io.fluentlenium.core.action">KeyboardActions</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendKeys(java.lang.CharSequence...)">sendKeys</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/CharSequence.html?is-external=true" title="class or interface in java.lang" class="externalLink">CharSequence</a>...&nbsp;keysToSend)</code></th>
 <td class="colLast">
 <div class="block">Sends keys to the active element.</div>
@@ -304,7 +304,7 @@ public&nbsp;org.openqa.selenium.interactions.Keyboard&nbsp;basic()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>keyDown</h4>
-<pre class="methodSignature">public&nbsp;<a href="KeyboardActions.html" title="class in org.fluentlenium.core.action">KeyboardActions</a>&nbsp;keyDown&#8203;(org.openqa.selenium.Keys&nbsp;theKey)</pre>
+<pre class="methodSignature">public&nbsp;<a href="KeyboardActions.html" title="class in io.fluentlenium.core.action">KeyboardActions</a>&nbsp;keyDown&#8203;(org.openqa.selenium.Keys&nbsp;theKey)</pre>
 <div class="block">Performs a modifier key press. Does not release the modifier key - subsequent interactions
  may assume it's kept pressed.
  Note that the modifier key is <b>never</b> released implicitly - either
@@ -327,7 +327,7 @@ public&nbsp;org.openqa.selenium.interactions.Keyboard&nbsp;basic()</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>keyUp</h4>
-<pre class="methodSignature">public&nbsp;<a href="KeyboardActions.html" title="class in org.fluentlenium.core.action">KeyboardActions</a>&nbsp;keyUp&#8203;(org.openqa.selenium.Keys&nbsp;theKey)</pre>
+<pre class="methodSignature">public&nbsp;<a href="KeyboardActions.html" title="class in io.fluentlenium.core.action">KeyboardActions</a>&nbsp;keyUp&#8203;(org.openqa.selenium.Keys&nbsp;theKey)</pre>
 <div class="block">Performs a modifier key release. Releasing a non-depressed modifier key will yield undefined
  behaviour.</div>
 <dl>
@@ -346,7 +346,7 @@ public&nbsp;org.openqa.selenium.interactions.Keyboard&nbsp;basic()</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>sendKeys</h4>
-<pre class="methodSignature">public&nbsp;<a href="KeyboardActions.html" title="class in org.fluentlenium.core.action">KeyboardActions</a>&nbsp;sendKeys&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/CharSequence.html?is-external=true" title="class or interface in java.lang" class="externalLink">CharSequence</a>...&nbsp;keysToSend)</pre>
+<pre class="methodSignature">public&nbsp;<a href="KeyboardActions.html" title="class in io.fluentlenium.core.action">KeyboardActions</a>&nbsp;sendKeys&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/CharSequence.html?is-external=true" title="class or interface in java.lang" class="externalLink">CharSequence</a>...&nbsp;keysToSend)</pre>
 <div class="block">Sends keys to the active element. This differs from calling
  <code>WebElement.sendKeys(CharSequence...)</code> on the active element in two ways:
  <ul>

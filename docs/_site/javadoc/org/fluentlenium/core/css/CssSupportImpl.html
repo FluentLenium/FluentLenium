@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.css</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.css</a></div>
 <h2 title="Class CssSupportImpl" class="title">Class CssSupportImpl</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.css.CssSupportImpl</li>
+<li>io.fluentlenium.core.css.CssSupportImpl</li>
 </ul>
 </li>
 </ul>
@@ -134,12 +134,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="CssSupport.html" title="interface in org.fluentlenium.core.css">CssSupport</a></code></dd>
+<dd><code><a href="CssSupport.html" title="interface in io.fluentlenium.core.css">CssSupport</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">CssSupportImpl</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="CssSupport.html" title="interface in org.fluentlenium.core.css">CssSupport</a></pre>
+implements <a href="CssSupport.html" title="interface in io.fluentlenium.core.css">CssSupport</a></pre>
 <div class="block">Features related to CSS loaded in the active page.
  <p>
  There is a retry logic trying to inject the CSS, using an underlying <code>JavascriptExecutor</code>,
@@ -169,8 +169,8 @@ implements <a href="CssSupport.html" title="interface in org.fluentlenium.core.c
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr class="altColor">
-<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(org.fluentlenium.core.script.JavascriptControl,org.fluentlenium.core.wait.AwaitControl)">CssSupportImpl</a></span>&#8203;(<a href="../script/JavascriptControl.html" title="interface in org.fluentlenium.core.script">JavascriptControl</a>&nbsp;javascriptControl,
-              <a href="../wait/AwaitControl.html" title="interface in org.fluentlenium.core.wait">AwaitControl</a>&nbsp;awaitControl)</code></th>
+<th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(io.fluentlenium.core.script.JavascriptControl,io.fluentlenium.core.wait.AwaitControl)">CssSupportImpl</a></span>&#8203;(<a href="../script/JavascriptControl.html" title="interface in io.fluentlenium.core.script">JavascriptControl</a>&nbsp;javascriptControl,
+              <a href="../wait/AwaitControl.html" title="interface in io.fluentlenium.core.wait">AwaitControl</a>&nbsp;awaitControl)</code></th>
 <td class="colLast">
 <div class="block">Creates a new implementation of css support.</div>
 </td>
@@ -231,14 +231,14 @@ implements <a href="CssSupport.html" title="interface in org.fluentlenium.core.c
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a id="&lt;init&gt;(org.fluentlenium.core.script.JavascriptControl,org.fluentlenium.core.wait.AwaitControl)">
+<a id="&lt;init&gt;(io.fluentlenium.core.script.JavascriptControl,io.fluentlenium.core.wait.AwaitControl)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CssSupportImpl</h4>
-<pre>public&nbsp;CssSupportImpl&#8203;(<a href="../script/JavascriptControl.html" title="interface in org.fluentlenium.core.script">JavascriptControl</a>&nbsp;javascriptControl,
-                      <a href="../wait/AwaitControl.html" title="interface in org.fluentlenium.core.wait">AwaitControl</a>&nbsp;awaitControl)</pre>
+<pre>public&nbsp;CssSupportImpl&#8203;(<a href="../script/JavascriptControl.html" title="interface in io.fluentlenium.core.script">JavascriptControl</a>&nbsp;javascriptControl,
+                      <a href="../wait/AwaitControl.html" title="interface in io.fluentlenium.core.wait">AwaitControl</a>&nbsp;awaitControl)</pre>
 <div class="block">Creates a new implementation of css support.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -279,7 +279,7 @@ implements <a href="CssSupport.html" title="interface in org.fluentlenium.core.c
  </pre></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="CssSupport.html#inject(java.lang.String)">inject</a></code>&nbsp;in interface&nbsp;<code><a href="CssSupport.html" title="interface in org.fluentlenium.core.css">CssSupport</a></code></dd>
+<dd><code><a href="CssSupport.html#inject(java.lang.String)">inject</a></code>&nbsp;in interface&nbsp;<code><a href="CssSupport.html" title="interface in io.fluentlenium.core.css">CssSupport</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>cssText</code> - css source to inject</dd>
 </dl>
@@ -306,7 +306,7 @@ implements <a href="CssSupport.html" title="interface in org.fluentlenium.core.c
  rather it injects the content of the resource itself.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="CssSupport.html#injectResource(java.lang.String)">injectResource</a></code>&nbsp;in interface&nbsp;<code><a href="CssSupport.html" title="interface in org.fluentlenium.core.css">CssSupport</a></code></dd>
+<dd><code><a href="CssSupport.html#injectResource(java.lang.String)">injectResource</a></code>&nbsp;in interface&nbsp;<code><a href="CssSupport.html" title="interface in io.fluentlenium.core.css">CssSupport</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>cssResourceName</code> - css classpath resource to inject</dd>
 </dl>

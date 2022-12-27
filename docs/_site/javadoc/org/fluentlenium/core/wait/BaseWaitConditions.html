@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.wait</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.wait</a></div>
 <h2 title="Class BaseWaitConditions" class="title">Class BaseWaitConditions</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.core.wait.BaseWaitConditions</li>
+<li>io.fluentlenium.core.wait.BaseWaitConditions</li>
 </ul>
 </li>
 </ul>
@@ -134,7 +134,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><code><a href="FluentWaitPageConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitPageConditions</a></code>, <code><a href="FluentWaitWindowConditions.html" title="class in org.fluentlenium.core.wait">FluentWaitWindowConditions</a></code></dd>
+<dd><code><a href="FluentWaitPageConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitPageConditions</a></code>, <code><a href="FluentWaitWindowConditions.html" title="class in io.fluentlenium.core.wait">FluentWaitWindowConditions</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">BaseWaitConditions</span>
@@ -190,8 +190,8 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(org.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.lang.String)">until</a></span>&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
-     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(io.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.lang.String)">until</a></span>&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
+     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
      <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;message)</code></th>
 <td class="colLast">
 <div class="block">Perform the wait.</div>
@@ -199,16 +199,16 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(org.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.util.function.Supplier)">until</a></span>&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
-     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(io.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.util.function.Supplier)">until</a></span>&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
+     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
      <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;messageSupplier)</code></th>
 <td class="colLast">
 <div class="block">Perform the wait.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>protected &lt;T extends <a href="../conditions/Conditions.html" title="interface in org.fluentlenium.core.conditions">Conditions</a>&lt;?&gt;&gt;<br>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(org.fluentlenium.core.wait.FluentWait,T,T,java.util.function.Function)">until</a></span>&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
+<td class="colFirst"><code>protected &lt;T extends <a href="../conditions/Conditions.html" title="interface in io.fluentlenium.core.conditions">Conditions</a>&lt;?&gt;&gt;<br>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#until(io.fluentlenium.core.wait.FluentWait,T,T,java.util.function.Function)">until</a></span>&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
      T&nbsp;condition,
      T&nbsp;messageBuilder,
      <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;T,&#8203;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;conditionFunction)</code></th>
@@ -273,14 +273,14 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 </dl>
 </li>
 </ul>
-<a id="until(org.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.lang.String)">
+<a id="until(io.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;until&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
-                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
+<pre class="methodSignature">protected&nbsp;void&nbsp;until&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
+                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
                      <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&nbsp;message)</pre>
 <div class="block">Perform the wait.</div>
 <dl>
@@ -291,14 +291,14 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 </dl>
 </li>
 </ul>
-<a id="until(org.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.util.function.Supplier)">
+<a id="until(io.fluentlenium.core.wait.FluentWait,java.util.function.Predicate,java.util.function.Supplier)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature">protected&nbsp;void&nbsp;until&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
-                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in org.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
+<pre class="methodSignature">protected&nbsp;void&nbsp;until&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
+                     <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Predicate.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Predicate</a>&lt;<a href="../FluentControl.html" title="interface in io.fluentlenium.core">FluentControl</a>&gt;&nbsp;present,
                      <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Supplier.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Supplier</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html?is-external=true" title="class or interface in java.lang" class="externalLink">String</a>&gt;&nbsp;messageSupplier)</pre>
 <div class="block">Perform the wait.</div>
 <dl>
@@ -309,15 +309,15 @@ extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/ja
 </dl>
 </li>
 </ul>
-<a id="until(org.fluentlenium.core.wait.FluentWait,org.fluentlenium.core.conditions.Conditions,org.fluentlenium.core.conditions.Conditions,java.util.function.Function)">
+<a id="until(io.fluentlenium.core.wait.FluentWait,io.fluentlenium.core.conditions.Conditions,io.fluentlenium.core.conditions.Conditions,java.util.function.Function)">
 <!--   -->
-</a><a id="until(org.fluentlenium.core.wait.FluentWait,T,T,java.util.function.Function)">
+</a><a id="until(io.fluentlenium.core.wait.FluentWait,T,T,java.util.function.Function)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>until</h4>
-<pre class="methodSignature">protected&nbsp;&lt;T extends <a href="../conditions/Conditions.html" title="interface in org.fluentlenium.core.conditions">Conditions</a>&lt;?&gt;&gt;&nbsp;void&nbsp;until&#8203;(<a href="FluentWait.html" title="class in org.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
+<pre class="methodSignature">protected&nbsp;&lt;T extends <a href="../conditions/Conditions.html" title="interface in io.fluentlenium.core.conditions">Conditions</a>&lt;?&gt;&gt;&nbsp;void&nbsp;until&#8203;(<a href="FluentWait.html" title="class in io.fluentlenium.core.wait">FluentWait</a>&nbsp;wait,
                                                T&nbsp;condition,
                                                T&nbsp;messageBuilder,
                                                <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;T,&#8203;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Boolean.html?is-external=true" title="class or interface in java.lang" class="externalLink">Boolean</a>&gt;&nbsp;conditionFunction)</pre>

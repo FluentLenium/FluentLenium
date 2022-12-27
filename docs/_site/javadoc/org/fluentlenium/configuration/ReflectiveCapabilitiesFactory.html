@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.configuration</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.configuration</a></div>
 <h2 title="Class ReflectiveCapabilitiesFactory" class="title">Class ReflectiveCapabilitiesFactory</h2>
 </div>
 <div class="contentContainer">
@@ -125,7 +125,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
-<li>org.fluentlenium.configuration.ReflectiveCapabilitiesFactory</li>
+<li>io.fluentlenium.configuration.ReflectiveCapabilitiesFactory</li>
 </ul>
 </li>
 </ul>
@@ -134,13 +134,13 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="CapabilitiesFactory.html" title="interface in org.fluentlenium.configuration">CapabilitiesFactory</a></code>, <code><a href="Factory.html" title="interface in org.fluentlenium.configuration">Factory</a></code>, <code><a href="FactoryNames.html" title="interface in org.fluentlenium.configuration">FactoryNames</a></code>, <code><a href="ReflectiveFactory.html" title="interface in org.fluentlenium.configuration">ReflectiveFactory</a></code></dd>
+<dd><code><a href="CapabilitiesFactory.html" title="interface in io.fluentlenium.configuration">CapabilitiesFactory</a></code>, <code><a href="Factory.html" title="interface in io.fluentlenium.configuration">Factory</a></code>, <code><a href="FactoryNames.html" title="interface in io.fluentlenium.configuration">FactoryNames</a></code>, <code><a href="ReflectiveFactory.html" title="interface in io.fluentlenium.configuration">ReflectiveFactory</a></code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">ReflectiveCapabilitiesFactory</span>
 extends <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html?is-external=true" title="class or interface in java.lang" class="externalLink">Object</a>
-implements <a href="CapabilitiesFactory.html" title="interface in org.fluentlenium.configuration">CapabilitiesFactory</a>, <a href="FactoryNames.html" title="interface in org.fluentlenium.configuration">FactoryNames</a>, <a href="ReflectiveFactory.html" title="interface in org.fluentlenium.configuration">ReflectiveFactory</a></pre>
-<div class="block">A simple <a href="CapabilitiesFactory.html" title="interface in org.fluentlenium.configuration"><code>CapabilitiesFactory</code></a> that create <code>Capabilities</code> instances using reflection.</div>
+implements <a href="CapabilitiesFactory.html" title="interface in io.fluentlenium.configuration">CapabilitiesFactory</a>, <a href="FactoryNames.html" title="interface in io.fluentlenium.configuration">FactoryNames</a>, <a href="ReflectiveFactory.html" title="interface in io.fluentlenium.configuration">ReflectiveFactory</a></pre>
+<div class="block">A simple <a href="CapabilitiesFactory.html" title="interface in io.fluentlenium.configuration"><code>CapabilitiesFactory</code></a> that create <code>Capabilities</code> instances using reflection.</div>
 </li>
 </ul>
 </div>
@@ -217,7 +217,7 @@ implements <a href="CapabilitiesFactory.html" title="interface in org.fluentleni
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>org.openqa.selenium.Capabilities</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newCapabilities(org.fluentlenium.configuration.ConfigurationProperties)">newCapabilities</a></span>&#8203;(<a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#newCapabilities(io.fluentlenium.configuration.ConfigurationProperties)">newCapabilities</a></span>&#8203;(<a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</code></th>
 <td class="colLast">
 <div class="block">Creates a new instance of <code>Capabilities</code>.</div>
 </td>
@@ -324,7 +324,7 @@ implements <a href="CapabilitiesFactory.html" title="interface in org.fluentleni
 <div class="block">Check if the class instantiated by this factory is available.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="ReflectiveFactory.html#isAvailable()">isAvailable</a></code>&nbsp;in interface&nbsp;<code><a href="ReflectiveFactory.html" title="interface in org.fluentlenium.configuration">ReflectiveFactory</a></code></dd>
+<dd><code><a href="ReflectiveFactory.html#isAvailable()">isAvailable</a></code>&nbsp;in interface&nbsp;<code><a href="ReflectiveFactory.html" title="interface in io.fluentlenium.configuration">ReflectiveFactory</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if the class is available.</dd>
 </dl>
@@ -344,18 +344,18 @@ implements <a href="CapabilitiesFactory.html" title="interface in org.fluentleni
 </dl>
 </li>
 </ul>
-<a id="newCapabilities(org.fluentlenium.configuration.ConfigurationProperties)">
+<a id="newCapabilities(io.fluentlenium.configuration.ConfigurationProperties)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>newCapabilities</h4>
-<pre class="methodSignature">public&nbsp;org.openqa.selenium.Capabilities&nbsp;newCapabilities&#8203;(<a href="ConfigurationProperties.html" title="interface in org.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="CapabilitiesFactory.html#newCapabilities(org.fluentlenium.configuration.ConfigurationProperties)">CapabilitiesFactory</a></code></span></div>
+<pre class="methodSignature">public&nbsp;org.openqa.selenium.Capabilities&nbsp;newCapabilities&#8203;(<a href="ConfigurationProperties.html" title="interface in io.fluentlenium.configuration">ConfigurationProperties</a>&nbsp;configuration)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="CapabilitiesFactory.html#newCapabilities(io.fluentlenium.configuration.ConfigurationProperties)">CapabilitiesFactory</a></code></span></div>
 <div class="block">Creates a new instance of <code>Capabilities</code>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="CapabilitiesFactory.html#newCapabilities(org.fluentlenium.configuration.ConfigurationProperties)">newCapabilities</a></code>&nbsp;in interface&nbsp;<code><a href="CapabilitiesFactory.html" title="interface in org.fluentlenium.configuration">CapabilitiesFactory</a></code></dd>
+<dd><code><a href="CapabilitiesFactory.html#newCapabilities(io.fluentlenium.configuration.ConfigurationProperties)">newCapabilities</a></code>&nbsp;in interface&nbsp;<code><a href="CapabilitiesFactory.html" title="interface in io.fluentlenium.configuration">CapabilitiesFactory</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>configuration</code> - configuration</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -374,7 +374,7 @@ implements <a href="CapabilitiesFactory.html" title="interface in org.fluentleni
 <div class="block">Get the factory names.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="FactoryNames.html#getNames()">getNames</a></code>&nbsp;in interface&nbsp;<code><a href="FactoryNames.html" title="interface in org.fluentlenium.configuration">FactoryNames</a></code></dd>
+<dd><code><a href="FactoryNames.html#getNames()">getNames</a></code>&nbsp;in interface&nbsp;<code><a href="FactoryNames.html" title="interface in io.fluentlenium.configuration">FactoryNames</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>array of factory names</dd>
 </dl>

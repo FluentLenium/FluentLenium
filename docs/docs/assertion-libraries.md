@@ -23,7 +23,7 @@ We recommend to use AssertJ because we extend it with FluentWebElement and Fluen
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
     <version>5.0.1</version>
     <scope>test</scope>
@@ -34,7 +34,7 @@ We recommend to use AssertJ because we extend it with FluentWebElement and Fluen
 
 ```java
 import static org.assertj.core.api.Assertions.*;
-import static org.fluentlenium.assertj.FluentLeniumAssertions.*;
+import static io.fluentlenium.assertj.FluentLeniumAssertions.*;
 ```
 
 ```java
@@ -100,11 +100,11 @@ There is a set of custom [Kotest Matchers](https://kotest.io/docs/assertions/ass
 
 - Import this additional maven dependency.
 
-Check [here](https://search.maven.org/artifact/org.fluentlenium/fluentlenium-kotest-assertions) for the latest available version
+Check [here](https://search.maven.org/artifact/io.fluentlenium/fluentlenium-kotest-assertions) for the latest available version
 
 ```xml
 <dependency>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-kotest-assertions</artifactId>
     <version>$VERSION</version>
     <scope>test</scope>
@@ -112,20 +112,20 @@ Check [here](https://search.maven.org/artifact/org.fluentlenium/fluentlenium-kot
 ```
 
 ```groovy
-testImplementation 'org.fluentlenium:fluentlenium-kotest-assertions:$VERSION'
+testImplementation 'io.fluentlenium:fluentlenium-kotest-assertions:$VERSION'
 ```
 
 ```kotlin
-testImplementation("org.fluentlenium:fluentlenium-kotest-assertions:$VERSION")
+testImplementation("io.fluentlenium:fluentlenium-kotest-assertions:$VERSION")
 ```
 
 - Add those static imports.
 
 ```kotlin
-import org.fluentlenium.kotest.matchers.el.*
-import org.fluentlenium.kotest.matchers.jq.*
-import org.fluentlenium.kotest.matchers.alert.*
-import org.fluentlenium.kotest.matchers.page.*
+import io.fluentlenium.kotest.matchers.el.*
+import io.fluentlenium.kotest.matchers.jq.*
+import io.fluentlenium.kotest.matchers.alert.*
+import io.fluentlenium.kotest.matchers.page.*
 ```
 
 ```kotlin

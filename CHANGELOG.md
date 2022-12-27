@@ -68,7 +68,7 @@ Dependencies update and changes to update Cucumber to the 5.5 version
 - [#690](https://github.com/FluentLenium/FluentLenium/issues/690) - Add method clearing React input
 - [#654](https://github.com/FluentLenium/FluentLenium/issues/654) - Add more assertions to AssertJ module
 - [#664](https://github.com/FluentLenium/FluentLenium/issues/664) - UrlTemplate#put(Map) doesn't set properties
-- [#655](https://github.com/FluentLenium/FluentLenium/issues/655) - Bug: @org.fluentlenium.adapter.junit.After is not executed on test success (JUnit)
+- [#655](https://github.com/FluentLenium/FluentLenium/issues/655) - Bug: @io.fluentlenium.adapter.junit.After is not executed on test success (JUnit)
 - [#626](https://github.com/FluentLenium/FluentLenium/issues/626) - Delombok
 - [#628](https://github.com/FluentLenium/FluentLenium/issues/628) - Improvement: Allow DragAndDropBy to accept a target element as a parameter
 
@@ -113,7 +113,7 @@ Dependencies update and changes to update Cucumber to the 5.5 version
 - [#690](https://github.com/FluentLenium/FluentLenium/issues/690) - Add method clearing React input
 - [#654](https://github.com/FluentLenium/FluentLenium/issues/654) - Add more assertions to AssertJ module
 - [#664](https://github.com/FluentLenium/FluentLenium/issues/664) - UrlTemplate#put(Map) doesn't set properties
-- [#655](https://github.com/FluentLenium/FluentLenium/issues/655) - Bug: @org.fluentlenium.adapter.junit.After is not executed on test success (JUnit)
+- [#655](https://github.com/FluentLenium/FluentLenium/issues/655) - Bug: @io.fluentlenium.adapter.junit.After is not executed on test success (JUnit)
 - [#626](https://github.com/FluentLenium/FluentLenium/issues/626) - Delombok
 - [#628](https://github.com/FluentLenium/FluentLenium/issues/628) - Improvement: Allow DragAndDropBy to accept a target element as a parameter
 - [#345](https://github.com/FluentLenium/FluentLenium/issues/345) - Added FluentPage assertions to fluentlenium-assertj module

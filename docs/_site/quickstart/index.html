@@ -420,13 +420,13 @@ lambda usage example.</p>
 <span class="nt">&lt;/properties&gt;</span>
 
 <span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-junit<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-assertj<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
@@ -443,8 +443,8 @@ lambda usage example.</p>
 
 <p>To see FluentLenium in action run this test as Junit.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.fluentlenium.adapter.junit.FluentTest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.hook.wait.Wait</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.fluentlenium.adapter.junit.FluentTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.hook.wait.Wait</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
@@ -469,8 +469,8 @@ lambda usage example.</p>
 
 <p>Test:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.fluentlenium.adapter.junit.FluentTest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.annotation.Page</span><span class="o">;</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.fluentlenium.adapter.junit.FluentTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.annotation.Page</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
 
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckGoTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
@@ -495,9 +495,9 @@ lambda usage example.</p>
 
 <span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.FluentPage</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.annotation.PageUrl</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.domain.FluentWebElement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.FluentPage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.annotation.PageUrl</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.domain.FluentWebElement</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.openqa.selenium.support.FindBy</span><span class="o">;</span>
 
 <span class="nd">@PageUrl</span><span class="o">(</span><span class="s">"https://duckduckgo.com"</span><span class="o">)</span>

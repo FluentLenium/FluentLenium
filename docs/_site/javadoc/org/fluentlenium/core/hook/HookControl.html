@@ -117,7 +117,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">org.fluentlenium.core.hook</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">io.fluentlenium.core.hook</a></div>
 <h2 title="Interface HookControl" class="title">Interface HookControl&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
@@ -130,11 +130,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><code><a href="../domain/FluentList.html" title="interface in org.fluentlenium.core.domain">FluentList</a>&lt;E&gt;</code></dd>
+<dd><code><a href="../domain/FluentList.html" title="interface in io.fluentlenium.core.domain">FluentList</a>&lt;E&gt;</code></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><code><a href="../domain/FluentListImpl.html" title="class in org.fluentlenium.core.domain">FluentListImpl</a></code>, <code><a href="../domain/FluentWebElement.html" title="class in org.fluentlenium.core.domain">FluentWebElement</a></code>, <code><a href="HookControlImpl.html" title="class in org.fluentlenium.core.hook">HookControlImpl</a></code></dd>
+<dd><code><a href="../domain/FluentListImpl.html" title="class in io.fluentlenium.core.domain">FluentListImpl</a></code>, <code><a href="../domain/FluentWebElement.html" title="class in io.fluentlenium.core.domain">FluentWebElement</a></code>, <code><a href="HookControlImpl.html" title="class in io.fluentlenium.core.hook">HookControlImpl</a></code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">HookControl&lt;T&gt;</span></pre>
@@ -168,14 +168,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="HookControl.html" title="type parameter in HookControl">T</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#noHook(java.lang.Class...)">noHook</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#noHook(java.lang.Class...)">noHook</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</code></th>
 <td class="colLast">
 <div class="block">Disable given hook from actual element.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>&lt;R&gt;&nbsp;R</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#noHook(java.lang.Class,java.util.function.Function)">noHook</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;&nbsp;hook,
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#noHook(java.lang.Class,java.util.function.Function)">noHook</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;&nbsp;hook,
       <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;<a href="HookControl.html" title="type parameter in HookControl">T</a>,&#8203;R&gt;&nbsp;function)</code></th>
 <td class="colLast">
 <div class="block">Invoke a function with no hook.</div>
@@ -197,7 +197,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="HookControl.html" title="type parameter in HookControl">T</a></code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#noHookInstance(java.lang.Class...)">noHookInstance</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#noHookInstance(java.lang.Class...)">noHookInstance</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</code></th>
 <td class="colLast">
 <div class="block">Creates a new element locator instance with given hook disabled.</div>
 </td>
@@ -210,14 +210,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;<br><a href="HookControl.html" title="type parameter in HookControl">T</a></code></td>
+<td class="colFirst"><code>&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;<br><a href="HookControl.html" title="type parameter in HookControl">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withHook(java.lang.Class)">withHook</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;H&gt;&nbsp;hook)</code></th>
 <td class="colLast">
 <div class="block">Enable a hook with default options.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;<br><a href="HookControl.html" title="type parameter in HookControl">T</a></code></td>
+<td class="colFirst"><code>&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;<br><a href="HookControl.html" title="type parameter in HookControl">T</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#withHook(java.lang.Class,O)">withHook</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;H&gt;&nbsp;hook,
         O&nbsp;options)</code></th>
 <td class="colLast">
@@ -261,7 +261,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>noHook</h4>
-<pre class="methodSignature"><a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;noHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</pre>
+<pre class="methodSignature"><a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;noHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</pre>
 <div class="block">Disable given hook from actual element.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -291,7 +291,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>withHook</h4>
-<pre class="methodSignature">&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;&nbsp;<a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;withHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;H&gt;&nbsp;hook)</pre>
+<pre class="methodSignature">&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;&nbsp;<a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;withHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;H&gt;&nbsp;hook)</pre>
 <div class="block">Enable a hook with default options.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -312,7 +312,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>withHook</h4>
-<pre class="methodSignature">&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;&nbsp;<a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;withHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;H&gt;&nbsp;hook,
+<pre class="methodSignature">&lt;O,&#8203;H extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&lt;O&gt;&gt;&nbsp;<a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;withHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;H&gt;&nbsp;hook,
                                              O&nbsp;options)</pre>
 <div class="block">Enable a hook with given options.</div>
 <dl>
@@ -351,7 +351,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockList">
 <li class="blockList">
 <h4>noHook</h4>
-<pre class="methodSignature">&lt;R&gt;&nbsp;R&nbsp;noHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;&nbsp;hook,
+<pre class="methodSignature">&lt;R&gt;&nbsp;R&nbsp;noHook&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;&nbsp;hook,
              <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function" class="externalLink">Function</a>&lt;<a href="HookControl.html" title="type parameter in HookControl">T</a>,&#8203;R&gt;&nbsp;function)</pre>
 <div class="block">Invoke a function with no hook.</div>
 <dl>
@@ -385,7 +385,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <ul class="blockListLast">
 <li class="blockList">
 <h4>noHookInstance</h4>
-<pre class="methodSignature"><a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;noHookInstance&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in org.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</pre>
+<pre class="methodSignature"><a href="HookControl.html" title="type parameter in HookControl">T</a>&nbsp;noHookInstance&#8203;(<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Class.html?is-external=true" title="class or interface in java.lang" class="externalLink">Class</a>&lt;? extends <a href="FluentHook.html" title="interface in io.fluentlenium.core.hook">FluentHook</a>&gt;...&nbsp;hooks)</pre>
 <div class="block">Creates a new element locator instance with given hook disabled.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
