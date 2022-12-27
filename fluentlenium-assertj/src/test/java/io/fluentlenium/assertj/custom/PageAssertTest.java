@@ -4,10 +4,6 @@ import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.page.ClassAnnotations;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.page.ClassAnnotations;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.By;
@@ -17,9 +13,7 @@ import org.testng.annotations.Test;
 
 import static io.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit test for {@link PageAssert}.

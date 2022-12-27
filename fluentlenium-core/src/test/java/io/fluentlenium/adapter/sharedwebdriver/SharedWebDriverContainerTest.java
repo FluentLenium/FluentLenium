@@ -2,7 +2,6 @@ package io.fluentlenium.adapter.sharedwebdriver;
 
 import com.google.common.collect.ImmutableSet;
 import io.fluentlenium.adapter.SharedMutator;
-import io.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.After;
 import org.junit.Before;

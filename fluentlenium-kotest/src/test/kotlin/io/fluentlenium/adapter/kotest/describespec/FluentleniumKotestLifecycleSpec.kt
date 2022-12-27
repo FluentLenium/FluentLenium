@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.describespec
 
-import io.kotest.matchers.string.shouldContain
 import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import io.kotest.matchers.string.shouldContain
 
 class FluentleniumKotestLifecycleSpec : FluentDescribeSpec() {
     init {

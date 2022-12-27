@@ -1,7 +1,6 @@
 package io.fluentlenium.adapter;
 
 import io.fluentlenium.adapter.exception.AnnotationNotFoundException;
-import io.fluentlenium.adapter.exception.AnnotationNotFoundException;
 
 import java.lang.annotation.Annotation;
 

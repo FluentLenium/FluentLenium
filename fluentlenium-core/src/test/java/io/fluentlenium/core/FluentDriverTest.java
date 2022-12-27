@@ -1,17 +1,5 @@
 package io.fluentlenium.core;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.withSettings;
-
-import io.fluentlenium.configuration.Configuration;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Test;
@@ -21,6 +9,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit test for {@link FluentDriver}.

@@ -3,9 +3,6 @@ package io.fluentlenium.test.page;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.annotation.PageUrl;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.annotation.PageUrl;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 

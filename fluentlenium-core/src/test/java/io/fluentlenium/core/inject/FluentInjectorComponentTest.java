@@ -7,12 +7,6 @@ import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.adapter.FluentAdapter;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.components.ComponentsManager;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,9 +19,7 @@ import org.openqa.selenium.support.ByIdOrName;
 
 import java.util.List;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentInjectorComponentTest {

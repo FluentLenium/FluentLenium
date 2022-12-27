@@ -1,24 +1,5 @@
 package io.fluentlenium.core.domain;
 
-import static java.util.stream.Collectors.toList;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.conditions.AtLeastOneElementConditions;
-import io.fluentlenium.core.conditions.EachElementConditions;
-import io.fluentlenium.core.conditions.FluentListConditions;
-import io.fluentlenium.core.conditions.wait.WaitConditionProxy;
-import io.fluentlenium.core.search.SearchFilter;
-import io.fluentlenium.utils.SupplierOfInstance;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.action.Fill;
 import io.fluentlenium.core.action.FillSelect;
@@ -44,6 +25,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Default implementation of {@link FluentList} and {@link ComponentList}.

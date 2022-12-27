@@ -1,22 +1,13 @@
 package io.fluentlenium.adapter.junit.jupiter.integration;
 
-import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
-
+import io.fluentlenium.adapter.junit.jupiter.FluentTest;
+import io.fluentlenium.adapter.junit.jupiter.MockitoExtension;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import io.fluentlenium.configuration.FluentConfiguration;
 import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import io.fluentlenium.adapter.junit.jupiter.FluentTest;
-import io.fluentlenium.adapter.junit.jupiter.MockitoExtension;
-import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
-import io.fluentlenium.configuration.FluentConfiguration;
-import io.fluentlenium.configuration.FluentConfiguration.BooleanValue;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,11 +20,7 @@ import org.junit.platform.launcher.core.LauncherDiscoveryRequestBuilder;
 import org.junit.platform.launcher.core.LauncherFactory;
 import org.junit.platform.launcher.listeners.SummaryGeneratingListener;
 import org.mockito.Mockito;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOError;
@@ -42,6 +29,12 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
 @NotThreadSafe
 class FluentTestTest {

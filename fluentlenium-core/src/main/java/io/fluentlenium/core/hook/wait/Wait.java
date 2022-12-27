@@ -1,15 +1,10 @@
 package io.fluentlenium.core.hook.wait;
 
-import io.fluentlenium.core.hook.HookOptions;
-import io.fluentlenium.core.wait.FluentWait;
 import io.fluentlenium.core.hook.Hook;
 import io.fluentlenium.core.hook.HookOptions;
+import io.fluentlenium.core.wait.FluentWait;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
 
 /**

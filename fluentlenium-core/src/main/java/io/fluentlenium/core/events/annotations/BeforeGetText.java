@@ -1,12 +1,12 @@
 package io.fluentlenium.core.events.annotations;
 
+import io.fluentlenium.core.events.ElementListener;
+import io.fluentlenium.core.events.EventsRegistry;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import io.fluentlenium.core.events.EventsRegistry;
-import io.fluentlenium.core.events.ElementListener;
 
 /**
  * Add this annotation on a method to register it in {@link EventsRegistry}.

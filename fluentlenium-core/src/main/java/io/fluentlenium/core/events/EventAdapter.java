@@ -1,8 +1,5 @@
 package io.fluentlenium.core.events;
 
-import java.util.Objects;
-
-import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
@@ -10,6 +7,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
+
+import java.util.Objects;
 
 /**
  * FluentLenium adapter for Selenium events listener.

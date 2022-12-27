@@ -1,13 +1,14 @@
 package io.fluentlenium.adapter.junit;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.MultipleFailureException;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Equivalent of {@link org.junit.rules.TestWatcher}, but stop process if exception occurs on

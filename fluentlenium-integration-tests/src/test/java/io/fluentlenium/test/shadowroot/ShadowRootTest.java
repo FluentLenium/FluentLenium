@@ -2,8 +2,6 @@ package io.fluentlenium.test.shadowroot;
 
 import io.fluentlenium.pages.ShadowRootComponent;
 import io.fluentlenium.pages.ShadowRootPage;
-import io.fluentlenium.pages.ShadowRootComponent;
-import io.fluentlenium.pages.ShadowRootPage;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 

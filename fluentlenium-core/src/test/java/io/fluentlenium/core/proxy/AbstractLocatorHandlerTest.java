@@ -1,41 +1,28 @@
 package io.fluentlenium.core.proxy;
 
-import static java.util.Collections.emptyList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.withSettings;
-
+import com.google.common.collect.ImmutableList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.hook.FluentHook;
 import io.fluentlenium.core.hook.HookChainBuilder;
 import io.fluentlenium.core.hook.HookDefinition;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.hook.FluentHook;
-import io.fluentlenium.core.hook.HookChainBuilder;
-import io.fluentlenium.core.hook.HookDefinition;
-import com.google.common.collect.ImmutableList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.Method;
 import java.util.List;
+
+import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit test for {@link AbstractLocatorHandler}.

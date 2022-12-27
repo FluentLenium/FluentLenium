@@ -8,14 +8,6 @@ import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.search.SearchFilter;
-import io.fluentlenium.adapter.FluentControlContainer;
-import io.fluentlenium.configuration.Configuration;
-import io.fluentlenium.configuration.DefaultConfigurationFactory;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.search.SearchFilter;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -32,9 +24,7 @@ import java.util.List;
 
 import static io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.DEFAULT;
 import static io.fluentlenium.configuration.ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 public class ControlUnitTest {

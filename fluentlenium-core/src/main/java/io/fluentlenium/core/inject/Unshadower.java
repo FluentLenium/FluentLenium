@@ -1,9 +1,12 @@
 package io.fluentlenium.core.inject;
 
-import static java.util.Collections.singletonList;
-import static java.util.stream.Collectors.toList;
-
 import com.google.common.collect.ImmutableSet;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Unshadow;
+import io.fluentlenium.core.domain.FluentWebElement;
+import org.openqa.selenium.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -12,16 +15,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Unshadow;
-import io.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 public class Unshadower {
     private static final Logger LOGGER = LoggerFactory.getLogger(Unshadower.class);

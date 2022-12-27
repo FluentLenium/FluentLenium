@@ -1,13 +1,14 @@
 package io.fluentlenium.core.components;
 
+import io.fluentlenium.core.domain.ListImpl;
+import io.fluentlenium.core.domain.WrapsElements;
+import org.openqa.selenium.WebElement;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
-import io.fluentlenium.core.domain.ListImpl;
-import io.fluentlenium.core.domain.WrapsElements;
-import org.openqa.selenium.WebElement;
 
 /**
  * A list of component that lazy initialize from it's related list of elements.

@@ -2,19 +2,13 @@ package io.fluentlenium.test.await.hook;
 
 import io.fluentlenium.core.filter.FilterConstructor;
 import io.fluentlenium.core.hook.wait.Wait;
-import org.apache.commons.io.IOUtils;
-import io.fluentlenium.core.hook.wait.Wait;
 import io.fluentlenium.test.IntegrationFluentTest;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOError;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.withText;
 
 /**
  * Test related to <a href=https://github.com/FluentLenium/FluentLenium/issues/425>issue #425</a>.

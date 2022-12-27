@@ -5,9 +5,6 @@ import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.Select;
 
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
-
 import java.util.function.Consumer;
 
 /**

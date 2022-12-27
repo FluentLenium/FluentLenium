@@ -6,10 +6,6 @@ import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.conditions.WebElementConditions;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.adapter.FluentAdapter;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.conditions.WebElementConditions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,12 +23,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit test for {@link FluentListImpl}.

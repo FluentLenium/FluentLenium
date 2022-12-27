@@ -1,20 +1,16 @@
 package io.fluentlenium.test.initialization;
 
+import io.fluentlenium.adapter.junit.jupiter.FluentTest;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.adapter.junit.jupiter.FluentTest;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class BeforeInitializationTest extends FluentTest {
     private TestPrivatePageWithElement page2; // NOPMD UsunedPrivateField

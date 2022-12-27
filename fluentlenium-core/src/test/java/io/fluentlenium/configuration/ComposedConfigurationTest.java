@@ -1,7 +1,7 @@
 package io.fluentlenium.configuration;
 
-import org.assertj.core.api.Assertions;
 import io.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -11,7 +11,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.function.Function;
 
 import static org.mockito.Mockito.RETURNS_DEFAULTS;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ComposedConfigurationTest {

@@ -1,12 +1,11 @@
 package io.fluentlenium.core.events;
 
+import io.fluentlenium.utils.ReflectionUtils;
+import org.openqa.selenium.OutputType;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Function;
-
-import io.fluentlenium.utils.ReflectionUtils;
-import io.fluentlenium.utils.ReflectionUtils;
-import org.openqa.selenium.OutputType;
 
 /**
  * GetScreenshotAs annotation listener.

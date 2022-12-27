@@ -7,12 +7,6 @@ import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.nodriver.
 import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.setbean.SetBeanRunner;
 import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.waithook.HookRunner;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.driverperfeature.PerFeatureRunner;
-import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.getbean.GetBeanRunner;
-import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.multiinheritance.MultiInheritanceRunner;
-import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.nodriver.NoWebDriverRunner;
-import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.setbean.SetBeanRunner;
-import io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.waithook.HookRunner;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

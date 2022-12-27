@@ -1,15 +1,8 @@
 package io.fluentlenium.adapter.testng;
 
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import io.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import io.fluentlenium.utils.SeleniumVersionChecker;
-import io.fluentlenium.utils.SeleniumVersionChecker;
-import io.fluentlenium.adapter.FluentTestRunnerAdapter;
-import io.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.testng.ITestContext;
 import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
@@ -17,6 +10,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * TestNG FluentLenium Test Runner Adapter.

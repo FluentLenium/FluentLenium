@@ -2,7 +2,6 @@ package io.fluentlenium.core.label;
 
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;

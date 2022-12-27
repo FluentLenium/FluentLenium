@@ -3,9 +3,6 @@ package io.fluentlenium.adapter.testng.integration;
 import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
 import org.testng.annotations.Test;
 
 public class CyclicDependencyTest extends IntegrationFluentTestNg {

@@ -1,18 +1,16 @@
 package io.fluentlenium.test.actions.waitandclick;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-
-import java.time.Duration;
-
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.FindBy;
+
+import java.time.Duration;
+
+import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class WaitAndClickTest extends IntegrationFluentTest {
 

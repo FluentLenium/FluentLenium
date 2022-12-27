@@ -1,11 +1,11 @@
 package io.fluentlenium.adapter.testng.integration.adapter.description;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestDescriptionAccessTest extends IntegrationFluentTestNg {
 

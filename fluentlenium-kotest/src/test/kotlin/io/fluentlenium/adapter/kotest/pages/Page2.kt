@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.pages
 
-import io.kotest.matchers.shouldBe
 import io.fluentlenium.core.FluentPage
 import io.fluentlenium.core.domain.FluentWebElement
+import io.kotest.matchers.shouldBe
 import org.openqa.selenium.support.FindBy
 
 class Page2 : FluentPage() {

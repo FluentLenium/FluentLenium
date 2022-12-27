@@ -5,11 +5,6 @@ import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentListImpl;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.proxy.LocatorProxies;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentListImpl;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

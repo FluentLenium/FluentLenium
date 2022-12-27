@@ -1,7 +1,6 @@
 package io.fluentlenium.test.await.hook;
 
 import io.fluentlenium.core.hook.wait.WaitHook;
-import io.fluentlenium.core.hook.wait.WaitHook;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.TimeoutException;

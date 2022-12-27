@@ -1,17 +1,9 @@
 package io.fluentlenium.core.inject;
 
-import static io.fluentlenium.core.inject.InjectionAnnotationSupport.isContainer;
-import static io.fluentlenium.core.inject.InjectionAnnotationSupport.isParent;
-
-import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.components.ComponentsManager;
-import io.fluentlenium.core.components.LazyComponents;
-import io.fluentlenium.core.components.LazyComponentsListener;
-import io.fluentlenium.utils.ReflectionUtils;
 import io.fluentlenium.core.FluentContainer;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Unshadow;
+import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.components.LazyComponents;
 import io.fluentlenium.core.components.LazyComponentsListener;

@@ -8,8 +8,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static io.fluentlenium.utils.Preconditions.checkArgument;
-
 /**
  * Utils class for Url manipulation.
  */

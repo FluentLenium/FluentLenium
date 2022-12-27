@@ -1,7 +1,6 @@
 package io.fluentlenium.adapter.cucumber;
 
 import io.fluentlenium.adapter.SharedMutator;
-import io.fluentlenium.adapter.SharedMutator;
 import io.fluentlenium.configuration.ConfigurationException;
 import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 

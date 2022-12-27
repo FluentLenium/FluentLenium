@@ -1,6 +1,5 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.alert.AlertImpl;
 import io.fluentlenium.assertj.FluentLeniumAssertions;
 import io.fluentlenium.core.alert.AlertImpl;
 import org.mockito.Mock;
@@ -11,9 +10,7 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class AlertAssertTest {
 

@@ -3,8 +3,8 @@ package io.fluentlenium.assertj.integration.element;
 import io.fluentlenium.assertj.integration.IntegrationTest;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FluentWebElementDisplayedTest extends IntegrationTest {
 

@@ -9,8 +9,6 @@ import java.util.function.Function;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toMap;
-import static io.fluentlenium.core.performance.PerformanceTimingEvent.NAVIGATION_START;
-import static io.fluentlenium.core.performance.PerformanceTimingEvent.SECURE_CONNECTION_START;
 
 /**
  * Default implementation of {@link PerformanceTimingMetrics} storing the metrics value as a {@link Map}.

@@ -1,11 +1,11 @@
 package io.fluentlenium.adapter.kotest.describespec
 
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
 import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import io.fluentlenium.core.domain.FluentList
 import io.fluentlenium.core.domain.FluentWebElement
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import org.openqa.selenium.support.FindBy
 
 class CanInjectElementsSpec : FluentDescribeSpec() {

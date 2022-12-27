@@ -3,17 +3,14 @@ package io.fluentlenium.shareddriver;
 import io.fluentlenium.IntegrationFluentTestNg;
 import io.fluentlenium.configuration.FluentConfiguration;
 import io.fluentlenium.core.filter.FilterConstructor;
-import io.fluentlenium.IntegrationFluentTestNg;
-import io.fluentlenium.configuration.FluentConfiguration;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.THREAD;
-import static io.fluentlenium.core.filter.FilterConstructor.withName;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @FluentConfiguration(driverLifecycle = THREAD)
 public class DriverPerThreadTest extends IntegrationFluentTestNg {

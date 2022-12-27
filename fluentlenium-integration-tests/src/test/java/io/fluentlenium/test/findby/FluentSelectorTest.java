@@ -6,12 +6,6 @@ import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.with;
-import static io.fluentlenium.core.filter.FilterConstructor.withClass;
-import static io.fluentlenium.core.filter.FilterConstructor.withId;
-import static io.fluentlenium.core.filter.FilterConstructor.withName;
-import static io.fluentlenium.core.filter.FilterConstructor.withPredicate;
-import static io.fluentlenium.core.filter.MatcherConstructor.regex;
 
 class FluentSelectorTest extends IntegrationFluentTest {
 

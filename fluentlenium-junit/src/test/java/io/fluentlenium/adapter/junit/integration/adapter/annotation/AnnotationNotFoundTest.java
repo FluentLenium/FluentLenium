@@ -1,11 +1,10 @@
 package io.fluentlenium.adapter.junit.integration.adapter.annotation;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import io.fluentlenium.adapter.exception.AnnotationNotFoundException;
 import io.fluentlenium.adapter.exception.AnnotationNotFoundException;
 import io.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class AnnotationNotFoundTest extends IntegrationFluentTest {
 

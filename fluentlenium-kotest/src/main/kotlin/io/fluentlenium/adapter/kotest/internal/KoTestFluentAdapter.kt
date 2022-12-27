@@ -1,31 +1,23 @@
 package io.fluentlenium.adapter.kotest.internal
 
+import io.fluentlenium.adapter.DefaultSharedMutator
+import io.fluentlenium.adapter.FluentAdapter
+import io.fluentlenium.adapter.FluentTestRunnerAdapter
+import io.fluentlenium.adapter.IFluentAdapter
+import io.fluentlenium.adapter.TestRunnerCommon.*
+import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
+import io.fluentlenium.configuration.Configuration
+import io.fluentlenium.utils.ScreenshotUtil
+import io.fluentlenium.utils.SeleniumVersionChecker
 import io.kotest.common.ExperimentalKotest
 import io.kotest.core.extensions.Extension
-import io.kotest.core.listeners.AfterEachListener
-import io.kotest.core.listeners.AfterSpecListener
-import io.kotest.core.listeners.AfterTestListener
-import io.kotest.core.listeners.BeforeSpecListener
-import io.kotest.core.listeners.BeforeTestListener
+import io.kotest.core.listeners.*
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import io.fluentlenium.adapter.DefaultSharedMutator
-import io.fluentlenium.adapter.FluentAdapter
-import io.fluentlenium.adapter.FluentTestRunnerAdapter
-import io.fluentlenium.adapter.IFluentAdapter
-import io.fluentlenium.adapter.TestRunnerCommon.deleteCookies
-import io.fluentlenium.adapter.TestRunnerCommon.doHtmlDump
-import io.fluentlenium.adapter.TestRunnerCommon.doScreenshot
-import io.fluentlenium.adapter.TestRunnerCommon.getTestDriver
-import io.fluentlenium.adapter.TestRunnerCommon.quitMethodAndThreadDrivers
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
-import io.fluentlenium.configuration.Configuration
-import io.fluentlenium.utils.ScreenshotUtil
-import io.fluentlenium.utils.SeleniumVersionChecker
 import java.util.concurrent.atomic.AtomicReference
 
 internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :

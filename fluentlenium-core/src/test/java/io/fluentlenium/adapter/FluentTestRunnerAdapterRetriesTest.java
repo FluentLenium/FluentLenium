@@ -1,20 +1,5 @@
 package io.fluentlenium.adapter;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import io.fluentlenium.core.FluentControl;
@@ -25,6 +10,16 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriverException;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @SuppressWarnings("unused")
 @RunWith(MockitoJUnitRunner.class)

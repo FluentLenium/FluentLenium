@@ -5,10 +5,6 @@ import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.ComponentList;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.components.ComponentsManager;
-import io.fluentlenium.core.domain.ComponentList;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

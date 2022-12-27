@@ -4,7 +4,6 @@ import io.fluentlenium.assertj.AssertionTestSupport;
 import io.fluentlenium.assertj.integration.IntegrationTest;
 import org.testng.annotations.Test;
 
-import static io.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 public class FluentListSizeTest extends IntegrationTest {

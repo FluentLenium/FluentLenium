@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.wordspec
 
-import io.kotest.datatest.withData
 import io.fluentlenium.adapter.kotest.FluentWordSpec
 import io.fluentlenium.adapter.kotest.TestConstants
+import io.kotest.datatest.withData
 
 class DataDrivenSpec : FluentWordSpec({
     "word spec" should {

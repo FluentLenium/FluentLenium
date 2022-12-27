@@ -1,7 +1,6 @@
 package io.fluentlenium.test.driver;
 
 import io.fluentlenium.core.WrongDriverException;
-import io.fluentlenium.core.WrongDriverException;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,6 @@
 package io.fluentlenium.core;
 
 import io.fluentlenium.configuration.Configuration;
-import io.fluentlenium.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

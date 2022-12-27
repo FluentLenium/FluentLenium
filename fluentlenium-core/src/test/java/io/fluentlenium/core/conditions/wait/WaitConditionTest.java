@@ -1,21 +1,5 @@
 package io.fluentlenium.core.conditions.wait;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.function.Predicate;
-
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.components.DefaultComponentInstantiator;
-import io.fluentlenium.core.conditions.FluentConditions;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.wait.FluentWait;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
@@ -31,6 +15,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.function.Predicate;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WaitConditionTest {

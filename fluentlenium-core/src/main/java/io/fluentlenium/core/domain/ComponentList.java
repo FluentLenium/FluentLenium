@@ -1,8 +1,5 @@
 package io.fluentlenium.core.domain;
 
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.components.LazyComponents;
-import io.fluentlenium.core.components.LazyComponentsListener;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.LazyComponents;

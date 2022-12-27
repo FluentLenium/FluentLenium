@@ -1,7 +1,6 @@
 package io.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.getbean.steps;
 
 import io.cucumber.java.en.Given;
-import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import io.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.setbean.steps.BaseTest;
 import io.fluentlenium.core.annotation.Page;

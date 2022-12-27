@@ -2,8 +2,6 @@ package io.fluentlenium.core.events;
 
 import io.fluentlenium.core.components.ComponentsAccessor;
 import io.fluentlenium.core.components.ComponentsListener;
-import io.fluentlenium.core.components.ComponentsAccessor;
-import io.fluentlenium.core.components.ComponentsListener;
 import org.openqa.selenium.WebElement;
 
 import java.util.IdentityHashMap;

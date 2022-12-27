@@ -2,8 +2,6 @@ package io.fluentlenium.core.conditions;
 
 import io.fluentlenium.core.conditions.message.Message;
 import io.fluentlenium.core.conditions.message.NotMessage;
-import io.fluentlenium.core.conditions.message.Message;
-import io.fluentlenium.core.conditions.message.NotMessage;
 
 import java.util.regex.Pattern;
 

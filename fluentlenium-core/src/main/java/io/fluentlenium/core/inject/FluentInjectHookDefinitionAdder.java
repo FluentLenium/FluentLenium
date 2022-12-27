@@ -1,15 +1,6 @@
 package io.fluentlenium.core.inject;
 
-import static io.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHook;
-import static io.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHookOptions;
-
-import io.fluentlenium.utils.ReflectionUtils;
-import io.fluentlenium.core.hook.FluentHook;
-import io.fluentlenium.core.hook.Hook;
-import io.fluentlenium.core.hook.HookControlImpl;
-import io.fluentlenium.core.hook.HookDefinition;
-import io.fluentlenium.core.hook.HookOptions;
-import io.fluentlenium.core.hook.NoHook;
+import io.fluentlenium.core.hook.*;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -17,6 +8,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
+
+import static io.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHook;
+import static io.fluentlenium.core.inject.InjectionAnnotationSupport.isAnnotationTypeHookOptions;
 
 /**
  * Collects {@link HookDefinition}s based on {@link Hook} and {@link HookOptions} annotations applied on fields and classes.

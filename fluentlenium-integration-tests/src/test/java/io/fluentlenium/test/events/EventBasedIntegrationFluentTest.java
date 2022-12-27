@@ -2,8 +2,6 @@ package io.fluentlenium.test.events;
 
 import io.fluentlenium.core.events.annotations.AfterClickOn;
 import io.fluentlenium.core.events.annotations.BeforeClickOn;
-import io.fluentlenium.core.events.annotations.AfterClickOn;
-import io.fluentlenium.core.events.annotations.BeforeClickOn;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

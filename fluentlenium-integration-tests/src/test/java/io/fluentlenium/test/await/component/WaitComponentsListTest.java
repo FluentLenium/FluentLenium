@@ -1,13 +1,5 @@
 package io.fluentlenium.test.await.component;
 
-import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
@@ -18,6 +10,8 @@ import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 class WaitComponentsListTest extends IntegrationFluentTest {
 

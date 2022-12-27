@@ -1,6 +1,6 @@
 package io.fluentlenium.core.events;
 
-import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import com.google.common.collect.ImmutableList;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +12,6 @@ import java.awt.event.ContainerListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import com.google.common.collect.ImmutableList;
 
 /**
  * Registry of event listeners.

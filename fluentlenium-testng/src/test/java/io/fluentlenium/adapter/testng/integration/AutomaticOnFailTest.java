@@ -2,7 +2,6 @@ package io.fluentlenium.adapter.testng.integration;
 
 import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;

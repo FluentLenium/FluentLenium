@@ -1,7 +1,6 @@
 package io.fluentlenium.core.wait;
 
 import io.fluentlenium.core.FluentDriver;
-import io.fluentlenium.core.FluentDriver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +15,7 @@ import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitWindowMatcherTest {

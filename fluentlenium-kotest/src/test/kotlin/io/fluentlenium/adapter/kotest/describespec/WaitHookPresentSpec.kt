@@ -1,10 +1,10 @@
 package io.fluentlenium.adapter.kotest.describespec
 
-import io.kotest.matchers.booleans.shouldBeFalse
 import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import io.fluentlenium.adapter.kotest.TestConstants
 import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.core.hook.wait.Wait
+import io.kotest.matchers.booleans.shouldBeFalse
 
 @Wait(timeout = 1)
 class WaitHookPresentSpec : FluentDescribeSpec({

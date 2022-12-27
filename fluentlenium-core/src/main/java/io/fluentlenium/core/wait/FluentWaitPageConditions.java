@@ -1,7 +1,6 @@
 package io.fluentlenium.core.wait;
 
 import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

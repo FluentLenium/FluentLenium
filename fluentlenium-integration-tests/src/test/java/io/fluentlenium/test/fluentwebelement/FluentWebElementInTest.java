@@ -1,7 +1,6 @@
 package io.fluentlenium.test.fluentwebelement;
 
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 

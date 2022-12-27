@@ -5,10 +5,6 @@ import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.adapter.FluentAdapter;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,10 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultHookChainBuilderTest {

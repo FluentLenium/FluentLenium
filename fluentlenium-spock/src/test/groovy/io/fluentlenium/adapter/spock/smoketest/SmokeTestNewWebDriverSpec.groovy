@@ -1,7 +1,7 @@
 package io.fluentlenium.adapter.spock.smoketest
 
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import io.fluentlenium.adapter.spock.FluentSpecification
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions

@@ -1,8 +1,6 @@
 package io.fluentlenium.core.search;
 
 import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.inject.FluentInjectControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.inject.FluentInjectControl;

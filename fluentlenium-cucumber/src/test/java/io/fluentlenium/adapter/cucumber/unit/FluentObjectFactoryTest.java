@@ -4,8 +4,6 @@ import cucumber.runtime.java.fluentlenium.FluentObjectFactory;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,17 +1,10 @@
 package io.fluentlenium.core.hook;
 
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.proxy.LocatorProxies;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.proxy.LocatorProxies;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 

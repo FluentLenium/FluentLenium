@@ -1,11 +1,9 @@
 package io.fluentlenium.assertj.integration;
 
+import io.fluentlenium.adapter.testng.FluentTestNg;
 import io.fluentlenium.utils.UrlUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.fluentlenium.adapter.testng.FluentTestNg;
 import org.testng.annotations.BeforeSuite;
-
-import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 public abstract class IntegrationTest extends FluentTestNg {
 

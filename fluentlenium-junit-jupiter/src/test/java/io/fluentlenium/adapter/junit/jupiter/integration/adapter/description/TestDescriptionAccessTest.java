@@ -1,12 +1,11 @@
 package io.fluentlenium.adapter.junit.jupiter.integration.adapter.description;
 
-import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-
-import io.fluentlenium.adapter.junit.jupiter.integration.IntegrationFluentTest;
 import io.fluentlenium.adapter.junit.jupiter.integration.IntegrationFluentTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 class TestDescriptionAccessTest extends IntegrationFluentTest {
 

@@ -2,8 +2,8 @@ package io.fluentlenium.test.await;
 
 import io.fluentlenium.core.filter.FilterConstructor;
 import io.fluentlenium.core.filter.MatcherConstructor;
-import net.jcip.annotations.NotThreadSafe;
 import io.fluentlenium.test.IntegrationFluentTest;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.TimeoutException;
@@ -12,14 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.containingText;
-import static io.fluentlenium.core.filter.FilterConstructor.with;
-import static io.fluentlenium.core.filter.FilterConstructor.withClass;
-import static io.fluentlenium.core.filter.FilterConstructor.withId;
-import static io.fluentlenium.core.filter.FilterConstructor.withName;
-import static io.fluentlenium.core.filter.FilterConstructor.withText;
-import static io.fluentlenium.core.filter.FilterConstructor.withTextContent;
-import static io.fluentlenium.core.filter.MatcherConstructor.regex;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 

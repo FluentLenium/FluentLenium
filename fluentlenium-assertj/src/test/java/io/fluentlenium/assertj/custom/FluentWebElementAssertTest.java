@@ -1,6 +1,5 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.assertj.FluentLeniumAssertions;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.mockito.Mock;
@@ -10,9 +9,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+import static io.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
-import static io.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static org.mockito.Mockito.when;
 
 /**

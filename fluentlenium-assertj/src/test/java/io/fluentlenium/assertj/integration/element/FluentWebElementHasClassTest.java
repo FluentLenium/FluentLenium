@@ -4,9 +4,9 @@ import io.fluentlenium.assertj.custom.FluentWebElementAssert;
 import io.fluentlenium.assertj.integration.IntegrationTest;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static io.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Integration test for {@link FluentWebElementAssert}.

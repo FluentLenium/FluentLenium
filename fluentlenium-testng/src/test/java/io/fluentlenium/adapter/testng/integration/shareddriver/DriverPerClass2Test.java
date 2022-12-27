@@ -1,14 +1,12 @@
 package io.fluentlenium.adapter.testng.integration.shareddriver;
 
-import io.fluentlenium.configuration.FluentConfiguration;
-import io.fluentlenium.core.filter.FilterConstructor;
 import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.filter.FilterConstructor;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.withName;
 
 @FluentConfiguration(driverLifecycle = DriverLifecycle.CLASS)
 @Test(dependsOnGroups = "DriverPerClass1", suiteName = "PerClass")

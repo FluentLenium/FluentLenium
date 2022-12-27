@@ -1,7 +1,6 @@
 package io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.driverperfeature.steps;
 
 import io.cucumber.java.en.Given;
-import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import io.fluentlenium.core.annotation.Page;
 

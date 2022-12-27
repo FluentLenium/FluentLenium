@@ -1,11 +1,6 @@
 package io.fluentlenium.adapter.spock
 
 
-import io.fluentlenium.adapter.FluentControlContainer
-import io.fluentlenium.adapter.ThreadLocalFluentControlContainer
-import io.fluentlenium.configuration.Configuration
-import io.fluentlenium.configuration.ConfigurationFactoryProvider
-import io.fluentlenium.core.FluentControl
 import spock.lang.Specification
 
 class SpockControl extends Specification implements io.fluentlenium.core.FluentControl {

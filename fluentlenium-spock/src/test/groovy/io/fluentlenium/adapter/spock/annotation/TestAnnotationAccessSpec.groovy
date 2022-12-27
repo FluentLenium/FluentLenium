@@ -1,9 +1,7 @@
 package io.fluentlenium.adapter.spock.annotation
 
-
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager
-import io.fluentlenium.adapter.exception.AnnotationNotFoundException
 import io.fluentlenium.adapter.spock.FluentSpecification
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 
 @CustomAnnotation("for_class")
 class TestAnnotationAccessSpec extends FluentSpecification {

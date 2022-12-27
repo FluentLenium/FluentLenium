@@ -1,7 +1,6 @@
 package io.fluentlenium.core.action;
 
 import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 
 /**

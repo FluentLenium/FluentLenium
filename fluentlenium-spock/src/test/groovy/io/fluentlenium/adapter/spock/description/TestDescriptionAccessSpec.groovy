@@ -1,7 +1,7 @@
 package io.fluentlenium.adapter.spock.description
 
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import io.fluentlenium.adapter.spock.FluentSpecification
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 
 import static org.assertj.core.api.Assertions.assertThat
 

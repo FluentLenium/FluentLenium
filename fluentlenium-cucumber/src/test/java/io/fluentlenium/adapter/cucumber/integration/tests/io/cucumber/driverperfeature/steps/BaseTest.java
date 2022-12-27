@@ -1,6 +1,5 @@
 package io.fluentlenium.adapter.cucumber.integration.tests.io.cucumber.driverperfeature.steps;
 
-import io.fluentlenium.configuration.FluentConfiguration;
 import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import io.fluentlenium.configuration.FluentConfiguration;
 

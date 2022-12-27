@@ -1,11 +1,11 @@
 package io.fluentlenium.core.events;
 
-import static java.util.Objects.requireNonNull;
-
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * EventsSupport can be registered in Selenium {@link org.openqa.selenium.support.events.EventFiringWebDriver} to provide an

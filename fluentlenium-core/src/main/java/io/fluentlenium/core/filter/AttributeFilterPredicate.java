@@ -1,6 +1,7 @@
 package io.fluentlenium.core.filter;
 
 import io.fluentlenium.core.domain.FluentWebElement;
+
 import java.util.function.Predicate;
 
 /**

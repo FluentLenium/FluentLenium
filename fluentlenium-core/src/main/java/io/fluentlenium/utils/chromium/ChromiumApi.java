@@ -2,13 +2,7 @@ package io.fluentlenium.utils.chromium;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import org.openqa.selenium.remote.Command;
-import org.openqa.selenium.remote.CommandExecutor;
-import org.openqa.selenium.remote.CommandInfo;
-import org.openqa.selenium.remote.HttpCommandExecutor;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.SessionId;
-import org.openqa.selenium.remote.Response;
+import org.openqa.selenium.remote.*;
 import org.openqa.selenium.remote.http.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +11,9 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Objects.requireNonNull;
 import static io.fluentlenium.utils.chromium.Commands.SEND_COMMAND;
 import static io.fluentlenium.utils.chromium.Commands.SEND_COMMAND_AND_GET_RESULT;
+import static java.util.Objects.requireNonNull;
 
 public class ChromiumApi {
 

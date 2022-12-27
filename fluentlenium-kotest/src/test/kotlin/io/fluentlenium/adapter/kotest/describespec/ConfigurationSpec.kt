@@ -1,10 +1,10 @@
 package io.fluentlenium.adapter.kotest.describespec
 
-import io.kotest.matchers.shouldBe
 import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import io.fluentlenium.configuration.ConfigurationProperties
 import io.fluentlenium.configuration.CustomProperty
 import io.fluentlenium.configuration.FluentConfiguration
+import io.kotest.matchers.shouldBe
 
 @FluentConfiguration(
     driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,

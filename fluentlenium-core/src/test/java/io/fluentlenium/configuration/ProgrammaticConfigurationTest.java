@@ -1,12 +1,13 @@
 package io.fluentlenium.configuration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import net.bytebuddy.ByteBuddy;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProgrammaticConfigurationTest {
 

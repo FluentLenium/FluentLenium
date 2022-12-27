@@ -1,11 +1,11 @@
 package io.fluentlenium.adapter.junit.integration.adapter.description;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import io.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestDescriptionAccessTest extends IntegrationFluentTest {
 

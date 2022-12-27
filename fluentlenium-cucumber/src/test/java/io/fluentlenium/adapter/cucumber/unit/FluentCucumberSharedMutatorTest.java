@@ -2,8 +2,6 @@ package io.fluentlenium.adapter.cucumber.unit;
 
 import io.fluentlenium.adapter.SharedMutator;
 import io.fluentlenium.adapter.cucumber.FluentCucumberSharedMutator;
-import io.fluentlenium.adapter.SharedMutator;
-import io.fluentlenium.adapter.cucumber.FluentCucumberSharedMutator;
 import io.fluentlenium.configuration.ConfigurationException;
 import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import org.junit.Before;

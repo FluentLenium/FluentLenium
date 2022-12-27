@@ -1,28 +1,14 @@
 package io.fluentlenium.adapter;
 
-import static io.fluentlenium.adapter.TestRunnerCommon.deleteCookies;
-import static io.fluentlenium.adapter.TestRunnerCommon.doHtmlDump;
-import static io.fluentlenium.adapter.TestRunnerCommon.doScreenshot;
-import static io.fluentlenium.adapter.TestRunnerCommon.getTestDriver;
-import static io.fluentlenium.adapter.TestRunnerCommon.quitMethodAndThreadDrivers;
-import static io.fluentlenium.utils.AnnotationUtil.getClassAnnotationForClass;
-import static io.fluentlenium.utils.AnnotationUtil.getMethodAnnotationForMethod;
-import static io.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.clearThreadLocals;
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.getClassFromThread;
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodNameFromThread;
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMethodValues;
-
-import java.lang.annotation.Annotation;
-import java.util.List;
-
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import io.fluentlenium.utils.AnnotationUtil;
 import io.fluentlenium.utils.ThreadLocalAdapterUtil;
-import io.fluentlenium.adapter.SharedMutator.EffectiveParameters;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+
+import static io.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 
 /**
  * FluentLenium Test Runner Adapter.

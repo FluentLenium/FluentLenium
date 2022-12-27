@@ -2,9 +2,8 @@ package io.fluentlenium.test.javascript;
 
 import io.fluentlenium.core.filter.FilterConstructor;
 import io.fluentlenium.core.script.FluentJavascript;
-import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.script.FluentJavascript;
 import io.fluentlenium.test.IntegrationFluentTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,7 +12,6 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.with;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class JavascriptTest extends IntegrationFluentTest {

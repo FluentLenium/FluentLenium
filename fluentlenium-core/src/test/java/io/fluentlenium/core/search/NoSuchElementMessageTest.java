@@ -4,9 +4,6 @@ import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import io.fluentlenium.core.filter.AttributeFilter;
 import io.fluentlenium.core.filter.FilterConstructor;
-import io.fluentlenium.adapter.FluentAdapter;
-import io.fluentlenium.core.components.DefaultComponentInstantiator;
-import io.fluentlenium.core.filter.AttributeFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +15,6 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static io.fluentlenium.core.filter.FilterConstructor.withId;
-import static io.fluentlenium.core.filter.FilterConstructor.withText;
 
 @RunWith(MockitoJUnitRunner.class)
 public class NoSuchElementMessageTest {

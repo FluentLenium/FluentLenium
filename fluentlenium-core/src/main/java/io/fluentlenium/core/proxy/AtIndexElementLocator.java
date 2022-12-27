@@ -4,8 +4,6 @@ import io.fluentlenium.core.domain.ElementUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import io.fluentlenium.core.domain.ElementUtils;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

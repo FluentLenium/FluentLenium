@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.shouldspec
 
-import io.kotest.datatest.withData
 import io.fluentlenium.adapter.kotest.FluentShouldSpec
 import io.fluentlenium.adapter.kotest.TestConstants
+import io.kotest.datatest.withData
 
 class DataDrivenSpec : FluentShouldSpec({
     context("context") {

@@ -1,7 +1,5 @@
 package io.fluentlenium.core.conditions.wait;
 
-import io.fluentlenium.core.conditions.message.MessageContext;
-import io.fluentlenium.core.conditions.message.MessageProxy;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.conditions.Conditions;
 import io.fluentlenium.core.conditions.ConditionsObject;

@@ -8,25 +8,7 @@ import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.hook.Hook;
-import io.fluentlenium.core.hook.HookOptions;
-import io.fluentlenium.core.hook.NoHook;
-import io.fluentlenium.core.proxy.LocatorHandler;
-import io.fluentlenium.core.proxy.LocatorProxies;
-import io.fluentlenium.adapter.FluentAdapter;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.components.ComponentsManager;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.hook.Hook;
-import io.fluentlenium.core.hook.HookOptions;
-import io.fluentlenium.core.hook.NanoHook;
-import io.fluentlenium.core.hook.NanoHookAnnotation;
-import io.fluentlenium.core.hook.NanoHookOptions;
-import io.fluentlenium.core.hook.NoHook;
+import io.fluentlenium.core.hook.*;
 import io.fluentlenium.core.proxy.LocatorHandler;
 import io.fluentlenium.core.proxy.LocatorProxies;
 import org.junit.After;
@@ -47,10 +29,7 @@ import java.util.function.Supplier;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentInjectorHookTest {

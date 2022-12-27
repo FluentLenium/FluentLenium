@@ -1,28 +1,18 @@
 package io.fluentlenium.adapter.junit.integration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
-
+import io.fluentlenium.adapter.junit.FluentTest;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import io.fluentlenium.configuration.FluentConfiguration;
 import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import io.fluentlenium.adapter.junit.FluentTest;
-import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
-import io.fluentlenium.configuration.FluentConfiguration;
-import io.fluentlenium.configuration.FluentConfiguration.BooleanValue;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.mockito.Mockito;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOError;
@@ -32,6 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 @NotThreadSafe
 public class FluentTestTest {

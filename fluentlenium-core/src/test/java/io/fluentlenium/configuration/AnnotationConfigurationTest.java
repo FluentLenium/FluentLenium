@@ -1,13 +1,12 @@
 package io.fluentlenium.configuration;
 
+import io.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
+import io.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import io.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationDefaults;
-import io.fluentlenium.configuration.PropertiesBackendConfigurationTest.DummyConfigurationFactory;
 
 /**
  * Unit test for {@link AnnotationConfiguration}.

@@ -1,13 +1,5 @@
 package io.fluentlenium.core.inject;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.components.ComponentsManager;
-import io.fluentlenium.core.domain.FluentListImpl;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.ComponentsManager;
@@ -22,6 +14,9 @@ import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Field;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit test for {@link FluentElementInjectionSupportValidator}.

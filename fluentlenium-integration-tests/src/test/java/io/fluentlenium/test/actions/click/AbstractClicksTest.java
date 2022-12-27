@@ -1,8 +1,8 @@
 package io.fluentlenium.test.actions.click;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import io.fluentlenium.test.IntegrationFluentTest;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 abstract class AbstractClicksTest extends IntegrationFluentTest {
 

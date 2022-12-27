@@ -8,9 +8,9 @@ import io.fluentlenium.configuration.FluentConfiguration;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Objects.nonNull;
 import static io.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 import static io.fluentlenium.adapter.cucumber.FluentTestContainer.setConfigClass;
+import static java.util.Objects.nonNull;
 
 /**
  * It is an object factory for creating Cucumber steps objects in FluentLenium injection container.

@@ -1,8 +1,6 @@
 package io.fluentlenium.adapter;
 
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import io.fluentlenium.configuration.WebDrivers;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import io.fluentlenium.configuration.ConfigurationProperties;
 import io.fluentlenium.configuration.WebDrivers;
 import io.fluentlenium.core.FluentControl;

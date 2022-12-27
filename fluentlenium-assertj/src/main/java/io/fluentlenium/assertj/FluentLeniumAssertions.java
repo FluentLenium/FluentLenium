@@ -1,13 +1,5 @@
 package io.fluentlenium.assertj;
 
-import io.fluentlenium.assertj.custom.FluentListAssert;
-import io.fluentlenium.assertj.custom.FluentWebElementAssert;
-import io.fluentlenium.assertj.custom.PageAssert;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.alert.AlertImpl;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
-import org.assertj.core.api.Assertions;
 import io.fluentlenium.assertj.custom.AlertAssert;
 import io.fluentlenium.assertj.custom.FluentListAssert;
 import io.fluentlenium.assertj.custom.FluentWebElementAssert;
@@ -16,6 +8,7 @@ import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.alert.AlertImpl;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
+import org.assertj.core.api.Assertions;
 
 /**
  * FluentLenium assertions entry point.

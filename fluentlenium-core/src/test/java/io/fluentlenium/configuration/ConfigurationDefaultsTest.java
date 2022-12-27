@@ -1,7 +1,7 @@
 package io.fluentlenium.configuration;
 
-import org.assertj.core.api.Assertions;
 import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.beans.IntrospectionException;

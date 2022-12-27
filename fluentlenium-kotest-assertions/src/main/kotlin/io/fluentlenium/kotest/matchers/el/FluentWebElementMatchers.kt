@@ -1,10 +1,10 @@
 package io.fluentlenium.kotest.matchers.el
 
+import io.fluentlenium.core.domain.FluentWebElement
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
-import io.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.Dimension
 
 /**

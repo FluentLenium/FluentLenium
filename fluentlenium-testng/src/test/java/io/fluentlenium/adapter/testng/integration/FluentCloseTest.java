@@ -1,7 +1,6 @@
 package io.fluentlenium.adapter.testng.integration;
 
 import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
-import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 

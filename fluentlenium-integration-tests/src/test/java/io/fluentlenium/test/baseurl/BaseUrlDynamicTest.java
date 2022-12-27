@@ -1,15 +1,12 @@
 package io.fluentlenium.test.baseurl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.annotation.PageUrl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.annotation.PageUrl;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class BaseUrlDynamicTest extends IntegrationFluentTest {
 

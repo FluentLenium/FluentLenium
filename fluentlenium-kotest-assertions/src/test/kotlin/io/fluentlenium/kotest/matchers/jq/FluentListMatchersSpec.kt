@@ -1,12 +1,12 @@
 package io.fluentlenium.kotest.matchers.jq
 
+import io.fluentlenium.adapter.kotest.jq
+import io.fluentlenium.kotest.matchers.config.MatcherBase
+import io.fluentlenium.kotest.matchers.config.shouldAssert
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
-import io.fluentlenium.adapter.kotest.jq
-import io.fluentlenium.kotest.matchers.config.MatcherBase
-import io.fluentlenium.kotest.matchers.config.shouldAssert
 import org.openqa.selenium.Dimension
 
 class FluentListMatchersSpec : MatcherBase(

@@ -1,10 +1,9 @@
 package io.fluentlenium.core.action;
 
-import java.util.function.Supplier;
-
-import io.fluentlenium.core.script.JavascriptControl;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.script.JavascriptControl;
+
+import java.util.function.Supplier;
 
 /**
  * Javascript actions that can be used on a list or on a web element.

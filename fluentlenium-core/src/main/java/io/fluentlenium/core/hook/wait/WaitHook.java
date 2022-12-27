@@ -4,10 +4,6 @@ import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.hook.BaseFluentHook;
 import io.fluentlenium.core.wait.FluentWait;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.hook.BaseFluentHook;
-import io.fluentlenium.core.wait.FluentWait;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 

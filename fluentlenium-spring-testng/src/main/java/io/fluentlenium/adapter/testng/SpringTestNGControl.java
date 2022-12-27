@@ -4,10 +4,6 @@ import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.configuration.ConfigurationFactoryProvider;
 import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.adapter.FluentControlContainer;
-import io.fluentlenium.configuration.Configuration;
-import io.fluentlenium.configuration.ConfigurationFactoryProvider;
-import io.fluentlenium.core.FluentControl;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 
 class SpringTestNGControl extends AbstractTestNGSpringContextTests implements FluentControl {

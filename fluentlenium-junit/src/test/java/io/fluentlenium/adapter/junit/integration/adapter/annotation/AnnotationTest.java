@@ -1,9 +1,7 @@
 package io.fluentlenium.adapter.junit.integration.adapter.annotation;
 
-import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-
-import org.assertj.core.api.Assertions;
 import io.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 @CustomAnnotation("AwesomeTestClass")

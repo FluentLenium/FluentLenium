@@ -1,10 +1,10 @@
 package io.fluentlenium.adapter.kotest.funspec
 
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
 import io.fluentlenium.adapter.kotest.FluentFunSpec
 import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import io.fluentlenium.adapter.kotest.jq
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 
 class ExampleFunSpec : FluentFunSpec({
     test("Title should be correct") {

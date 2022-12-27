@@ -1,10 +1,8 @@
 package io.fluentlenium.core.inject;
 
 import io.fluentlenium.core.components.ComponentsManager;
-import io.fluentlenium.utils.CollectionUtils;
-import io.fluentlenium.utils.ReflectionUtils;
-import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.utils.CollectionUtils;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebElement;
 
@@ -13,9 +11,8 @@ import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
 import static io.fluentlenium.core.inject.InjectionAnnotationSupport.isNoInject;
-import static io.fluentlenium.utils.CollectionUtils.isList;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Provides method for validating whether the injection of a field into a container is supported,

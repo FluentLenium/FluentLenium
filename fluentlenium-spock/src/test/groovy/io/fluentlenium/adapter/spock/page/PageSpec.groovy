@@ -1,9 +1,7 @@
 package io.fluentlenium.adapter.spock.page
 
-
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import io.fluentlenium.adapter.spock.FluentSpecification
-import io.fluentlenium.core.annotation.Page
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 
 class PageSpec extends FluentSpecification {
 

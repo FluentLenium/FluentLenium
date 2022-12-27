@@ -1,8 +1,8 @@
 package io.fluentlenium.kotest.matchers.el
 
-import io.kotest.matchers.shouldNot
 import io.fluentlenium.core.hook.wait.Wait
 import io.fluentlenium.kotest.matchers.config.MatcherBase
+import io.kotest.matchers.shouldNot
 
 @Wait(timeout = 1)
 class FluentWebElementWaitHookSpec : MatcherBase({

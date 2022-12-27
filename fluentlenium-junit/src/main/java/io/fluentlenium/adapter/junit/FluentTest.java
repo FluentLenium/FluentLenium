@@ -2,8 +2,6 @@ package io.fluentlenium.adapter.junit;
 
 import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import io.fluentlenium.utils.SeleniumVersionChecker;
-import io.fluentlenium.utils.SeleniumVersionChecker;
-import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.rules.TestRule;

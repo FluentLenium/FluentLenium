@@ -1,26 +1,21 @@
 package io.fluentlenium.adapter;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
-import static org.mockito.Mockito.verify;
-import static org.openqa.selenium.remote.Browser.HTMLUNIT;
-
+import io.fluentlenium.configuration.ConfigurationProperties;
 import io.fluentlenium.utils.ScreenshotUtil;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.configuration.ConfigurationProperties;
 import org.junit.Test;
 import org.junit.internal.AssumptionViolatedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WrapsDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.openqa.selenium.remote.Browser.HTMLUNIT;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentAdapterTest {

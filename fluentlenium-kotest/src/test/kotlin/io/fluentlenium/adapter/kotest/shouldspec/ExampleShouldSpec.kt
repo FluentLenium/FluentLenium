@@ -1,10 +1,10 @@
 package io.fluentlenium.adapter.kotest.shouldspec
 
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
 import io.fluentlenium.adapter.kotest.FluentShouldSpec
 import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import io.fluentlenium.adapter.kotest.jq
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 
 class ExampleShouldSpec : FluentShouldSpec({
     context("Should Spec") {

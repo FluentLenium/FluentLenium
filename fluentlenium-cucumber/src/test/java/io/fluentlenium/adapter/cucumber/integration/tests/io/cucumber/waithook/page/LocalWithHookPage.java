@@ -4,12 +4,7 @@ import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.hook.wait.Wait;
 import io.fluentlenium.utils.UrlUtils;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.hook.wait.Wait;
 import org.openqa.selenium.support.FindBy;
-
-import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 @Wait
 public class LocalWithHookPage extends FluentPage {

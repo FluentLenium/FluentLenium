@@ -1,13 +1,6 @@
 package io.fluentlenium.configuration;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
-import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.configuration.DefaultWebDriverFactories.RemoteWebDriverFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -16,6 +9,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 public class RemoteWebDriverTest {
     private DefaultWebDriverFactories.RemoteWebDriverFactory factorySpy;

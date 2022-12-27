@@ -1,7 +1,7 @@
 package io.fluentlenium.test.htmldump;
 
-import org.apache.commons.io.IOUtils;
 import io.fluentlenium.test.IntegrationFluentTest;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

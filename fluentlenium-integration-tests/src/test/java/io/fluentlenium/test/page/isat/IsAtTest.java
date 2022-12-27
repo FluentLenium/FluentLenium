@@ -2,14 +2,12 @@ package io.fluentlenium.test.page.isat;
 
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.FindBy;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class IsAtTest extends IntegrationFluentTest {
     @Page

@@ -1,12 +1,11 @@
 package io.fluentlenium.test.param;
 
 import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class FluentListParamTest extends IntegrationFluentTest {
 

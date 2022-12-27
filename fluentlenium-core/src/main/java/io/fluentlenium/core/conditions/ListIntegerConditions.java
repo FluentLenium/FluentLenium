@@ -1,8 +1,8 @@
 package io.fluentlenium.core.conditions;
 
-import java.util.List;
-
 import io.fluentlenium.core.domain.FluentWebElement;
+
+import java.util.List;
 
 /**
  * Conditions API for FluentLists.

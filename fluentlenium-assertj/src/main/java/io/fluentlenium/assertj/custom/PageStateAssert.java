@@ -4,8 +4,6 @@ import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.PageUrl;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
 
 /**
  * Interface for asserting the state of {@link FluentPage} objects.

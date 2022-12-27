@@ -29,32 +29,6 @@ import io.fluentlenium.utils.UrlUtils;
 import io.fluentlenium.utils.chromium.ChromiumApi;
 import io.fluentlenium.utils.chromium.ChromiumControl;
 import io.fluentlenium.utils.chromium.ChromiumControlImpl;
-import io.fluentlenium.configuration.Configuration;
-import io.fluentlenium.core.action.KeyboardActions;
-import io.fluentlenium.core.action.MouseActions;
-import io.fluentlenium.core.action.WindowAction;
-import io.fluentlenium.core.alert.Alert;
-import io.fluentlenium.core.alert.AlertImpl;
-import io.fluentlenium.core.components.ComponentsManager;
-import io.fluentlenium.core.css.CssControl;
-import io.fluentlenium.core.css.CssControlImpl;
-import io.fluentlenium.core.css.CssSupport;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.events.ComponentsEventsRegistry;
-import io.fluentlenium.core.events.EventsRegistry;
-import io.fluentlenium.core.inject.ContainerContext;
-import io.fluentlenium.core.inject.DefaultContainerInstantiator;
-import io.fluentlenium.core.inject.FluentInjector;
-import io.fluentlenium.core.performance.DefaultPerformanceTiming;
-import io.fluentlenium.core.performance.PerformanceTiming;
-import io.fluentlenium.core.script.FluentJavascript;
-import io.fluentlenium.core.search.Search;
-import io.fluentlenium.core.wait.FluentWait;
-import io.fluentlenium.utils.UrlUtils;
-import io.fluentlenium.utils.chromium.ChromiumApi;
-import io.fluentlenium.utils.chromium.ChromiumControl;
-import io.fluentlenium.utils.chromium.ChromiumControlImpl;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
@@ -63,10 +37,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.Date;
 import java.util.Set;
-
-import static io.fluentlenium.core.domain.ElementUtils.getWrappedElement;
-import static io.fluentlenium.utils.Preconditions.checkArgument;
-import static io.fluentlenium.utils.Preconditions.checkState;
 
 /**
  * Wrapper class for a {@link WebDriver} instance which also offers shortcut and convenience methods,

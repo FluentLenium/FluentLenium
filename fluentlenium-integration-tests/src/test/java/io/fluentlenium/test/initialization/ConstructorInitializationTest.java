@@ -1,7 +1,7 @@
 package io.fluentlenium.test.initialization;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.fluentlenium.adapter.junit.jupiter.FluentTest;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;

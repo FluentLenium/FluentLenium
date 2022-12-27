@@ -1,7 +1,5 @@
 package io.fluentlenium.adapter.spock
 
-
-import io.fluentlenium.utils.SeleniumVersionChecker
 import io.fluentlenium.adapter.junit.FluentTestRule
 import org.junit.Rule
 import org.junit.rules.TestRule

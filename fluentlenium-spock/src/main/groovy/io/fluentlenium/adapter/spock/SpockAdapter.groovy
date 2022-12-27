@@ -1,30 +1,16 @@
 package io.fluentlenium.adapter.spock
 
 
-import io.fluentlenium.adapter.DefaultSharedMutator
-import io.fluentlenium.adapter.IFluentAdapter
-import io.fluentlenium.adapter.SharedMutator
-import io.fluentlenium.adapter.TestRunnerAdapter
-import io.fluentlenium.adapter.exception.AnnotationNotFoundException
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
 import org.openqa.selenium.WebDriver
 
 import java.lang.annotation.Annotation
 
-import static io.fluentlenium.adapter.TestRunnerCommon.deleteCookies
-import static io.fluentlenium.adapter.TestRunnerCommon.doHtmlDump
-import static io.fluentlenium.adapter.TestRunnerCommon.doScreenshot
-import static io.fluentlenium.adapter.TestRunnerCommon.getTestDriver
-import static io.fluentlenium.adapter.TestRunnerCommon.quitMethodAndThreadDrivers
+import static io.fluentlenium.adapter.TestRunnerCommon.*
 
 // Intellij is wrong here - do not delete
-import static io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle
+
 import static io.fluentlenium.utils.ScreenshotUtil.isIgnoredException
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.clearThreadLocals
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.getClassFromThread
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.getMethodNameFromThread
-import static io.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMethodValues
+import static io.fluentlenium.utils.ThreadLocalAdapterUtil.*
 
 class SpockAdapter extends SpockControl implements io.fluentlenium.adapter.TestRunnerAdapter, io.fluentlenium.adapter.IFluentAdapter {
 

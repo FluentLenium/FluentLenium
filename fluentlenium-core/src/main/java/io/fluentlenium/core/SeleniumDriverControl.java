@@ -2,7 +2,6 @@ package io.fluentlenium.core;
 
 import io.appium.java_client.AppiumDriver;
 import io.fluentlenium.adapter.FluentAdapter;
-import io.fluentlenium.adapter.FluentAdapter;
 import org.openqa.selenium.WebDriver;
 
 /**

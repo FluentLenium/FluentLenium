@@ -1,24 +1,6 @@
 package io.fluentlenium.core.domain;
 
 import io.appium.java_client.AppiumDriver;
-import io.fluentlenium.core.action.*;
-import io.fluentlenium.core.capabilities.CapabilitiesControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.conditions.FluentConditions;
-import io.fluentlenium.core.conditions.WebElementConditions;
-import io.fluentlenium.core.events.EventsControl;
-import io.fluentlenium.core.events.EventsRegistry;
-import io.fluentlenium.core.inject.ContainerContext;
-import io.fluentlenium.core.inject.FluentInjectControl;
-import io.fluentlenium.core.inject.Unshadower;
-import io.fluentlenium.core.navigation.NavigationControl;
-import io.fluentlenium.core.script.FluentJavascript;
-import io.fluentlenium.core.script.JavascriptControl;
-import io.fluentlenium.core.search.Search;
-import io.fluentlenium.core.search.SearchControl;
-import io.fluentlenium.core.search.SearchFilter;
-import io.fluentlenium.core.snapshot.SnapshotControl;
-import io.fluentlenium.utils.SupplierOfInstance;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.SeleniumDriverControl;

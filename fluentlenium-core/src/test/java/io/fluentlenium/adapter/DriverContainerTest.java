@@ -2,7 +2,6 @@ package io.fluentlenium.adapter;
 
 import io.fluentlenium.core.FluentDriver;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.FluentDriver;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +11,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DriverContainerTest {

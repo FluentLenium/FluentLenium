@@ -1,7 +1,6 @@
 package io.fluentlenium.core.filter.matcher;
 
 import io.fluentlenium.core.filter.AttributeFilter;
-import io.fluentlenium.core.filter.AttributeFilter;
 import org.junit.Test;
 
 import java.util.regex.Pattern;

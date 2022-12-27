@@ -1,12 +1,13 @@
 package io.fluentlenium.configuration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CapabilitiesJsonParsingTest {
 

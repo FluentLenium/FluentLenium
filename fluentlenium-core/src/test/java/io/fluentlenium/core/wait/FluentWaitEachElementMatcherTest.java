@@ -1,22 +1,5 @@
 package io.fluentlenium.core.wait;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Predicate;
-
-import io.fluentlenium.core.FluentDriver;
-import io.fluentlenium.core.conditions.FluentListConditions;
-import io.fluentlenium.core.conditions.WebElementConditions;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.FluentDriver;
 import io.fluentlenium.core.conditions.FluentListConditions;
 import io.fluentlenium.core.conditions.WebElementConditions;
@@ -31,6 +14,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 @SuppressWarnings("PMD.ExcessivePublicCount")

@@ -1,8 +1,8 @@
 package io.fluentlenium.kotest.matchers.config
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.fluentlenium.adapter.kotest.FluentStringSpec
 import io.fluentlenium.utils.UrlUtils
+import io.kotest.assertions.throwables.shouldThrow
 
 abstract class MatcherBase(
     body: FluentStringSpec.() -> Unit = {}

@@ -1,19 +1,17 @@
 package io.fluentlenium.core.css;
 
-import static java.util.Objects.requireNonNull;
-
 import io.fluentlenium.core.script.JavascriptControl;
+import io.fluentlenium.core.wait.AwaitControl;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.openqa.selenium.WebDriverException;
-
-import io.fluentlenium.core.script.JavascriptControl;
-import io.fluentlenium.core.wait.AwaitControl;
 
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Features related to CSS loaded in the active page.

@@ -3,13 +3,9 @@ package io.fluentlenium.adapter;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import io.fluentlenium.configuration.Configuration;
-import io.fluentlenium.utils.ExceptionUtil;
-import io.fluentlenium.adapter.SharedMutator.EffectiveParameters;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
-import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.utils.ExceptionUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
@@ -17,11 +13,10 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 import static io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.METHOD;
 import static io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.THREAD;
 import static io.fluentlenium.configuration.ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL;
-import static io.fluentlenium.utils.ExceptionUtil.getCauseMessage;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public final class TestRunnerCommon {
 

@@ -1,10 +1,10 @@
 package io.fluentlenium.kotest.matchers.alert
 
+import io.fluentlenium.core.alert.Alert
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
-import io.fluentlenium.core.alert.Alert
 import org.openqa.selenium.NoAlertPresentException
 
 /**

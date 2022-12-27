@@ -1,10 +1,10 @@
 package io.fluentlenium.core.events;
 
-import static java.util.Objects.requireNonNull;
-
 import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.Method;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Context object for storing data related to registering listeners to {@link EventsRegistry}.

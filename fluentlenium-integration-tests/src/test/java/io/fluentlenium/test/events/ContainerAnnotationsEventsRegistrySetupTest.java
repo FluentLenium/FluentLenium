@@ -1,25 +1,21 @@
 package io.fluentlenium.test.events;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import com.google.common.collect.ImmutableList;
 import io.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
 import io.fluentlenium.core.events.EventsRegistry;
 import io.fluentlenium.core.events.annotations.AfterClickOn;
 import io.fluentlenium.core.events.annotations.BeforeClickOn;
-import net.jcip.annotations.NotThreadSafe;
-import io.fluentlenium.core.events.EventsRegistry;
-import io.fluentlenium.core.events.annotations.AfterClickOn;
-import io.fluentlenium.core.events.annotations.BeforeClickOn;
 import io.fluentlenium.test.IntegrationFluentTest;
-import com.google.common.collect.ImmutableList;
+import net.jcip.annotations.NotThreadSafe;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration test for {@link ContainerAnnotationsEventsRegistry} to validate that

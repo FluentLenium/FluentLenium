@@ -1,9 +1,6 @@
 package io.fluentlenium.adapter.spock.page
 
 
-import io.fluentlenium.core.FluentPage
-import io.fluentlenium.core.domain.FluentWebElement
-import io.fluentlenium.utils.UrlUtils
 import org.openqa.selenium.support.FindBy
 
 class Page1 extends io.fluentlenium.core.FluentPage {

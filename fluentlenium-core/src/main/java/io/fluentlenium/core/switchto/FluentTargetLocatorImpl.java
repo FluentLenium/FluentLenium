@@ -1,6 +1,5 @@
 package io.fluentlenium.core.switchto;
 
-import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.alert.AlertImpl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.domain.FluentWebElement;

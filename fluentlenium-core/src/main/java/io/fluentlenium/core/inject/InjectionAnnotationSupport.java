@@ -1,7 +1,6 @@
 package io.fluentlenium.core.inject;
 
 import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.hook.Hook;
 import io.fluentlenium.core.hook.HookOptions;
 

@@ -1,18 +1,16 @@
 package io.fluentlenium.adapter.testng.integration.shareddriver;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.withName;
+import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
+import io.fluentlenium.configuration.ConfigurationProperties;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.filter.FilterConstructor;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.fluentlenium.configuration.FluentConfiguration;
-import io.fluentlenium.core.filter.FilterConstructor;
-import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
-import io.fluentlenium.configuration.ConfigurationProperties;
-import io.fluentlenium.configuration.FluentConfiguration;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @FluentConfiguration(driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD)
 public class DriverPerThreadTest extends IntegrationFluentTestNg {

@@ -3,9 +3,6 @@ package io.fluentlenium.core.wait;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.conditions.Conditions;
 import io.fluentlenium.core.conditions.message.MessageProxy;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.conditions.Conditions;
-import io.fluentlenium.core.conditions.message.MessageProxy;
 
 import java.util.function.Function;
 import java.util.function.Predicate;

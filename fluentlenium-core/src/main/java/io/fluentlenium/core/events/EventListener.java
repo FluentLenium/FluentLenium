@@ -1,11 +1,7 @@
 package io.fluentlenium.core.events;
 
 import io.fluentlenium.core.domain.FluentWebElement;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 /**
  * Listener interface for events.

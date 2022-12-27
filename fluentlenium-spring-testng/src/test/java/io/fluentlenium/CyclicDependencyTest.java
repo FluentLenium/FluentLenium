@@ -2,8 +2,6 @@ package io.fluentlenium;
 
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
 import org.testng.annotations.Test;
 
 public class CyclicDependencyTest extends IntegrationFluentTestNg {

@@ -1,10 +1,10 @@
 package io.fluentlenium.adapter.kotest.wordspec
 
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
 import io.fluentlenium.adapter.kotest.FluentWordSpec
 import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import io.fluentlenium.adapter.kotest.jq
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 
 class ExampleWordSpec : FluentWordSpec({
     "Word Spec" should {

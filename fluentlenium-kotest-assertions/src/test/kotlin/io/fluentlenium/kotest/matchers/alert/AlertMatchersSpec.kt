@@ -1,10 +1,10 @@
 package io.fluentlenium.kotest.matchers.alert
 
-import io.kotest.matchers.should
-import io.kotest.matchers.shouldNot
 import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.kotest.matchers.config.MatcherBase
 import io.fluentlenium.kotest.matchers.config.shouldAssert
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldNot
 
 class AlertMatchersSpec : MatcherBase({
     "present" {

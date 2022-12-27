@@ -1,7 +1,5 @@
 package io.fluentlenium.test.events;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -9,12 +7,13 @@ import ch.qos.logback.core.read.ListAppender;
 import com.google.common.collect.ImmutableList;
 import io.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
 import io.fluentlenium.core.events.EventsRegistry;
-import io.fluentlenium.core.events.EventsRegistry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration test for {@link ContainerAnnotationsEventsRegistry} to validate that

@@ -1,13 +1,12 @@
 package io.fluentlenium.adapter.junit.integration.shareddriver;
 
-import io.fluentlenium.core.filter.FilterConstructor;
 import io.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
+import io.fluentlenium.core.filter.FilterConstructor;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.withName;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SharedDriverPerMethodByDefault extends IntegrationFluentTest {

@@ -1,8 +1,8 @@
 package io.fluentlenium.core.filter.matcher;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit test for {@link ContainsWordMatcher}.

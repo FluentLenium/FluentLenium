@@ -1,21 +1,16 @@
 package io.fluentlenium.core.components;
 
-import static io.fluentlenium.core.domain.ElementUtils.getWrappedElement;
-
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.proxy.LocatorProxies;
 import io.fluentlenium.core.proxy.ProxyElementListener;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
+import static io.fluentlenium.core.domain.ElementUtils.getWrappedElement;
 
 /**
  * Manage living components for a WebDriver instance.

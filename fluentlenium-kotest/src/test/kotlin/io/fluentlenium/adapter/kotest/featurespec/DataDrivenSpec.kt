@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.featurespec
 
-import io.kotest.datatest.withData
 import io.fluentlenium.adapter.kotest.FluentFeatureSpec
 import io.fluentlenium.adapter.kotest.TestConstants
+import io.kotest.datatest.withData
 
 class DataDrivenSpec : FluentFeatureSpec({
     feature("feature") {

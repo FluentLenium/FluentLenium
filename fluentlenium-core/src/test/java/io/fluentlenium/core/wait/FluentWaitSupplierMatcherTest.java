@@ -4,10 +4,6 @@ import io.fluentlenium.core.FluentDriver;
 import io.fluentlenium.core.conditions.FluentConditions;
 import io.fluentlenium.core.conditions.WebElementConditions;
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.FluentDriver;
-import io.fluentlenium.core.conditions.FluentConditions;
-import io.fluentlenium.core.conditions.WebElementConditions;
-import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,10 +16,7 @@ import org.openqa.selenium.WebElement;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentWaitSupplierMatcherTest {

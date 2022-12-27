@@ -1,7 +1,6 @@
 package io.fluentlenium.core.events;
 
 import io.fluentlenium.utils.ReflectionUtils;
-import io.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.InvocationTargetException;

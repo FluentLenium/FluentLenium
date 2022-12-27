@@ -1,11 +1,10 @@
 package io.fluentlenium.core;
 
-import static java.util.Objects.requireNonNull;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-
-import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.configuration.Configuration;
 import org.openqa.selenium.WebDriver;
+
+import static java.util.Objects.requireNonNull;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * Configures a {@link WebDriver} instance with timeouts from a {@link Configuration}.

@@ -1,7 +1,6 @@
 package io.fluentlenium.smoketest;
 
 import io.fluentlenium.IntegrationFluentTestNg;
-import io.fluentlenium.IntegrationFluentTestNg;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeClass;

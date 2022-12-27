@@ -5,12 +5,6 @@ import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import io.fluentlenium.adapter.SharedMutator;
 import io.fluentlenium.utils.SeleniumVersionChecker;
-import io.fluentlenium.utils.SeleniumVersionChecker;
-import io.fluentlenium.adapter.FluentControlContainer;
-import io.fluentlenium.adapter.FluentTestRunnerAdapter;
-import io.fluentlenium.adapter.SharedMutator;
-
-import static io.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 
 /**
  * Cucumber FluentLenium Test Runner Adapter.

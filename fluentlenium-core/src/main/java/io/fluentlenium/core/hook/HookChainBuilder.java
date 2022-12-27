@@ -1,10 +1,10 @@
 package io.fluentlenium.core.hook;
 
-import java.util.function.Supplier;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Builder of hook chains from element supplier, element locator supplier and hook definitions list.

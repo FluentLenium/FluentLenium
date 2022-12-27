@@ -2,7 +2,6 @@ package io.fluentlenium.core.events.annotations;
 
 import io.fluentlenium.core.events.EventsRegistry;
 import io.fluentlenium.core.events.NavigateListener;
-import io.fluentlenium.core.events.NavigateListener;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

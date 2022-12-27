@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.with;
 
 class FluentabilityTest extends IntegrationFluentTest {
 

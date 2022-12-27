@@ -1,6 +1,5 @@
 package io.fluentlenium.adapter.kotest
 
-import io.kotest.core.spec.style.StringSpec
 import io.fluentlenium.adapter.IFluentAdapter
 import io.fluentlenium.adapter.TestRunnerAdapter
 import io.fluentlenium.adapter.exception.AnnotationNotFoundException
@@ -8,6 +7,7 @@ import io.fluentlenium.adapter.kotest.internal.KoTestFluentAdapter
 import io.fluentlenium.configuration.Configuration
 import io.fluentlenium.configuration.ConfigurationFactoryProvider
 import io.fluentlenium.core.inject.ContainerFluentControl
+import io.kotest.core.spec.style.StringSpec
 
 abstract class FluentStringSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,

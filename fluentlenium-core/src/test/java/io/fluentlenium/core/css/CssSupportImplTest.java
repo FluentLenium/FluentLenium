@@ -1,14 +1,5 @@
 package io.fluentlenium.core.css;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.startsWith;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
 import io.fluentlenium.core.script.FluentJavascript;
 import io.fluentlenium.core.script.JavascriptControl;
 import io.fluentlenium.core.wait.AwaitControl;
@@ -21,10 +12,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriverException;
 
-import io.fluentlenium.core.script.FluentJavascript;
-import io.fluentlenium.core.script.JavascriptControl;
-import io.fluentlenium.core.wait.AwaitControl;
-import io.fluentlenium.core.wait.FluentWait;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit test for {@link CssSupportImpl}.

@@ -1,13 +1,11 @@
 package io.fluentlenium.test.actions.attributemodification;
 
-import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
+
+import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 class AttributeModificationTest extends IntegrationFluentTest {
 

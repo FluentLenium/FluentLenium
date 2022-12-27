@@ -1,7 +1,6 @@
 package io.fluentlenium.adapter.testng.integration;
 
 import io.fluentlenium.adapter.testng.FluentTestNg;
-import io.fluentlenium.adapter.testng.FluentTestNg;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -11,9 +10,7 @@ import org.testng.TestNG;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class DontRunTestsWhenInitFailTest {
 

@@ -1,10 +1,9 @@
 package io.fluentlenium.core.action;
 
-import java.time.Duration;
-
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.WebElement;
+
+import java.time.Duration;
 
 /**
  * All actions that can be used on the list or on a web element.

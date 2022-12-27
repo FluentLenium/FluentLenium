@@ -13,9 +13,7 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 public class DontRunTestsWhenInitFailTest {

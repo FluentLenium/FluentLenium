@@ -1,6 +1,5 @@
 package io.fluentlenium.core.filter;
 
-import io.fluentlenium.core.search.SearchFilter;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.filter.matcher.AbstractMatcher;
 import io.fluentlenium.core.filter.matcher.EqualMatcher;

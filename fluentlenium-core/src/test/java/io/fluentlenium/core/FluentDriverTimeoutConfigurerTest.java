@@ -1,11 +1,5 @@
 package io.fluentlenium.core;
 
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
-import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +9,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 
 import java.util.concurrent.TimeUnit;
+
+import static org.mockito.Mockito.*;
 
 /**
  * Unit test for {@link FluentDriverTimeoutConfigurer}.

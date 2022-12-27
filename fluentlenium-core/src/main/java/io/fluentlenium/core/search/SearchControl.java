@@ -1,7 +1,6 @@
 package io.fluentlenium.core.search;
 
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;

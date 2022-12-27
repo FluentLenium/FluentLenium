@@ -3,11 +3,7 @@ package io.fluentlenium.adapter.cucumber.integration.page;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.utils.UrlUtils;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
-
-import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 public class LocalPage extends FluentPage {
 

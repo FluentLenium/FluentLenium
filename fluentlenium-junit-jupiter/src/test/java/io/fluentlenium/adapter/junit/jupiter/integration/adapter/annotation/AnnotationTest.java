@@ -1,9 +1,9 @@
 package io.fluentlenium.adapter.junit.jupiter.integration.adapter.annotation;
 
-import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-
 import io.fluentlenium.adapter.junit.jupiter.integration.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
+
+import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 @CustomAnnotation("AwesomeTestClass")
 class AnnotationTest extends IntegrationFluentTest {

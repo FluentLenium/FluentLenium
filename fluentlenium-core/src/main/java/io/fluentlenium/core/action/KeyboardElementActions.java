@@ -1,7 +1,6 @@
 package io.fluentlenium.core.action;
 
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

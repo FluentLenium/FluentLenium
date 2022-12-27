@@ -1,10 +1,10 @@
 package io.fluentlenium.adapter.kotest.describespec
 
-import io.kotest.matchers.nulls.shouldBeNull
-import io.kotest.matchers.shouldBe
 import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import io.fluentlenium.core.events.annotations.AfterNavigateTo
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
 
 class EventSpec : FluentDescribeSpec() {
 

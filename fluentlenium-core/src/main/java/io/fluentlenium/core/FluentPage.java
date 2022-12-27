@@ -10,12 +10,6 @@ import io.fluentlenium.core.wait.AwaitControl;
 import io.fluentlenium.utils.Preconditions;
 import io.fluentlenium.utils.UrlUtils;
 import org.apache.commons.lang3.StringUtils;
-import io.fluentlenium.core.annotation.PageUrl;
-import io.fluentlenium.core.inject.Unshadower;
-import io.fluentlenium.core.page.ClassAnnotations;
-import io.fluentlenium.core.url.ParsedUrlTemplate;
-import io.fluentlenium.core.url.UrlTemplate;
-import io.fluentlenium.core.wait.AwaitControl;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -25,10 +19,6 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Optional;
-
-import static io.fluentlenium.utils.Preconditions.checkArgumentBlank;
-import static io.fluentlenium.utils.Preconditions.checkState;
-import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 /**
  * Use the Page Object Pattern to have more resilient tests.

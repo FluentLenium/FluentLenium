@@ -1,10 +1,10 @@
 package io.fluentlenium.core.conditions;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Conditions for integer

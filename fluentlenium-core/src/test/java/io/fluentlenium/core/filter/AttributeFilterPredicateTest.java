@@ -1,8 +1,5 @@
 package io.fluentlenium.core.filter;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.filter.matcher.AbstractMatcher;
 import io.fluentlenium.core.filter.matcher.MatcherType;
@@ -11,9 +8,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.filter.matcher.AbstractMatcher;
-import io.fluentlenium.core.filter.matcher.MatcherType;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit test for {@link AttributeFilterPredicate}.

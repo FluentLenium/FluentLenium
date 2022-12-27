@@ -1,7 +1,5 @@
 package io.fluentlenium.kotest.matchers.page
 
-import io.kotest.matchers.should
-import io.kotest.matchers.shouldNot
 import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.core.annotation.Page
 import io.fluentlenium.kotest.matchers.config.MatcherBase
@@ -9,6 +7,8 @@ import io.fluentlenium.kotest.matchers.config.pages.FluentleniumPage
 import io.fluentlenium.kotest.matchers.config.pages.IndexPage
 import io.fluentlenium.kotest.matchers.config.pages.IndexPageWrongClassAnnotations
 import io.fluentlenium.kotest.matchers.config.shouldAssert
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldNot
 
 class PageMatchersSpec : MatcherBase() {
 

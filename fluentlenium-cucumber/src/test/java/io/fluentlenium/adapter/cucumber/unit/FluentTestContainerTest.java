@@ -5,14 +5,10 @@ import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import io.fluentlenium.adapter.cucumber.FluentTestContainer;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.adapter.FluentAdapter;
-import io.fluentlenium.adapter.FluentControlContainer;
-import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.junit.After;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
 
 public class FluentTestContainerTest {
 

@@ -4,9 +4,6 @@ import io.fluentlenium.core.conditions.FluentConditions;
 import io.fluentlenium.core.conditions.StringConditions;
 import io.fluentlenium.core.conditions.StringConditionsImpl;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.conditions.FluentConditions;
-import io.fluentlenium.core.conditions.StringConditions;
-import io.fluentlenium.core.conditions.StringConditionsImpl;
 import org.junit.Test;
 
 import static org.mockito.Mockito.spy;

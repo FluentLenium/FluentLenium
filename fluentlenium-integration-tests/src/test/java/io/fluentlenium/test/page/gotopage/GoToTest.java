@@ -1,9 +1,8 @@
 package io.fluentlenium.test.page.gotopage;
 
 import io.fluentlenium.core.FluentPage;
-import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.test.IntegrationFluentTest;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;

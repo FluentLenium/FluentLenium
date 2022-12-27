@@ -1,13 +1,13 @@
 package io.fluentlenium.test.await;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AwaitWithStaleElementReferenceException extends IntegrationFluentTest {
 

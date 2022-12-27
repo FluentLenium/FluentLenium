@@ -1,22 +1,14 @@
 package io.fluentlenium.adapter.spock.control
 
-
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import io.fluentlenium.adapter.spock.FluentSpecification
 import io.fluentlenium.adapter.spock.page.Page1
 import io.fluentlenium.adapter.spock.page.Page2
-import io.fluentlenium.core.WrongDriverException
-import io.fluentlenium.core.action.KeyboardActions
-import io.fluentlenium.core.action.MouseActions
-import io.fluentlenium.core.css.CssSupport
-import io.fluentlenium.core.events.EventsRegistry
-import io.fluentlenium.core.performance.PerformanceTiming
-import io.fluentlenium.utils.chromium.ChromiumApi
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import org.openqa.selenium.NoAlertPresentException
 import org.openqa.selenium.WebDriver
 
-import static org.hamcrest.CoreMatchers.not
 import static org.hamcrest.CoreMatchers.is
+import static org.hamcrest.CoreMatchers.not
 import static spock.util.matcher.HamcrestSupport.expect
 
 class SpockControlSpec extends FluentSpecification {

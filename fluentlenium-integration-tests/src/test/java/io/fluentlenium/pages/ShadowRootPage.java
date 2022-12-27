@@ -3,9 +3,6 @@ package io.fluentlenium.pages;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Unshadow;
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Unshadow;
-import io.fluentlenium.core.domain.FluentWebElement;
 
 public class ShadowRootPage extends FluentPage {
     @Override

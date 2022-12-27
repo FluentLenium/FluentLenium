@@ -2,8 +2,6 @@ package io.fluentlenium.core.proxy;
 
 import io.fluentlenium.core.domain.WrapsElements;
 import io.fluentlenium.utils.SupplierOfInstance;
-import io.fluentlenium.core.domain.WrapsElements;
-import io.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

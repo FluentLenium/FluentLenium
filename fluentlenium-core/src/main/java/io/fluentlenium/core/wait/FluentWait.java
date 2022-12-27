@@ -1,12 +1,6 @@
 package io.fluentlenium.core.wait;
 
 import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.conditions.FluentConditions;
-import io.fluentlenium.core.conditions.FluentListConditions;
-import io.fluentlenium.core.conditions.wait.WaitConditionProxy;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.utils.SupplierOfInstance;
-import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.conditions.FluentConditions;
 import io.fluentlenium.core.conditions.FluentListConditions;

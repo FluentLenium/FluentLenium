@@ -1,6 +1,5 @@
 package io.fluentlenium.adapter.spock.control
 
-
 import io.fluentlenium.adapter.FluentControlContainer
 import io.fluentlenium.adapter.spock.SpockControl
 import io.fluentlenium.adapter.spock.page.Page2
@@ -24,10 +23,10 @@ import static io.fluentlenium.configuration.ConfigurationProperties.TriggerMode.
 
 class SpockControlUnitSpec extends Specification {
 
-    io.fluentlenium.core.FluentControl mockFluentControl = Mock()
+    FluentControl mockFluentControl = Mock()
 
-    io.fluentlenium.configuration.Configuration mockConfiguration = Mock()
-    io.fluentlenium.adapter.FluentControlContainer mockFluentControlContainer = Mock() {
+    Configuration mockConfiguration = Mock()
+    FluentControlContainer mockFluentControlContainer = Mock() {
         getFluentControl() >> mockFluentControl
     }
     SpockControl spockControl = new SpockControl(
@@ -121,11 +120,11 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call get/setConfigurationFactory'() {
         when:
-        spockControl.setConfigurationFactory(io.fluentlenium.configuration.DefaultConfigurationFactory.class)
+        spockControl.setConfigurationFactory(DefaultConfigurationFactory.class)
         spockControl.getConfigurationFactory()
 
         then:
-        1 * mockConfiguration.setConfigurationFactory(io.fluentlenium.configuration.DefaultConfigurationFactory.class)
+        1 * mockConfiguration.setConfigurationFactory(DefaultConfigurationFactory.class)
         1 * mockConfiguration.getConfigurationFactory()
     }
 
@@ -343,7 +342,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newFluentList - 2/6'() {
         given:
-        io.fluentlenium.core.domain.FluentWebElement element = Mock(io.fluentlenium.core.domain.FluentWebElement)
+        FluentWebElement element = Mock(FluentWebElement)
 
         when:
         spockControl.newFluentList(element)
@@ -354,7 +353,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newFluentList - 3/6'() {
         given:
-        List<io.fluentlenium.core.domain.FluentWebElement> list = Mock(List<io.fluentlenium.core.domain.FluentWebElement>)
+        List<FluentWebElement> list = Mock(List<FluentWebElement>)
 
         when:
         spockControl.newFluentList(list)
@@ -376,8 +375,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newFluentList - 5/6'() {
         given:
-        def clazz = io.fluentlenium.core.domain.FluentWebElement.class
-        io.fluentlenium.core.domain.FluentWebElement element = Mock(io.fluentlenium.core.domain.FluentWebElement)
+        def clazz = FluentWebElement.class
+        FluentWebElement element = Mock(FluentWebElement)
 
         when:
         spockControl.newFluentList(clazz, element)
@@ -480,8 +479,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newComponentList - 2/6'() {
         given:
-        def clazz = io.fluentlenium.core.domain.FluentWebElement.class
-        io.fluentlenium.core.domain.FluentWebElement element = Mock(io.fluentlenium.core.domain.FluentWebElement)
+        def clazz = FluentWebElement.class
+        FluentWebElement element = Mock(FluentWebElement)
 
         when:
         spockControl.newComponentList(clazz, element)
@@ -492,8 +491,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newComponentList - 3/6'() {
         given:
-        def clazz = io.fluentlenium.core.domain.FluentWebElement.class
-        List<io.fluentlenium.core.domain.FluentWebElement> list = Mock(List<io.fluentlenium.core.domain.FluentWebElement>)
+        def clazz = FluentWebElement.class
+        List<FluentWebElement> list = Mock(List<FluentWebElement>)
 
         when:
         spockControl.newComponentList(clazz, list)
@@ -504,8 +503,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newComponentList - 4/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
-        def componentClazz = io.fluentlenium.core.domain.Component.class
+        def objectClazz = FluentWebElement.class
+        def componentClazz = Component.class
 
         when:
         spockControl.newComponentList(objectClazz, componentClazz)
@@ -516,9 +515,9 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newComponentList - 5/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
-        def componentClazz = io.fluentlenium.core.domain.Component.class
-        io.fluentlenium.core.domain.FluentWebElement element = Mock(io.fluentlenium.core.domain.FluentWebElement)
+        def objectClazz = FluentWebElement.class
+        def componentClazz = Component.class
+        FluentWebElement element = Mock(FluentWebElement)
 
         when:
         spockControl.newComponentList(objectClazz, componentClazz, element)
@@ -529,9 +528,9 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newComponentList - 6/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
-        def componentClazz = io.fluentlenium.core.domain.Component.class
-        List<io.fluentlenium.core.domain.FluentWebElement> list = Mock(List<io.fluentlenium.core.domain.FluentWebElement>)
+        def objectClazz = FluentWebElement.class
+        def componentClazz = Component.class
+        List<FluentWebElement> list = Mock(List<FluentWebElement>)
 
         when:
         spockControl.newComponentList(objectClazz, componentClazz, list)
@@ -542,7 +541,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call asComponentList - 1/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
+        def objectClazz = FluentWebElement.class
         WebElement element = Mock(WebElement)
 
         when:
@@ -554,7 +553,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call asComponentList - 2/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
+        def objectClazz = FluentWebElement.class
         Iterable<WebElement> iterable = Mock(Iterable<WebElement>)
 
         when:
@@ -566,7 +565,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call asComponentList - 3/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
+        def objectClazz = FluentWebElement.class
         List<WebElement> list = Mock(List<WebElement>)
 
         when:
@@ -578,8 +577,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call asComponentList - 4/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
-        def componentClazz = io.fluentlenium.core.domain.Component.class
+        def objectClazz = FluentWebElement.class
+        def componentClazz = Component.class
         WebElement element = Mock(WebElement)
 
         when:
@@ -591,8 +590,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call asComponentList - 5/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
-        def componentClazz = io.fluentlenium.core.domain.Component.class
+        def objectClazz = FluentWebElement.class
+        def componentClazz = Component.class
         Iterable<WebElement> iterable = Mock(Iterable<WebElement>)
 
         when:
@@ -604,8 +603,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call asComponentList - 6/6'() {
         given:
-        def objectClazz = io.fluentlenium.core.domain.FluentWebElement.class
-        def componentClazz = io.fluentlenium.core.domain.Component.class
+        def objectClazz = FluentWebElement.class
+        def componentClazz = Component.class
         List<WebElement> list = Mock(List<WebElement>)
 
         when:
@@ -617,7 +616,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call isComponentClass / isComponentListClass'() {
         given:
-        def clazz = io.fluentlenium.core.domain.Component.class
+        def clazz = Component.class
 
         when:
         spockControl.isComponentClass(clazz)
@@ -671,7 +670,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call newInstance'() {
         given:
-        def page = io.fluentlenium.adapter.spock.page.Page2.class
+        def page = Page2.class
 
         when:
         spockControl.newInstance(page)
@@ -682,7 +681,7 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call goTo'() {
         given:
-        io.fluentlenium.core.FluentPage page = Mock(io.fluentlenium.core.FluentPage)
+        FluentPage page = Mock(FluentPage)
         def url = "url.com"
 
         when:
@@ -698,8 +697,8 @@ class SpockControlUnitSpec extends Specification {
 
     def 'should call switchTo'() {
         given:
-        io.fluentlenium.core.domain.FluentWebElement element = Mock(io.fluentlenium.core.domain.FluentWebElement)
-        io.fluentlenium.core.domain.FluentList<io.fluentlenium.core.domain.FluentWebElement> list = Mock(io.fluentlenium.core.domain.FluentList<io.fluentlenium.core.domain.FluentWebElement>)
+        FluentWebElement element = Mock(FluentWebElement)
+        FluentList<FluentWebElement> list = Mock(FluentList<FluentWebElement>)
 
         when:
         spockControl.switchTo()
@@ -776,7 +775,7 @@ class SpockControlUnitSpec extends Specification {
     def 'should call find'() {
         given:
         List<WebElement> list = Mock(List<WebElement>)
-        io.fluentlenium.core.search.SearchFilter searchFilter = Mock(io.fluentlenium.core.search.SearchFilter)
+        SearchFilter searchFilter = Mock(SearchFilter)
         By by = Mock(By)
         def selector = ""
 

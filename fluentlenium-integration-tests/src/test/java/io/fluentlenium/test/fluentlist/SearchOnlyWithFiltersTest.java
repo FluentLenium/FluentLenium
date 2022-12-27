@@ -3,17 +3,11 @@ package io.fluentlenium.test.fluentlist;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.filter.FilterConstructor;
-import io.fluentlenium.core.domain.FluentList;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.Select;
 
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-import static io.fluentlenium.core.filter.FilterConstructor.withClass;
-import static io.fluentlenium.core.filter.FilterConstructor.withId;
-import static io.fluentlenium.core.filter.FilterConstructor.withName;
-import static io.fluentlenium.core.filter.FilterConstructor.withText;
 
 @SuppressWarnings("unchecked")
 class SearchOnlyWithFiltersTest extends IntegrationFluentTest {

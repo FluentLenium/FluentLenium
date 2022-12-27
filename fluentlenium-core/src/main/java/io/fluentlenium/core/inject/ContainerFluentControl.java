@@ -1,9 +1,6 @@
 package io.fluentlenium.core.inject;
 
-import java.util.List;
-
 import io.appium.java_client.AppiumBy;
-import io.appium.java_client.MobileBy;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentControlImpl;
 import io.fluentlenium.core.domain.FluentList;
@@ -14,6 +11,8 @@ import io.fluentlenium.core.search.SearchFilter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Container global FluentLenium control interface.

@@ -1,16 +1,13 @@
 package io.fluentlenium.core.inject;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import io.fluentlenium.core.annotation.Label;
-import io.fluentlenium.core.annotation.LabelHint;
-import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.annotation.Label;
 import io.fluentlenium.core.annotation.LabelHint;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit test for {@link LabelAnnotations}.

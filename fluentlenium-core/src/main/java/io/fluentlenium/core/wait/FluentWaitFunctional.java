@@ -1,10 +1,11 @@
 package io.fluentlenium.core.wait;
 
+import io.fluentlenium.core.FluentControl;
+import org.openqa.selenium.support.ui.Wait;
+
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import io.fluentlenium.core.FluentControl;
-import org.openqa.selenium.support.ui.Wait;
 
 /**
  * Functional API of fluent wait.

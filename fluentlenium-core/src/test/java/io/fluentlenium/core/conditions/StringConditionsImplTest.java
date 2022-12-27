@@ -1,10 +1,10 @@
 package io.fluentlenium.core.conditions;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Test;
 
 import java.util.regex.Pattern;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Unit test for {@link StringConditionsImpl}.

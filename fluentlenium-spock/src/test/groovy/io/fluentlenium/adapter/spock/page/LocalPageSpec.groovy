@@ -1,11 +1,7 @@
 package io.fluentlenium.adapter.spock.page
 
-
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import io.fluentlenium.adapter.spock.FluentSpecification
-import io.fluentlenium.core.annotation.Page
-import io.fluentlenium.core.domain.FluentList
-import io.fluentlenium.core.domain.FluentWebElement
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 
 class LocalPageSpec extends FluentSpecification {
     public static final String INPUT_VALUE = "1"

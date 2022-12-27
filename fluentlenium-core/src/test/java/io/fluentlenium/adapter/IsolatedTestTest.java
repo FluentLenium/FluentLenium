@@ -5,10 +5,6 @@ import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.proxy.LocatorProxies;
 import org.assertj.core.api.Assertions;
-import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.proxy.LocatorProxies;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -19,11 +15,7 @@ import org.openqa.selenium.support.ByIdOrName;
 
 import java.util.function.Supplier;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IsolatedTestTest {

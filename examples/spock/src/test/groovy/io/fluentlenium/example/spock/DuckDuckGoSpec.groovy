@@ -1,8 +1,8 @@
 package io.fluentlenium.example.spock
 
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import io.fluentlenium.adapter.spock.FluentSpecification
 import io.fluentlenium.core.hook.wait.Wait
+import io.github.bonigarcia.wdm.managers.ChromeDriverManager
 import org.openqa.selenium.Capabilities
 import org.openqa.selenium.Cookie
 import org.openqa.selenium.chrome.ChromeOptions

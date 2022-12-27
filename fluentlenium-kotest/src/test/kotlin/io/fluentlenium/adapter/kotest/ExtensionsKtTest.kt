@@ -1,9 +1,9 @@
 package io.fluentlenium.adapter.kotest
 
 import io.appium.java_client.AppiumBy
+import io.fluentlenium.core.filter.FilterConstructor.withName
 import io.kotest.inspectors.forOne
 import io.kotest.matchers.shouldBe
-import io.fluentlenium.core.filter.FilterConstructor.withName
 import org.openqa.selenium.By
 
 class ExtensionsKtTest : FluentStringSpec({

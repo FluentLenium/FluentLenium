@@ -1,11 +1,11 @@
 package io.fluentlenium.adapter.kotest.describespec
 
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import io.kotest.core.extensions.Extension
 import io.kotest.core.extensions.TestCaseExtension
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.matchers.shouldBe
-import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 
 class ExtensionSpec : FluentDescribeSpec() {
 

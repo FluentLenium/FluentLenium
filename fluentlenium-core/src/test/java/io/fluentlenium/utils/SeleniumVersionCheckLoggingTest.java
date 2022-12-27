@@ -12,13 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.utils.SeleniumVersionChecker.FAILED_TO_READ_MESSAGE;
-import static io.fluentlenium.utils.SeleniumVersionChecker.WRONG_VERSION_MESSAGE;
-import static io.fluentlenium.utils.SeleniumVersionChecker.readPom;
-import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.MISSING_SELENIUM_POM;
-import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.PARAMETRIZED_PARENT_CHILD_POM;
-import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.WRONG_VERSION_POM;
 
 @NotThreadSafe
 public class SeleniumVersionCheckLoggingTest {

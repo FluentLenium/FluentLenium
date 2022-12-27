@@ -1,17 +1,16 @@
 package io.fluentlenium.configuration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
-import java.util.LinkedHashMap;
-
-import io.fluentlenium.utils.ReflectionUtils;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import java.util.LinkedHashMap;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Unit test for {@link WebDriversRegistryImpl}.

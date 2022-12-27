@@ -1,12 +1,12 @@
 package io.fluentlenium.adapter.kotest.stringspec
 
-import io.kotest.assertions.throwables.shouldThrow
-import io.kotest.matchers.nulls.shouldNotBeNull
-import io.kotest.matchers.shouldBe
 import io.fluentlenium.adapter.exception.AnnotationNotFoundException
 import io.fluentlenium.adapter.kotest.FluentStringSpec
 import io.fluentlenium.adapter.kotest.MyAnnotation
 import io.fluentlenium.adapter.kotest.OtherAnnotation
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.nulls.shouldNotBeNull
+import io.kotest.matchers.shouldBe
 
 @MyAnnotation
 class StringMetadataSpec : FluentStringSpec({

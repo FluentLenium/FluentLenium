@@ -1,26 +1,18 @@
 package io.fluentlenium.core.action;
 
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.switchto.FluentTargetLocator;
+import io.fluentlenium.core.switchto.FluentTargetLocatorImpl;
+import org.openqa.selenium.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.switchto.FluentTargetLocator;
-import io.fluentlenium.core.switchto.FluentTargetLocatorImpl;
-import io.fluentlenium.core.FluentControl;
-import io.fluentlenium.core.components.ComponentInstantiator;
-import io.fluentlenium.core.domain.FluentWebElement;
-import io.fluentlenium.core.switchto.FluentTargetLocator;
-import io.fluentlenium.core.switchto.FluentTargetLocatorImpl;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 
 /**
  * Execute actions on active window.

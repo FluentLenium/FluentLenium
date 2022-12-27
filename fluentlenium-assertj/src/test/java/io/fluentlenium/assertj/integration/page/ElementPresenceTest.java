@@ -1,16 +1,14 @@
 package io.fluentlenium.assertj.integration.page;
 
 import io.fluentlenium.assertj.custom.PageAssert;
-import io.fluentlenium.assertj.integration.page.pages.IndexPage;
-import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.assertj.integration.IntegrationTest;
 import io.fluentlenium.assertj.integration.page.pages.IndexPage;
 import io.fluentlenium.core.annotation.Page;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Integration test for {@link PageAssert}.
