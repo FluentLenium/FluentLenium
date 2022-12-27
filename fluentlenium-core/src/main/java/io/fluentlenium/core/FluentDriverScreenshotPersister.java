@@ -1,0 +1,70 @@
+package io.fluentlenium.core;
+
+import io.fluentlenium.configuration.Configuration;import io.fluentlenium.utils.ImageUtils;import org.apache.commons.io.FileUtils;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.utils.ImageUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+
+import static java.util.Objects.requireNonNull;
+
+/**
+ * Persists a screenshot to a target file.
+ */
+public class FluentDriverScreenshotPersister {
+
+    private static final Logger LOGGER  = LoggerFactory.getLogger(FluentDriverScreenshotPersister.class);
+
+    private final Configuration configuration;
+    private final WebDriver driver;
+
+    public FluentDriverScreenshotPersister(Configuration configuration, WebDriver driver) {
+        this.configuration = requireNonNull(configuration);
+        this.driver = driver;
+    }
+
+    /**
+     * Persists a screenshot to the argument target file using the screenshot path from {@link Configuration}.
+     * <p>
+     * If there is no screenshot path set in the configuration, the file will be the argument file name,
+     * otherwise the argument file name will be concatenated to the screenshot path to create the destination file.
+     *
+     * @param fileName the target file to save the screenshot to
+     * @return the screenshot file
+     * @throws ScreenshotNotCreatedException when an error occurs during taking the screenshot
+     */
+    public File persistScreenshot(String fileName) {
+        try {
+            File destFile;
+            if (configuration.getScreenshotPath() == null) {
+                destFile = new File(fileName);
+            } else {
+                destFile = Paths.get(configuration.getScreenshotPath(), fileName).toFile();
+            }
+            FileUtils.writeByteArrayToFile(destFile, prepareScreenshot());
+            LOGGER.info("Created screenshot at: " + destFile.getAbsolutePath());
+
+            return destFile;
+        } catch (IOException e) {
+            throw new ScreenshotNotCreatedException("Error when taking the screenshot", e);
+        }
+    }
+
+    private byte[] prepareScreenshot() {
+        byte[] screenshot;
+        try {
+            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        } catch (UnhandledAlertException uae) {
+            screenshot = new ImageUtils(driver).handleAlertAndTakeScreenshot();
+        }
+        return screenshot;
+    }
+}
