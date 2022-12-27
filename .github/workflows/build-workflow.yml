@@ -5,7 +5,7 @@ name: Java pipeline
 
 on:
   push:
-    branches: 
+    branches:
       - develop
   pull_request:
     branches: [ develop ]
@@ -29,28 +29,28 @@ jobs:
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: 11
-        distribution: 'zulu'
-        cache: "maven"
-    - name: Java 11 - unit & integration tests code coverage
-      run: |
-        mvn -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
-    - name: Publish Test reports
-      uses: mikepenz/action-junit-report@v2
-      if: always() # always run even if the previous step fails
-      with:
-        check_name: Java 11 Test Reports
-        report_paths: '**/target/*-reports/TEST-*.xml'
-    - name: Coveralls report
-      if: needs.check-env.outputs.repo-token-available == 'true'
-      env:
-        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-      run: |
-        mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: 'zulu'
+          cache: "maven"
+      - name: Java 11 - unit & integration tests code coverage
+        run: |
+          mvn -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v2
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Java 11 Test Reports
+          report_paths: '**/target/*-reports/TEST-*.xml'
+      - name: Coveralls report
+        if: needs.check-env.outputs.repo-token-available == 'true'
+        env:
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        run: |
+          mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-build:
     needs: [ check-env ]
@@ -99,15 +99,15 @@ jobs:
   java17-javadoc:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 17
-      uses: actions/setup-java@v2
-      with:
-        java-version: 17
-        distribution: 'zulu'
-        cache: "maven"
-    - name: Java 17 - JavaDoc
-      run: mvn -B -Pjava17 javadoc:aggregate
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: 'zulu'
+          cache: "maven"
+      - name: Java 17 - JavaDoc
+        run: mvn -B -Pjava17 javadoc:aggregate
 
   compile-gradle-example:
     runs-on: ubuntu-latest

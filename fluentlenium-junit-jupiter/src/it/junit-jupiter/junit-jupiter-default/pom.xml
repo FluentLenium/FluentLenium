@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.fluentlenium.it</groupId>
+        <groupId>io.fluentlenium.it</groupId>
         <artifactId>junit-jupiter</artifactId>
         <version>testing</version>
     </parent>
@@ -15,12 +15,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-assertj</artifactId>
             <scope>test</scope>
         </dependency>
@@ -48,7 +48,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <fluentlenium.capabilities>{"goog:chromeOptions": {"args": ["headless","no-sandbox",
+                            "disable-gpu", "disable-dev-shm-usage"]}}
+                        </fluentlenium.capabilities>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

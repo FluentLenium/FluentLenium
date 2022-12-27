@@ -2,19 +2,20 @@ package cucumber.runtime.java.fluentlenium;
 
 import io.cucumber.core.backend.ObjectFactory;
 import io.cucumber.core.exception.CucumberException;
-import org.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import io.fluentlenium.configuration.FluentConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
+import static io.fluentlenium.adapter.cucumber.FluentTestContainer.setConfigClass;
 import static java.util.Objects.nonNull;
-import static org.fluentlenium.adapter.cucumber.FluentTestContainer.FLUENT_TEST;
-import static org.fluentlenium.adapter.cucumber.FluentTestContainer.setConfigClass;
 
 /**
  * It is an object factory for creating Cucumber steps objects in FluentLenium injection container.
  * <p>
- * It also configures a config class which is either a subclass of {@link org.fluentlenium.adapter.cucumber.FluentCucumberTest}
+ * It also configures a config class which is either a subclass of {@link FluentCucumberTest}
  * annotated with {@code @FluentConfiguration}, or if there is no such class, then sets it as null.
  * <p>
  * Since a FluentLenium configuration can be configured not only via the {@link FluentConfiguration} annotation but in

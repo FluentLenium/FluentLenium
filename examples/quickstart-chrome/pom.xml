@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fluentlenium-examples-quickstart-chrome</artifactId>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <version>6.0.0-SNAPSHOT</version>
 
     <properties>
@@ -38,12 +38,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-junit</artifactId>
             <version>${fluentlenium.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-assertj</artifactId>
             <version>${fluentlenium.version}</version>
         </dependency>

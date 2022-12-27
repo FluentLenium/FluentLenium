@@ -1,7 +1,7 @@
-package org.fluentlenium.it;
+package io.fluentlenium.it;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
+import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,0 +1,28 @@
+package io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.waithook.page;
+
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.hook.wait.Wait;
+import io.fluentlenium.utils.UrlUtils;
+import org.openqa.selenium.support.FindBy;
+
+@Wait
+public class LocalWithHookPage extends FluentPage {
+
+    @FindBy(css = "a#linkToPage2")
+    private FluentWebElement link;
+
+    @Override
+    public String getUrl() {
+        return UrlUtils.getAbsoluteUrlFromFile("html/index.html");
+    }
+
+    @Override
+    public void isAtUsingUrl(String urlTemplate) {
+        // Skip because it doesn't work with file:// urls ...
+    }
+
+    public void clickLink() {
+        link.click();
+    }
+}

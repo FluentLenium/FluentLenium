@@ -35,6 +35,7 @@ Each config property can be overridden by system property.
 # Running web mobile devices tests locally on Simulators/Emulators
 
 How to setup local mobile environment
+
 - [iOS Guide](https://medium.com/2359media/tutorial-automated-testing-on-ios-with-appium-test-ng-and-java-on-mac-bc115d0ec881)
 - [Android Guide](https://medium.com/2359media/tutorial-automated-testing-on-android-and-ios-with-appium-testng-and-java-on-mac-210119edf323)
 - [Appium Install](https://www.swtestacademy.com/appium-tutorial/)

@@ -10,7 +10,7 @@
         </encoder>
     </appender>
 
-    <logger name="io.kotlintest.provided" level="INFO" />
+    <logger name="io.kotlintest.provided" level="INFO"/>
 
     <root level="WARN">
         <appender-ref ref="CONSOLE"/>
