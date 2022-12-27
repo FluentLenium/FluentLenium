@@ -1,8 +1,8 @@
-package org.fluentlenium.it;
+package io.fluentlenium.it;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.core.FluentControl;
+import io.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.core.FluentControl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;

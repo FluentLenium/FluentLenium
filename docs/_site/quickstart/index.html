@@ -1,432 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+<!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8"/>
 
-  <title>Quick Start</title>
-  <meta name="Description" content="FluentLenium is a website automation framework which
+    <title>Quick Start</title>
+    <meta name="Description" content="FluentLenium is a website automation framework which
    extends Selenium to write reliable and resilient UI functional tests.
     This framework is React ready. Written and maintained by people who
      are automating browser-based tests on a daily basis.">
-  <meta name="author" content="FluentLenium" />
-  
-  
+    <meta name="author" content="FluentLenium"/>
 
-  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
-    
-      
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/bootstrap-social.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
-  
+    <link rel="alternate" type="application/rss+xml"
+          title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests."
+          href="/feed.xml"/>
 
-    
-  
-  
 
-  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
 
-  <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Quick Start" />
-  <meta property="og:type" content="website" />
-  
-  <meta property="og:url" content="http://fluentlenium.io/quickstart/" />
-  
-  
-  <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
-  
-  <!-- Twitter summary cards -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@FluentLenium" />
-  <meta name="twitter:creator" content="@FluentLenium" />
-  <meta name="twitter:title" content="Quick Start" />
-  <meta name="twitter:description" content="## Table of Contents - [Choosing FluentLenium version](#choose-the-right-version) - [Maven pom configuration](#maven-pom-configuration) - [Basic FluentLenium test](#basic-fluentlenium-test) - [Page Object Pattern example](#page-object-pattern-example) - [More examples](#more-examples) ## Choose the right version FluentLenium 4.x is the newest version of FluentLenium it is based on JDK 11 it includes latest enhancements and features, but..." />
-  
-  <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
 
-  gtag('config', 'UA-132760260-1');
-</script>
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+
+    <link rel="stylesheet" href="/css/main.css"/>
+
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"/>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"/>
+
+
+    <!-- Facebook OpenGraph tags -->
+    <meta property="og:title" content="Quick Start"/>
+    <meta property="og:type" content="website"/>
+
+    <meta property="og:url" content="http://fluentlenium.io/quickstart/"/>
+
+
+    <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <!-- Twitter summary cards -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@FluentLenium"/>
+    <meta name="twitter:creator" content="@FluentLenium"/>
+    <meta name="twitter:title" content="Quick Start"/>
+    <meta name="twitter:description"
+          content="## Table of Contents - [Choosing FluentLenium version](#choose-the-right-version) - [Maven pom configuration](#maven-pom-configuration) - [Basic FluentLenium test](#basic-fluentlenium-test) - [Page Object Pattern example](#page-object-pattern-example) - [More examples](#more-examples) ## Choose the right version FluentLenium 4.x is the newest version of FluentLenium it is based on JDK 11 it includes latest enhancements and features, but..."/>
+
+    <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132760260-1');
+    </script>
 </head>
 
 
-  <body>
-  
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="nav navbar-nav navbar-right">
+
+
+                <li>
+
+
+                    <a href="/">Home</a>
+
+                </li>
+
+
+                <li>
+
+
+                    <a href="/quickstart">Quickstart</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/docs/test-runners">Supported Test runners</a>
+
+
+                        <a href="/docs/locators">Finding elements</a>
+
+
+                        <a href="/docs/key_features">Key features</a>
+
+
+                        <a href="/docs/configuration">Configuration</a>
+
+
+                        <a href="/docs/test-methods">Test methods</a>
+
+
+                        <a href="/docs/assertion-libraries">Assertion libraries</a>
+
+
+                        <a href="/docs/appium-support">Appium support</a>
+
+
+                        <a href="https://fluentlenium.io/javadoc">Javadoc</a>
+
+
+                    </div>
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+
+                        <a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+
+                    </div>
+                </li>
+
+
+                <li>
+
+
+                    <a href="/about">About</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+        <div class="avatar-container">
+            <div class="avatar-img-border">
+                <a href="http://fluentlenium.io ">
+                    <img class="avatar-img" src="/img/avatar-icon.png"/>
+                </a>
+            </div>
+        </div>
+
+
     </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-      
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/">Home</a>
-
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/quickstart">Quickstart</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-runners">Supported Test runners</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/locators">Finding elements</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/key_features">Key features</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/configuration">Configuration</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-methods">Test methods</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/assertion-libraries">Assertion libraries</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/appium-support">Appium support</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://fluentlenium.io/javadoc">Javadoc</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/about">About</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-      </ul>
-    </div>
-
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://fluentlenium.io ">
-	      <img class="avatar-img" src="/img/avatar-icon.png" />
-		</a>
-	  </div>
-	</div>
-	
-
-  </div>
 </nav>
 
 <nav class="sidebar">
-    
+
     <ul>
-        
+
         <li><a href="#choose-the-right-version">Choosing version</a></li>
-        
+
         <li><a href="#maven-pom-configuration">pom.xml config</a></li>
-        
+
         <li><a href="#basic-fluentlenium-test">Basic example</a></li>
-        
+
         <li><a href="#page-object-pattern-example">POP example</a></li>
-        
+
         <li><a href="#more-examples">More examples</a></li>
-        
+
     </ul>
-    
+
 </nav>
 
 
-    <!-- TODO this file has become a mess, refactor it -->
-
-
-
+<!-- TODO this file has become a mess, refactor it -->
 
 
 <header class="header-section ">
 
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-heading">
-          <h1>Quick Start</h1>
-		  
-		  
-		  
+    <div class="intro-header no-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Quick Start</h1>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 </header>
 
 
-
-
 <div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-  <li><a href="#choose-the-right-version">Choosing FluentLenium version</a></li>
-  <li><a href="#maven-pom-configuration">Maven pom configuration</a></li>
-  <li><a href="#basic-fluentlenium-test">Basic FluentLenium test</a></li>
-  <li><a href="#page-object-pattern-example">Page Object Pattern example</a></li>
-  <li><a href="#more-examples">More examples</a></li>
-</ul>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li><a href="#choose-the-right-version">Choosing FluentLenium version</a></li>
+                <li><a href="#maven-pom-configuration">Maven pom configuration</a></li>
+                <li><a href="#basic-fluentlenium-test">Basic FluentLenium test</a></li>
+                <li><a href="#page-object-pattern-example">Page Object Pattern example</a></li>
+                <li><a href="#more-examples">More examples</a></li>
+            </ul>
 
-<h2 id="choose-the-right-version">Choose the right version</h2>
+            <h2 id="choose-the-right-version">Choose the right version</h2>
 
-<p>FluentLenium 4.x is the newest version of FluentLenium it is based on JDK 11 it includes latest enhancements and features, but Selenium 3 is required to run it.</p>
+            <p>FluentLenium 4.x is the newest version of FluentLenium it is based on JDK 11 it includes latest
+                enhancements and features, but Selenium 3 is required to run it.</p>
 
-<p>FluentLenium 3.x is based on JDK 1.8 - we are not going to add new features to this version but still planning work on bugfixes.</p>
+            <p>FluentLenium 3.x is based on JDK 1.8 - we are not going to add new features to this version but still
+                planning work on bugfixes.</p>
 
-<p>FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium 2 and
-Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.</p>
+            <p>FluentLenium 1.x is in maintenance state, and no new feature will be added anymore. It requires Selenium
+                2 and
+                Java 7, but can also be used with Java 8. Selenium 3 is not supported in this version though.</p>
 
-<p>Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lambdas. It is a nice extension in
-comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find <code class="language-plaintext highlighter-rouge">await</code>
-lambda usage example.</p>
+            <p>Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lambdas. It is a nice
+                extension in
+                comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to
+                find <code class="language-plaintext highlighter-rouge">await</code>
+                lambda usage example.</p>
 
-<p>If you want to keep up to date please choose FluentLenium 4.x</p>
+            <p>If you want to keep up to date please choose FluentLenium 4.x</p>
 
-<h2 id="maven-pom-configuration">Maven pom configuration</h2>
+            <h2 id="maven-pom-configuration">Maven pom configuration</h2>
 
-<p>Assuming you want to use Java 11, Junit and AssertJ please add the following dependencies into your <code class="language-plaintext highlighter-rouge">pom.xml</code> file.</p>
+            <p>Assuming you want to use Java 11, Junit and AssertJ please add the following dependencies into your <code
+                    class="language-plaintext highlighter-rouge">pom.xml</code> file.</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;properties&gt;</span>
     <span class="nt">&lt;fluentlenium.version&gt;</span>4.5.1<span class="nt">&lt;/fluentlenium.version&gt;</span>
     <span class="nt">&lt;selenium.version&gt;</span>3.141.59<span class="nt">&lt;/selenium.version&gt;</span>
 <span class="nt">&lt;/properties&gt;</span>
 
 <span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-junit<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 <span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-assertj<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
@@ -437,220 +297,279 @@ lambda usage example.</p>
     <span class="nt">&lt;version&gt;</span>2.34.0<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="basic-fluentlenium-test">Basic FluentLenium test</h2>
+            <h2 id="basic-fluentlenium-test">Basic FluentLenium test</h2>
 
-<p>To see FluentLenium in action run this test as Junit.</p>
+            <p>To see FluentLenium in action run this test as Junit.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.fluentlenium.adapter.junit.FluentTest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.hook.wait.Wait</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.fluentlenium.adapter.junit.FluentTest</span><span
+                        class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.hook.wait.Wait</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">assertj</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">Assertions</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span
+                            class="na">assertj</span><span class="o">.</span><span class="na">core</span><span
+                            class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">Assertions</span><span
+                            class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
 
 <span class="nd">@Wait</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckGoTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckGoTest</span> <span class="kd">extends</span> <span
+                            class="nc">FluentTest</span> <span class="o">{</span>
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">titleOfDuckDuckGoShouldContainSearchQueryName</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">goTo</span><span class="o">(</span><span class="s">"https://duckduckgo.com"</span><span class="o">);</span>
-        <span class="err">$</span><span class="o">(</span><span class="s">"#search_form_input_homepage"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="s">"FluentLenium"</span><span class="o">);</span>
-        <span class="err">$</span><span class="o">(</span><span class="s">"#search_button_homepage"</span><span class="o">).</span><span class="na">submit</span><span class="o">();</span>
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">contains</span><span class="o">(</span><span class="s">"FluentLenium"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">titleOfDuckDuckGoShouldContainSearchQueryName</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="n">goTo</span><span class="o">(</span><span class="s">"https://duckduckgo.com"</span><span
+                            class="o">);</span>
+        <span class="err">$</span><span class="o">(</span><span class="s">"#search_form_input_homepage"</span><span
+                            class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span
+                            class="o">(</span><span class="s">"FluentLenium"</span><span class="o">);</span>
+        <span class="err">$</span><span class="o">(</span><span class="s">"#search_button_homepage"</span><span
+                            class="o">).</span><span class="na">submit</span><span class="o">();</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">()).</span><span class="na">contains</span><span
+                            class="o">(</span><span class="s">"FluentLenium"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="page-object-pattern-example">Page Object Pattern example</h2>
+            <h2 id="page-object-pattern-example">Page Object Pattern example</h2>
 
-<p>In order to take advantage of FluentLenium magic please use Page Object Pattern. Here is more advanced example of the same test as above.</p>
+            <p>In order to take advantage of FluentLenium magic please use Page Object Pattern. Here is more advanced
+                example of the same test as above.</p>
 
-<p>Test:</p>
+            <p>Test:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.fluentlenium.adapter.junit.FluentTest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.annotation.Page</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.fluentlenium.adapter.junit.FluentTest</span><span
+                        class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.annotation.Page</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckGoTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckGoTest</span> <span class="kd">extends</span> <span
+                            class="nc">FluentTest</span> <span class="o">{</span>
     <span class="nd">@Page</span>
     <span class="nc">DuckDuckMainPage</span> <span class="n">duckDuckMainPage</span><span class="o">;</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">titleOfDuckDuckGoShouldContainSearchQueryName</span><span class="o">()</span> <span class="o">{</span>
-        <span class="nc">String</span> <span class="n">searchPhrase</span> <span class="o">=</span> <span class="s">"searchPhrase"</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">titleOfDuckDuckGoShouldContainSearchQueryName</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">searchPhrase</span> <span class="o">=</span> <span class="s">"searchPhrase"</span><span
+                            class="o">;</span>
 
-        <span class="n">goTo</span><span class="o">(</span><span class="n">duckDuckMainPage</span><span class="o">)</span>
-                <span class="o">.</span><span class="na">typeSearchPhraseIn</span><span class="o">(</span><span class="n">searchPhrase</span><span class="o">)</span>
+        <span class="n">goTo</span><span class="o">(</span><span class="n">duckDuckMainPage</span><span
+                            class="o">)</span>
+                <span class="o">.</span><span class="na">typeSearchPhraseIn</span><span class="o">(</span><span
+                            class="n">searchPhrase</span><span class="o">)</span>
                 <span class="o">.</span><span class="na">submitSearchForm</span><span class="o">()</span>
-                <span class="o">.</span><span class="na">assertIsPhrasePresentInTheResults</span><span class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
+                <span class="o">.</span><span class="na">assertIsPhrasePresentInTheResults</span><span
+                            class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Page Object:</p>
+            <p>Page Object:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">assertj</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">Assertions</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span
+                        class="n">org</span><span class="o">.</span><span class="na">assertj</span><span
+                        class="o">.</span><span class="na">core</span><span class="o">.</span><span
+                        class="na">api</span><span class="o">.</span><span class="na">Assertions</span><span
+                        class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
 
 <span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
 
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.FluentPage</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.annotation.PageUrl</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.core.domain.FluentWebElement</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.FluentPage</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.annotation.PageUrl</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.core.domain.FluentWebElement</span><span
+                            class="o">;</span>
 <span class="kn">import</span> <span class="nn">org.openqa.selenium.support.FindBy</span><span class="o">;</span>
 
-<span class="nd">@PageUrl</span><span class="o">(</span><span class="s">"https://duckduckgo.com"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckMainPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">SEARCH_FORM_HOMEPAGE</span> <span class="o">=</span> <span class="s">"#search_form_homepage"</span><span class="o">;</span>
+<span class="nd">@PageUrl</span><span class="o">(</span><span class="s">"https://duckduckgo.com"</span><span
+                            class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DuckDuckMainPage</span> <span class="kd">extends</span> <span
+                            class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span
+                            class="nc">String</span> <span class="no">SEARCH_FORM_HOMEPAGE</span> <span
+                            class="o">=</span> <span class="s">"#search_form_homepage"</span><span class="o">;</span>
 
-    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">"#search_form_input_homepage"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">searchInput</span><span class="o">;</span>
+    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="s">"#search_form_input_homepage"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">searchInput</span><span
+                            class="o">;</span>
 
-    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">"#search_button_homepage"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">searchButton</span><span class="o">;</span>
+    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="s">"#search_button_homepage"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">searchButton</span><span
+                            class="o">;</span>
 
-    <span class="kd">public</span> <span class="nc">DuckDuckMainPage</span> <span class="nf">typeSearchPhraseIn</span><span class="o">(</span><span class="nc">String</span> <span class="n">searchPhrase</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">searchInput</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="nc">DuckDuckMainPage</span> <span
+                            class="nf">typeSearchPhraseIn</span><span class="o">(</span><span
+                            class="nc">String</span> <span class="n">searchPhrase</span><span class="o">)</span> <span
+                            class="o">{</span>
+        <span class="n">searchInput</span><span class="o">.</span><span class="na">write</span><span
+                            class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="nc">DuckDuckMainPage</span> <span class="nf">submitSearchForm</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">searchButton</span><span class="o">.</span><span class="na">submit</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="nc">DuckDuckMainPage</span> <span
+                            class="nf">submitSearchForm</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">searchButton</span><span class="o">.</span><span class="na">submit</span><span
+                            class="o">();</span>
         <span class="n">awaitUntilSearchFormDisappear</span><span class="o">();</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">assertIsPhrasePresentInTheResults</span><span class="o">(</span><span class="nc">String</span> <span class="n">searchPhrase</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">contains</span><span class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span
+                            class="nf">assertIsPhrasePresentInTheResults</span><span class="o">(</span><span class="nc">String</span> <span
+                            class="n">searchPhrase</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">()).</span><span class="na">contains</span><span
+                            class="o">(</span><span class="n">searchPhrase</span><span class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">private</span> <span class="nc">DuckDuckMainPage</span> <span class="nf">awaitUntilSearchFormDisappear</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="n">el</span><span class="o">(</span><span class="no">SEARCH_FORM_HOMEPAGE</span><span class="o">)).</span><span class="na">not</span><span class="o">().</span><span class="na">present</span><span class="o">();</span>
+    <span class="kd">private</span> <span class="nc">DuckDuckMainPage</span> <span class="nf">awaitUntilSearchFormDisappear</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span
+                            class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                            class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span
+                            class="o">(</span><span class="n">el</span><span class="o">(</span><span class="no">SEARCH_FORM_HOMEPAGE</span><span
+                            class="o">)).</span><span class="na">not</span><span class="o">().</span><span class="na">present</span><span
+                            class="o">();</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="more-examples">More examples</h2>
+            <h2 id="more-examples">More examples</h2>
 
-<p><a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples">More FluentLenium examples are available on github</a>.
-Enable them by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven profile.</p>
+            <p><a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples">More FluentLenium examples
+                are available on github</a>.
+                Enable them by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven
+                profile.</p>
 
-<p>Assuming you want to use only one browser please choose:</p>
+            <p>Assuming you want to use only one browser please choose:</p>
 
-<ul>
-  <li><strong>Chrome</strong>: <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-chrome">quickstart-chrome</a> - include <code class="language-plaintext highlighter-rouge">headless</code> example</li>
-  <li><strong>Safari</strong>: <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-safari">quickstart-safari</a></li>
-  <li><strong>Firefox</strong>: <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox">quickstart-firefox</a> - include <code class="language-plaintext highlighter-rouge">headless</code> example</li>
-  <li><strong>IE</strong>: <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-microsoft-browsers">quickstart-microsoft-browsers</a></li>
-  <li><strong>Edge</strong>: <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-microsoft-browsers">quickstart-microsoft-browsers</a></li>
-</ul>
+            <ul>
+                <li><strong>Chrome</strong>: <a
+                        href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-chrome">quickstart-chrome</a>
+                    - include <code class="language-plaintext highlighter-rouge">headless</code> example
+                </li>
+                <li><strong>Safari</strong>: <a
+                        href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-safari">quickstart-safari</a>
+                </li>
+                <li><strong>Firefox</strong>: <a
+                        href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox">quickstart-firefox</a>
+                    - include <code class="language-plaintext highlighter-rouge">headless</code> example
+                </li>
+                <li><strong>IE</strong>: <a
+                        href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-microsoft-browsers">quickstart-microsoft-browsers</a>
+                </li>
+                <li><strong>Edge</strong>: <a
+                        href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-microsoft-browsers">quickstart-microsoft-browsers</a>
+                </li>
+            </ul>
 
-<p>If you are more experienced user please choose <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring">Spring based example</a>
-which has ready to use framework supporting every browser.</p>
+            <p>If you are more experienced user please choose <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring">Spring based
+                example</a>
+                which has ready to use framework supporting every browser.</p>
 
-<p>If you want to use BDD please take a look into <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber">Cucumber example</a></p>
+            <p>If you want to use BDD please take a look into <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber">Cucumber
+                example</a></p>
 
-<p>If you want to write in Groovy please take a look into <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock">Spock example</a></p>
+            <p>If you want to write in Groovy please take a look into <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock">Spock example</a>
+            </p>
 
-<p><a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/hooks">Hook example</a> show this feature in action.</p>
+            <p><a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/hooks">Hook example</a> show
+                this feature in action.</p>
 
-	    
+
+        </div>
     </div>
-  </div>
 </div>
 
 
-    <footer>
-  <div class="container beautiful-jekyll-footer">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-          
-          <li>
-            <a href="https://github.com/FluentLenium" title="GitHub">
+<footer>
+    <div class="container beautiful-jekyll-footer">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center footer-links">
+
+
+                    <li>
+                        <a href="https://github.com/FluentLenium" title="GitHub">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-		  
-          <li>
-            <a href="https://twitter.com/FluentLenium" title="Twitter">
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="https://twitter.com/FluentLenium" title="Twitter">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-      
-		  
-		  
-		  
-		  
-      
-      
-      
-      
-		  
-        </ul>
-        <p class="copyright text-muted">
-		  FluentLenium
-		  &nbsp;&bull;&nbsp;
-		  2021
+                        </a>
+                    </li>
 
-		  
-		  &nbsp;&bull;&nbsp;
-		  <a href="http://fluentlenium.io">fluentlenium.io</a>
-		  
-	    </p>
-	        <!-- Please don't remove this, keep my open source work credited :) -->
-		<p class="theme-by text-muted">
-		  Theme by
-		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
-		</p>
-      </div>
+
+                </ul>
+                <p class="copyright text-muted">
+                    FluentLenium
+                    &nbsp;&bull;&nbsp;
+                    2021
+
+
+                    &nbsp;&bull;&nbsp;
+                    <a href="http://fluentlenium.io">fluentlenium.io</a>
+
+                </p>
+                <!-- Please don't remove this, keep my open source work credited :) -->
+                <p class="theme-by text-muted">
+                    Theme by
+                    <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
-  
-    
+
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script>
+    if (typeof jQuery == 'undefined') {
+        document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+    }
+</script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/bootstrap.min.js"></script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/main.js"></script>
 
 
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-      <script>
-      	if (typeof jQuery == 'undefined') {
-      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
-      	}
-      </script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/bootstrap.min.js"></script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/main.js"></script>
-    
-  
-
-
-
-
-  
-  </body>
+</body>
 </html>

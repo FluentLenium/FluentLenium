@@ -3,6 +3,7 @@
     <title>Fluent Selenium Documentation Container</title>
     <script>
         x = "";
+
         function alertBox() {
             alert("alertBox");
             x = "alertBox";
@@ -13,11 +14,11 @@
             var r = confirm("confirmBox");
             if (r == true) {
                 display("confirmBox OK");
-            }
-            else {
+            } else {
                 display("confirmBox CANCEL");
             }
         }
+
         function promptBox() {
             var s = prompt("promptBox", "");
             if (s != null && s != "") {

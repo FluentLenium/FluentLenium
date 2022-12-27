@@ -13,10 +13,10 @@ test {
 }
 
 dependencies {
-    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "5.0.4"
+    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "6.0.0-SNAPSHOT"
 
-    implementation "org.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
-    implementation "org.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
+    implementation "io.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
+    implementation "io.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
     testImplementation 'ch.qos.logback:logback-classic:1.4.5'
     testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.2.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -27,7 +27,7 @@ configurations.all {
     exclude group: 'io.netty', module: 'netty-transport-native-kqueue'
 }
 
-group = 'org.fluentlenium'
+group = 'io.fluentlenium'
 version = '6.0.0-SNAPSHOT'
 description = 'FluentLenium Examples Firefox'
 sourceCompatibility = '11'

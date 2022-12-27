@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.sonatype.oss</groupId>
         <artifactId>oss-parent</artifactId>
         <version>9</version>
     </parent>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
     <version>6.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -126,13 +127,15 @@
         <spring.version>6.0.3</spring.version>
         <slf4j.version>2.0.6</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v102</seleniumDevtools.artifactId>
-        <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
+        <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu",
+            "disable-dev-shm-usage"]}}
+        </fluentlenium.capabilities.default>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.fluentlenium</groupId>
+                <groupId>io.fluentlenium</groupId>
                 <artifactId>fluentlenium-testing-private</artifactId>
                 <version>${project.version}</version>
             </dependency>

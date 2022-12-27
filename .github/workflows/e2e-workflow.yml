@@ -3,7 +3,7 @@
 
 name: E2E pipeline
 
-on: [pull_request]
+on: [ pull_request ]
 
 env:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
@@ -25,15 +25,15 @@ jobs:
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Install Fluentlenium
-      uses: ./.github/actions/fluentlenium-maven-install
-    - name: E2E on Edge
-      run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+      - name: E2E on Edge
+        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   ie:
     needs: [ check-env ]
