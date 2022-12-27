@@ -1,6 +1,12 @@
 package io.fluentlenium.test.await;
 
-import io.fluentlenium.core.annotation.Label;import io.fluentlenium.core.annotation.LabelHint;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.hook.wait.Wait;import io.fluentlenium.core.wait.FluentWait;import org.assertj.core.api.ThrowableAssert;
+import io.fluentlenium.core.annotation.Label;
+import io.fluentlenium.core.annotation.LabelHint;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.hook.wait.Wait;
+import io.fluentlenium.core.wait.FluentWait;
+import org.assertj.core.api.ThrowableAssert;
 import io.fluentlenium.core.annotation.Label;
 import io.fluentlenium.core.annotation.LabelHint;
 import io.fluentlenium.core.domain.FluentList;

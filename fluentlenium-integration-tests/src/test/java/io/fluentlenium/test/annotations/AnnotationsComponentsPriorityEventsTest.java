@@ -1,6 +1,11 @@
 package io.fluentlenium.test.annotations;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.events.annotations.AfterClickOn;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.events.annotations.AfterClickOn;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.domain.FluentWebElement;

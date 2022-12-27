@@ -17,8 +17,8 @@ import org.openqa.selenium.Dimension
  * @param expectedText text to find
  * @return the matcher object
  */
-fun haveText(expectedText: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveText(expectedText: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualTexts = value.texts()
 
         return MatcherResult(
@@ -34,13 +34,13 @@ fun haveText(expectedText: String) = object : Matcher<_root_ide_package_.io.flue
 /**
  * See [haveText]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveText(text: String) =
+fun FluentList<FluentWebElement>.shouldHaveText(text: String) =
     also { it should haveText(text) }
 
 /**
  * See [haveText]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveText(text: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) =
     also { it shouldNot haveText(text) }
 
 /**
@@ -51,8 +51,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedText substring to find
  * @return the matcher object
  */
-fun haveTextContaining(expectedText: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveTextContaining(expectedText: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualTexts = value.texts()
 
         return MatcherResult(
@@ -68,13 +68,13 @@ fun haveTextContaining(expectedText: String) = object : Matcher<_root_ide_packag
 /**
  * See [haveTextContaining]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveTextContaining(text: String) =
+fun FluentList<FluentWebElement>.shouldHaveTextContaining(text: String) =
     also { it should haveTextContaining(text) }
 
 /**
  * See [haveTextContaining]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveTextContaining(text: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveTextContaining(text: String) =
     also { it shouldNot haveTextContaining(text) }
 
 /**
@@ -86,8 +86,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedPattern pattern to match
  * @return the matcher object
  */
-fun haveTextMatching(expectedPattern: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveTextMatching(expectedPattern: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualTexts = value.texts()
 
         return MatcherResult(
@@ -103,13 +103,13 @@ fun haveTextMatching(expectedPattern: String) = object : Matcher<_root_ide_packa
 /**
  * See [haveTextMatching]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveTextMatching(text: String) =
+fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
     also { it should haveTextMatching(text) }
 
 /**
  * See [haveTextMatching]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveTextMatching(text: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
     also { it shouldNot haveTextMatching(text) }
 
 /**
@@ -121,8 +121,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param id id to find
  * @return the matcher object
  */
-fun haveId(id: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveId(id: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualIds = value.ids()
 
         return MatcherResult(
@@ -138,13 +138,13 @@ fun haveId(id: String) = object : Matcher<_root_ide_package_.io.fluentlenium.cor
 /**
  * See [haveId]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveId(id: String) =
+fun FluentList<FluentWebElement>.shouldHaveId(id: String) =
     also { it should haveId(id) }
 
 /**
  * See [haveId]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveId(id: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveId(id: String) =
     also { it shouldNot haveId(id) }
 
 private const val CLASS_ATTRIBUTE = "class"
@@ -162,8 +162,8 @@ private const val CLASS_DELIMITER = " "
  * @param expectedText expected classes
  * @return the matcher object
  */
-fun haveClass(vararg expectedClasses: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val expectedList = expectedClasses.toList()
         val actualClasses = value.attributes(CLASS_ATTRIBUTE)
             .map { it.split(CLASS_DELIMITER) }
@@ -185,13 +185,13 @@ fun haveClass(vararg expectedClasses: String) = object : Matcher<_root_ide_packa
 /**
  * See [haveClass]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveClass(vararg classes: String) =
+fun FluentList<FluentWebElement>.shouldHaveClass(vararg classes: String) =
     also { it should haveClass(*classes) }
 
 /**
  * See [haveClass]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveClass(vararg classes: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveClass(vararg classes: String) =
     also { it shouldNot haveClass(*classes) }
 
 /**
@@ -203,8 +203,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedName name to find
  * @return the matcher object
  */
-fun haveName(expectedName: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveName(expectedName: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualNames = value.names()
 
         return MatcherResult(
@@ -220,13 +220,13 @@ fun haveName(expectedName: String) = object : Matcher<_root_ide_package_.io.flue
 /**
  * See [haveName]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveName(name: String) =
+fun FluentList<FluentWebElement>.shouldHaveName(name: String) =
     also { it should haveName(name) }
 
 /**
  * See [haveName]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveName(name: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveName(name: String) =
     also { it shouldNot haveName(name) }
 
 /**
@@ -238,8 +238,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedAttribute attribute to find
  * @return the matcher object
  */
-fun haveAttribute(expectedAttribute: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualAttributes = value.attributes(expectedAttribute)
 
         val anyPresent = actualAttributes.filterNotNull()
@@ -257,13 +257,13 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<_root_ide_packag
 /**
  * See [haveAttribute]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveAttribute(attribute: String) =
+fun FluentList<FluentWebElement>.shouldHaveAttribute(attribute: String) =
     also { it should haveAttribute(attribute) }
 
 /**
  * See [haveAttribute]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveAttribute(attribute: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveAttribute(attribute: String) =
     also { it shouldNot haveAttribute(attribute) }
 
 /**
@@ -275,8 +275,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedValue value to find
  * @return the matcher object
  */
-fun haveValue(expectedValue: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveValue(expectedValue: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualAttributes = value.values()
 
         return MatcherResult(
@@ -292,13 +292,13 @@ fun haveValue(expectedValue: String) = object : Matcher<_root_ide_package_.io.fl
 /**
  * See [haveValue]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveValue(value: String) =
+fun FluentList<FluentWebElement>.shouldHaveValue(value: String) =
     also { it should haveValue(value) }
 
 /**
  * See [haveValue]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveValue(value: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveValue(value: String) =
     also { it shouldNot haveValue(value) }
 
 /**
@@ -311,8 +311,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedValue attribute value
  * @return the matcher object
  */
-fun haveAttributeValue(key: String, expectedValue: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveAttributeValue(key: String, expectedValue: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualValues = value.attributes(key)
 
         return MatcherResult(
@@ -328,25 +328,25 @@ fun haveAttributeValue(key: String, expectedValue: String) = object : Matcher<_r
 /**
  * See [haveAttributeValue]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveAttributeValue(key: String, attribute: String) =
+fun FluentList<FluentWebElement>.shouldHaveAttributeValue(key: String, attribute: String) =
     also { it should haveAttributeValue(key, attribute) }
 
 /**
  * See [haveAttributeValue]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveAttributeValue(pair: Pair<String, String>) =
+fun FluentList<FluentWebElement>.shouldHaveAttributeValue(pair: Pair<String, String>) =
     shouldHaveAttributeValue(pair.first, pair.second)
 
 /**
  * See [haveAttributeValue]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveAttributeValue(pair: Pair<String, String>) =
+fun FluentList<FluentWebElement>.shouldNotHaveAttributeValue(pair: Pair<String, String>) =
     shouldNotHaveAttributeValue(pair.first, pair.second)
 
 /**
  * See [haveAttributeValue]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveAttributeValue(key: String, attribute: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveAttributeValue(key: String, attribute: String) =
     also { it shouldNot haveAttributeValue(key, attribute) }
 
 /**
@@ -358,8 +358,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedTag tagname to find
  * @return the matcher object
  */
-fun haveTagName(expectedTag: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveTagName(expectedTag: String) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualTags = value.tagNames()
 
         return MatcherResult(
@@ -375,13 +375,13 @@ fun haveTagName(expectedTag: String) = object : Matcher<_root_ide_package_.io.fl
 /**
  * See [haveTagName]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveTagName(tagName: String) =
+fun FluentList<FluentWebElement>.shouldHaveTagName(tagName: String) =
     also { it should haveTagName(tagName) }
 
 /**
  * See [haveTagName]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveTagName(tagName: String) =
+fun FluentList<FluentWebElement>.shouldNotHaveTagName(tagName: String) =
     also { it shouldNot haveTagName(tagName) }
 
 /**
@@ -393,8 +393,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  * @param expectedDimension dimension to check for
  * @return the matcher object
  */
-fun haveDimension(expectedDimension: Dimension) = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult {
+fun haveDimension(expectedDimension: Dimension) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualDimensions = value.dimensions()
 
         return MatcherResult(
@@ -416,13 +416,13 @@ fun haveDimension(expectedDimension: Pair<Int, Int>) =
 /**
  * See [haveDimension]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldHaveDimension(dimension: Dimension) =
+fun FluentList<FluentWebElement>.shouldHaveDimension(dimension: Dimension) =
     also { it should haveDimension(dimension) }
 
 /**
  * See [haveDimension]
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotHaveDimension(dimension: Dimension) =
+fun FluentList<FluentWebElement>.shouldNotHaveDimension(dimension: Dimension) =
     also { it shouldNot haveDimension(dimension) }
 
 /**
@@ -433,8 +433,8 @@ fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_
  *
  * @return the matcher object.
  */
-fun bePresent() = object : Matcher<_root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>): MatcherResult =
+fun bePresent() = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult =
         MatcherResult(
             value.present(),
             { "Elements '$value' should be present" },
@@ -447,13 +447,13 @@ fun bePresent() = object : Matcher<_root_ide_package_.io.fluentlenium.core.domai
 /**
  * @see bePresent
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldBePresent() = also {
+fun FluentList<FluentWebElement>.shouldBePresent() = also {
     it should bePresent()
 }
 
 /**
  * @see bePresent
  */
-fun _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>.shouldNotBePresent() = also {
+fun FluentList<FluentWebElement>.shouldNotBePresent() = also {
     it shouldNot bePresent()
 }

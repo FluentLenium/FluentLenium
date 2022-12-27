@@ -2,7 +2,8 @@ package io.fluentlenium.core.css;
 
 import static java.util.Objects.requireNonNull;
 
-import io.fluentlenium.core.script.JavascriptControl;import org.apache.commons.io.IOUtils;
+import io.fluentlenium.core.script.JavascriptControl;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.text.StringEscapeUtils;
 import org.openqa.selenium.WebDriverException;
 

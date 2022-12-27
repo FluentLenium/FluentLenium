@@ -1,6 +1,13 @@
 package io.fluentlenium.core.proxy;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.hook.BaseHook;import io.fluentlenium.core.hook.DefaultHookChainBuilder;import io.fluentlenium.core.hook.HookChainBuilder;import io.fluentlenium.core.hook.HookDefinition;import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.hook.BaseHook;
+import io.fluentlenium.core.hook.DefaultHookChainBuilder;
+import io.fluentlenium.core.hook.HookChainBuilder;
+import io.fluentlenium.core.hook.HookDefinition;
+import org.assertj.core.api.Assertions;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;

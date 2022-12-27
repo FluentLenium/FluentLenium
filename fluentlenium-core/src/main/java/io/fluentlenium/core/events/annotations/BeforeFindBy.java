@@ -1,6 +1,8 @@
 package io.fluentlenium.core.events.annotations;
 
-import io.fluentlenium.core.events.EventsRegistry;import io.fluentlenium.core.events.FindByListener;import io.fluentlenium.core.events.FindByListener;
+import io.fluentlenium.core.events.EventsRegistry;
+import io.fluentlenium.core.events.FindByListener;
+import io.fluentlenium.core.events.FindByListener;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

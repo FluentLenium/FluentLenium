@@ -1,7 +1,7 @@
 package io.fluentlenium.kotest.matchers.config
 
 import io.kotest.assertions.throwables.shouldThrow
-import org.fluentlenium.adapter.kotest.FluentStringSpec
+import io.fluentlenium.adapter.kotest.FluentStringSpec
 import io.fluentlenium.utils.UrlUtils
 
 abstract class MatcherBase(
@@ -9,7 +9,7 @@ abstract class MatcherBase(
 ) : FluentStringSpec(body) {
 
     fun goToFile(file: String) =
-        goTo(_root_ide_package_.io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile(file))
+        goTo(UrlUtils.getAbsoluteUrlFromFile(file))
 
     init {
         beforeTest {

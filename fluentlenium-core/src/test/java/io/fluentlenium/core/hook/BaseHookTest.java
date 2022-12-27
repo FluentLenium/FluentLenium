@@ -1,6 +1,9 @@
 package io.fluentlenium.core.hook;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.components.DefaultComponentInstantiator;import org.assertj.core.api.Assertions;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;
 import org.junit.Test;

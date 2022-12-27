@@ -9,8 +9,8 @@ import io.fluentlenium.core.domain.FluentList
 import io.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.By
 
-fun haveElement(element: _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement) = object : Matcher<_root_ide_package_.io.fluentlenium.core.FluentPage> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.FluentPage): MatcherResult =
+fun haveElement(element: FluentWebElement) = object : Matcher<FluentPage> {
+    override fun test(value: FluentPage): MatcherResult =
         MatcherResult(
             element.present(),
             { "Page should have element '$element'" },
@@ -20,11 +20,11 @@ fun haveElement(element: _root_ide_package_.io.fluentlenium.core.domain.FluentWe
         )
 }
 
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldHaveElement(element: _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement) = also { it should haveElement(element) }
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldNotHaveElement(element: _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement) = also { it shouldNot haveElement(element) }
+fun FluentPage.shouldHaveElement(element: FluentWebElement) = also { it should haveElement(element) }
+fun FluentPage.shouldNotHaveElement(element: FluentWebElement) = also { it shouldNot haveElement(element) }
 
-fun haveElements(elements: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>) = object : Matcher<_root_ide_package_.io.fluentlenium.core.FluentPage> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.FluentPage): MatcherResult =
+fun haveElements(elements: FluentList<FluentWebElement>) = object : Matcher<FluentPage> {
+    override fun test(value: FluentPage): MatcherResult =
         MatcherResult(
             elements.present(),
             { "Page should have elements '$elements'" },
@@ -34,13 +34,13 @@ fun haveElements(elements: _root_ide_package_.io.fluentlenium.core.domain.Fluent
         )
 }
 
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldNotHaveElements(element: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>) =
+fun FluentPage.shouldNotHaveElements(element: FluentList<FluentWebElement>) =
     also { it shouldNot haveElements(element) }
 
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldHaveElements(element: _root_ide_package_.io.fluentlenium.core.domain.FluentList<_root_ide_package_.io.fluentlenium.core.domain.FluentWebElement>) = also { it should haveElements(element) }
+fun FluentPage.shouldHaveElements(element: FluentList<FluentWebElement>) = also { it should haveElements(element) }
 
-fun haveElementDisplayed(element: _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement) = object : Matcher<_root_ide_package_.io.fluentlenium.core.FluentPage> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.FluentPage): MatcherResult =
+fun haveElementDisplayed(element: FluentWebElement) = object : Matcher<FluentPage> {
+    override fun test(value: FluentPage): MatcherResult =
         MatcherResult(
             element.displayed(),
             { "Page should display '$element'" },
@@ -50,12 +50,12 @@ fun haveElementDisplayed(element: _root_ide_package_.io.fluentlenium.core.domain
         )
 }
 
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldHaveElementDisplayed(element: _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement) = also { it should haveElementDisplayed(element) }
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldNotHaveElementDisplayed(element: _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement) =
+fun FluentPage.shouldHaveElementDisplayed(element: FluentWebElement) = also { it should haveElementDisplayed(element) }
+fun FluentPage.shouldNotHaveElementDisplayed(element: FluentWebElement) =
     also { it shouldNot haveElementDisplayed(element) }
 
-fun haveTitle(title: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.FluentPage> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.FluentPage): MatcherResult {
+fun haveTitle(title: String) = object : Matcher<FluentPage> {
+    override fun test(value: FluentPage): MatcherResult {
         val pageTitle: String = value.driver.title
 
         return MatcherResult(
@@ -68,11 +68,11 @@ fun haveTitle(title: String) = object : Matcher<_root_ide_package_.io.fluentleni
     }
 }
 
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldHaveTitle(title: String) = also { this should haveTitle(title) }
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldNotHaveTitle(title: String) = also { this shouldNot haveTitle(title) }
+fun FluentPage.shouldHaveTitle(title: String) = also { this should haveTitle(title) }
+fun FluentPage.shouldNotHaveTitle(title: String) = also { this shouldNot haveTitle(title) }
 
-fun haveUrl(url: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.FluentPage> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.FluentPage): MatcherResult {
+fun haveUrl(url: String) = object : Matcher<FluentPage> {
+    override fun test(value: FluentPage): MatcherResult {
         val currentUrl: String = value.driver.currentUrl
 
         return MatcherResult(
@@ -85,8 +85,8 @@ fun haveUrl(url: String) = object : Matcher<_root_ide_package_.io.fluentlenium.c
     }
 }
 
-fun haveExpectedElements() = object : Matcher<_root_ide_package_.io.fluentlenium.core.FluentPage> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.FluentPage): MatcherResult {
+fun haveExpectedElements() = object : Matcher<FluentPage> {
+    override fun test(value: FluentPage): MatcherResult {
         val by: By = value.classAnnotations.buildBy()
 
         val isAt = try {
@@ -106,11 +106,11 @@ fun haveExpectedElements() = object : Matcher<_root_ide_package_.io.fluentlenium
     }
 }
 
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldHaveExpectedElements() = also { this should haveExpectedElements() }
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldNotHaveExpectedElements() = also { this shouldNot haveExpectedElements() }
+fun FluentPage.shouldHaveExpectedElements() = also { this should haveExpectedElements() }
+fun FluentPage.shouldNotHaveExpectedElements() = also { this shouldNot haveExpectedElements() }
 
-fun haveExpectedUrl() = object : Matcher<_root_ide_package_.io.fluentlenium.core.FluentPage> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.FluentPage): MatcherResult {
+fun haveExpectedUrl() = object : Matcher<FluentPage> {
+    override fun test(value: FluentPage): MatcherResult {
         val url: String = value.url ?: return MatcherResult(
             false,
             { "no page url available" },
@@ -136,5 +136,5 @@ fun haveExpectedUrl() = object : Matcher<_root_ide_package_.io.fluentlenium.core
     }
 }
 
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldHaveExpectedUrl() = also { this should haveExpectedUrl() }
-fun _root_ide_package_.io.fluentlenium.core.FluentPage.shouldNotHaveExpectedUrl() = also { this shouldNot haveExpectedUrl() }
+fun FluentPage.shouldHaveExpectedUrl() = also { this should haveExpectedUrl() }
+fun FluentPage.shouldNotHaveExpectedUrl() = also { this shouldNot haveExpectedUrl() }

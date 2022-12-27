@@ -5,7 +5,9 @@ import static io.fluentlenium.utils.ScreenshotUtil.isIgnoredException;
 import static org.mockito.Mockito.verify;
 import static org.openqa.selenium.remote.Browser.HTMLUNIT;
 
-import io.fluentlenium.utils.ScreenshotUtil;import org.assertj.core.api.Assertions;import io.fluentlenium.configuration.ConfigurationProperties;
+import io.fluentlenium.utils.ScreenshotUtil;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.configuration.ConfigurationProperties;
 import org.junit.Test;
 import org.junit.internal.AssumptionViolatedException;
 import org.junit.runner.RunWith;

@@ -1,9 +1,9 @@
-package org.fluentlenium.examples.pages.basic
+package io.fluentlenium.examples.pages.basic
 
 import org.assertj.core.api.Assertions.assertThat
-import org.fluentlenium.core.FluentPage
-import org.fluentlenium.core.annotation.PageUrl
-import org.fluentlenium.core.domain.FluentWebElement
+import io.fluentlenium.core.FluentPage
+import io.fluentlenium.core.annotation.PageUrl
+import io.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.support.FindBy
 import java.util.concurrent.TimeUnit
 

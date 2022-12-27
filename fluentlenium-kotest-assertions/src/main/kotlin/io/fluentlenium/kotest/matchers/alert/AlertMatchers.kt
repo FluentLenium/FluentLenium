@@ -16,8 +16,8 @@ import org.openqa.selenium.NoAlertPresentException
  * @param text text to search for
  * @return the matcher object
  */
-fun haveText(text: String) = object : Matcher<_root_ide_package_.io.fluentlenium.core.alert.Alert> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.alert.Alert): MatcherResult =
+fun haveText(text: String) = object : Matcher<Alert> {
+    override fun test(value: Alert): MatcherResult =
         MatcherResult(
             value.text.contains(text),
             { "The alert box is expected to contain the text '${value.text}', actual text is '$text'" },
@@ -30,20 +30,20 @@ fun haveText(text: String) = object : Matcher<_root_ide_package_.io.fluentlenium
 /**
  * See [haveText]
  */
-fun _root_ide_package_.io.fluentlenium.core.alert.Alert.shouldHaveText(text: String) = also { it should haveText(text) }
+fun Alert.shouldHaveText(text: String) = also { it should haveText(text) }
 
 /**
  * See [haveText]
  */
-fun _root_ide_package_.io.fluentlenium.core.alert.Alert.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
+fun Alert.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
 
 /**
  * Check that an alert box is present.
  *
  * @return the matcher object
  */
-fun bePresent() = object : Matcher<_root_ide_package_.io.fluentlenium.core.alert.Alert> {
-    override fun test(value: _root_ide_package_.io.fluentlenium.core.alert.Alert): MatcherResult {
+fun bePresent() = object : Matcher<Alert> {
+    override fun test(value: Alert): MatcherResult {
         val isAlertPresent = try {
             value.present()
         } catch (e: NoAlertPresentException) {
@@ -63,9 +63,9 @@ fun bePresent() = object : Matcher<_root_ide_package_.io.fluentlenium.core.alert
 /**
  * See [bePresent]
  */
-fun _root_ide_package_.io.fluentlenium.core.alert.Alert.shouldBePresent() = also { it should bePresent() }
+fun Alert.shouldBePresent() = also { it should bePresent() }
 
 /**
  * See [bePresent]
  */
-fun _root_ide_package_.io.fluentlenium.core.alert.Alert.shouldNotBePresent() = also { it shouldNot bePresent() }
+fun Alert.shouldNotBePresent() = also { it shouldNot bePresent() }

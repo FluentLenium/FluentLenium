@@ -1,6 +1,9 @@
 package io.fluentlenium.core.domain;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.components.ComponentException;import io.fluentlenium.core.components.ComponentsManager;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.components.ComponentException;
+import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.ComponentException;
 import io.fluentlenium.core.components.ComponentsManager;
 import org.junit.After;

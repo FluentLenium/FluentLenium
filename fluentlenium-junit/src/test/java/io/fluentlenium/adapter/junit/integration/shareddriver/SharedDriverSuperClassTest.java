@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter.junit.integration.shareddriver;
 
-import io.fluentlenium.configuration.FluentConfiguration;import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import io.fluentlenium.configuration.FluentConfiguration;
 import io.fluentlenium.configuration.FluentConfiguration.BooleanValue;
 import io.fluentlenium.adapter.junit.integration.IntegrationFluentTest;

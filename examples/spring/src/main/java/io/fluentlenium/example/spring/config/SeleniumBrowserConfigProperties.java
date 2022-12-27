@@ -1,4 +1,4 @@
-package org.fluentlenium.example.spring.config;
+package io.fluentlenium.example.spring.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

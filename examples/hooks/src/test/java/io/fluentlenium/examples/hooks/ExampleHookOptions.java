@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.hooks;
+package io.fluentlenium.examples.hooks;
 
 /**
  * Options for {@link ExampleHook}

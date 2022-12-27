@@ -1,6 +1,9 @@
 package io.fluentlenium.core.events.annotations;
 
-import io.fluentlenium.core.events.EventsRegistry;import io.fluentlenium.core.events.SwitchToWindowListener;import java.lang.annotation.ElementType;
+import io.fluentlenium.core.events.EventsRegistry;
+import io.fluentlenium.core.events.SwitchToWindowListener;
+
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -13,7 +16,7 @@ import java.lang.annotation.Target;
  * Parameters from {@link SwitchToWindowListener} will be injected
  * in the method based on parameters types.
  *
- * @see EventsRegistry#afterSwitchToWindow( SwitchToWindowListener )
+ * @see EventsRegistry#afterSwitchToWindow(SwitchToWindowListener)
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

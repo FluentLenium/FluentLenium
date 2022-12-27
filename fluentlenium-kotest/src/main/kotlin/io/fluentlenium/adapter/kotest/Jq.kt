@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement
  * @param filters  set of filters
  * @return list of element
  */
-fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_ide_package_.io.fluentlenium.core.search.SearchControl<E>.jq(selector: String, vararg filters: _root_ide_package_.io.fluentlenium.core.search.SearchFilter): _root_ide_package_.io.fluentlenium.core.domain.FluentList<E> =
+fun <E : FluentWebElement> SearchControl<E>.jq(selector: String, vararg filters: SearchFilter): FluentList<E> =
     `$`(selector, *filters)
 
 /**
@@ -24,7 +24,7 @@ fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_
  * @param rawElements raw selenium elements
  * @return list of element
  */
-fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_ide_package_.io.fluentlenium.core.search.SearchControl<E>.jq(rawElements: List<WebElement>): _root_ide_package_.io.fluentlenium.core.domain.FluentList<E> =
+fun <E : FluentWebElement> SearchControl<E>.jq(rawElements: List<WebElement>): FluentList<E> =
     `$`(rawElements)
 
 /**
@@ -33,7 +33,7 @@ fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_
  * @param filters set of filters in the current context
  * @return list of elements
  */
-fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_ide_package_.io.fluentlenium.core.search.SearchControl<E>.jq(vararg filters: _root_ide_package_.io.fluentlenium.core.search.SearchFilter): _root_ide_package_.io.fluentlenium.core.domain.FluentList<E> =
+fun <E : FluentWebElement> SearchControl<E>.jq(vararg filters: SearchFilter): FluentList<E> =
     `$`(*filters)
 
 /**
@@ -43,7 +43,7 @@ fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_
  * @param filters filters set
  * @return list of elements
  */
-fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_ide_package_.io.fluentlenium.core.search.SearchControl<E>.jq(locator: By, vararg filters: _root_ide_package_.io.fluentlenium.core.search.SearchFilter): _root_ide_package_.io.fluentlenium.core.domain.FluentList<E> =
+fun <E : FluentWebElement> SearchControl<E>.jq(locator: By, vararg filters: SearchFilter): FluentList<E> =
     `$`(locator, *filters)
 
 /**
@@ -53,5 +53,5 @@ fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_
  * @param filters filters set
  * @return list of elements
  */
-fun <E : _root_ide_package_.io.fluentlenium.core.domain.FluentWebElement> _root_ide_package_.io.fluentlenium.core.search.SearchControl<E>.jq(locator: AppiumBy, vararg filters: _root_ide_package_.io.fluentlenium.core.search.SearchFilter): _root_ide_package_.io.fluentlenium.core.domain.FluentList<E> =
+fun <E : FluentWebElement> SearchControl<E>.jq(locator: AppiumBy, vararg filters: SearchFilter): FluentList<E> =
     `$`(locator, *filters)

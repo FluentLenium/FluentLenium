@@ -1,11 +1,11 @@
-package org.fluentlenium.examples.performance;
+package io.fluentlenium.examples.performance;
 
 import org.assertj.core.api.SoftAssertions;
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.performance.PerformanceTimingEvent;
-import org.fluentlenium.core.performance.PerformanceTimingMetrics;
-import org.fluentlenium.examples.pages.DuckDuckMainPage;
+import io.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.performance.PerformanceTimingEvent;
+import io.fluentlenium.core.performance.PerformanceTimingMetrics;
+import io.fluentlenium.examples.pages.DuckDuckMainPage;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

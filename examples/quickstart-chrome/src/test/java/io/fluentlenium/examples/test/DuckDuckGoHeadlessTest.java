@@ -1,8 +1,8 @@
-package org.fluentlenium.examples.test;
+package io.fluentlenium.examples.test;
 
-import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.examples.pages.DuckDuckMainPage;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.examples.pages.DuckDuckMainPage;
 import org.junit.Test;
 
 @FluentConfiguration(capabilities = "{\"goog:chromeOptions\": {\"args\": [\"headless\",\"disable-gpu\"]}}")

@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter;
 
-import io.fluentlenium.core.FluentDriver;import org.assertj.core.api.Assertions;import io.fluentlenium.core.FluentDriver;
+import io.fluentlenium.core.FluentDriver;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.FluentDriver;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,8 +1,8 @@
-package org.fluentlenium.examples.test.basic
+package io.fluentlenium.examples.test.basic
 
-import org.fluentlenium.core.annotation.Page
-import org.fluentlenium.examples.pages.basic.DuckDuckMainPage
-import org.fluentlenium.examples.test.AbstractFirefoxTest
+import io.fluentlenium.core.annotation.Page
+import io.fluentlenium.examples.pages.basic.DuckDuckMainPage
+import io.fluentlenium.examples.test.AbstractFirefoxTest
 import org.junit.jupiter.api.Test
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.firefox.FirefoxDriver

@@ -1,6 +1,7 @@
 package io.fluentlenium.test.param;
 
-import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 

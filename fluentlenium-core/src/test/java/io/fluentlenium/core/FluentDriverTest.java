@@ -10,7 +10,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
-import io.fluentlenium.configuration.Configuration;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Test;
 import org.junit.runner.RunWith;

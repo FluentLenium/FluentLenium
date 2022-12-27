@@ -1,6 +1,7 @@
 package io.fluentlenium.adapter.testng.integration;
 
-import io.fluentlenium.adapter.testng.FluentTestNg;import io.fluentlenium.adapter.testng.FluentTestNg;
+import io.fluentlenium.adapter.testng.FluentTestNg;
+import io.fluentlenium.adapter.testng.FluentTestNg;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

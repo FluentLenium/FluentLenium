@@ -1,6 +1,10 @@
 package io.fluentlenium.configuration;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.hook.wait.Wait;import io.fluentlenium.core.wait.FluentWait;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.hook.wait.Wait;
+import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.FluentControl;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;

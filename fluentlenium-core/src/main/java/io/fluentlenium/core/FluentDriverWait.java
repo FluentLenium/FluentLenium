@@ -2,7 +2,9 @@ package io.fluentlenium.core;
 
 import static java.util.Objects.requireNonNull;
 
-import io.fluentlenium.configuration.Configuration;import io.fluentlenium.core.wait.FluentWait;import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.core.wait.FluentWait;
 
 /**

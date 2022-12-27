@@ -5,7 +5,7 @@ import io.kotest.core.extensions.Extension
 import io.kotest.core.listeners.BeforeTestListener
 import io.kotest.core.test.TestCase
 import io.kotest.matchers.shouldBe
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import org.openqa.selenium.WebDriver
 
 class CanUseAdditionalExtensionSpec : FluentDescribeSpec() {

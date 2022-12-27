@@ -1,4 +1,4 @@
-package org.fluentlenium.example.spring.config.browser;
+package io.fluentlenium.example.spring.config.browser;
 
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;

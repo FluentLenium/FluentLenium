@@ -1,7 +1,10 @@
 package io.fluentlenium.test.initialization;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.domain.FluentWebElement;import io.github.bonigarcia.wdm.WebDriverManager;
-import org.assertj.core.api.Assertions;import io.fluentlenium.adapter.junit.jupiter.FluentTest;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.junit.jupiter.FluentTest;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.jupiter.api.BeforeAll;

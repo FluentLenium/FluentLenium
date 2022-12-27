@@ -1,4 +1,4 @@
-package org.fluentlenium.example.kotest
+package io.fluentlenium.example.kotest
 
 import io.kotest.engine.spec.tempdir
 import io.kotest.matchers.collections.shouldHaveAtLeastSize
@@ -6,18 +6,18 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentFreeSpec
-import org.fluentlenium.adapter.kotest.jq
-import org.fluentlenium.core.hook.wait.Wait
-import org.fluentlenium.kotest.matchers.el.haveClass
-import org.fluentlenium.kotest.matchers.el.haveDimension
-import org.fluentlenium.kotest.matchers.el.shouldHaveDimension
-import org.fluentlenium.kotest.matchers.jq.haveTagName
-import org.fluentlenium.kotest.matchers.jq.shouldHaveTagName
+import io.fluentlenium.adapter.kotest.FluentFreeSpec
+import io.fluentlenium.adapter.kotest.jq
+import io.fluentlenium.core.hook.wait.Wait
+import io.fluentlenium.kotest.matchers.el.haveClass
+import io.fluentlenium.kotest.matchers.el.haveDimension
+import io.fluentlenium.kotest.matchers.el.shouldHaveDimension
+import io.fluentlenium.kotest.matchers.jq.haveTagName
+import io.fluentlenium.kotest.matchers.jq.shouldHaveTagName
 import org.openqa.selenium.Cookie
 import java.io.File
 import java.io.FilenameFilter
-import org.fluentlenium.kotest.matchers.jq.haveClass as listHaveClass
+import io.fluentlenium.kotest.matchers.jq.haveClass as listHaveClass
 
 @Wait
 class DuckDuckGoSpec : FluentFreeSpec() {

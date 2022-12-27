@@ -1,9 +1,9 @@
-package org.fluentlenium.examples.hooks;
+package io.fluentlenium.examples.hooks;
 
 import java.util.concurrent.TimeUnit;
 
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.core.hook.wait.Wait;
+import io.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.core.hook.wait.Wait;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

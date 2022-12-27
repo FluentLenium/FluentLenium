@@ -1,6 +1,10 @@
 package io.fluentlenium.core.search;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.filter.AttributeFilter;import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.filter.AttributeFilter;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import io.fluentlenium.core.filter.AttributeFilter;
 import org.junit.Before;

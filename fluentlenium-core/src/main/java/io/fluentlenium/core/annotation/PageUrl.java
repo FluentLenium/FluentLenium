@@ -1,6 +1,8 @@
 package io.fluentlenium.core.annotation;
 
-import io.fluentlenium.core.FluentPage;import java.lang.annotation.Retention;
+import io.fluentlenium.core.FluentPage;
+
+import java.lang.annotation.Retention;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 

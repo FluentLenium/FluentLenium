@@ -7,8 +7,8 @@ import java.lang.annotation.Inherited
 @Inherited
 @Target(AnnotationTarget.FIELD, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-@_root_ide_package_.io.fluentlenium.core.hook.Hook(
+@Hook(
     ExampleHook::class
 )
-@_root_ide_package_.io.fluentlenium.core.hook.HookOptions(ExampleHookOptions::class)
+@HookOptions(ExampleHookOptions::class)
 annotation class Example(val message: String = "")

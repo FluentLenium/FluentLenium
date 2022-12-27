@@ -1,8 +1,8 @@
-package org.fluentlenium.examples.components.fluentlenium
+package io.fluentlenium.examples.components.fluentlenium
 
-import org.fluentlenium.core.FluentControl
-import org.fluentlenium.core.components.ComponentInstantiator
-import org.fluentlenium.core.domain.FluentWebElement
+import io.fluentlenium.core.FluentControl
+import io.fluentlenium.core.components.ComponentInstantiator
+import io.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.FindBy
 

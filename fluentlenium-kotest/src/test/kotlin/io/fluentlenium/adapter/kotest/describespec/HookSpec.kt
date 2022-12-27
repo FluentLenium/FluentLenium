@@ -1,14 +1,14 @@
 package io.fluentlenium.adapter.kotest.describespec
 
 import io.kotest.matchers.shouldBe
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
-import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
-import org.fluentlenium.adapter.kotest.hooks.Example
-import org.fluentlenium.adapter.kotest.hooks.ExampleHook
-import org.fluentlenium.adapter.kotest.jq
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import io.fluentlenium.adapter.kotest.hooks.Example
+import io.fluentlenium.adapter.kotest.hooks.ExampleHook
+import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.core.hook.wait.Wait
 
-@_root_ide_package_.io.fluentlenium.core.hook.wait.Wait
+@Wait
 @Example
 class HookSpec : FluentDescribeSpec({
     it("counts clicks") {

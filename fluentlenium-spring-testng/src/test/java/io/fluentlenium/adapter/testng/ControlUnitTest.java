@@ -1,6 +1,14 @@
 package io.fluentlenium.adapter.testng;
 
-import io.fluentlenium.adapter.FluentControlContainer;import io.fluentlenium.configuration.Configuration;import io.fluentlenium.configuration.DefaultConfigurationFactory;import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.search.SearchFilter;import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.DefaultConfigurationFactory;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.search.SearchFilter;
+import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.configuration.DefaultConfigurationFactory;
 import io.fluentlenium.core.FluentControl;

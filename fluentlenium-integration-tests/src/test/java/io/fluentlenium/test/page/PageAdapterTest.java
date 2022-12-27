@@ -14,7 +14,10 @@
 
 package io.fluentlenium.test.page;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.pages.IndexPage;import io.github.bonigarcia.wdm.WebDriverManager;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.pages.IndexPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.assertj.core.api.Assertions;
 import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.annotation.Page;

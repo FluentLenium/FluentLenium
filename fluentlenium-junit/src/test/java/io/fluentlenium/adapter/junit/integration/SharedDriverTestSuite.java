@@ -1,6 +1,7 @@
 package io.fluentlenium.adapter.junit.integration;
 
-import io.fluentlenium.adapter.junit.integration.shareddriver.*;import net.jcip.annotations.NotThreadSafe;
+import io.fluentlenium.adapter.junit.integration.shareddriver.*;
+import net.jcip.annotations.NotThreadSafe;
 import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriver;
 import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverOnce1;
 import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverOnce2;

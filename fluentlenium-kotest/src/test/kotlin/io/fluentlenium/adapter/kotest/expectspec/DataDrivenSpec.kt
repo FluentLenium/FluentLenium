@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.expectspec
 
 import io.kotest.datatest.withData
-import org.fluentlenium.adapter.kotest.FluentExpectSpec
-import org.fluentlenium.adapter.kotest.TestConstants
+import io.fluentlenium.adapter.kotest.FluentExpectSpec
+import io.fluentlenium.adapter.kotest.TestConstants
 
 class DataDrivenSpec : FluentExpectSpec({
     context("context") {

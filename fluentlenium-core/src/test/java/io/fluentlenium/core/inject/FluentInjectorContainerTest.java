@@ -1,6 +1,11 @@
 package io.fluentlenium.core.inject;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.FluentContainer;import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.components.ComponentsManager;import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.FluentContainer;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.components.ComponentsManager;
+import org.assertj.core.api.Assertions;
 import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.FluentContainer;
 import io.fluentlenium.core.FluentControl;

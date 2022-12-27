@@ -3,7 +3,8 @@ package io.fluentlenium.core;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import io.fluentlenium.configuration.Configuration;import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

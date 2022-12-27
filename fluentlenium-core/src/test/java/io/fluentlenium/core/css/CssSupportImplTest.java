@@ -9,7 +9,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import io.fluentlenium.core.script.FluentJavascript;import io.fluentlenium.core.script.JavascriptControl;import io.fluentlenium.core.wait.AwaitControl;import io.fluentlenium.core.wait.FluentWait;import org.junit.Before;
+import io.fluentlenium.core.script.FluentJavascript;
+import io.fluentlenium.core.script.JavascriptControl;
+import io.fluentlenium.core.wait.AwaitControl;
+import io.fluentlenium.core.wait.FluentWait;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

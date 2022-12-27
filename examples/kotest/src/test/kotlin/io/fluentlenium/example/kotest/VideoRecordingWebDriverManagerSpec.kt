@@ -1,10 +1,10 @@
-package org.fluentlenium.example.kotest
+package io.fluentlenium.example.kotest
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import io.kotest.core.spec.Spec
 import io.kotest.matchers.paths.shouldExist
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentFreeSpec
+import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import org.openqa.selenium.WebDriver
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectory

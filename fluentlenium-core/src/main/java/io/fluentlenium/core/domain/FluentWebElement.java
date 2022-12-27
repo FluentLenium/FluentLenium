@@ -22,7 +22,7 @@ import io.fluentlenium.utils.SupplierOfInstance;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.SeleniumDriverControl;
-import org.fluentlenium.core.action.*;
+import io.fluentlenium.core.action.*;
 import io.fluentlenium.core.alert.Alert;
 import io.fluentlenium.core.alert.AlertControl;
 import io.fluentlenium.core.capabilities.CapabilitiesControl;

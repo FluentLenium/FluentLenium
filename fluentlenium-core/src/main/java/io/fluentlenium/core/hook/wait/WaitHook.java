@@ -1,6 +1,10 @@
 package io.fluentlenium.core.hook.wait;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.hook.BaseFluentHook;import io.fluentlenium.core.wait.FluentWait;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.hook.BaseFluentHook;
+import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.hook.BaseFluentHook;
 import io.fluentlenium.core.wait.FluentWait;
@@ -26,7 +30,7 @@ public class WaitHook extends BaseFluentHook<WaitHookOptions> {
      * @param options          hook options
      */
     public WaitHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, WaitHookOptions options) {
+                    Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, WaitHookOptions options) {
         super(control, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 

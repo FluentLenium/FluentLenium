@@ -1,6 +1,15 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.core.annotation.PageUrl;import io.fluentlenium.core.annotation.Unshadow;import io.fluentlenium.core.inject.Unshadower;import io.fluentlenium.core.page.ClassAnnotations;import io.fluentlenium.core.url.ParsedUrlTemplate;import io.fluentlenium.core.url.UrlTemplate;import io.fluentlenium.core.wait.AwaitControl;import io.fluentlenium.utils.Preconditions;import io.fluentlenium.utils.UrlUtils;import org.apache.commons.lang3.StringUtils;
+import io.fluentlenium.core.annotation.PageUrl;
+import io.fluentlenium.core.annotation.Unshadow;
+import io.fluentlenium.core.inject.Unshadower;
+import io.fluentlenium.core.page.ClassAnnotations;
+import io.fluentlenium.core.url.ParsedUrlTemplate;
+import io.fluentlenium.core.url.UrlTemplate;
+import io.fluentlenium.core.wait.AwaitControl;
+import io.fluentlenium.utils.Preconditions;
+import io.fluentlenium.utils.UrlUtils;
+import org.apache.commons.lang3.StringUtils;
 import io.fluentlenium.core.annotation.PageUrl;
 import io.fluentlenium.core.inject.Unshadower;
 import io.fluentlenium.core.page.ClassAnnotations;

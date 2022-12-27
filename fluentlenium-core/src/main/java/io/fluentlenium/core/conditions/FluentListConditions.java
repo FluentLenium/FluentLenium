@@ -1,7 +1,11 @@
 package io.fluentlenium.core.conditions;
 
 import java.util.function.Predicate;
-import io.fluentlenium.core.conditions.message.Message;import io.fluentlenium.core.conditions.message.MessageContext;import io.fluentlenium.core.conditions.message.NotMessage;import io.fluentlenium.core.conditions.message.Message;
+
+import io.fluentlenium.core.conditions.message.Message;
+import io.fluentlenium.core.conditions.message.MessageContext;
+import io.fluentlenium.core.conditions.message.NotMessage;
+import io.fluentlenium.core.conditions.message.Message;
 import io.fluentlenium.core.conditions.message.MessageContext;
 import io.fluentlenium.core.conditions.message.NotMessage;
 import io.fluentlenium.core.domain.FluentWebElement;

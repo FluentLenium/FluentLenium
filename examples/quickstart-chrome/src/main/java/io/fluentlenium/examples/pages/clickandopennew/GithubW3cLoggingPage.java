@@ -1,8 +1,8 @@
-package org.fluentlenium.examples.pages.clickandopennew;
+package io.fluentlenium.examples.pages.clickandopennew;
 
 import java.util.concurrent.TimeUnit;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class GithubW3cLoggingPage extends FluentPage {

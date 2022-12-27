@@ -1,6 +1,8 @@
 package io.fluentlenium.core.hook;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
@@ -20,7 +22,7 @@ public class NanoHook extends BaseHook<NanoHookOptions> {
     private long afterFindElementNano;
 
     public NanoHook(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
+                    Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
         super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 

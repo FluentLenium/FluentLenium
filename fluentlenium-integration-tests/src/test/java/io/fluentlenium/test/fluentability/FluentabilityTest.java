@@ -1,6 +1,7 @@
 package io.fluentlenium.test.fluentability;
 
-import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.test.IntegrationFluentTest;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 
 import static java.util.concurrent.TimeUnit.NANOSECONDS;

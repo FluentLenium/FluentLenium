@@ -2,15 +2,15 @@ package io.fluentlenium.adapter.kotest.describespec
 
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
-import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
 import io.fluentlenium.core.events.annotations.AfterNavigateTo
 
 class EventSpec : FluentDescribeSpec() {
 
     var url: String? = null
 
-    @_root_ide_package_.io.fluentlenium.core.events.annotations.AfterNavigateTo
+    @AfterNavigateTo
     fun afterNavigateTo(url: String) {
         this.url = url
     }

@@ -1,6 +1,7 @@
 package io.fluentlenium.pages;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;

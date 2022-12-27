@@ -1,6 +1,8 @@
 package io.fluentlenium.core.hook;
 
-import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.proxy.LocatorProxies;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.proxy.LocatorProxies;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.proxy.LocatorProxies;
 

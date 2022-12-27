@@ -1,6 +1,7 @@
 package io.fluentlenium.core.events;
 
-import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;

@@ -1,6 +1,8 @@
 package io.fluentlenium.test.iframe;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;

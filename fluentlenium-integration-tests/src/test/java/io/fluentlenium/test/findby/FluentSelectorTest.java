@@ -1,6 +1,8 @@
 package io.fluentlenium.test.findby;
 
-import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.core.filter.MatcherConstructor;import io.fluentlenium.test.IntegrationFluentTest;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.core.filter.MatcherConstructor;
+import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

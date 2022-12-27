@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.describespec
 
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
-import org.fluentlenium.adapter.kotest.TestConstants
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.TestConstants
 
 class AwaitUntilAssertedSpec : FluentDescribeSpec({
 

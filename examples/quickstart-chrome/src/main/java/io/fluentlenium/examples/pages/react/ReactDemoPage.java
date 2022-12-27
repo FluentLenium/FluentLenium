@@ -1,9 +1,9 @@
-package org.fluentlenium.examples.pages.react;
+package io.fluentlenium.examples.pages.react;
 
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.domain.FluentList;
-import org.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.PageUrl;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
 @FindBy(id = "app")

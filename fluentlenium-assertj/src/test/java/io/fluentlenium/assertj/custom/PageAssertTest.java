@@ -1,6 +1,10 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.page.ClassAnnotations;import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.page.ClassAnnotations;
+import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.page.ClassAnnotations;

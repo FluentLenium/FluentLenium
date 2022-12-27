@@ -5,7 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.events.NavigateAllListener;import io.fluentlenium.core.events.annotations.*;import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.events.NavigateAllListener;
+import io.fluentlenium.core.events.annotations.*;
+import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.events.NavigateAllListener;
 import io.fluentlenium.core.events.annotations.AfterClickOn;
 import io.fluentlenium.core.events.annotations.AfterFindBy;

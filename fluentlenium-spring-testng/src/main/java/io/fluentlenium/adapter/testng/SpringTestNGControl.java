@@ -1,6 +1,10 @@
 package io.fluentlenium.adapter.testng;
 
-import io.fluentlenium.adapter.FluentControlContainer;import io.fluentlenium.configuration.Configuration;import io.fluentlenium.configuration.ConfigurationFactoryProvider;import io.fluentlenium.core.FluentControl;import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.ConfigurationFactoryProvider;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.configuration.ConfigurationFactoryProvider;
 import io.fluentlenium.core.FluentControl;

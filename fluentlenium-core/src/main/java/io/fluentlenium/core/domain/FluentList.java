@@ -2,7 +2,10 @@ package io.fluentlenium.core.domain;
 
 import static java.util.stream.Collectors.toList;
 
-import io.fluentlenium.core.conditions.FluentListConditions;import io.fluentlenium.core.search.SearchControl;import io.fluentlenium.core.search.SearchFilter;import io.fluentlenium.core.action.FluentActions;
+import io.fluentlenium.core.conditions.FluentListConditions;
+import io.fluentlenium.core.search.SearchControl;
+import io.fluentlenium.core.search.SearchFilter;
+import io.fluentlenium.core.action.FluentActions;
 import io.fluentlenium.core.conditions.FluentListConditions;
 import io.fluentlenium.core.hook.HookControl;
 import io.fluentlenium.core.label.FluentLabel;

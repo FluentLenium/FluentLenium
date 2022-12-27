@@ -1,6 +1,7 @@
 package io.fluentlenium.test.actions.onselector;
 
-import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.Select;

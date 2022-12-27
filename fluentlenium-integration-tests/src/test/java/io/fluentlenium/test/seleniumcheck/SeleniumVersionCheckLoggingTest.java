@@ -1,6 +1,7 @@
 package io.fluentlenium.test.seleniumcheck;
 
-import io.fluentlenium.utils.SeleniumVersionChecker;import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.utils.SeleniumVersionChecker;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Logger;

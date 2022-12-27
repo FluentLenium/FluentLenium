@@ -1,9 +1,9 @@
-package org.fluentlenium.example.appium.ios;
+package io.fluentlenium.example.appium.ios;
 
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.example.appium.ExampleFluentTest;
-import org.fluentlenium.example.appium.app.ios.AboutPage;
-import org.fluentlenium.example.appium.app.ios.HomePage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.example.appium.ExampleFluentTest;
+import io.fluentlenium.example.appium.app.ios.AboutPage;
+import io.fluentlenium.example.appium.app.ios.HomePage;
 import org.junit.Test;
 
 public class IosUITestDemo extends ExampleFluentTest {

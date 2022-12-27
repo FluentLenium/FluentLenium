@@ -1,6 +1,11 @@
 package io.fluentlenium.adapter.cucumber.unit;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.adapter.FluentControlContainer;import io.fluentlenium.adapter.cucumber.FluentCucumberTest;import io.fluentlenium.adapter.cucumber.FluentTestContainer;import org.assertj.core.api.Assertions;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import io.fluentlenium.adapter.cucumber.FluentTestContainer;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import org.junit.After;

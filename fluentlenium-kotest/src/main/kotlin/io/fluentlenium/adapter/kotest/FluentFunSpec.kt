@@ -4,7 +4,7 @@ import io.kotest.core.spec.style.FunSpec
 import io.fluentlenium.adapter.IFluentAdapter
 import io.fluentlenium.adapter.TestRunnerAdapter
 import io.fluentlenium.adapter.exception.AnnotationNotFoundException
-import org.fluentlenium.adapter.kotest.internal.KoTestFluentAdapter
+import io.fluentlenium.adapter.kotest.internal.KoTestFluentAdapter
 import io.fluentlenium.configuration.Configuration
 import io.fluentlenium.configuration.ConfigurationFactoryProvider
 import io.fluentlenium.core.inject.ContainerFluentControl
@@ -13,8 +13,8 @@ abstract class FluentFunSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
     body: FluentFunSpec.() -> Unit
 ) : FunSpec({ }),
-    _root_ide_package_.io.fluentlenium.adapter.IFluentAdapter by fluentAdapter,
-    _root_ide_package_.io.fluentlenium.adapter.TestRunnerAdapter {
+    IFluentAdapter by fluentAdapter,
+    TestRunnerAdapter {
 
     constructor(body: FluentFunSpec.() -> Unit = {}) : this(KoTestFluentAdapter(), body)
 
@@ -26,11 +26,11 @@ abstract class FluentFunSpec internal constructor(
         body()
     }
 
-    private val config: _root_ide_package_.io.fluentlenium.configuration.Configuration by lazy {
-        _root_ide_package_.io.fluentlenium.configuration.ConfigurationFactoryProvider.newConfiguration(javaClass)
+    private val config: Configuration by lazy {
+        ConfigurationFactoryProvider.newConfiguration(javaClass)
     }
 
-    override fun getConfiguration(): _root_ide_package_.io.fluentlenium.configuration.Configuration = config
+    override fun getConfiguration(): Configuration = config
 
     override fun getTestClass(): Class<*> = javaClass
 
@@ -38,13 +38,13 @@ abstract class FluentFunSpec internal constructor(
         fluentAdapter.currentTestName.get()
 
     override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>): T =
-        javaClass.getAnnotation(annotation) ?: throw _root_ide_package_.io.fluentlenium.adapter.exception.AnnotationNotFoundException()
+        javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
 
     override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>): T {
-        throw _root_ide_package_.io.fluentlenium.adapter.exception.AnnotationNotFoundException()
+        throw AnnotationNotFoundException()
     }
 
-    override fun getFluentControl(): _root_ide_package_.io.fluentlenium.core.inject.ContainerFluentControl {
+    override fun getFluentControl(): ContainerFluentControl {
         fluentAdapter.ensureTestStarted()
 
         return super.getFluentControl()

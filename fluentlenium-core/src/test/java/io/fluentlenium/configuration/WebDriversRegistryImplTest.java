@@ -5,7 +5,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.LinkedHashMap;
 
-import io.fluentlenium.utils.ReflectionUtils;import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.utils.ReflectionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Capabilities;

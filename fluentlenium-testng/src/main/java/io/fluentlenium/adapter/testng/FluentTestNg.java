@@ -4,7 +4,10 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.fluentlenium.adapter.FluentTestRunnerAdapter;import io.fluentlenium.adapter.ThreadLocalFluentControlContainer;import io.fluentlenium.utils.SeleniumVersionChecker;import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.adapter.FluentTestRunnerAdapter;
+import io.fluentlenium.adapter.ThreadLocalFluentControlContainer;
+import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.utils.SeleniumVersionChecker;
 import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import io.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import org.testng.ITestContext;

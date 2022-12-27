@@ -1,13 +1,13 @@
-package org.fluentlenium.example.appium.config;
+package io.fluentlenium.example.appium.config;
 
-import org.fluentlenium.example.appium.device.Android;
-import org.fluentlenium.example.appium.device.Iphone;
+import io.fluentlenium.example.appium.device.Android;
+import io.fluentlenium.example.appium.device.Iphone;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 //CHECKSTYLE.OFF: HideUtilityClassConstructor
 @Configuration
-@ComponentScan(value = {"org.fluentlenium.example.appium"})
+@ComponentScan(value = {"io.fluentlenium.example.appium"})
 @PropertySources(@PropertySource("config.properties"))
 @SuppressWarnings("PMD.UseUtilityClass")
 public class Config {

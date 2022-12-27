@@ -2,7 +2,9 @@ package io.fluentlenium.pages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.openqa.selenium.support.FindBy;

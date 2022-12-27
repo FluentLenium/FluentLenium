@@ -8,7 +8,9 @@ import static java.util.Optional.ofNullable;
 import static io.fluentlenium.utils.CollectionUtils.isList;
 
 import io.appium.java_client.pagefactory.DefaultElementByBuilder;
-import io.fluentlenium.utils.CollectionUtils;import io.fluentlenium.utils.ReflectionUtils;import io.fluentlenium.configuration.ConfigurationException;
+import io.fluentlenium.utils.CollectionUtils;
+import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.configuration.ConfigurationException;
 import io.fluentlenium.core.label.FluentLabelProvider;
 import io.fluentlenium.core.page.ClassAnnotations;
 import io.fluentlenium.utils.ReflectionUtils;

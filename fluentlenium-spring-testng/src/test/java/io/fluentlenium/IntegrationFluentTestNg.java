@@ -1,6 +1,7 @@
 package io.fluentlenium;
 
-import io.fluentlenium.utils.UrlUtils;import io.github.bonigarcia.wdm.WebDriverManager;
+import io.fluentlenium.utils.UrlUtils;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.fluentlenium.adapter.testng.FluentTestNgSpringTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.testng.annotations.BeforeSuite;

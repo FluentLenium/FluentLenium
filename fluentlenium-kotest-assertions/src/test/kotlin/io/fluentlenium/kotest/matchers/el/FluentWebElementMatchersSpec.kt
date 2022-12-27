@@ -2,8 +2,8 @@ package io.fluentlenium.kotest.matchers.el
 
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
-import org.fluentlenium.kotest.matchers.config.MatcherBase
-import org.fluentlenium.kotest.matchers.config.shouldAssert
+import io.fluentlenium.kotest.matchers.config.MatcherBase
+import io.fluentlenium.kotest.matchers.config.shouldAssert
 import org.openqa.selenium.By
 import org.openqa.selenium.Dimension
 

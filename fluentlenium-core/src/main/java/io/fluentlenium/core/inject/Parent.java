@@ -1,6 +1,9 @@
 package io.fluentlenium.core.inject;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.domain.FluentWebElement;import java.lang.annotation.Retention;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
+
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.FIELD;

@@ -5,7 +5,9 @@ import static io.fluentlenium.core.inject.FluentElementInjectionSupportValidator
 import static io.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isListOfWebElement;
 import static io.fluentlenium.core.inject.FluentElementInjectionSupportValidator.isListOfFluentWebElement;
 
-import io.fluentlenium.core.components.ComponentsManager;import io.fluentlenium.utils.ReflectionUtils;import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.ComponentList;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;

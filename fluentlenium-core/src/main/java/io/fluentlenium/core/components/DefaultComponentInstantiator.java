@@ -1,6 +1,7 @@
 package io.fluentlenium.core.components;
 
-import io.fluentlenium.utils.ReflectionUtils;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebElement;
 

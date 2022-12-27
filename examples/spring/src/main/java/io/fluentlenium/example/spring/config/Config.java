@@ -1,4 +1,4 @@
-package org.fluentlenium.example.spring.config;
+package io.fluentlenium.example.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,7 +9,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 //CHECKSTYLE.OFF: HideUtilityClassConstructor
 @Configuration
-@ComponentScan(value = {"org.fluentlenium.example.spring"})
+@ComponentScan(value = {"io.fluentlenium.example.spring"})
 @PropertySources(@PropertySource("config.properties"))
 @SuppressWarnings("PMD.UseUtilityClass")
 public class Config {

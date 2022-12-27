@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter.cucumber.integration.page;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.utils.UrlUtils;import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.utils.UrlUtils;
+import io.fluentlenium.core.FluentPage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;

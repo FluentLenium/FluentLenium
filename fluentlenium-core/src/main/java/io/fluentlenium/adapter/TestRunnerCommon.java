@@ -1,6 +1,10 @@
 package io.fluentlenium.adapter;
 
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;import io.fluentlenium.configuration.Configuration;import io.fluentlenium.utils.ExceptionUtil;import io.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
+import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.utils.ExceptionUtil;
+import io.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import io.fluentlenium.configuration.Configuration;

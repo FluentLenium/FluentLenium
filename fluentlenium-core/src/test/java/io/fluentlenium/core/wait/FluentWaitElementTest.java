@@ -1,6 +1,9 @@
 package io.fluentlenium.core.wait;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.Before;

@@ -1,6 +1,11 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.search.Search;import io.fluentlenium.core.search.SearchControl;import io.fluentlenium.core.search.SearchFilter;import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.search.Search;
+import io.fluentlenium.core.search.SearchControl;
+import io.fluentlenium.core.search.SearchFilter;
+import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.search.Search;
 import io.fluentlenium.core.search.SearchFilter;

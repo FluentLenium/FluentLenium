@@ -1,6 +1,8 @@
 package io.fluentlenium.test.await;
 
-import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.core.filter.MatcherConstructor;import net.jcip.annotations.NotThreadSafe;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.core.filter.MatcherConstructor;
+import net.jcip.annotations.NotThreadSafe;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

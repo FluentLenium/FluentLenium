@@ -1,6 +1,9 @@
 package io.fluentlenium;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;

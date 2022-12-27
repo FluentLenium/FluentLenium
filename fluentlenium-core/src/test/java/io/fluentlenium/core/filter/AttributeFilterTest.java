@@ -1,7 +1,15 @@
 package io.fluentlenium.core.filter;
 
 import com.google.common.collect.Lists;
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.filter.matcher.AbstractMatcher;import io.fluentlenium.core.filter.matcher.ContainsWordMatcher;import io.fluentlenium.core.filter.matcher.EqualMatcher;import io.fluentlenium.core.filter.matcher.MatcherType;import org.assertj.core.api.Assertions;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.filter.matcher.AbstractMatcher;
+import io.fluentlenium.core.filter.matcher.ContainsWordMatcher;
+import io.fluentlenium.core.filter.matcher.EqualMatcher;
+import io.fluentlenium.core.filter.matcher.MatcherType;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.filter.matcher.AbstractMatcher;

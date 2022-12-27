@@ -10,7 +10,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.url.ParsedUrlTemplate;import org.assertj.core.api.Assertions;import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.url.ParsedUrlTemplate;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.url.ParsedUrlTemplate;
 import org.junit.Before;
@@ -61,7 +65,7 @@ public class FluentPageTest {
 
         assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> fluentPage.isAtUsingSelector(by))
                                                        .withMessageStartingWith(
-                                                               "@FindBy element not found for page org.fluentlenium.core"
+                                                               "@FindBy element not found for page io.fluentlenium.core"
                                                                        + ".FluentPage$MockitoMock");
     }
 

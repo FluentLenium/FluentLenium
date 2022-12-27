@@ -1,6 +1,9 @@
 package io.fluentlenium.core.conditions;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;

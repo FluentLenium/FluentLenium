@@ -1,8 +1,8 @@
-package org.fluentlenium.examples.pages.clickandopennew;
+package io.fluentlenium.examples.pages.clickandopennew;
 
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.PageUrl;
+import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
 @PageUrl("https://www.awesome-testing.com/2019/01/adding-console-error-log-verification.html")

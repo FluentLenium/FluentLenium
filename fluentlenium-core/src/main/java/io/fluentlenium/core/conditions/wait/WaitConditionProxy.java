@@ -4,7 +4,8 @@ import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.function.Supplier;
 
-import io.fluentlenium.core.conditions.message.MessageProxy;import io.fluentlenium.core.conditions.AtLeastOneElementConditions;
+import io.fluentlenium.core.conditions.message.MessageProxy;
+import io.fluentlenium.core.conditions.AtLeastOneElementConditions;
 import io.fluentlenium.core.conditions.Conditions;
 import io.fluentlenium.core.conditions.EachElementConditions;
 import io.fluentlenium.core.conditions.FluentConditions;

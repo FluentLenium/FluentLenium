@@ -1,6 +1,8 @@
 package io.fluentlenium.test.await.negate;
 
-import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,9 +1,9 @@
-package org.fluentlenium.examples.pages.fluentlenium
+package io.fluentlenium.examples.pages.fluentlenium
 
-import org.fluentlenium.assertj.FluentLeniumAssertions.assertThat
-import org.fluentlenium.core.FluentPage
-import org.fluentlenium.core.domain.FluentList
-import org.fluentlenium.core.domain.FluentWebElement
+import io.fluentlenium.assertj.FluentLeniumAssertions.assertThat
+import io.fluentlenium.core.FluentPage
+import io.fluentlenium.core.domain.FluentList
+import io.fluentlenium.core.domain.FluentWebElement
 import org.openqa.selenium.support.FindBy
 
 class AboutPage : FluentPage() {

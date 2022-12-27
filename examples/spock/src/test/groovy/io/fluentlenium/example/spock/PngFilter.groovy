@@ -1,4 +1,4 @@
-package org.fluentlenium.example.spock
+package io.fluentlenium.example.spock
 
 class PngFilter implements FilenameFilter {
 

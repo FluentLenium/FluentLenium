@@ -1,12 +1,12 @@
-package org.fluentlenium.example.spring.web;
+package io.fluentlenium.example.spring.web;
 
 import io.appium.java_client.AppiumDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.fluentlenium.adapter.testng.FluentTestNgSpringTest;
-import org.fluentlenium.example.spring.config.Config;
-import org.fluentlenium.example.spring.config.ConfigException;
-import org.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;
-import org.fluentlenium.example.spring.config.browser.IBrowser;
+import io.fluentlenium.adapter.testng.FluentTestNgSpringTest;
+import io.fluentlenium.example.spring.config.Config;
+import io.fluentlenium.example.spring.config.ConfigException;
+import io.fluentlenium.example.spring.config.SeleniumBrowserConfigProperties;
+import io.fluentlenium.example.spring.config.browser.IBrowser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.Augmenter;

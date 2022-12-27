@@ -1,6 +1,8 @@
 package io.fluentlenium.core.inject;
 
-import io.fluentlenium.core.annotation.Label;import io.fluentlenium.core.annotation.LabelHint;import io.fluentlenium.core.annotation.Label;
+import io.fluentlenium.core.annotation.Label;
+import io.fluentlenium.core.annotation.LabelHint;
+import io.fluentlenium.core.annotation.Label;
 import io.fluentlenium.core.annotation.LabelHint;
 import io.fluentlenium.core.label.FluentLabelProvider;
 

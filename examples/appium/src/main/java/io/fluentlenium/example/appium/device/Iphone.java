@@ -1,4 +1,4 @@
-package org.fluentlenium.example.appium.device;
+package io.fluentlenium.example.appium.device;
 
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.Capabilities;

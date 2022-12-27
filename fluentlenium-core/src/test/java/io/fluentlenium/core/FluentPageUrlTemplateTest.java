@@ -1,6 +1,7 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.core.url.ParsedUrlTemplate;import org.apache.http.message.BasicNameValuePair;
+import io.fluentlenium.core.url.ParsedUrlTemplate;
+import org.apache.http.message.BasicNameValuePair;
 import io.fluentlenium.core.url.ParsedUrlTemplate;
 import org.junit.Before;
 import org.junit.Test;

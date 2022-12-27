@@ -1,6 +1,11 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.adapter.DefaultFluentControlContainer;import io.fluentlenium.adapter.FluentControlContainer;import io.fluentlenium.configuration.Configuration;import io.fluentlenium.configuration.ConfigurationFactoryProvider;import io.fluentlenium.configuration.FluentConfiguration;import io.fluentlenium.adapter.DefaultFluentControlContainer;
+import io.fluentlenium.adapter.DefaultFluentControlContainer;
+import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.ConfigurationFactoryProvider;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.adapter.DefaultFluentControlContainer;
 import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.configuration.ConfigurationFactoryProvider;

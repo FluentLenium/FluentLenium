@@ -1,6 +1,7 @@
 package io.fluentlenium.core.hook.wait;
 
-import io.fluentlenium.core.wait.FluentWait;import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.core.wait.FluentWait;
 
 import java.util.ArrayList;
 import java.util.Arrays;

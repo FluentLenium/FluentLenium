@@ -1,6 +1,8 @@
 package io.fluentlenium.core.hook;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.DefaultFluentContainer;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.DefaultFluentContainer;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import org.openqa.selenium.By;
@@ -81,7 +83,7 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
      * @param options          hook options
      */
     public BaseHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
+                    Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, T options) {
         super(control);
         this.instantiator = instantiator;
         this.elementSupplier = elementSupplier;

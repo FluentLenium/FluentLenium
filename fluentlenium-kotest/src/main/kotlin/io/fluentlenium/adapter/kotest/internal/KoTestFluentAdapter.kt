@@ -28,11 +28,11 @@ import io.fluentlenium.utils.ScreenshotUtil
 import io.fluentlenium.utils.SeleniumVersionChecker
 import java.util.concurrent.atomic.AtomicReference
 
-internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> _root_ide_package_.io.fluentlenium.configuration.Configuration = { throw IllegalStateException() }) :
-    _root_ide_package_.io.fluentlenium.adapter.IFluentAdapter,
-    _root_ide_package_.io.fluentlenium.adapter.FluentAdapter() {
+internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
+    IFluentAdapter,
+    FluentAdapter() {
 
-    val sharedMutator = _root_ide_package_.io.fluentlenium.adapter.DefaultSharedMutator()
+    val sharedMutator = DefaultSharedMutator()
 
     /**
      * Kotest will use the same thread for all tests in a spec as long as Kotests configuration option
@@ -42,9 +42,9 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
      */
     val currentTestName = AtomicReference<String>()
 
-    private val configurationOverride: _root_ide_package_.io.fluentlenium.configuration.Configuration by lazy { useConfigurationOverride() }
+    private val configurationOverride: Configuration by lazy { useConfigurationOverride() }
 
-    override fun getConfiguration(): _root_ide_package_.io.fluentlenium.configuration.Configuration = configurationOverride
+    override fun getConfiguration(): Configuration = configurationOverride
 
     val extension: Extension = object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener, AfterTestListener {
 
@@ -70,7 +70,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     suspend fun beforeSpec() {
         withContext(Dispatchers.IO) {
-            _root_ide_package_.io.fluentlenium.utils.SeleniumVersionChecker.checkSeleniumVersion()
+            SeleniumVersionChecker.checkSeleniumVersion()
         }
     }
 
@@ -94,7 +94,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
         currentTestName.set(testName)
 
         val theTestInstance =
-            testCase.spec as? _root_ide_package_.io.fluentlenium.adapter.IFluentAdapter ?: throw IllegalArgumentException()
+            testCase.spec as? IFluentAdapter ?: throw IllegalArgumentException()
 
         val driver =
             getTestDriver(
@@ -110,7 +110,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
     }
 
     fun afterSpec(spec: Spec) {
-        _root_ide_package_.io.fluentlenium.adapter.FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
+        FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
     }
 
     fun afterEach(testCase: TestCase, result: TestResult) {
@@ -127,7 +127,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
             else -> Unit
         }
 
-        val sharedWebDriver = _root_ide_package_.io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer.INSTANCE
+        val sharedWebDriver = SharedWebDriverContainer.INSTANCE
             .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
 
         quitMethodAndThreadDrivers(driverLifecycle, sharedWebDriver)
@@ -138,7 +138,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
     }
 
     private fun failed(error: Throwable?, testClass: Class<*>, testName: String) {
-        if (isFluentControlAvailable && !_root_ide_package_.io.fluentlenium.utils.ScreenshotUtil.isIgnoredException(error)) {
+        if (isFluentControlAvailable && !ScreenshotUtil.isIgnoredException(error)) {
             doScreenshot(testClass, testName, this@KoTestFluentAdapter, configuration)
             doHtmlDump(testClass, testName, this@KoTestFluentAdapter, configuration)
         }

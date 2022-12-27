@@ -1,9 +1,9 @@
-package org.fluentlenium.examples.test;
+package io.fluentlenium.examples.test;
 
 import com.google.common.collect.ImmutableMap;
-import org.fluentlenium.adapter.testng.FluentTestNg;
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.examples.pages.DuckDuckMainPage;
+import io.fluentlenium.adapter.testng.FluentTestNg;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.examples.pages.DuckDuckMainPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.Response;

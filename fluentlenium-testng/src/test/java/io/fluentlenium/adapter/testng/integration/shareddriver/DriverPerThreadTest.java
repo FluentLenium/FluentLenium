@@ -6,7 +6,9 @@ import static io.fluentlenium.core.filter.FilterConstructor.withName;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.fluentlenium.configuration.FluentConfiguration;import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import io.fluentlenium.configuration.ConfigurationProperties;
 import io.fluentlenium.configuration.FluentConfiguration;
 import org.testng.annotations.AfterClass;

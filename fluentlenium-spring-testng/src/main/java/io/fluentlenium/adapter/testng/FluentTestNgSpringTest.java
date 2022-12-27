@@ -1,6 +1,11 @@
 package io.fluentlenium.adapter.testng;
 
-import io.fluentlenium.adapter.FluentTestRunnerAdapter;import io.fluentlenium.adapter.IFluentAdapter;import io.fluentlenium.adapter.TestRunnerAdapter;import io.fluentlenium.core.FluentControl;import io.fluentlenium.utils.SeleniumVersionChecker;import io.fluentlenium.adapter.FluentTestRunnerAdapter;
+import io.fluentlenium.adapter.FluentTestRunnerAdapter;
+import io.fluentlenium.adapter.IFluentAdapter;
+import io.fluentlenium.adapter.TestRunnerAdapter;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import io.fluentlenium.adapter.IFluentAdapter;
 import io.fluentlenium.adapter.TestRunnerAdapter;
 import io.fluentlenium.core.FluentControl;

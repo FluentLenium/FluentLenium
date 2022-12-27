@@ -1,6 +1,11 @@
 package io.fluentlenium.core.wait;
 
-import io.fluentlenium.core.FluentDriver;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.conditions.FluentListConditions;import io.fluentlenium.core.conditions.WebElementConditions;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.FluentDriver;
+import io.fluentlenium.core.FluentDriver;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.conditions.FluentListConditions;
+import io.fluentlenium.core.conditions.WebElementConditions;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentDriver;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import io.fluentlenium.core.conditions.FluentListConditions;
 import io.fluentlenium.core.conditions.WebElementConditions;

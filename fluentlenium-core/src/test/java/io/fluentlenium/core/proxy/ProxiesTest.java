@@ -1,6 +1,8 @@
 package io.fluentlenium.core.proxy;
 
-import io.fluentlenium.core.domain.WrapsElements;import org.assertj.core.api.Assertions;import io.fluentlenium.core.domain.WrapsElements;
+import io.fluentlenium.core.domain.WrapsElements;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.domain.WrapsElements;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

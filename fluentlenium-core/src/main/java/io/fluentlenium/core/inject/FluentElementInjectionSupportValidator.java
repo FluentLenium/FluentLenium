@@ -1,6 +1,9 @@
 package io.fluentlenium.core.inject;
 
-import io.fluentlenium.core.components.ComponentsManager;import io.fluentlenium.utils.CollectionUtils;import io.fluentlenium.utils.ReflectionUtils;import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.utils.CollectionUtils;
+import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebElement;

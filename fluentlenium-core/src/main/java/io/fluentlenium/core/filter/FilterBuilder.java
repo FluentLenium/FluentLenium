@@ -1,6 +1,7 @@
 package io.fluentlenium.core.filter;
 
-import io.fluentlenium.core.filter.matcher.*;import io.fluentlenium.core.filter.matcher.ContainsMatcher;
+import io.fluentlenium.core.filter.matcher.*;
+import io.fluentlenium.core.filter.matcher.ContainsMatcher;
 import io.fluentlenium.core.filter.matcher.ContainsWordMatcher;
 import io.fluentlenium.core.filter.matcher.EndsWithMatcher;
 import io.fluentlenium.core.filter.matcher.EqualMatcher;

@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter.sharedwebdriver;
 
-import io.fluentlenium.configuration.ConfigurationProperties;import java.util.HashMap;
+import io.fluentlenium.configuration.ConfigurationProperties;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 

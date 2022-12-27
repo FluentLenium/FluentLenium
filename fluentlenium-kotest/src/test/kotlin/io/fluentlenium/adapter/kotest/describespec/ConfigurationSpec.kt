@@ -1,14 +1,14 @@
 package io.fluentlenium.adapter.kotest.describespec
 
 import io.kotest.matchers.shouldBe
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 import io.fluentlenium.configuration.ConfigurationProperties
 import io.fluentlenium.configuration.CustomProperty
 import io.fluentlenium.configuration.FluentConfiguration
 
-@_root_ide_package_.io.fluentlenium.configuration.FluentConfiguration(
-    driverLifecycle = _root_ide_package_.io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.JVM,
-    custom = [_root_ide_package_.io.fluentlenium.configuration.CustomProperty(name = "foo", value = "bar")]
+@FluentConfiguration(
+    driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,
+    custom = [CustomProperty(name = "foo", value = "bar")]
 )
 class ConfigurationSpec : FluentDescribeSpec() {
 
@@ -18,7 +18,7 @@ class ConfigurationSpec : FluentDescribeSpec() {
         setCustomProperty("customProp", "myValue")
 
         it("driverLifeCycle via annotation") {
-            driverLifecycle shouldBe _root_ide_package_.io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.JVM
+            driverLifecycle shouldBe ConfigurationProperties.DriverLifecycle.JVM
         }
 
         it("custom property via annotation") {

@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.freespec
 
 import io.kotest.datatest.withData
-import org.fluentlenium.adapter.kotest.FluentFreeSpec
-import org.fluentlenium.adapter.kotest.TestConstants
+import io.fluentlenium.adapter.kotest.FluentFreeSpec
+import io.fluentlenium.adapter.kotest.TestConstants
 
 class DataDrivenSpec : FluentFreeSpec({
     "free" - {

@@ -1,6 +1,13 @@
 package io.fluentlenium.core.hook;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.proxy.LocatorHandler;import io.fluentlenium.core.proxy.LocatorProxies;import io.fluentlenium.core.search.Search;import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.proxy.LocatorHandler;
+import io.fluentlenium.core.proxy.LocatorProxies;
+import io.fluentlenium.core.search.Search;
+import org.assertj.core.api.Assertions;
 import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import io.fluentlenium.core.domain.FluentList;

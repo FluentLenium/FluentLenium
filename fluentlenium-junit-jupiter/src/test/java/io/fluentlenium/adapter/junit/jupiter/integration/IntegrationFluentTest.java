@@ -2,7 +2,8 @@ package io.fluentlenium.adapter.junit.jupiter.integration;
 
 import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 
-import io.fluentlenium.utils.UrlUtils;import io.github.bonigarcia.wdm.WebDriverManager;
+import io.fluentlenium.utils.UrlUtils;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.junit.jupiter.api.BeforeAll;
 

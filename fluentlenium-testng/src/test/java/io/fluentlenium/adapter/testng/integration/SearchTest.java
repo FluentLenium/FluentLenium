@@ -1,6 +1,10 @@
 package io.fluentlenium.adapter.testng.integration;
 
-import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import org.assertj.core.api.Assertions;import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
+import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.By;

@@ -4,4 +4,4 @@ import io.fluentlenium.core.FluentPage
 import org.openqa.selenium.support.FindBy
 
 @FindBy(id = "nonexisting")
-class IndexPageWrongClassAnnotations : _root_ide_package_.io.fluentlenium.core.FluentPage()
+class IndexPageWrongClassAnnotations : FluentPage()

@@ -1,6 +1,7 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.alert.AlertImpl;import org.assertj.core.api.AbstractAssert;
+import io.fluentlenium.core.alert.AlertImpl;
+import org.assertj.core.api.AbstractAssert;
 import io.fluentlenium.core.alert.AlertImpl;
 import org.openqa.selenium.NoAlertPresentException;
 

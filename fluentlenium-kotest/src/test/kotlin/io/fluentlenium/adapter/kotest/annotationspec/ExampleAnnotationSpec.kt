@@ -2,9 +2,9 @@ package io.fluentlenium.adapter.kotest.annotationspec
 
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentAnnotationSpec
-import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
-import org.fluentlenium.adapter.kotest.jq
+import io.fluentlenium.adapter.kotest.FluentAnnotationSpec
+import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import io.fluentlenium.adapter.kotest.jq
 
 class ExampleAnnotationSpec : FluentAnnotationSpec() {
     @Test

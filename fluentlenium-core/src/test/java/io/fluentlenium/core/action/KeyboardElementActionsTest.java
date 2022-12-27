@@ -1,6 +1,7 @@
 package io.fluentlenium.core.action;
 
-import io.fluentlenium.core.domain.FluentWebElement;import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.domain.FluentWebElement;
+import org.assertj.core.api.Assertions;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.junit.After;
 import org.junit.Before;

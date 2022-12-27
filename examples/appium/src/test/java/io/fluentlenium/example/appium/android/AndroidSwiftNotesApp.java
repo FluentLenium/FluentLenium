@@ -1,8 +1,8 @@
-package org.fluentlenium.example.appium.android;
+package io.fluentlenium.example.appium.android;
 
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.example.appium.ExampleFluentTest;
-import org.fluentlenium.example.appium.app.android.SwiftNoteHomePage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.example.appium.ExampleFluentTest;
+import io.fluentlenium.example.appium.app.android.SwiftNoteHomePage;
 import org.junit.Test;
 
 public class AndroidSwiftNotesApp extends ExampleFluentTest {

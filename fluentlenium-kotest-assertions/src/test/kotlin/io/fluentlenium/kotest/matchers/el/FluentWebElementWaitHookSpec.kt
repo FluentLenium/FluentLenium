@@ -2,9 +2,9 @@ package io.fluentlenium.kotest.matchers.el
 
 import io.kotest.matchers.shouldNot
 import io.fluentlenium.core.hook.wait.Wait
-import org.fluentlenium.kotest.matchers.config.MatcherBase
+import io.fluentlenium.kotest.matchers.config.MatcherBase
 
-@_root_ide_package_.io.fluentlenium.core.hook.wait.Wait(timeout = 1)
+@Wait(timeout = 1)
 class FluentWebElementWaitHookSpec : MatcherBase({
     "can check for absent elements when using waithook" {
         el("#doesNotExist") shouldNot bePresent()

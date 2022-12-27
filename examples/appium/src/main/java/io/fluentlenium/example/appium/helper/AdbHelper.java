@@ -1,4 +1,4 @@
-package org.fluentlenium.example.appium.helper;
+package io.fluentlenium.example.appium.helper;
 
 import io.appium.java_client.AppiumDriver;
 

@@ -1,6 +1,7 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.alert.AlertImpl;import io.fluentlenium.assertj.FluentLeniumAssertions;
+import io.fluentlenium.core.alert.AlertImpl;
+import io.fluentlenium.assertj.FluentLeniumAssertions;
 import io.fluentlenium.core.alert.AlertImpl;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
 
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;import io.fluentlenium.configuration.FluentConfiguration;import net.jcip.annotations.NotThreadSafe;
+import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+import io.fluentlenium.configuration.FluentConfiguration;
+import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;

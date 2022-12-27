@@ -6,7 +6,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.switchto.FluentTargetLocator;import io.fluentlenium.core.switchto.FluentTargetLocatorImpl;import io.fluentlenium.core.FluentControl;
+
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.switchto.FluentTargetLocator;
+import io.fluentlenium.core.switchto.FluentTargetLocatorImpl;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.switchto.FluentTargetLocator;

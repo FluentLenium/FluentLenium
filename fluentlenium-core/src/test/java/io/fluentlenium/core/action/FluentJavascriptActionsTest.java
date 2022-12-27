@@ -1,6 +1,8 @@
 package io.fluentlenium.core.action;
 
-import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.script.JavascriptControl;import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.script.JavascriptControl;
+import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.script.JavascriptControl;
 import org.junit.Before;
 import org.junit.Test;

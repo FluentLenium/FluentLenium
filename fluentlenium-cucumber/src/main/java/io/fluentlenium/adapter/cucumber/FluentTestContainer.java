@@ -1,6 +1,14 @@
 package io.fluentlenium.adapter.cucumber;
 
-import io.fluentlenium.adapter.DefaultFluentControlContainer;import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.adapter.FluentControlContainer;import io.fluentlenium.adapter.SharedMutator;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.components.ComponentsManager;import io.fluentlenium.core.inject.DefaultContainerInstantiator;import io.fluentlenium.core.inject.FluentInjector;import io.fluentlenium.adapter.DefaultFluentControlContainer;
+import io.fluentlenium.adapter.DefaultFluentControlContainer;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.adapter.SharedMutator;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.core.inject.DefaultContainerInstantiator;
+import io.fluentlenium.core.inject.FluentInjector;
+import io.fluentlenium.adapter.DefaultFluentControlContainer;
 import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.adapter.SharedMutator;

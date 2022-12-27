@@ -1,6 +1,19 @@
 package io.fluentlenium.core.inject;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.components.ComponentsManager;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.hook.Hook;import io.fluentlenium.core.hook.HookOptions;import io.fluentlenium.core.hook.NoHook;import io.fluentlenium.core.proxy.LocatorHandler;import io.fluentlenium.core.proxy.LocatorProxies;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.hook.Hook;
+import io.fluentlenium.core.hook.HookOptions;
+import io.fluentlenium.core.hook.NoHook;
+import io.fluentlenium.core.proxy.LocatorHandler;
+import io.fluentlenium.core.proxy.LocatorProxies;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
@@ -276,7 +289,7 @@ public class FluentInjectorHookTest {
 
     public static class NanoHook2 extends NanoHook {
         public NanoHook2(FluentControl fluentControl, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-                Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
+                         Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, NanoHookOptions options) {
             super(fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
         }
     }

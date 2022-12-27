@@ -4,9 +4,9 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.fluentlenium.adapter.exception.AnnotationNotFoundException
-import org.fluentlenium.adapter.kotest.FluentShouldSpec
-import org.fluentlenium.adapter.kotest.MyAnnotation
-import org.fluentlenium.adapter.kotest.OtherAnnotation
+import io.fluentlenium.adapter.kotest.FluentShouldSpec
+import io.fluentlenium.adapter.kotest.MyAnnotation
+import io.fluentlenium.adapter.kotest.OtherAnnotation
 
 @MyAnnotation
 class ShouldMetadataSpec : FluentShouldSpec({
@@ -17,13 +17,13 @@ class ShouldMetadataSpec : FluentShouldSpec({
         }
 
         should("access non existing annotation fails") {
-            shouldThrow<_root_ide_package_.io.fluentlenium.adapter.exception.AnnotationNotFoundException> {
+            shouldThrow<AnnotationNotFoundException> {
                 getClassAnnotation(OtherAnnotation::class.java)
             }
         }
 
         should("getMethodAnnotation should fail") {
-            shouldThrow<_root_ide_package_.io.fluentlenium.adapter.exception.AnnotationNotFoundException> {
+            shouldThrow<AnnotationNotFoundException> {
                 getMethodAnnotation(MyAnnotation::class.java)
             }
         }

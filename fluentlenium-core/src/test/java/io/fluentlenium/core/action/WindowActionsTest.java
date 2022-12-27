@@ -1,7 +1,15 @@
 package io.fluentlenium.core.action;
 
 import com.google.common.collect.ImmutableSet;
-import io.fluentlenium.configuration.Configuration;import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.FluentDriver;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.switchto.FluentTargetLocator;import io.fluentlenium.core.wait.FluentWait;import io.fluentlenium.core.wait.FluentWaitWindowConditions;import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentDriver;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.switchto.FluentTargetLocator;
+import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.core.wait.FluentWaitWindowConditions;
+import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentDriver;
 import io.fluentlenium.core.components.ComponentInstantiator;

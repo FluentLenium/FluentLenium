@@ -1,6 +1,7 @@
 package io.fluentlenium.core.css;
 
-import io.fluentlenium.core.script.JavascriptControl;import io.fluentlenium.core.script.JavascriptControl;
+import io.fluentlenium.core.script.JavascriptControl;
+import io.fluentlenium.core.script.JavascriptControl;
 import io.fluentlenium.core.wait.AwaitControl;
 
 /**

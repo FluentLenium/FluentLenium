@@ -4,15 +4,15 @@ import io.kotest.engine.spec.tempdir
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
-import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
-import org.fluentlenium.adapter.kotest.TestConstants.PAGE2_URL
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import io.fluentlenium.adapter.kotest.TestConstants.PAGE2_URL
 import io.fluentlenium.configuration.ConfigurationProperties
 import io.fluentlenium.configuration.FluentConfiguration
 import io.fluentlenium.utils.UrlUtils.getAbsoluteUrlPathFromFile
 
-@_root_ide_package_.io.fluentlenium.configuration.FluentConfiguration(
-    driverLifecycle = _root_ide_package_.io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.JVM,
+@FluentConfiguration(
+    driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,
     configurationDefaults = CustomConfigurationDefault::class,
     webDriver = "chrome"
 )

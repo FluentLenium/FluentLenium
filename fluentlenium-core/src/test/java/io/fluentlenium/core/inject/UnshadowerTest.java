@@ -10,7 +10,14 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Set;
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.annotation.Unshadow;import io.fluentlenium.core.domain.FluentWebElement;import org.assertj.core.api.Assertions;import io.fluentlenium.core.FluentControl;
+
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.annotation.Unshadow;
+import io.fluentlenium.core.domain.FluentWebElement;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.annotation.Unshadow;

@@ -1,6 +1,8 @@
 package io.fluentlenium.core.hook.wait;
 
-import io.fluentlenium.core.hook.HookOptions;import io.fluentlenium.core.wait.FluentWait;import io.fluentlenium.core.hook.Hook;
+import io.fluentlenium.core.hook.HookOptions;
+import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.core.hook.Hook;
 import io.fluentlenium.core.hook.HookOptions;
 
 import java.lang.annotation.ElementType;

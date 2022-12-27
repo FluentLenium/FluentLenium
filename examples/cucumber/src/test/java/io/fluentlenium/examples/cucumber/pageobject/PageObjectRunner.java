@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.cucumber.pageobject;
+package io.fluentlenium.examples.cucumber.pageobject;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

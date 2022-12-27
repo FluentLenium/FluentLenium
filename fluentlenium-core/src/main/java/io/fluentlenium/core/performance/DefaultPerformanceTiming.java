@@ -1,6 +1,7 @@
 package io.fluentlenium.core.performance;
 
-import io.fluentlenium.utils.Preconditions;import org.openqa.selenium.JavascriptExecutor;
+import io.fluentlenium.utils.Preconditions;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
 import static io.fluentlenium.core.performance.PerformanceTimingEvent.NAVIGATION_START;

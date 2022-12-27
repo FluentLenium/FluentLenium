@@ -1,6 +1,8 @@
 package io.fluentlenium.core.domain;
 
-import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.inject.NoInject;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.inject.NoInject;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.inject.NoInject;
 import org.openqa.selenium.WebElement;

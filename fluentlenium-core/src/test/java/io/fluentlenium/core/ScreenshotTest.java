@@ -1,6 +1,7 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;

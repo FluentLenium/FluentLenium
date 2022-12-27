@@ -1,9 +1,9 @@
-package org.fluentlenium.example.appium.app.android;
+package io.fluentlenium.example.appium.app.android;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentWebElement;
-import org.fluentlenium.example.appium.helper.AdbHelper;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.example.appium.helper.AdbHelper;
 
 public class SwiftNoteAddPage extends FluentPage {
 

@@ -1,6 +1,9 @@
 package io.fluentlenium.core.wait;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.conditions.Conditions;import io.fluentlenium.core.conditions.message.MessageProxy;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.conditions.Conditions;
+import io.fluentlenium.core.conditions.message.MessageProxy;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.conditions.Conditions;
 import io.fluentlenium.core.conditions.message.MessageProxy;
 
@@ -63,7 +66,7 @@ public class BaseWaitConditions {
      * @param <T>               type of the condition.
      */
     protected <T extends Conditions<?>> void until(FluentWait wait, T condition, T messageBuilder,
-            Function<T, Boolean> conditionFunction) {
+                                                   Function<T, Boolean> conditionFunction) {
         Predicate<FluentControl> predicate = input -> conditionFunction.apply(condition);
         Supplier<String> messageSupplier = () -> {
             conditionFunction.apply(messageBuilder);

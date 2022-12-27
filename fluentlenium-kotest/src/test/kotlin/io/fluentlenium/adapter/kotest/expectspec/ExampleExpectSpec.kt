@@ -2,9 +2,9 @@ package io.fluentlenium.adapter.kotest.expectspec
 
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentExpectSpec
-import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
-import org.fluentlenium.adapter.kotest.jq
+import io.fluentlenium.adapter.kotest.FluentExpectSpec
+import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import io.fluentlenium.adapter.kotest.jq
 
 class ExampleExpectSpec : FluentExpectSpec({
     context("ExpectSpec") {

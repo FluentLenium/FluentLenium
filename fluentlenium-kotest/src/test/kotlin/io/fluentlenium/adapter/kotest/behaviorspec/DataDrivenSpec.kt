@@ -1,8 +1,8 @@
 package io.fluentlenium.adapter.kotest.behaviorspec
 
 import io.kotest.datatest.withData
-import org.fluentlenium.adapter.kotest.FluentBehaviorSpec
-import org.fluentlenium.adapter.kotest.TestConstants
+import io.fluentlenium.adapter.kotest.FluentBehaviorSpec
+import io.fluentlenium.adapter.kotest.TestConstants
 
 class DataDrivenSpec : FluentBehaviorSpec({
     given("given") {

@@ -1,8 +1,8 @@
-package org.fluentlenium.example.spring.web;
+package io.fluentlenium.example.spring.web;
 
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.example.spring.page.JavadocPage;
-import org.fluentlenium.example.spring.page.MainPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.example.spring.page.JavadocPage;
+import io.fluentlenium.example.spring.page.MainPage;
 import org.testng.annotations.Test;
 
 public class FluentleniumComTest extends ExampleFluentTest {

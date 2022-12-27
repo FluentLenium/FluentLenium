@@ -1,6 +1,7 @@
 package io.fluentlenium.test;
 
-import io.fluentlenium.utils.UrlUtils;import io.github.bonigarcia.wdm.WebDriverManager;
+import io.fluentlenium.utils.UrlUtils;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.fluentlenium.adapter.junit.jupiter.FluentTest;
 import org.junit.jupiter.api.BeforeAll;
 

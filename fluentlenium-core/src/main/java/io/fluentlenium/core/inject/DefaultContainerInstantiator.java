@@ -1,6 +1,7 @@
 package io.fluentlenium.core.inject;
 
-import io.fluentlenium.utils.ReflectionUtils;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.utils.ReflectionUtils;
 
 import java.lang.reflect.InvocationTargetException;

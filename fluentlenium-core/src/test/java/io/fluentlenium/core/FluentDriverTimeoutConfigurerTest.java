@@ -5,7 +5,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import io.fluentlenium.configuration.Configuration;import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

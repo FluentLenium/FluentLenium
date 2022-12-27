@@ -2,7 +2,13 @@ package io.fluentlenium.core.search;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.filter.AttributeFilter;import org.assertj.core.api.Assertions;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.filter.AttributeFilter;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;

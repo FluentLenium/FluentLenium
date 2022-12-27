@@ -1,6 +1,7 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.domain.FluentWebElement;import io.netty.util.internal.StringUtil;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.netty.util.internal.StringUtil;
 import org.assertj.core.api.AbstractStringAssert;
 import org.assertj.core.api.StringAssert;
 import io.fluentlenium.core.domain.FluentWebElement;

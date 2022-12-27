@@ -1,7 +1,7 @@
-package org.fluentlenium.examples.test;
+package io.fluentlenium.examples.test;
 
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.examples.pages.DuckDuckMainPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.examples.pages.DuckDuckMainPage;
 import org.junit.Test;
 
 public class DuckDuckGoChromeTest extends AbstractChromeTest {

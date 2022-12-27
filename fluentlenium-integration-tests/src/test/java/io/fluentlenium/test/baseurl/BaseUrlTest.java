@@ -1,6 +1,10 @@
 package io.fluentlenium.test.baseurl;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.annotation.PageUrl;import io.fluentlenium.pages.Page2;import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.annotation.PageUrl;
+import io.fluentlenium.pages.Page2;
+import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.annotation.PageUrl;
 import io.fluentlenium.test.IntegrationFluentTest;

@@ -1,6 +1,10 @@
 package io.fluentlenium.core.action;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.search.SearchControl;import org.assertj.core.api.Assertions;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.search.SearchControl;
+import org.assertj.core.api.Assertions;
 import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;

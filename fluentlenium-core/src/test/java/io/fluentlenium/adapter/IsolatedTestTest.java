@@ -1,6 +1,10 @@
 package io.fluentlenium.adapter;
 
-import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.proxy.LocatorProxies;import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.proxy.LocatorProxies;
+import org.assertj.core.api.Assertions;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.domain.FluentWebElement;

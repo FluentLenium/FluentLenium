@@ -1,6 +1,9 @@
 package io.fluentlenium.assertj.integration.page;
 
-import io.fluentlenium.assertj.custom.PageAssert;import io.fluentlenium.assertj.integration.page.pages.IndexPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.assertj.integration.IntegrationTest;
+import io.fluentlenium.assertj.custom.PageAssert;
+import io.fluentlenium.assertj.integration.page.pages.IndexPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.assertj.integration.IntegrationTest;
 import io.fluentlenium.assertj.integration.page.pages.IndexPage;
 import io.fluentlenium.core.annotation.Page;
 import org.testng.annotations.BeforeMethod;

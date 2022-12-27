@@ -1,11 +1,11 @@
-package org.fluentlenium.example.spring.page;
+package io.fluentlenium.example.spring.page;
 
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.annotation.PageUrl;
-import org.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.PageUrl;
+import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static org.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
+import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
 
 @PageUrl("/")
 public class MainPage extends FluentPage {

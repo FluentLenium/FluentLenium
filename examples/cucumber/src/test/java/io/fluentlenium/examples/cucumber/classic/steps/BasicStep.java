@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.cucumber.classic.steps;
+package io.fluentlenium.examples.cucumber.classic.steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -6,8 +6,8 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
-import org.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import io.fluentlenium.configuration.FluentConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

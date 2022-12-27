@@ -3,7 +3,9 @@ package io.fluentlenium.adapter.junit.integration;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;import io.fluentlenium.configuration.FluentConfiguration;import net.jcip.annotations.NotThreadSafe;
+import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+import io.fluentlenium.configuration.FluentConfiguration;
+import net.jcip.annotations.NotThreadSafe;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.util.Files;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
@@ -276,15 +278,15 @@ public class FluentTestTest {
         Mockito.verify(driver).getScreenshotAs(OutputType.BYTES);
         Mockito.verify(driver).findElements(By.cssSelector("html"));
 
-        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(io.fluentlenium.adapter.junit.integration"
                 + ".FluentTestTest$AutomaticScreenShotTest).html");
-        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+        assertThat(tmpPath.list()).contains("AutomaticScreenShotTest_failingTest(io.fluentlenium.adapter.junit.integration"
                 + ".FluentTestTest$AutomaticScreenShotTest).png");
 
         File screenshotGeneratedFile = new File(tmpPath,
-                "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+                "AutomaticScreenShotTest_failingTest(io.fluentlenium.adapter.junit.integration"
                         + ".FluentTestTest$AutomaticScreenShotTest).png");
-        File htmlDumpFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest(org.fluentlenium.adapter.junit.integration"
+        File htmlDumpFile = new File(tmpPath, "AutomaticScreenShotTest_failingTest(io.fluentlenium.adapter.junit.integration"
                 + ".FluentTestTest$AutomaticScreenShotTest).html");
 
         try {

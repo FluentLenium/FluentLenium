@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter.sharedwebdriver;
 
-import io.fluentlenium.configuration.ConfigurationProperties; /**
+import io.fluentlenium.configuration.ConfigurationProperties;
+
+/**
  * Stores and handles a {@link SharedWebDriver} instance for the whole JVM.
  *
  * @see ConfigurationProperties.DriverLifecycle#JVM

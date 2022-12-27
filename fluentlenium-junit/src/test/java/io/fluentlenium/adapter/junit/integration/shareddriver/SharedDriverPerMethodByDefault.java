@@ -1,6 +1,7 @@
 package io.fluentlenium.adapter.junit.integration.shareddriver;
 
-import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.adapter.junit.integration.IntegrationFluentTest;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;

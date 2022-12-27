@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter.junit.jupiter;
 
-import io.fluentlenium.adapter.FluentTestRunnerAdapter;import io.fluentlenium.utils.SeleniumVersionChecker;import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.adapter.FluentTestRunnerAdapter;
+import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.utils.SeleniumVersionChecker;
 import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import org.junit.jupiter.api.extension.ExtendWith;
 

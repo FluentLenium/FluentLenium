@@ -1,6 +1,6 @@
-package org.fluentlenium.examples.test
+package io.fluentlenium.examples.test
 
-import org.fluentlenium.adapter.junit.jupiter.FluentTest
+import io.fluentlenium.adapter.junit.jupiter.FluentTest
 import org.junit.jupiter.api.BeforeAll
 import org.openqa.selenium.os.ExecutableFinder
 

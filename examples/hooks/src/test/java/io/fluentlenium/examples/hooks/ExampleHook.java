@@ -1,8 +1,8 @@
-package org.fluentlenium.examples.hooks;
+package io.fluentlenium.examples.hooks;
 
-import org.fluentlenium.core.FluentControl;
-import org.fluentlenium.core.components.ComponentInstantiator;
-import org.fluentlenium.core.hook.BaseHook;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.hook.BaseHook;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 

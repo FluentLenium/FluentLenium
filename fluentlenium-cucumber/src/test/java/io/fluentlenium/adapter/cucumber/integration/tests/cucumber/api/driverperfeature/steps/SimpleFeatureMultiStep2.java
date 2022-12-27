@@ -2,7 +2,8 @@ package io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.driverpe
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.fluentlenium.core.annotation.Page;import io.fluentlenium.adapter.cucumber.integration.page.LocalPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import io.fluentlenium.core.annotation.Page;
 
 public class SimpleFeatureMultiStep2 extends BaseTest {

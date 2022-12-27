@@ -1,6 +1,7 @@
 package io.fluentlenium.core.wait;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

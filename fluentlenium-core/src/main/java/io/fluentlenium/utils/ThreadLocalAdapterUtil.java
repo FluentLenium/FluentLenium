@@ -1,6 +1,7 @@
 package io.fluentlenium.utils;
 
-import io.fluentlenium.adapter.SharedMutator;import org.apache.commons.lang3.StringUtils;
+import io.fluentlenium.adapter.SharedMutator;
+import org.apache.commons.lang3.StringUtils;
 import io.fluentlenium.adapter.SharedMutator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

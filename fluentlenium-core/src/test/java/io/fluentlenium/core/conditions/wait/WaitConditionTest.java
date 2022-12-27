@@ -9,7 +9,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Predicate;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.core.conditions.FluentConditions;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.wait.FluentWait;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.core.conditions.FluentConditions;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.wait.FluentWait;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import io.fluentlenium.core.conditions.FluentConditions;

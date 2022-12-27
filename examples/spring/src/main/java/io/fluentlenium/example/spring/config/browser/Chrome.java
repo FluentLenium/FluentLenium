@@ -1,4 +1,4 @@
-package org.fluentlenium.example.spring.config.browser;
+package io.fluentlenium.example.spring.config.browser;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeOptions;

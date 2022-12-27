@@ -3,7 +3,12 @@ package io.fluentlenium.core.inject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.components.ComponentsManager;import io.fluentlenium.core.domain.FluentListImpl;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.core.domain.FluentListImpl;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.FluentListImpl;

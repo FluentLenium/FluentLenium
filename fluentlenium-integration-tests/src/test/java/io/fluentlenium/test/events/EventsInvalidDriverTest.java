@@ -1,6 +1,8 @@
 package io.fluentlenium.test.events;
 
-import io.fluentlenium.configuration.FluentConfiguration;import io.fluentlenium.core.events.ElementListener;import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.events.ElementListener;
+import io.fluentlenium.configuration.FluentConfiguration;
 import io.fluentlenium.core.events.ElementListener;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,9 @@
 package io.fluentlenium.core.dom;
 
-import io.fluentlenium.adapter.FluentAdapter;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.components.DefaultComponentInstantiator;import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.adapter.FluentAdapter;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.components.DefaultComponentInstantiator;
+import io.fluentlenium.adapter.FluentAdapter;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.components.DefaultComponentInstantiator;
 import org.junit.Before;

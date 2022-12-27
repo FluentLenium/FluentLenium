@@ -2,7 +2,8 @@ package io.fluentlenium.core;
 
 import static java.util.Objects.requireNonNull;
 
-import io.fluentlenium.configuration.Configuration;import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.configuration.Configuration;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

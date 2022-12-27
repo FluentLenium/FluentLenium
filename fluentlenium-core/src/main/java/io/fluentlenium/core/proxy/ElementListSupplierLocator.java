@@ -1,6 +1,7 @@
 package io.fluentlenium.core.proxy;
 
-import io.fluentlenium.utils.SupplierOfInstance;import io.fluentlenium.utils.SupplierOfInstance;
+import io.fluentlenium.utils.SupplierOfInstance;
+import io.fluentlenium.utils.SupplierOfInstance;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 

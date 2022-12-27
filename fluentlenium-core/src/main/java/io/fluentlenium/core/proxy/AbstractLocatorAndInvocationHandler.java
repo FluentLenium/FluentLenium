@@ -2,7 +2,8 @@ package io.fluentlenium.core.proxy;
 
 import static io.fluentlenium.utils.ReflectionUtils.getMethod;
 
-import io.fluentlenium.utils.ReflectionUtils;import org.openqa.selenium.StaleElementReferenceException;
+import io.fluentlenium.utils.ReflectionUtils;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 

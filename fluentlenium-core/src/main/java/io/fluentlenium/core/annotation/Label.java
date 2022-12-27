@@ -1,6 +1,12 @@
 package io.fluentlenium.core.annotation;
 
-import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.inject.LabelAnnotations;import io.fluentlenium.core.label.FluentLabel;import io.fluentlenium.core.label.FluentLabelImpl;import java.lang.annotation.ElementType;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.inject.LabelAnnotations;
+import io.fluentlenium.core.label.FluentLabel;
+import io.fluentlenium.core.label.FluentLabelImpl;
+
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;

@@ -3,18 +3,18 @@ package io.fluentlenium.adapter.kotest.describespec
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
-import org.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
-import org.fluentlenium.adapter.kotest.pages.DefaultPage
-import org.fluentlenium.adapter.kotest.pages.Page2
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.TestConstants.DEFAULT_URL
+import io.fluentlenium.adapter.kotest.pages.DefaultPage
+import io.fluentlenium.adapter.kotest.pages.Page2
 import io.fluentlenium.core.annotation.Page
 
 class PageSpec : FluentDescribeSpec() {
 
-    @_root_ide_package_.io.fluentlenium.core.annotation.Page
+    @Page
     lateinit var defaultPage: DefaultPage
 
-    @_root_ide_package_.io.fluentlenium.core.annotation.Page
+    @Page
     lateinit var page2: Page2
 
     init {

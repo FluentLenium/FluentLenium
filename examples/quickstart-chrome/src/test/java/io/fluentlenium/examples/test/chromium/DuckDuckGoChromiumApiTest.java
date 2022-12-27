@@ -1,7 +1,7 @@
-package org.fluentlenium.examples.test.chromium;
+package io.fluentlenium.examples.test.chromium;
 
 import com.google.common.collect.ImmutableMap;
-import org.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.adapter.junit.FluentTest;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

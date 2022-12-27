@@ -1,10 +1,10 @@
-package org.fluentlenium.examples.test.componentexample
+package io.fluentlenium.examples.test.componentexample
 
-import org.fluentlenium.core.annotation.Page
-import org.fluentlenium.examples.pages.fluentlenium.AboutPage
-import org.fluentlenium.examples.pages.fluentlenium.MainPage
-import org.fluentlenium.examples.pages.fluentlenium.QuickStartPage
-import org.fluentlenium.examples.test.AbstractFirefoxTest
+import io.fluentlenium.core.annotation.Page
+import io.fluentlenium.examples.pages.fluentlenium.AboutPage
+import io.fluentlenium.examples.pages.fluentlenium.MainPage
+import io.fluentlenium.examples.pages.fluentlenium.QuickStartPage
+import io.fluentlenium.examples.test.AbstractFirefoxTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.openqa.selenium.Dimension

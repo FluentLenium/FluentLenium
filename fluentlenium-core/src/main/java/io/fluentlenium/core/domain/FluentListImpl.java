@@ -12,7 +12,14 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.conditions.AtLeastOneElementConditions;import io.fluentlenium.core.conditions.EachElementConditions;import io.fluentlenium.core.conditions.FluentListConditions;import io.fluentlenium.core.conditions.wait.WaitConditionProxy;import io.fluentlenium.core.search.SearchFilter;import io.fluentlenium.utils.SupplierOfInstance;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.conditions.AtLeastOneElementConditions;
+import io.fluentlenium.core.conditions.EachElementConditions;
+import io.fluentlenium.core.conditions.FluentListConditions;
+import io.fluentlenium.core.conditions.wait.WaitConditionProxy;
+import io.fluentlenium.core.search.SearchFilter;
+import io.fluentlenium.utils.SupplierOfInstance;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.action.Fill;
 import io.fluentlenium.core.action.FillSelect;
 import io.fluentlenium.core.action.FluentJavascriptActions;

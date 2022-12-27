@@ -1,4 +1,4 @@
-package org.fluentlenium.example.kotest
+package io.fluentlenium.example.kotest
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import io.kotest.core.config.AbstractProjectConfig

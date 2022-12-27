@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.cucumber.classic;
+package io.fluentlenium.examples.cucumber.classic;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;

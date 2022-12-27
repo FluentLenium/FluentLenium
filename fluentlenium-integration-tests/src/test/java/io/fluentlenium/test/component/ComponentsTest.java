@@ -1,6 +1,15 @@
 package io.fluentlenium.test.component;
 
-import io.fluentlenium.core.FluentControl;import io.fluentlenium.core.FluentPage;import io.fluentlenium.core.annotation.Page;import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.hook.wait.Wait;import io.fluentlenium.core.inject.Parent;import io.fluentlenium.pages.Page2;import org.assertj.core.api.Assertions;import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentControl;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.hook.wait.Wait;
+import io.fluentlenium.core.inject.Parent;
+import io.fluentlenium.pages.Page2;
+import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.core.components.ComponentInstantiator;

@@ -37,7 +37,7 @@ public class AnnotationConfigurationTest {
     public static class DesiredCapabilitiesClass {
     }
 
-    @FluentConfiguration(capabilities = "org.fluentlenium.configuration.TestCapabilities")
+    @FluentConfiguration(capabilities = "io.fluentlenium.configuration.TestCapabilities")
     public static class CapabilitiesClassNameClass {
     }
 

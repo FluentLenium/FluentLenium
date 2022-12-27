@@ -1,4 +1,4 @@
-package org.fluentlenium.example.kotest
+package io.fluentlenium.example.kotest
 
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
@@ -6,7 +6,7 @@ import io.kotest.extensions.testcontainers.LifecycleMode
 import io.kotest.extensions.testcontainers.TestContainerExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import org.fluentlenium.adapter.kotest.FluentFreeSpec
+import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.testcontainers.containers.BrowserWebDriverContainer

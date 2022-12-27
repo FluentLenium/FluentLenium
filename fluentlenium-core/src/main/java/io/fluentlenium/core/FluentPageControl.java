@@ -1,6 +1,7 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.core.url.ParsedUrlTemplate;import io.fluentlenium.core.url.ParsedUrlTemplate;
+import io.fluentlenium.core.url.ParsedUrlTemplate;
+import io.fluentlenium.core.url.ParsedUrlTemplate;
 
 /**
  * Provides controls for a Page Object.

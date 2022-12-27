@@ -1,4 +1,4 @@
-package org.fluentlenium.example.spring.config;
+package io.fluentlenium.example.spring.config;
 
 /**
  * Thrown when something wrong occurs with the configuration

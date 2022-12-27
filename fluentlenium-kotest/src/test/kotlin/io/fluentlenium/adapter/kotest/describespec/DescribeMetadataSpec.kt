@@ -4,9 +4,9 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.fluentlenium.adapter.exception.AnnotationNotFoundException
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
-import org.fluentlenium.adapter.kotest.MyAnnotation
-import org.fluentlenium.adapter.kotest.OtherAnnotation
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.MyAnnotation
+import io.fluentlenium.adapter.kotest.OtherAnnotation
 
 @MyAnnotation
 class DescribeMetadataSpec : FluentDescribeSpec({
@@ -22,13 +22,13 @@ class DescribeMetadataSpec : FluentDescribeSpec({
     it("testGetClassAnnotation") {
         getClassAnnotation(MyAnnotation::class.java).shouldNotBeNull()
 
-        shouldThrow<_root_ide_package_.io.fluentlenium.adapter.exception.AnnotationNotFoundException> {
+        shouldThrow<AnnotationNotFoundException> {
             getClassAnnotation(OtherAnnotation::class.java).shouldNotBeNull()
         }
     }
 
     it("testGetMethodAnnotation") {
-        shouldThrow<_root_ide_package_.io.fluentlenium.adapter.exception.AnnotationNotFoundException> {
+        shouldThrow<AnnotationNotFoundException> {
             getMethodAnnotation(OtherAnnotation::class.java).shouldNotBeNull()
         }
     }

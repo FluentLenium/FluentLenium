@@ -1,8 +1,8 @@
-package org.fluentlenium.example.appium.app.ios;
+package io.fluentlenium.example.appium.app.ios;
 
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.fluentlenium.core.FluentPage;
-import org.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.FluentPage;
+import io.fluentlenium.core.domain.FluentWebElement;
 
 public class HomePage extends FluentPage {
 

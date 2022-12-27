@@ -1,8 +1,8 @@
-package org.fluentlenium.examples.test;
+package io.fluentlenium.examples.test;
 
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.examples.pages.DuckDuckMainPage;
+import io.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.examples.pages.DuckDuckMainPage;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.safari.SafariDriver;

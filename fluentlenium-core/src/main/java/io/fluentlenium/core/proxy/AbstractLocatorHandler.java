@@ -2,7 +2,8 @@ package io.fluentlenium.core.proxy;
 
 import static io.fluentlenium.utils.CollectionUtils.isEmpty;
 
-import io.fluentlenium.utils.CollectionUtils;import io.fluentlenium.core.hook.FluentHook;
+import io.fluentlenium.utils.CollectionUtils;
+import io.fluentlenium.core.hook.FluentHook;
 import io.fluentlenium.core.hook.HookChainBuilder;
 import io.fluentlenium.core.hook.HookDefinition;
 import org.openqa.selenium.NoSuchElementException;

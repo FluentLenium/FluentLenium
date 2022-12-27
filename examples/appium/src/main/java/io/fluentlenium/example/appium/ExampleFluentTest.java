@@ -1,13 +1,13 @@
-package org.fluentlenium.example.appium;
+package io.fluentlenium.example.appium;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.apache.commons.lang3.SystemUtils;
-import org.fluentlenium.adapter.junit.FluentTest;
-import org.fluentlenium.example.appium.config.Config;
-import org.fluentlenium.example.appium.device.Device;
+import io.fluentlenium.adapter.junit.FluentTest;
+import io.fluentlenium.example.appium.config.Config;
+import io.fluentlenium.example.appium.device.Device;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;

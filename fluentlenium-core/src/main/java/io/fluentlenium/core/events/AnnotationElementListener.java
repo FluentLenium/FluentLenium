@@ -1,6 +1,7 @@
 package io.fluentlenium.core.events;
 
-import io.fluentlenium.utils.ReflectionUtils;import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.utils.ReflectionUtils;
+import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

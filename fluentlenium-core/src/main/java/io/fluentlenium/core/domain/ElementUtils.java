@@ -1,6 +1,8 @@
 package io.fluentlenium.core.domain;
 
-import io.fluentlenium.core.conditions.FluentConditions;import io.fluentlenium.core.conditions.message.MessageProxy;import io.fluentlenium.core.conditions.FluentConditions;
+import io.fluentlenium.core.conditions.FluentConditions;
+import io.fluentlenium.core.conditions.message.MessageProxy;
+import io.fluentlenium.core.conditions.FluentConditions;
 import io.fluentlenium.core.conditions.message.MessageProxy;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;

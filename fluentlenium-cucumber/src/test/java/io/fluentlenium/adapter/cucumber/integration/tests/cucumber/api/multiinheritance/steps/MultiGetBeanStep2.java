@@ -2,7 +2,8 @@ package io.fluentlenium.adapter.cucumber.integration.tests.cucumber.api.multiinh
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.fluentlenium.core.annotation.Page;import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
 import io.fluentlenium.adapter.cucumber.integration.page.LocalPage;
 import io.fluentlenium.adapter.cucumber.integration.page.LocalPage2;
 import io.fluentlenium.core.annotation.Page;

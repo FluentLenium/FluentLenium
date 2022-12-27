@@ -1,6 +1,7 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.assertj.FluentLeniumAssertions;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.assertj.FluentLeniumAssertions;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;

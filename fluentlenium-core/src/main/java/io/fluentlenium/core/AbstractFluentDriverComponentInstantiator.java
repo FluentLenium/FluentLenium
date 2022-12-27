@@ -1,6 +1,11 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.core.components.ComponentInstantiator;import io.fluentlenium.core.components.ComponentsManager;import io.fluentlenium.core.domain.ComponentList;import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.core.components.ComponentInstantiator;
+import io.fluentlenium.core.components.ComponentsManager;
+import io.fluentlenium.core.domain.ComponentList;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.core.components.ComponentsManager;
 import io.fluentlenium.core.domain.ComponentList;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;

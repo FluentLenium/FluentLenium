@@ -1,4 +1,4 @@
-package org.fluentlenium.examples.cucumber.pageobject.steps;
+package io.fluentlenium.examples.cucumber.pageobject.steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -6,10 +6,10 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.fluentlenium.adapter.cucumber.FluentCucumberTest;
-import org.fluentlenium.configuration.FluentConfiguration;
-import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.examples.cucumber.pageobject.page.HomePage;
+import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.annotation.Page;
+import io.fluentlenium.examples.cucumber.pageobject.page.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

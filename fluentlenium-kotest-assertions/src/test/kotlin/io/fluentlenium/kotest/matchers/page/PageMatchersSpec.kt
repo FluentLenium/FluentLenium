@@ -2,23 +2,23 @@ package io.fluentlenium.kotest.matchers.page
 
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
-import org.fluentlenium.adapter.kotest.jq
+import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.core.annotation.Page
-import org.fluentlenium.kotest.matchers.config.MatcherBase
-import org.fluentlenium.kotest.matchers.config.pages.FluentleniumPage
-import org.fluentlenium.kotest.matchers.config.pages.IndexPage
-import org.fluentlenium.kotest.matchers.config.pages.IndexPageWrongClassAnnotations
-import org.fluentlenium.kotest.matchers.config.shouldAssert
+import io.fluentlenium.kotest.matchers.config.MatcherBase
+import io.fluentlenium.kotest.matchers.config.pages.FluentleniumPage
+import io.fluentlenium.kotest.matchers.config.pages.IndexPage
+import io.fluentlenium.kotest.matchers.config.pages.IndexPageWrongClassAnnotations
+import io.fluentlenium.kotest.matchers.config.shouldAssert
 
 class PageMatchersSpec : MatcherBase() {
 
-    @_root_ide_package_.io.fluentlenium.core.annotation.Page
+    @Page
     lateinit var indexPage: IndexPage
 
-    @_root_ide_package_.io.fluentlenium.core.annotation.Page
+    @Page
     lateinit var indexPageWrongClassAnnotation: IndexPageWrongClassAnnotations
 
-    @_root_ide_package_.io.fluentlenium.core.annotation.Page
+    @Page
     lateinit var fluentleniumPage: FluentleniumPage
 
     init {

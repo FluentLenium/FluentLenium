@@ -5,7 +5,7 @@ import io.kotest.core.extensions.TestCaseExtension
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.matchers.shouldBe
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 
 class ExtensionSpec : FluentDescribeSpec() {
 

@@ -1,7 +1,7 @@
-package org.fluentlenium.examples.hooks;
+package io.fluentlenium.examples.hooks;
 
-import org.fluentlenium.core.hook.Hook;
-import org.fluentlenium.core.hook.HookOptions;
+import io.fluentlenium.core.hook.Hook;
+import io.fluentlenium.core.hook.HookOptions;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

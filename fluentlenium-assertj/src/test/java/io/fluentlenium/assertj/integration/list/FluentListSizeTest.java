@@ -1,6 +1,7 @@
 package io.fluentlenium.assertj.integration.list;
 
-import io.fluentlenium.assertj.AssertionTestSupport;import io.fluentlenium.assertj.integration.IntegrationTest;
+import io.fluentlenium.assertj.AssertionTestSupport;
+import io.fluentlenium.assertj.integration.IntegrationTest;
 import org.testng.annotations.Test;
 
 import static io.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;

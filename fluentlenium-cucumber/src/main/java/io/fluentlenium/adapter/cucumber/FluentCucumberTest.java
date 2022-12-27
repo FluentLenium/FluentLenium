@@ -1,7 +1,11 @@
 package io.fluentlenium.adapter.cucumber;
 
 import io.cucumber.java.Scenario;
-import io.fluentlenium.adapter.FluentControlContainer;import io.fluentlenium.adapter.FluentTestRunnerAdapter;import io.fluentlenium.adapter.SharedMutator;import io.fluentlenium.utils.SeleniumVersionChecker;import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.adapter.FluentControlContainer;
+import io.fluentlenium.adapter.FluentTestRunnerAdapter;
+import io.fluentlenium.adapter.SharedMutator;
+import io.fluentlenium.utils.SeleniumVersionChecker;
+import io.fluentlenium.utils.SeleniumVersionChecker;
 import io.fluentlenium.adapter.FluentControlContainer;
 import io.fluentlenium.adapter.FluentTestRunnerAdapter;
 import io.fluentlenium.adapter.SharedMutator;

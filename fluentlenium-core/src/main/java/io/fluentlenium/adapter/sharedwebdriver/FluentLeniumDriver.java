@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter.sharedwebdriver;
 
-import io.fluentlenium.configuration.ConfigurationProperties; /**
+import io.fluentlenium.configuration.ConfigurationProperties;
+
+/**
  * Driver interface for {@link ConfigurationProperties.DriverLifecycle} based
  * {@link SharedWebDriver} handling.
  */

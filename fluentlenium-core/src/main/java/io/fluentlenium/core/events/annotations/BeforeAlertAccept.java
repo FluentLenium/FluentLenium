@@ -1,6 +1,9 @@
 package io.fluentlenium.core.events.annotations;
 
-import io.fluentlenium.core.events.AlertListener;import io.fluentlenium.core.events.EventsRegistry;import java.lang.annotation.ElementType;
+import io.fluentlenium.core.events.AlertListener;
+import io.fluentlenium.core.events.EventsRegistry;
+
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -12,7 +15,7 @@ import java.lang.annotation.Target;
  * <p>
  * Parameters from {@link AlertListener} will be injected in the method based on parameters types.
  *
- * @see EventsRegistry#beforeAlertAccept( AlertListener )
+ * @see EventsRegistry#beforeAlertAccept(AlertListener)
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -1,6 +1,8 @@
 package io.fluentlenium.test.javascript;
 
-import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.core.script.FluentJavascript;import org.assertj.core.api.Assertions;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.core.script.FluentJavascript;
+import org.assertj.core.api.Assertions;
 import io.fluentlenium.core.script.FluentJavascript;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.BeforeEach;

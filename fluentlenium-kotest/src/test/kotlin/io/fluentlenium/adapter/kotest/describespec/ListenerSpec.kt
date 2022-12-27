@@ -3,7 +3,7 @@ package io.fluentlenium.adapter.kotest.describespec
 import io.kotest.core.listeners.TestListener
 import io.kotest.core.test.TestCase
 import io.kotest.matchers.shouldBe
-import org.fluentlenium.adapter.kotest.FluentDescribeSpec
+import io.fluentlenium.adapter.kotest.FluentDescribeSpec
 
 class ListenerSpec : FluentDescribeSpec() {
 

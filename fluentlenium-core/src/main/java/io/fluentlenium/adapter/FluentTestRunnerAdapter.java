@@ -16,7 +16,11 @@ import static io.fluentlenium.utils.ThreadLocalAdapterUtil.setTestClassAndMethod
 import java.lang.annotation.Annotation;
 import java.util.List;
 
-import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;import io.fluentlenium.utils.AnnotationUtil;import io.fluentlenium.utils.ThreadLocalAdapterUtil;import io.fluentlenium.adapter.SharedMutator.EffectiveParameters;
+import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
+import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
+import io.fluentlenium.utils.AnnotationUtil;
+import io.fluentlenium.utils.ThreadLocalAdapterUtil;
+import io.fluentlenium.adapter.SharedMutator.EffectiveParameters;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 

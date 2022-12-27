@@ -1,6 +1,8 @@
 package io.fluentlenium.core;
 
-import io.fluentlenium.configuration.Configuration;import io.fluentlenium.utils.ImageUtils;import org.apache.commons.io.FileUtils;
+import io.fluentlenium.configuration.Configuration;
+import io.fluentlenium.utils.ImageUtils;
+import org.apache.commons.io.FileUtils;
 import io.fluentlenium.configuration.Configuration;
 import io.fluentlenium.utils.ImageUtils;
 import org.openqa.selenium.OutputType;

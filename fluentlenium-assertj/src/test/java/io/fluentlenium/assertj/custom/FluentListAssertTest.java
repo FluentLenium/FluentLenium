@@ -1,7 +1,9 @@
 package io.fluentlenium.assertj.custom;
 
 import com.google.common.collect.Lists;
-import io.fluentlenium.core.domain.FluentList;import io.fluentlenium.core.domain.FluentWebElement;import io.fluentlenium.assertj.FluentLeniumAssertions;
+import io.fluentlenium.core.domain.FluentList;
+import io.fluentlenium.core.domain.FluentWebElement;
+import io.fluentlenium.assertj.FluentLeniumAssertions;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.mockito.Mock;

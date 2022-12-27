@@ -2,7 +2,11 @@ package io.fluentlenium.test.events;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;import io.fluentlenium.core.events.EventsRegistry;import io.fluentlenium.core.events.annotations.AfterClickOn;import io.fluentlenium.core.events.annotations.BeforeClickOn;import net.jcip.annotations.NotThreadSafe;
+import io.fluentlenium.core.events.ContainerAnnotationsEventsRegistry;
+import io.fluentlenium.core.events.EventsRegistry;
+import io.fluentlenium.core.events.annotations.AfterClickOn;
+import io.fluentlenium.core.events.annotations.BeforeClickOn;
+import net.jcip.annotations.NotThreadSafe;
 import io.fluentlenium.core.events.EventsRegistry;
 import io.fluentlenium.core.events.annotations.AfterClickOn;
 import io.fluentlenium.core.events.annotations.BeforeClickOn;

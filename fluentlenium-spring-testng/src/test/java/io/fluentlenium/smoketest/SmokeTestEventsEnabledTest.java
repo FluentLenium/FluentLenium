@@ -1,6 +1,7 @@
 package io.fluentlenium.smoketest;
 
-import io.fluentlenium.IntegrationFluentTestNg;import io.fluentlenium.IntegrationFluentTestNg;
+import io.fluentlenium.IntegrationFluentTestNg;
+import io.fluentlenium.IntegrationFluentTestNg;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.springframework.test.context.ContextConfiguration;

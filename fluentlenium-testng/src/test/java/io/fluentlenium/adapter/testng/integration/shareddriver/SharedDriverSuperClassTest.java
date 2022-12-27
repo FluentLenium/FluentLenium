@@ -1,6 +1,8 @@
 package io.fluentlenium.adapter.testng.integration.shareddriver;
 
-import io.fluentlenium.configuration.FluentConfiguration;import io.fluentlenium.core.filter.FilterConstructor;import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
+import io.fluentlenium.configuration.FluentConfiguration;
+import io.fluentlenium.core.filter.FilterConstructor;
+import io.fluentlenium.adapter.testng.integration.localtest.IntegrationFluentTestNg;
 import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import io.fluentlenium.configuration.FluentConfiguration;
 import org.openqa.selenium.Cookie;
