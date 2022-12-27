@@ -13,7 +13,7 @@ test {
 }
 
 dependencies {
-    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "5.0.4"
+    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "6.0.0-SNAPSHOT"
 
     implementation "io.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
     implementation "io.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
