@@ -79,7 +79,7 @@ public class CssSupportImplTest {
     public void shouldInjectResource() {
         when(javascriptControl.executeScript(anyString())).thenReturn(fluentJavascript);
 
-        cssSupport.injectResource("/org/fluentlenium/core/css/dummy_resource.js");
+        cssSupport.injectResource("/io/fluentlenium/core/css/dummy_resource.js");
 
         verify(javascriptControl, times(1)).executeScript(startsWith("cssText = \"dummy: content\";"));
         verifyNoMoreInteractions(javascriptControl);

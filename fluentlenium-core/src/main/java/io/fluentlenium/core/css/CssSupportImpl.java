@@ -26,7 +26,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class CssSupportImpl implements CssSupport {
 
-    private static final String INJECTOR_JS_PATH = "/org/fluentlenium/core/css/injector.js";
+    private static final String INJECTOR_JS_PATH = "/io/fluentlenium/core/css/injector.js";
     private static final int MAX_SCRIPT_EXECUTION_RETRY_COUNT = 10;
     private static final long EXPLICIT_WAIT_PERIOD = 250L;
 

@@ -140,11 +140,11 @@ public class PropertiesBackendConfigurationTest {
 
     @Test
     public void capabilitiesURL() {
-        URL capabilitiesURL = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
+        URL capabilitiesURL = getClass().getResource("/io/fluentlenium/configuration/capabilities.json");
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
         capabilitiesJSEnabled.setJavascriptEnabled(true);
         when(retriever.getCapabilitiesProperty(capabilitiesURL.toString(), null)).thenReturn(capabilitiesJSEnabled);
-        URL capabilitiesFalseURL = getClass().getResource("/org/fluentlenium/configuration/capabilities-false.json");
+        URL capabilitiesFalseURL = getClass().getResource("/io/fluentlenium/configuration/capabilities-false.json");
         DesiredCapabilities capabilitiesJSDisabled = new DesiredCapabilities();
         when(retriever.getCapabilitiesProperty(capabilitiesFalseURL.toString(), null)).thenReturn(capabilitiesJSDisabled);
 

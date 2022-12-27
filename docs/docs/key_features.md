@@ -515,7 +515,7 @@ public class SelectComponent {
 ```
 
 Simple & working Component example can be found in our
-dedicated [GitHub section](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox/src/test/java/org/fluentlenium/examples/test/componentexample)
+dedicated [GitHub section](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox/src/test/java/io/fluentlenium/examples/test/componentexample)
 .
 
 ## Lazy Fluent Locators

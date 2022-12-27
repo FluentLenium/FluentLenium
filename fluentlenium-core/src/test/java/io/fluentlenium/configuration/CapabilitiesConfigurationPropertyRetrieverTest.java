@@ -64,7 +64,7 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
 
     @Test
     public void capabilitiesURL() {
-        URL capabilitiesURLJSEnabled = getClass().getResource("/org/fluentlenium/configuration/capabilities.json");
+        URL capabilitiesURLJSEnabled = getClass().getResource("/io/fluentlenium/configuration/capabilities.json");
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
         capabilitiesJSEnabled.setJavascriptEnabled(true);
 

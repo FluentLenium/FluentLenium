@@ -143,7 +143,7 @@ jq("button") should haveClass("class1")
 ```
 
 check
-the [example](https://github.com/FluentLenium/FluentLenium/blob/develop/examples/kotest/src/test/kotlin/org/fluentlenium/example/kotest/DuckDuckGoSpec.kt)
+the [example](https://github.com/FluentLenium/FluentLenium/blob/develop/examples/kotest/src/test/kotlin/io/fluentlenium/example/kotest/DuckDuckGoSpec.kt)
 and
-the [tests](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest-assertions/src/test/kotlin/org/fluentlenium/kotest/matchers)
+the [tests](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest-assertions/src/test/kotlin/io/fluentlenium/kotest/matchers)
 for usage examples.

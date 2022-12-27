@@ -357,11 +357,11 @@ public void click(){
         }
 ```
 
-[Example sources are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples/hooks/src/test/java/org/fluentlenium/examples/hooks)
+[Example sources are available on github](https://github.com/FluentLenium/FluentLenium/tree/master/examples/hooks/src/test/java/io/fluentlenium/examples/hooks)
 .
 
 You may also
-read [sources for @Wait hook](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-core/src/main/java/org/fluentlenium/core/hook/wait)
+read [sources for @Wait hook](https://github.com/FluentLenium/FluentLenium/tree/master/fluentlenium-core/src/main/java/io/fluentlenium/core/hook/wait)
 to read how it's implemented.
 
 ## Javascript execution
