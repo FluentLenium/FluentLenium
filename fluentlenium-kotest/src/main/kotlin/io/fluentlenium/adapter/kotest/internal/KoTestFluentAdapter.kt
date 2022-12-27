@@ -83,7 +83,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
         val singleThreadPerTest =
             testCase.spec.dispatcherAffinity ?: testCase.spec.dispatcherAffinity()
-            ?: io.kotest.core.config.Defaults.dispatcherAffinity
+                ?: io.kotest.core.config.Defaults.dispatcherAffinity
 
         require(singleThreadPerTest) {
             "fluentlenium-kotest is incompatible with dispatcherAffinity=false. set to true!"
