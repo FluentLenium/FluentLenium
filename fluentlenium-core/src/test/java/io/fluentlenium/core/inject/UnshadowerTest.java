@@ -22,95 +22,98 @@ import java.util.Set;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.AdditionalMatchers.or;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UnshadowerTest extends FluentPage {
 
-  @Mock
-  private TestWebDriver webDriver;
+    @Mock
+    private TestWebDriver webDriver;
 
-  @Mock
-  private FluentControl fluentControl;
+    @Mock
+    private FluentControl fluentControl;
 
-  @Mock
-  private WebElement shadowRoots;
+    @Mock
+    private WebElement shadowRoots;
 
-  @Mock
-  private WebElement searchedElement1, searchedElement2;
+    @Mock
+    private WebElement searchedElement1, searchedElement2;
 
-  @Page
-  private TestedWebpage webpage;
+    @Page
+    private TestedWebpage webpage;
 
-  Unshadower unshadower;
+    Unshadower unshadower;
 
-  @Before
-  public void setUp() throws Exception {
-    webpage = new TestedWebpage(fluentControl);
-    unshadower = new Unshadower(webDriver, webpage);
-    setMocks();
-  }
+    @Before
+    public void setUp() throws Exception {
+        webpage = new TestedWebpage(fluentControl);
+        unshadower = new Unshadower(webDriver, webpage);
+        setMocks();
+    }
 
-  private void setMocks() {
-    when(fluentControl.getDriver()).thenReturn(webDriver);
+    private void setMocks() {
+        when(fluentControl.getDriver()).thenReturn(webDriver);
 
-    when(webDriver.findElement(By.xpath("/*"))).thenReturn(shadowRoots);
-    when(webDriver.executeScript(anyString(), any())).thenReturn(shadowRoots);
+        when(webDriver.findElement(By.xpath("/*"))).thenReturn(shadowRoots);
+        when(webDriver.executeScript(anyString(), any())).thenReturn(shadowRoots);
 
-    when(shadowRoots.findElements(or(
-            eq(By.cssSelector("outer-shadow-root")),
-            eq(By.cssSelector("inner-shadow-root")))))
-        .thenReturn(newArrayList(shadowRoots));
-    when(shadowRoots.findElements(By.cssSelector("div"))).thenReturn(newArrayList(searchedElement1, searchedElement2));
-    when(shadowRoots.findElements(By.xpath("/*"))).thenReturn(newArrayList(searchedElement1, searchedElement2));
+        when(shadowRoots.findElements(or(
+                eq(By.cssSelector("outer-shadow-root")),
+                eq(By.cssSelector("inner-shadow-root")))))
+                .thenReturn(newArrayList(shadowRoots));
+        when(shadowRoots.findElements(By.cssSelector("div"))).thenReturn(newArrayList(searchedElement1, searchedElement2));
+        when(shadowRoots.findElements(By.xpath("/*"))).thenReturn(newArrayList(searchedElement1, searchedElement2));
 
-    when(searchedElement1.getText()).thenReturn("DIV1");
-    when(searchedElement2.getText()).thenReturn("DIV2");
-  }
+        when(searchedElement1.getText()).thenReturn("DIV1");
+        when(searchedElement2.getText()).thenReturn("DIV2");
+    }
 
-  @Test
-  public void shouldExtractElementsFromShadowRoots() {
-    unshadower.unshadowAllAnnotatedFields();
+    @Test
+    public void shouldExtractElementsFromShadowRoots() {
+        unshadower.unshadowAllAnnotatedFields();
 
-    Assertions.assertThat(webpage.getElement().text()).isEqualTo("DIV1");
-    Assertions.assertThat(webpage.getElementsList())
-        .hasSize(2)
-        .extracting(FluentWebElement::text).containsExactly("DIV1", "DIV2");
-    assertThat(webpage.getElementsSet())
-        .hasSize(2)
-        .extracting(FluentWebElement::text).containsExactlyInAnyOrder("DIV1", "DIV2");
-  }
+        Assertions.assertThat(webpage.getElement().text()).isEqualTo("DIV1");
+        Assertions.assertThat(webpage.getElementsList())
+                .hasSize(2)
+                .extracting(FluentWebElement::text).containsExactly("DIV1", "DIV2");
+        assertThat(webpage.getElementsSet())
+                .hasSize(2)
+                .extracting(FluentWebElement::text).containsExactlyInAnyOrder("DIV1", "DIV2");
+    }
 
 }
 
-interface TestWebDriver extends WebDriver, JavascriptExecutor { }
+interface TestWebDriver extends WebDriver, JavascriptExecutor {
+}
 
 class TestedWebpage extends FluentPage {
 
-  @Unshadow(css = {"outer-shadow-root", "inner-shadow-root", "div"})
-  private FluentWebElement element;
+    @Unshadow(css = {"outer-shadow-root", "inner-shadow-root", "div"})
+    private FluentWebElement element;
 
-  @Unshadow(css = {"inner-shadow-root", "div"})
-  private List<FluentWebElement> elementsList;
+    @Unshadow(css = {"inner-shadow-root", "div"})
+    private List<FluentWebElement> elementsList;
 
-  @Unshadow(css = {"div"})
-  private Set<FluentWebElement> elementsSet;
+    @Unshadow(css = {"div"})
+    private Set<FluentWebElement> elementsSet;
 
-  TestedWebpage(FluentControl control) {
-    super(control);
-  }
+    TestedWebpage(FluentControl control) {
+        super(control);
+    }
 
-  public FluentWebElement getElement() {
-    return element;
-  }
+    public FluentWebElement getElement() {
+        return element;
+    }
 
-  public List<FluentWebElement> getElementsList() {
-    return elementsList;
-  }
+    public List<FluentWebElement> getElementsList() {
+        return elementsList;
+    }
 
-  public Set<FluentWebElement> getElementsSet() {
-    return elementsSet;
-  }
+    public Set<FluentWebElement> getElementsSet() {
+        return elementsSet;
+    }
 
 }

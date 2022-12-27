@@ -4,7 +4,11 @@ import io.fluentlenium.core.hook.FluentHook;
 import io.fluentlenium.core.hook.HookChainBuilder;
 import io.fluentlenium.core.hook.HookDefinition;
 import io.fluentlenium.utils.CollectionUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.util.ArrayList;

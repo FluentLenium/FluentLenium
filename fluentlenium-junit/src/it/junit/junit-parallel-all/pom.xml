@@ -47,7 +47,9 @@
                     <parallel>all</parallel>
                     <threadCount>4</threadCount>
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <fluentlenium.capabilities>{"goog:chromeOptions": {"args": ["headless","no-sandbox",
+                            "disable-gpu", "disable-dev-shm-usage"]}}
+                        </fluentlenium.capabilities>
                         <surefire.forkNumber>0${surefire.forkNumber}</surefire.forkNumber>
                     </systemPropertyVariables>
                 </configuration>

@@ -6,7 +6,7 @@ subtitle: FluentLenium
 
 FluentLenium is an opensource project licensed under the [Apache license](https://www.apache.org/licenses/LICENSE-2.0).
 
-Our objective is to improve the user experience on Selenium by providing a solid framework to build readable, reusable, 
+Our objective is to improve the user experience on Selenium by providing a solid framework to build readable, reusable,
 reliable and resilient UI functional tests.
 
 Current active contributors:

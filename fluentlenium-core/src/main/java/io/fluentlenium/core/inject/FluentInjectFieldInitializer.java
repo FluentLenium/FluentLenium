@@ -32,7 +32,7 @@ final class FluentInjectFieldInitializer {
      * Initializes the argument field based on its type using the argument element locator,
      *
      * @param locator the element locator
-     * @param field the field to initialize
+     * @param field   the field to initialize
      * @return a {@link ComponentAndProxy} and proxy object storing initialized component and proxy object for that
      */
     ComponentAndProxy<?, ?> initFieldElements(ElementLocator locator, Field field) {

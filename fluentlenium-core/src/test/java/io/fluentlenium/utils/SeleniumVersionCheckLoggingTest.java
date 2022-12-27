@@ -12,7 +12,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
-import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.*;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.MISSING_SELENIUM_POM;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.PARAMETRIZED_PARENT_CHILD_POM;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.WRONG_VERSION_POM;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe

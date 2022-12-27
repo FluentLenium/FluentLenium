@@ -31,7 +31,7 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
 
     @Override
     public List<FluentHook> build(Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locator,
-            Supplier<String> toStringSupplier, List<HookDefinition<?>> hooks) {
+                                  Supplier<String> toStringSupplier, List<HookDefinition<?>> hooks) {
         List<FluentHook> chain = new ArrayList<>();
 
         Supplier<WebElement> currentSupplier = elementSupplier;
@@ -41,7 +41,8 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
             try {
                 newObject = newInstance(hook.getHookClass(), control, instantiator, currentSupplier, locator, toStringSupplier,
                         hook.getOptions());
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException |
+                     InstantiationException e) {
                 throw new HookException(e);
             }
             FluentHook<?> hookInstance = newObject;
@@ -75,8 +76,8 @@ public class DefaultHookChainBuilder implements HookChainBuilder {
      *                                   throws an exception.
      */
     protected FluentHook<?> newInstance(Class<? extends FluentHook<?>> hookClass, FluentControl fluentControl,
-            ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier,
-            Supplier<String> toStringSupplier, Object options)
+                                        ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locatorSupplier,
+                                        Supplier<String> toStringSupplier, Object options)
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ReflectionUtils
                 .newInstance(hookClass, fluentControl, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);

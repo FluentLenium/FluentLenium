@@ -17,7 +17,7 @@ public class StringListConditionsImpl extends BaseObjectListConditions<String, S
      * @param conditionsGetter getter of the underlying string conditions
      */
     public StringListConditionsImpl(Conditions<FluentWebElement> conditions, Function<FluentWebElement, String> objectGetter,
-            Function<FluentWebElement, StringConditions> conditionsGetter) {
+                                    Function<FluentWebElement, StringConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 

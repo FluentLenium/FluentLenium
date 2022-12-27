@@ -62,8 +62,8 @@ public class ImageUtils {
      *
      * @param fileName the name of the file to convert
      * @return the converted BufferedImage
-     * @throws NoSuchFileException if the argument file cannot be found
-     * @throws ScreenshotNotCreatedException      if a problem occurred during image conversion
+     * @throws NoSuchFileException           if the argument file cannot be found
+     * @throws ScreenshotNotCreatedException if a problem occurred during image conversion
      */
     public static BufferedImage toBufferedImage(String fileName) throws IOException {
         InputStream is = Files.newInputStream(Paths.get(fileName));

@@ -8,7 +8,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static io.fluentlenium.core.domain.ElementUtils.getWrappedElement;
 
@@ -85,7 +90,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
     /**
      * Fire component registered event.
      *
-     * @param element underlying element
+     * @param element   underlying element
      * @param component registered component
      */
     protected void fireComponentRegistered(WebElement element, Object component) {
@@ -99,7 +104,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
     /**
      * Fire component released event.
      *
-     * @param element underlying element
+     * @param element   underlying element
      * @param component released component
      */
     protected void fireComponentReleased(WebElement element, Object component) {
@@ -127,7 +132,7 @@ public class ComponentsManager extends AbstractComponentInstantiator
 
     @Override
     public <L extends List<T>, T> L asComponentList(Class<L> listClass, Class<T> componentClass,
-            Iterable<WebElement> elementList) {
+                                                    Iterable<WebElement> elementList) {
         L componentList = instantiator.asComponentList(listClass, componentClass, elementList);
 
         int i = 0;

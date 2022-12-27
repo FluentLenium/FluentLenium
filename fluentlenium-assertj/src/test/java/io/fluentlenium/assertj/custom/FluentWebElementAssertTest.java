@@ -409,7 +409,7 @@ public class FluentWebElementAssertTest {
     public void testHasNotTextContainingNegative() {
         when(element.text()).thenReturn("Something written here");
         assertThatAssertionErrorIsThrownBy(() -> elementAssert.hasNotTextContaining("Something"))
-            .hasMessage("The element contains the text: Something");
+                .hasMessage("The element contains the text: Something");
     }
 
     @Test

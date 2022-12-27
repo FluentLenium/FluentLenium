@@ -26,6 +26,7 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
         this.instance = instance;
         this.args = args;
     }
+
     @Override
     public Capabilities newCapabilities(ConfigurationProperties configuration) {
         try {
@@ -37,7 +38,7 @@ public class MethodInvocationReflectionFactory implements CapabilitiesFactory, F
 
     @Override
     public String[] getNames() {
-        return new String[] {method.getDeclaringClass().getName() + "." + method.getName(),
+        return new String[]{method.getDeclaringClass().getName() + "." + method.getName(),
                 method.getDeclaringClass().getSimpleName() + "." + method.getName(), method.getName()};
     }
 }

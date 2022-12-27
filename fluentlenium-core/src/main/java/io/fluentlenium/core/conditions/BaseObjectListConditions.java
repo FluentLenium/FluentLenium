@@ -28,7 +28,7 @@ public class BaseObjectListConditions<T, C extends Conditions<T>> implements Con
      * @param conditionsGetter getter of the underlying object conditions
      */
     public BaseObjectListConditions(Conditions<FluentWebElement> conditions, Function<FluentWebElement, T> objectGetter,
-            Function<FluentWebElement, C> conditionsGetter) {
+                                    Function<FluentWebElement, C> conditionsGetter) {
         this.conditions = conditions;
         this.objectGetter = objectGetter;
         this.conditionsGetter = conditionsGetter;

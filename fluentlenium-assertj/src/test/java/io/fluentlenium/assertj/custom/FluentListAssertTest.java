@@ -43,8 +43,8 @@ public class FluentListAssertTest {
     public void testHasTextKo() {
         when(fluentList.texts()).thenReturn(Lists.newArrayList("some text", "other text"));
         assertThatAssertionErrorIsThrownBy(() -> listAssert.hasText("absent text"))
-            .hasMessage("No selected elements contains text: absent text. "
-                + "Actual texts found: [some text, other text]");
+                .hasMessage("No selected elements contains text: absent text. "
+                        + "Actual texts found: [some text, other text]");
     }
 
     @Test
@@ -57,8 +57,8 @@ public class FluentListAssertTest {
     public void testHasTextContainingKo() {
         when(fluentList.texts()).thenReturn(Lists.newArrayList("some text to contain", "other text to contain"));
         assertThatAssertionErrorIsThrownBy(() -> listAssert.hasTextContaining("absent text"))
-            .hasMessage("No selected elements contains text: absent text. "
-                + "Actual texts found: [some text to contain, other text to contain]");
+                .hasMessage("No selected elements contains text: absent text. "
+                        + "Actual texts found: [some text to contain, other text to contain]");
     }
 
     @Test
@@ -85,8 +85,8 @@ public class FluentListAssertTest {
     public void testHasNotTextKo() {
         when(fluentList.texts()).thenReturn(Lists.newArrayList("some text", "other text"));
         assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotText("other text"))
-            .hasMessage("At least one selected elements contains text: other text. "
-                + "Actual texts found: [some text, other text]");
+                .hasMessage("At least one selected elements contains text: other text. "
+                        + "Actual texts found: [some text, other text]");
     }
 
     @Test
@@ -99,8 +99,8 @@ public class FluentListAssertTest {
     public void testHasNotTextContainingKo() {
         when(fluentList.texts()).thenReturn(Lists.newArrayList("some text", "other text to contain"));
         assertThatAssertionErrorIsThrownBy(() -> listAssert.hasNotTextContaining("other text"))
-            .hasMessage("At least one selected elements contains text: other text. "
-                + "Actual texts found: [some text, other text to contain]");
+                .hasMessage("At least one selected elements contains text: other text. "
+                        + "Actual texts found: [some text, other text to contain]");
     }
 
     @Test

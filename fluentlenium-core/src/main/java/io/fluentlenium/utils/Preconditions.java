@@ -16,7 +16,7 @@ public final class Preconditions {
      *
      * @param object  the object to validate
      * @param message the error message to throw the exception with
-     * @param <T> object to check
+     * @param <T>     object to check
      * @return the argument object if it is not null
      * @throws IllegalArgumentException if the argument object is null
      */
@@ -47,7 +47,7 @@ public final class Preconditions {
      *
      * @param object  the object to validate
      * @param message the error message to throw the exception with
-     * @param <T> object to check
+     * @param <T>     object to check
      * @return the argument object if it is not null
      * @throws IllegalStateException if the argument object is null
      */

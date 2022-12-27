@@ -21,7 +21,7 @@ class SmokeTestNewWebDriverSpec extends FluentSpecification {
         return new ChromeDriver(chromeOptions)
     }
 
-    def "smokeTest" () {
+    def "smokeTest"() {
         expect:
         assertThat(getDriver()).isInstanceOf(ChromeDriver.class)
     }

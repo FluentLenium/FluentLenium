@@ -18,6 +18,7 @@ public class ExpectedUrlTest extends IntegrationTest {
     public void setUp() {
         goTo(DEFAULT_URL);
     }
+
     @Test
     public void verifyHasExpectedElementseNegativeAbsent() {
         assertThatThrownBy(() -> assertThat(indexPage).hasExpectedUrl())

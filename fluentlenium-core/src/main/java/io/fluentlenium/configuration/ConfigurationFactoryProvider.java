@@ -28,7 +28,8 @@ public final class ConfigurationFactoryProvider {
         if (configurationFactoryClass != null) {
             try {
                 return ReflectionUtils.newInstance(configurationFactoryClass);
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 throw new ConfigurationException("Can't initialize ConfigurationFactory " + configurationFactoryClass.getName(),
                         e);
             }
@@ -53,7 +54,8 @@ public final class ConfigurationFactoryProvider {
 
             try {
                 configurationDefaults = ReflectionUtils.newInstance(configuration.getConfigurationDefaults());
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 throw new ConfigurationException(
                         "Can't initialize ConfigurationDefaults:" + configuration.getConfigurationDefaults(), e);
             }

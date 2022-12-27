@@ -19,7 +19,7 @@ public class IntegerListConditionsImpl extends BaseObjectListConditions<Integer,
      * @param conditionsGetter getter of the underlying conditions
      */
     public IntegerListConditionsImpl(Conditions<FluentWebElement> conditions, Function<FluentWebElement, Integer> objectGetter,
-            Function<FluentWebElement, IntegerConditions> conditionsGetter) {
+                                     Function<FluentWebElement, IntegerConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 

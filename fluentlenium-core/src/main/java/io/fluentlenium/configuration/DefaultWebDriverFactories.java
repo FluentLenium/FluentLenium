@@ -136,7 +136,7 @@ public class DefaultWebDriverFactories {
 
         @Override
         protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
-                Object... args)
+                                        Object... args)
                 throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
             URL url = null;
             if (configuration != null) {

@@ -4,14 +4,22 @@ import io.fluentlenium.adapter.DefaultSharedMutator
 import io.fluentlenium.adapter.FluentAdapter
 import io.fluentlenium.adapter.FluentTestRunnerAdapter
 import io.fluentlenium.adapter.IFluentAdapter
-import io.fluentlenium.adapter.TestRunnerCommon.*
+import io.fluentlenium.adapter.TestRunnerCommon.deleteCookies
+import io.fluentlenium.adapter.TestRunnerCommon.doHtmlDump
+import io.fluentlenium.adapter.TestRunnerCommon.doScreenshot
+import io.fluentlenium.adapter.TestRunnerCommon.getTestDriver
+import io.fluentlenium.adapter.TestRunnerCommon.quitMethodAndThreadDrivers
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer
 import io.fluentlenium.configuration.Configuration
 import io.fluentlenium.utils.ScreenshotUtil
 import io.fluentlenium.utils.SeleniumVersionChecker
 import io.kotest.common.ExperimentalKotest
 import io.kotest.core.extensions.Extension
-import io.kotest.core.listeners.*
+import io.kotest.core.listeners.AfterEachListener
+import io.kotest.core.listeners.AfterSpecListener
+import io.kotest.core.listeners.AfterTestListener
+import io.kotest.core.listeners.BeforeSpecListener
+import io.kotest.core.listeners.BeforeTestListener
 import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
@@ -38,27 +46,28 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
     override fun getConfiguration(): Configuration = configurationOverride
 
-    val extension: Extension = object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener, AfterTestListener {
+    val extension: Extension =
+        object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener, AfterTestListener {
 
-        override suspend fun beforeSpec(spec: Spec) =
-            this@KoTestFluentAdapter.beforeSpec()
+            override suspend fun beforeSpec(spec: Spec) =
+                this@KoTestFluentAdapter.beforeSpec()
 
-        override suspend fun afterSpec(spec: Spec) {
-            this@KoTestFluentAdapter.afterSpec(spec)
+            override suspend fun afterSpec(spec: Spec) {
+                this@KoTestFluentAdapter.afterSpec(spec)
+            }
+
+            override suspend fun beforeTest(testCase: TestCase) {
+                this@KoTestFluentAdapter.beforeTest(testCase)
+            }
+
+            override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+                // is not invoked for dynamic tests https://kotlinlang.slack.com/archives/CT0G9SD7Z/p1666788639534289
+            }
+
+            override suspend fun afterAny(testCase: TestCase, result: TestResult) {
+                this@KoTestFluentAdapter.afterEach(testCase, result)
+            }
         }
-
-        override suspend fun beforeTest(testCase: TestCase) {
-            this@KoTestFluentAdapter.beforeTest(testCase)
-        }
-
-        override suspend fun afterEach(testCase: TestCase, result: TestResult) {
-            // is not invoked for dynamic tests https://kotlinlang.slack.com/archives/CT0G9SD7Z/p1666788639534289
-        }
-
-        override suspend fun afterAny(testCase: TestCase, result: TestResult) {
-            this@KoTestFluentAdapter.afterEach(testCase, result)
-        }
-    }
 
     suspend fun beforeSpec() {
         withContext(Dispatchers.IO) {
@@ -74,7 +83,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
 
         val singleThreadPerTest =
             testCase.spec.dispatcherAffinity ?: testCase.spec.dispatcherAffinity()
-                ?: io.kotest.core.config.Defaults.dispatcherAffinity
+            ?: io.kotest.core.config.Defaults.dispatcherAffinity
 
         require(singleThreadPerTest) {
             "fluentlenium-kotest is incompatible with dispatcherAffinity=false. set to true!"

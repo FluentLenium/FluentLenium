@@ -20,5 +20,5 @@ public interface HookChainBuilder {
      * @return hook chain
      */
     List<FluentHook> build(Supplier<WebElement> elementSupplier, Supplier<ElementLocator> locator,
-            Supplier<String> toStringSupplier, List<HookDefinition<?>> hooks);
+                           Supplier<String> toStringSupplier, List<HookDefinition<?>> hooks);
 }

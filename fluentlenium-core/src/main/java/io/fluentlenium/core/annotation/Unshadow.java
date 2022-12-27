@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
  *      //Element is instantiated and can be used by test methods.
  * }
  * </pre>
- *
+ * <p>
  * It can also handle List and Set collections if many objects are found
  * <pre>
  * public class HomepageTest extends FluentPage {
@@ -35,5 +35,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Unshadow {
-  String[] css();
+    String[] css();
 }

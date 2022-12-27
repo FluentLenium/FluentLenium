@@ -9,7 +9,7 @@ public interface ComponentsListener {
     /**
      * Invoked when a component has been registered.
      *
-     * @param element underlying element
+     * @param element   underlying element
      * @param component registered component
      */
     void componentRegistered(WebElement element, Object component);
@@ -17,7 +17,7 @@ public interface ComponentsListener {
     /**
      * Invoked when a component has been released.
      *
-     * @param element underlying element
+     * @param element   underlying element
      * @param component released component
      */
     void componentReleased(WebElement element, Object component);

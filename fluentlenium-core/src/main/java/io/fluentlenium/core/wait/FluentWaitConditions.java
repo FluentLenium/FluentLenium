@@ -124,12 +124,12 @@ public interface FluentWaitConditions<T> {
 
     /**
      * waits until a {@link java.lang.Runnable} block execution ends without throwing an exception.
-     *
+     * <p>
      * The method is intended to be used with Java 8 Lambda expressions. This allows to use AssertJ/JUnit/TestNG
      * assertions to periodically check for conditions.
      *
      * <code>
-     *     await().untilAsserted(() -&gt; assertThat(window().title()).isEqualTo("Fluentlenium"));
+     * await().untilAsserted(() -&gt; assertThat(window().title()).isEqualTo("Fluentlenium"));
      * </code>
      *
      * @param block the code block that is responsible for executing the assertion and throwing AssertionError on failure.

@@ -12,8 +12,15 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit test for {@link FluentPage}.
@@ -54,9 +61,9 @@ public class FluentPageTest {
         when(element1.now()).thenThrow(NoSuchElementException.class);
 
         assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> fluentPage.isAtUsingSelector(by))
-                                                       .withMessageStartingWith(
-                                                               "@FindBy element not found for page io.fluentlenium.core"
-                                                                       + ".FluentPage$MockitoMock");
+                .withMessageStartingWith(
+                        "@FindBy element not found for page io.fluentlenium.core"
+                                + ".FluentPage$MockitoMock");
     }
 
     @Test
@@ -117,7 +124,7 @@ public class FluentPageTest {
         when(fluentPage.getUrl()).thenReturn(null);
 
         assertThatIllegalStateException().isThrownBy(() -> fluentPage.parseUrl("/abc/param1val/def/param2val/param3val"))
-                                         .withMessage("An URL should be defined on the page. Use @PageUrl annotation or "
-                                                 + "override getUrl() method.");
+                .withMessage("An URL should be defined on the page. Use @PageUrl annotation or "
+                        + "override getUrl() method.");
     }
 }

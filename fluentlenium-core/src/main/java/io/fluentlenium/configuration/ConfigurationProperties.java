@@ -81,10 +81,12 @@ public interface ConfigurationProperties {
         /**
          * Take screenshot when the test fail.
          */
-        AUTOMATIC_ON_FAIL, /**
+        AUTOMATIC_ON_FAIL,
+        /**
          * Only take screenshot manually through API.
          */
-        MANUAL, /**
+        MANUAL,
+        /**
          * Default value.
          */
         DEFAULT
@@ -97,16 +99,20 @@ public interface ConfigurationProperties {
         /**
          * WebDriver is created once, and same instance is used for each test class and method.
          */
-        JVM, /**
+        JVM,
+        /**
          * WebDriver is created for each test class, and same instance is used for each test method in the class.
          */
-        CLASS, /**
+        CLASS,
+        /**
          * WebDriver is created for each test method, and this instance is used only for one test method.
          */
-        METHOD, /**
+        METHOD,
+        /**
          * WebDriver is created for each test thread, and this instance is used only for one test method.
          */
-        THREAD, /**
+        THREAD,
+        /**
          * Default value.
          */
         DEFAULT
@@ -136,7 +142,7 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>remoteUrl</pre> property.
-     *
+     * <p>
      * Sets the remoteUrl for "remote" webDriver.
      *
      * @return remoteUrl property value
@@ -146,10 +152,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>capabilities</pre> property.
-     *
+     * <p>
      * Sets the <a href="https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities">Capabilities</a> to use, as a
      * JSON Object or a URL pointing to a JSON Object.
-     *
+     * <p>
      * Default value is "null".
      *
      * @return Capabilities property value
@@ -160,9 +166,9 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>baseUrl</pre> property.
-     *
+     * <p>
      * Sets the base URL used to build absolute URL when relative URL is given to {@link FluentAdapter#goTo(String)}.
-     *
+     * <p>
      * Default value is null.
      *
      * @return baseUrl property value
@@ -171,13 +177,13 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>driverLifecycle</pre> property.
-     *
+     * <p>
      * Sets the lifecycle of the WebDriver. WebDriver is fully managed by FluentLenium, so you should never
      * create or quit a WebDriver by yourself.
-     *
+     * <p>
      * Please keep in mind that this configures when drivers are created and exited at runtime, but it does not deal with
      * concurrency of your tests.
-     *
+     * <p>
      * Default value is METHOD.
      *
      * @return driverLifecycle property value
@@ -186,9 +192,9 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>browserTimeout</pre> property.
-     *
+     * <p>
      * Sets the maximum amount of time when the browser should start responding to the WebDriver.
-     *
+     * <p>
      * Default value is 60 seconds.
      *
      * @return long
@@ -197,9 +203,9 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>browserTimeoutRetries</pre> property.
-     *
+     * <p>
      * Sets the maximum number of retries for failed WebDriver because of browserTimeout issues.
-     *
+     * <p>
      * Default value is 2 times.
      *
      * @return Integer
@@ -208,10 +214,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>deleteCookies</pre> property.
-     *
+     * <p>
      * When using CLASS or JVM <pre>driverLifecycle</pre> configuration property, allow to delete cookies between
      * each test.
-     *
+     * <p>
      * Default value is false.
      *
      * @return deleteCookies property value.
@@ -220,10 +226,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>pageLoadTimeout</pre> property.
-     *
+     * <p>
      * Sets the amount of time in millisecond to wait for a page load to complete before throwing an error.
      * If the timeout is negative, page loads can be indefinite.
-     *
+     * <p>
      * Default value is null.
      *
      * @return pageLoadTimeout property value
@@ -233,10 +239,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>implicitlyWait</pre> property.
-     *
+     * <p>
      * Specifies the amount of time in millisecond the driver should wait when searching for an element if it is
      * not immediately present.
-     *
+     * <p>
      * Default value is null.
      *
      * @return implicitlyWait property value
@@ -246,11 +252,11 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>scriptTimeout</pre> property.
-     *
+     * <p>
      * Sets the amount of time in millisecond to wait for an asynchronous script to finish execution before
      * throwing an error. If the timeout is negative, then the script will be allowed to run
      * indefinitely.
-     *
+     * <p>
      * Default value is null.
      *
      * @return scriptTimeout property value
@@ -260,7 +266,7 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>awaitAtMost</pre> property.
-     *
+     * <p>
      * Sets the default timeout in millisecond when using {@link FluentControl#await()} or
      * {@link Wait} hook.
      *
@@ -272,7 +278,7 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>awaitPollingEvery</pre> property.
-     *
+     * <p>
      * Sets the default polling frequency in millisecond when using {@link FluentControl#await()} or
      * {@link Wait} hook.
      *
@@ -284,10 +290,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>eventsEnabled</pre> property.
-     *
+     * <p>
      * Enables {@link FluentAdapter#events()} by wrapping the {@link WebDriver} in
      * {@link org.openqa.selenium.support.events.EventFiringWebDriver}.
-     *
+     * <p>
      * Default value is true.
      *
      * @return eventsEnabled property value.
@@ -296,10 +302,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>screenshotPath</pre> property.
-     *
+     * <p>
      * Sets the filesystem path where screenshot will be saved when calling {@link FluentAdapter#takeScreenshot()} or
      * {@link FluentAdapter#takeScreenshot(String)}.
-     *
+     * <p>
      * Default value is null.
      *
      * @return screenshotPath property value
@@ -308,9 +314,9 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>screenshotMode</pre> property.
-     *
+     * <p>
      * Sets the trigger mode of screenshots. Can be {AUTOMATIC_ON_FAIL} to take screenshot when the test fail or {MANUAL}.
-     *
+     * <p>
      * Default value is null.
      *
      * @return screenshotMode property value.
@@ -320,10 +326,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>htmlDumpPath</pre> property.
-     *
+     * <p>
      * Sets the filesystem path where screenshot will be saved when calling {@link FluentAdapter#takeHtmlDump()} or
      * {@link FluentAdapter#takeHtmlDump(String)}.
-     *
+     * <p>
      * Default value is null.
      *
      * @return htmlDumpPath property value
@@ -332,9 +338,9 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>htmlDumpMode</pre> property.
-     *
+     * <p>
      * Sets the trigger mode of htmlDump. Can be {AUTOMATIC_ON_FAIL} to take html dump when the test fail or {MANUAL}.
-     *
+     * <p>
      * Default value is null.
      *
      * @return htmlDumpMode property value.
@@ -344,10 +350,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>configurationDefaults</pre> property.
-     *
+     * <p>
      * Set this to a class implementing {@link ConfigurationProperties} to provide the default values
      * of the configuration properties.
-     *
+     * <p>
      * Default value is {@link ConfigurationDefaults}
      *
      * @return Custom {@link ConfigurationProperties} instance with default values.
@@ -356,10 +362,10 @@ public interface ConfigurationProperties {
 
     /**
      * <pre>configurationFactory</pre> property.
-     *
+     * <p>
      * Set this to a class implementing {@link ConfigurationFactory} to customize the ways properties are read.
      * This allow to configure properties from sources that are not supported by default FluentLenium.
-     *
+     * <p>
      * Default value is {@link DefaultConfigurationFactory} class.
      *
      * @return Custom {@link ConfigurationFactory} class.

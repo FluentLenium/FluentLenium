@@ -13,7 +13,7 @@ public class JavadocPage extends FluentPage {
     @FindBy(className = "contentContainer")
     private FluentWebElement content;
 
-   public void verifyIfIsLoaded() {
+    public void verifyIfIsLoaded() {
         assertThat(content).isPresent();
-   }
+    }
 }

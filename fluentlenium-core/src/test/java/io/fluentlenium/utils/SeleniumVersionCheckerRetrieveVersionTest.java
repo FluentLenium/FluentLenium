@@ -9,7 +9,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.*;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.CHILD_POM;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.EXPECTED_VERSION;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.PARAMETRIZED_POM;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.PARENT_POM;
+import static io.fluentlenium.utils.SeleniumVersionCheckerTestConstants.WRONG_VERSION_POM;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SeleniumVersionCheckerRetrieveVersionTest {

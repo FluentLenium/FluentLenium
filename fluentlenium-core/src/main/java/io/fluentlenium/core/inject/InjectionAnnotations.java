@@ -17,7 +17,9 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 import static io.appium.java_client.remote.AutomationName.IOS_XCUI_TEST;
-import static io.appium.java_client.remote.MobilePlatform.*;
+import static io.appium.java_client.remote.MobilePlatform.ANDROID;
+import static io.appium.java_client.remote.MobilePlatform.IOS;
+import static io.appium.java_client.remote.MobilePlatform.WINDOWS;
 import static java.util.Optional.ofNullable;
 
 /**

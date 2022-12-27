@@ -3,17 +3,18 @@ layout: page
 title: Test runners
 subtitle: FluentLenium
 sidebar:
-  JUnit 4: "#junit-4"
-  JUnit 5 Jupiter: "#junit-5-jupiter"
-  TestNG: "#testng"
-  Cucumber: "#cucumber"
-  Spock: "#spock"
-  Spring TestNG: "#spring-testng"
-  FluentStandalone: "#standalone-mode"
-  Kotest: "#kotest"
+JUnit 4: "#junit-4"
+JUnit 5 Jupiter: "#junit-5-jupiter"
+TestNG: "#testng"
+Cucumber: "#cucumber"
+Spock: "#spock"
+Spring TestNG: "#spring-testng"
+FluentStandalone: "#standalone-mode"
+Kotest: "#kotest"
 ---
 
 ## Supported Test Runners
+
 - [Junit 4](#junit-4)
 - [Junit 5 Jupiter](#junit-5-jupiter)
 - [TestNG](#testng)
@@ -23,6 +24,7 @@ sidebar:
 - [Kotest](#kotest)
 
 ## Standalone mode (no 3rd party test-runner)
+
 - [Standalone mode](#standalone-mode)
 
 ## JUnit 4
@@ -30,6 +32,7 @@ sidebar:
 - Import this maven dependency.
 
 ```xml
+
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-junit</artifactId>
@@ -57,6 +60,7 @@ You can use the Surefire maven plugin for example.
 **Surefire JUnit example**
 
 ```xml
+
 <profile>
     <id>junit-tests</id>
     <build>
@@ -76,7 +80,8 @@ You can use the Surefire maven plugin for example.
 </profile>
 ```
 
-More configuration examples can be found in our [Integration tests](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit/src/it/junit).
+More configuration examples can be found in
+our [Integration tests](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit/src/it/junit).
 Enable them by activating ```framework-integration-tests``` Maven profile.
 
 ## JUnit 5 Jupiter
@@ -84,6 +89,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 - Import this maven dependency.
 
 ```xml
+
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-junit-jupiter</artifactId>
@@ -94,7 +100,9 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 
 - Extends FluentTest.
 
-If you need to run your tests in parallel please take a look into our [Integration tests examples](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit-jupiter/src/it/junit-jupiter).
+If you need to run your tests in parallel please take a look into
+our [Integration tests examples](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit-jupiter/src/it/junit-jupiter)
+.
 Enable them by activating ```framework-integration-tests``` Maven profile.
 
 ## TestNG
@@ -102,6 +110,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 - Import this maven dependency.
 
 ```xml
+
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-testng</artifactId>
@@ -118,6 +127,7 @@ You can use the Surefire maven plugin for example.
 **Surefire TestNG example**
 
 ```xml
+
 <profile>
     <id>testng-tests</id>
     <build>
@@ -140,6 +150,7 @@ You can use the Surefire maven plugin for example.
 **TestNG test suite file**
 
 ```xml
+
 <suite name="Parallel tests" parallel="tests" thread-count="10">
     <test name="Home Page Tests" parallel="methods" thread-count="10">
         <parameter name="test-name" value="Home page"/>
@@ -159,14 +170,15 @@ You can use the Surefire maven plugin for example.
 ```
 
 TestNG gives you more flexibility in order to the concurrency level, test suites and having better control on executed
- scenarios.
+scenarios.
 
 Both test frameworks are giving possibility to define the parallelism level of tests.
 
 It is possible when you have multiple execution/concurrency levels set in your tests to face driver sharing issues,
 so please use ```METHOD``` ```driverLifecycle``` configuration property when your execution methods are mixed up.
 
-More configuration examples can be found in our [Integration tests](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-testng/src/it/testng).
+More configuration examples can be found in
+our [Integration tests](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-testng/src/it/testng).
 Enable them by activating ```framework-integration-tests``` Maven profile.
 
 ## Cucumber
@@ -174,6 +186,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 - Import this maven dependency.
 
 ```xml
+
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-cucumber</artifactId>
@@ -184,6 +197,7 @@ Enable them by activating ```framework-integration-tests``` Maven profile.
 - Create runner class annotated with Cucumber.class
 
 ```java
+
 @RunWith(Cucumber.class)
 @CucumberOptions
 public class Runner {
@@ -196,22 +210,25 @@ public class Runner {
 public class ExampleSteps1 extends FluentCucumberTest {
 }
 ```
+
 ```java
 public class ExampleSteps2 extends FluentCucumberTest {
 }
 ```
+
 or only in your `BaseTest` class:
 
 ```java
 public class BaseTest extends FluentCucumberTest {
 }
 ```
+
 ```java
 public class ExampleSteps1 extends BaseTest {
 }
 ```
 
-- Add `Before` and `After` hooks: 
+- Add `Before` and `After` hooks:
 
 ```java
 import io.cucumber.java.Scenario;
@@ -235,10 +252,10 @@ Hooks can be added like this:
 
 ```java
 public class FluentHooks extends FluentCucumberTest {
-    
-    public FluentHooks(){
+
+    public FluentHooks() {
         Before(this::before);
-        
+
         After(this::after);
     }
 }
@@ -247,41 +264,44 @@ public class FluentHooks extends FluentCucumberTest {
 **Notes related to Cucumber hooks:**
 
 1) Hooks should be added **ONCE** for your tests. Do not add these hooks in all your steps classes.
- 
-2) Adding these hooks starts FluentLenium context during execution of scenario. It means that driver will start 
-automatically. If you want to start WebDriver only for some scenarios, you can use tagged Cucumber hooks, for example:
+
+2) Adding these hooks starts FluentLenium context during execution of scenario. It means that driver will start
+   automatically. If you want to start WebDriver only for some scenarios, you can use tagged Cucumber hooks, for
+   example:
 
 ```
 @fluent
 Scenario: Driver should start when tag is present above scenario
     Then WebDriver starts as expected
 ```
+
 and add tags to your hooks:
 
 ```java
 @Before({"@fluent"})
-public void beforeScenario(Scenario scenario) {
-    before(scenario);
-}
+public void beforeScenario(Scenario scenario){
+        before(scenario);
+        }
 
 @After({"@fluent"})
-public void afterScenario(Scenario scenario) {
-    after(scenario);
-}
+public void afterScenario(Scenario scenario){
+        after(scenario);
+        }
 ```
+
 3) Hooks in `Cucumber` cannot be extended. So do not add `Before` and `After` hooks in `BaseTest` (if you use such
-pattern) but add them in any other class:
+   pattern) but add them in any other class:
 
 ```java
 public class FluentHooks extends BaseTest {
-    
+
     @Before
     public void beforeScenario(Scenario scenario) {
         before(scenario);
     }
-    
+
     @After
-     public void afterScenario(Scenario scenario) {
+    public void afterScenario(Scenario scenario) {
         after(scenario);
     }
 }
@@ -293,7 +313,8 @@ public class FluentHooks extends BaseTest {
 FluentTestContainer.FLUENT_TEST.instance()
 ```
 
-It can be handy if you want to have access to the current WebDriver instance. The purpose of `FluentTestContainer` is to share
+It can be handy if you want to have access to the current WebDriver instance. The purpose of `FluentTestContainer` is to
+share
 state between many steps classes.
 
 - Keep your configuration in `BaseTest`:
@@ -311,31 +332,31 @@ public class BaseTest extends FluentCucumberTest {
 ```
 
 or class with Cucumber hooks:
- 
+
 ```java
 // example configuration
 @FluentConfiguration(webDriver = "chrome")
 public class FluentHooks extends FluentCucumberTest {
- 
+
     @Override
     public Capabilities getCapabilities() {
         return new ChromeOptions();
     }
-    
+
     @Before
     public void beforeScenario(Scenario scenario) {
         before(scenario);
     }
-    
+
     @After
     public void afterScenario(Scenario scenario) {
         after(scenario);
     }
 }
 ```
- 
-- By default, a new instance of WebDriver is created for each scenario. If you want to run single WebDriver for all 
-scenarios in feature, change DriverLifecycle to JVM level:
+
+- By default, a new instance of WebDriver is created for each scenario. If you want to run single WebDriver for all
+  scenarios in feature, change DriverLifecycle to JVM level:
 
 ```java
 import io.fluentlenium.adapter.cucumber.FluentCucumberTest;
@@ -349,19 +370,25 @@ public class BaseTest extends FluentCucumberTest {
 
 - Remember, that page objects still need to inherit `FluentPage` to run correctly.
 
-E2E Cucumber tests are present in [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber).
+E2E Cucumber tests are present
+in [Cucumber example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber).
 Enable it by activating ```examples``` Maven profile.
 
-- Until FLuentLenium 4.3.1, both `cucumber.api` and `io.cucumber` based classes (`@Given`, `@When`, `@CucumberOptions`, etc.) are supported,
-however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectFactory` due to the Cucumber limitation of allowing only one instance of
-`ObjectFactory` to be used, and also to provide backward compatibility for projects where Cucumber version cannot be upgraded.
-- From FluentLenium 4.4.1 on support for `cucumber.api` package based Before and After hooks is removed. Only `io.cucumber` packages are supported.
+- Until FLuentLenium 4.3.1, both `cucumber.api` and `io.cucumber` based classes (`@Given`, `@When`, `@CucumberOptions`,
+  etc.) are supported,
+  however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectFactory` due to the Cucumber limitation
+  of allowing only one instance of
+  `ObjectFactory` to be used, and also to provide backward compatibility for projects where Cucumber version cannot be
+  upgraded.
+- From FluentLenium 4.4.1 on support for `cucumber.api` package based Before and After hooks is removed.
+  Only `io.cucumber` packages are supported.
 
 ## Spock
 
 - Import this maven dependency.
 
 ```xml
+
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-spock</artifactId>
@@ -372,7 +399,8 @@ however the `FluentCucumberTest` based tests still use the old Cucumber `ObjectF
 
 - Extends FluentSpecification instead of FluentTest.
 
-E2E Spock tests are present in [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock).
+E2E Spock tests are present in [Spock example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock)
+.
 Enable it by activating ```examples``` Maven profile.
 
 ## Spring TestNG
@@ -380,6 +408,7 @@ Enable it by activating ```examples``` Maven profile.
 - Import this maven dependency.
 
 ```xml
+
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-spring-testng</artifactId>
@@ -390,7 +419,8 @@ Enable it by activating ```examples``` Maven profile.
 
 - Extends FluentTestNgSpringTest instead of FluentTest.
 
-E2E Spring testNG tests are present in [Spring example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring).
+E2E Spring testNG tests are present
+in [Spring example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring).
 Enable it by activating ```examples``` Maven profile.
 
 ## Kotest
@@ -398,7 +428,9 @@ Enable it by activating ```examples``` Maven profile.
 - Import this dependency:
 
 ### Maven
+
 ```xml
+
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-kotest</artifactId>
@@ -408,25 +440,27 @@ Enable it by activating ```examples``` Maven profile.
 ```
 
 ### Gradle
+
 ```gradle
     testImplementation("io.fluentlenium:fluentlenium-kotest:5.0.1")
 ```
 
-- There are baseclasses available for all [Kotest testing styles](https://kotest.io/docs/framework/testing-styles.html). Choose
+- There are baseclasses available for all [Kotest testing styles](https://kotest.io/docs/framework/testing-styles.html).
+  Choose
   one and extend your test from it:
-  
+
 ```kotlin
 class ExampleStringSpec : FluentStringSpec({
-  "Title should be correct" {
-    goTo(URL)
-  }
+    "Title should be correct" {
+        goTo(URL)
+    }
 })
 ```
 
-Check [src](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest) for examples. 
+Check [src](https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-kotest) for examples.
 
-There is an example setup available in [Kotest example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/kotest).
-
+There is an example setup available
+in [Kotest example](https://github.com/FluentLenium/FluentLenium/tree/develop/examples/kotest).
 
 ## Standalone mode
 
@@ -440,14 +474,14 @@ Create an instance of `FluentStandalone` and use it directly. You have to manual
 WebDriver, and `quit()` to close it.
 
 ```java
-FluentStandalone standalone = new FluentStandalone()
-standalone.init();
+FluentStandalone standalone=new FluentStandalone()
+        standalone.init();
 
-standalone.goTo(DEFAULT_URL);
-standalone.await().atMost(1, SECONDS).until(test.$(".fluent", with("name").equalTo("name"))).present();
-standalone.el("input").enabled();
+        standalone.goTo(DEFAULT_URL);
+        standalone.await().atMost(1,SECONDS).until(test.$(".fluent",with("name").equalTo("name"))).present();
+        standalone.el("input").enabled();
 
-standalone.quit();
+        standalone.quit();
 ```
 
 Using a `FluentStandalone` instance is quite verbose because of the need to repeat the instance name before each
@@ -470,6 +504,6 @@ public class MyStandaloneRunnable extends FluentStandaloneRunnable {
 ```
 
 ```java
-MyStandaloneRunnable runnable = new MyStandaloneRunnable();
-runnable.run();
+MyStandaloneRunnable runnable=new MyStandaloneRunnable();
+        runnable.run();
 ```

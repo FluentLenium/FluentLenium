@@ -35,7 +35,7 @@ public class Search implements SearchControl<FluentWebElement> {
      * @param injectControl inject control
      */
     public Search(SearchContext context, Object container, ComponentInstantiator instantiator,
-            FluentInjectControl injectControl) {
+                  FluentInjectControl injectControl) {
         searchContext = context;
         this.container = container;
         this.instantiator = instantiator;

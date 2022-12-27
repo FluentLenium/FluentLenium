@@ -36,7 +36,7 @@ public class ComponentList<T> extends DelegatingList<T> implements WrapsElements
      * @param instantiator   component instantiator
      */
     public ComponentList(Class<T> componentClass, List<T> list, FluentControl control,
-            ComponentInstantiator instantiator) {
+                         ComponentInstantiator instantiator) {
         super(list);
         if (list instanceof LazyComponents) {
             lazyComponents = (LazyComponents) list;

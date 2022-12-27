@@ -24,6 +24,7 @@ public interface IFluentAdapter extends FluentControl {
 
     /**
      * Sets FluentControl
+     *
      * @param fluentControl to set
      * @return FluentControl
      */
@@ -40,9 +41,8 @@ public interface IFluentAdapter extends FluentControl {
      *
      * @param webDriver webDriver to use.
      * @param container instance where FluentLenium should inject dependencies
-     *
-     * @throws IllegalStateException when trying to register a different webDriver that the current one.
      * @return initialized FluentControl
+     * @throws IllegalStateException when trying to register a different webDriver that the current one.
      */
     default FluentControl initFluent(WebDriver webDriver, Object container) {
         if (webDriver == null) {
@@ -121,6 +121,7 @@ public interface IFluentAdapter extends FluentControl {
 
     /**
      * returns WebDriver instance
+     *
      * @return current webdriver
      */
     @Override

@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriverException;
  * <p>
  * It delegates all calls to an underlying {@link FluentControlContainer} containing the {@link FluentDriver}
  * instance, and a {@link Configuration} instance.
- *
+ * <p>
  * Do not put any logic here. Consider it as a proxy exposing fluentlenium-core to end user
  */
 public class FluentControlImpl implements FluentControl {

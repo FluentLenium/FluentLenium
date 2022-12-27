@@ -104,6 +104,7 @@ class SizeChangePage extends FluentPage {
     FluentList<FluentWebElement> getRowsByAnnotation() {
         return rows;
     }
+
     FluentList<FluentWebElement> getRowsBySelector() {
         return $(".row");
     }

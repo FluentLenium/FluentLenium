@@ -1,6 +1,13 @@
 package io.fluentlenium.core.filter;
 
-import io.fluentlenium.core.filter.matcher.*;
+import io.fluentlenium.core.filter.matcher.AbstractMatcher;
+import io.fluentlenium.core.filter.matcher.ContainsMatcher;
+import io.fluentlenium.core.filter.matcher.EndsWithMatcher;
+import io.fluentlenium.core.filter.matcher.EqualMatcher;
+import io.fluentlenium.core.filter.matcher.NotContainsMatcher;
+import io.fluentlenium.core.filter.matcher.NotEndsWithMatcher;
+import io.fluentlenium.core.filter.matcher.NotStartsWithMatcher;
+import io.fluentlenium.core.filter.matcher.StartsWithMatcher;
 
 import java.util.regex.Pattern;
 

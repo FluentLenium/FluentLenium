@@ -17,7 +17,7 @@ public class InjectionElementLocatorFactory implements ElementLocatorFactory {
      * Creates a new factory
      *
      * @param searchContext search context
-     * @param capabilities device capabilities
+     * @param capabilities  device capabilities
      */
     public InjectionElementLocatorFactory(SearchContext searchContext, Capabilities capabilities) {
         this.searchContext = searchContext;

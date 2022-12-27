@@ -24,7 +24,9 @@ import java.util.List;
 
 import static io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle.DEFAULT;
 import static io.fluentlenium.configuration.ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 public class ControlUnitTest {

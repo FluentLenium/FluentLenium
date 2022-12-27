@@ -1,7 +1,17 @@
 package io.fluentlenium.test.page;
 
 import io.fluentlenium.core.annotation.Page;
-import io.fluentlenium.pages.*;
+import io.fluentlenium.pages.FailingIndexPageWithFindAllAnnotation;
+import io.fluentlenium.pages.FailingIndexPageWithFindByAnnotation;
+import io.fluentlenium.pages.FailingIndexPageWithFindBysAnnotation;
+import io.fluentlenium.pages.IndexPage;
+import io.fluentlenium.pages.IndexPage2;
+import io.fluentlenium.pages.IndexPageWithFindAllAnnotation;
+import io.fluentlenium.pages.IndexPageWithFindByAnnotation;
+import io.fluentlenium.pages.IndexPageWithFindBysAnnotation;
+import io.fluentlenium.pages.Page2;
+import io.fluentlenium.pages.Page3;
+import io.fluentlenium.pages.Page4;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

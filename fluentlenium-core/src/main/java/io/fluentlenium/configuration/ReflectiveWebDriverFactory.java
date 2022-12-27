@@ -100,7 +100,8 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
                 }
             }
             return newInstance(webDriverClass, configuration, args);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 InvocationTargetException e) {
             throw new ConfigurationException("Can't create new WebDriver instance", e);
         }
     }
@@ -122,7 +123,7 @@ public class ReflectiveWebDriverFactory implements WebDriverFactory, ReflectiveF
      *                                   throws an exception.
      */
     protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration,
-            Object... args)
+                                    Object... args)
             throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         return ReflectionUtils.newInstance(webDriverClass, args);
     }

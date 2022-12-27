@@ -28,6 +28,7 @@ var packageSearchIndex;
 var typeSearchIndex;
 var memberSearchIndex;
 var tagSearchIndex;
+
 function loadScripts(doc, tag) {
     createElem(doc, tag, 'search.js');
 
@@ -48,12 +49,12 @@ function createElem(doc, tag, path) {
 function show(tableId, selected, columns) {
     if (tableId !== selected) {
         document.querySelectorAll('div.' + tableId + ':not(.' + selected + ')')
-            .forEach(function(elem) {
+            .forEach(function (elem) {
                 elem.style.display = 'none';
             });
     }
     document.querySelectorAll('div.' + selected)
-        .forEach(function(elem, index) {
+        .forEach(function (elem, index) {
             elem.style.display = '';
             var isEvenRow = index % (columns * 2) < columns;
             elem.classList.remove(isEvenRow ? oddRowColor : evenRowColor);
@@ -63,18 +64,18 @@ function show(tableId, selected, columns) {
 }
 
 function updateTabs(tableId, selected) {
-    document.querySelector('div#' + tableId +' .summary-table')
+    document.querySelector('div#' + tableId + ' .summary-table')
         .setAttribute('aria-labelledby', selected);
     document.querySelectorAll('button[id^="' + tableId + '"]')
-        .forEach(function(tab, index) {
+        .forEach(function (tab, index) {
             if (selected === tab.id || (tableId === selected && index === 0)) {
                 tab.className = activeTableTab;
                 tab.setAttribute('aria-selected', true);
-                tab.setAttribute('tabindex',0);
+                tab.setAttribute('tabindex', 0);
             } else {
                 tab.className = tableTab;
                 tab.setAttribute('aria-selected', false);
-                tab.setAttribute('tabindex',-1);
+                tab.setAttribute('tabindex', -1);
             }
         });
 }
@@ -96,7 +97,8 @@ function switchTab(e) {
     }
 }
 
-var updateSearchResults = function() {};
+var updateSearchResults = function () {
+};
 
 function indexFilesLoaded() {
     return moduleSearchIndex
@@ -120,27 +122,27 @@ function copySnippet(button) {
         var initialLabel = span.innerHTML;
         span.innerHTML = copied;
         var parent = button.parentElement;
-        parent.onmouseleave = parent.ontouchend = function() {
+        parent.onmouseleave = parent.ontouchend = function () {
             span.innerHTML = initialLabel;
         };
     }
 }
 
 // Workaround for scroll position not being included in browser history (8249133)
-document.addEventListener("DOMContentLoaded", function(e) {
+document.addEventListener("DOMContentLoaded", function (e) {
     var contentDiv = document.querySelector("div.flex-content");
-    window.addEventListener("popstate", function(e) {
+    window.addEventListener("popstate", function (e) {
         if (e.state !== null) {
             contentDiv.scrollTop = e.state;
         }
     });
-    window.addEventListener("hashchange", function(e) {
+    window.addEventListener("hashchange", function (e) {
         history.replaceState(contentDiv.scrollTop, document.title);
     });
-    contentDiv.addEventListener("scroll", function(e) {
+    contentDiv.addEventListener("scroll", function (e) {
         var timeoutID;
         if (!timeoutID) {
-            timeoutID = setTimeout(function() {
+            timeoutID = setTimeout(function () {
                 history.replaceState(contentDiv.scrollTop, document.title);
                 timeoutID = null;
             }, 100);

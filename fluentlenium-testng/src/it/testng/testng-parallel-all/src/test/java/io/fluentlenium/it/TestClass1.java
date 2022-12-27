@@ -6,7 +6,7 @@ import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 import org.testng.annotations.Test;
 
 public class TestClass1 extends FluentIntegTestNg {
-    
+
     private static final String LOCAL_FILE_PATH = "inputs.html";
     private static final String SELECTOR = "input";
     private static final Class<?> CLASS = TestClass1.class;

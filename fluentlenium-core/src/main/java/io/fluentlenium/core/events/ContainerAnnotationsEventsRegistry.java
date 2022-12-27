@@ -1,6 +1,33 @@
 package io.fluentlenium.core.events;
 
-import io.fluentlenium.core.events.annotations.*;
+import io.fluentlenium.core.events.annotations.AfterAlertAccept;
+import io.fluentlenium.core.events.annotations.AfterAlertDismiss;
+import io.fluentlenium.core.events.annotations.AfterChangeValueOf;
+import io.fluentlenium.core.events.annotations.AfterClickOn;
+import io.fluentlenium.core.events.annotations.AfterFindBy;
+import io.fluentlenium.core.events.annotations.AfterGetScreenshotAs;
+import io.fluentlenium.core.events.annotations.AfterGetText;
+import io.fluentlenium.core.events.annotations.AfterNavigate;
+import io.fluentlenium.core.events.annotations.AfterNavigateBack;
+import io.fluentlenium.core.events.annotations.AfterNavigateForward;
+import io.fluentlenium.core.events.annotations.AfterNavigateRefresh;
+import io.fluentlenium.core.events.annotations.AfterNavigateTo;
+import io.fluentlenium.core.events.annotations.AfterScript;
+import io.fluentlenium.core.events.annotations.AfterSwitchToWindow;
+import io.fluentlenium.core.events.annotations.BeforeAlertAccept;
+import io.fluentlenium.core.events.annotations.BeforeAlertDismiss;
+import io.fluentlenium.core.events.annotations.BeforeChangeValueOf;
+import io.fluentlenium.core.events.annotations.BeforeClickOn;
+import io.fluentlenium.core.events.annotations.BeforeFindBy;
+import io.fluentlenium.core.events.annotations.BeforeGetScreenshotAs;
+import io.fluentlenium.core.events.annotations.BeforeGetText;
+import io.fluentlenium.core.events.annotations.BeforeNavigate;
+import io.fluentlenium.core.events.annotations.BeforeNavigateBack;
+import io.fluentlenium.core.events.annotations.BeforeNavigateForward;
+import io.fluentlenium.core.events.annotations.BeforeNavigateRefresh;
+import io.fluentlenium.core.events.annotations.BeforeNavigateTo;
+import io.fluentlenium.core.events.annotations.BeforeScript;
+import io.fluentlenium.core.events.annotations.BeforeSwitchToWindow;
 import org.openqa.selenium.WebElement;
 
 import java.lang.annotation.Annotation;

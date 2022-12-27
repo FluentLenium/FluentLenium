@@ -44,7 +44,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
+                        <fluentlenium.capabilities>{"goog:chromeOptions": {"args": ["headless","no-sandbox",
+                            "disable-gpu", "disable-dev-shm-usage"]}}
+                        </fluentlenium.capabilities>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

@@ -21,7 +21,7 @@ public final class AnnotationUtil {
         return definedAnnotation;
     }
 
-    public static  <T extends Annotation> T getMethodAnnotationForMethod(
+    public static <T extends Annotation> T getMethodAnnotationForMethod(
             Class<T> annotation, Class<?> classFromThread, String methodNameFromThread) {
         T definedAnnotation;
         try {

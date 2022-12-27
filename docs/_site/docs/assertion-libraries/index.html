@@ -1,573 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+<!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8"/>
 
-  <title>Assertions</title>
-  <meta name="Description" content="FluentLenium is a website automation framework which
+    <title>Assertions</title>
+    <meta name="Description" content="FluentLenium is a website automation framework which
    extends Selenium to write reliable and resilient UI functional tests.
     This framework is React ready. Written and maintained by people who
      are automating browser-based tests on a daily basis.">
-  <meta name="author" content="FluentLenium" />
-  
-  
-  <meta name="description" content="FluentLenium">
-  
+    <meta name="author" content="FluentLenium"/>
 
-  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
-    
-      
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/bootstrap-social.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
-  
+    <meta name="description" content="FluentLenium">
 
-    
-  
-  
 
-  
+    <link rel="alternate" type="application/rss+xml"
+          title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests."
+          href="/feed.xml"/>
 
-  <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Assertions" />
-  <meta property="og:type" content="website" />
-  
-  <meta property="og:url" content="http://fluentlenium.io/docs/assertion-libraries/" />
-  
-  
-  <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
-  
-  <!-- Twitter summary cards -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@FluentLenium" />
-  <meta name="twitter:creator" content="@FluentLenium" />
-  <meta name="twitter:title" content="Assertions" />
-  <meta name="twitter:description" content="## Supported Assertions Libraries - [AssertJ (recommended)](#assertj) - [Junit](#junit) - [Hamcrest](#hamcrest) ## AssertJ We recommend to use AssertJ because we extend it with FluentWebElement and FluentList custom assertions. - Import this additional maven dependency. ```xml io.fluentlenium fluentlenium-assertj 4.5.1 test ``` - Add those static imports. ```java import static org.assertj.core.api.Assertions.*; import..." />
-  
-  <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
 
-  gtag('config', 'UA-132760260-1');
-</script>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+
+    <link rel="stylesheet" href="/css/main.css"/>
+
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"/>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"/>
+
+
+    <!-- Facebook OpenGraph tags -->
+    <meta property="og:title" content="Assertions"/>
+    <meta property="og:type" content="website"/>
+
+    <meta property="og:url" content="http://fluentlenium.io/docs/assertion-libraries/"/>
+
+
+    <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <!-- Twitter summary cards -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@FluentLenium"/>
+    <meta name="twitter:creator" content="@FluentLenium"/>
+    <meta name="twitter:title" content="Assertions"/>
+    <meta name="twitter:description"
+          content="## Supported Assertions Libraries - [AssertJ (recommended)](#assertj) - [Junit](#junit) - [Hamcrest](#hamcrest) ## AssertJ We recommend to use AssertJ because we extend it with FluentWebElement and FluentList custom assertions. - Import this additional maven dependency. ```xml io.fluentlenium fluentlenium-assertj 4.5.1 test ``` - Add those static imports. ```java import static org.assertj.core.api.Assertions.*; import..."/>
+
+    <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132760260-1');
+    </script>
 </head>
 
 
-  <body>
-  
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="nav navbar-nav navbar-right">
+
+
+                <li>
+
+
+                    <a href="/">Home</a>
+
+                </li>
+
+
+                <li>
+
+
+                    <a href="/quickstart">Quickstart</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/docs/test-runners">Supported Test runners</a>
+
+
+                        <a href="/docs/locators">Finding elements</a>
+
+
+                        <a href="/docs/key_features">Key features</a>
+
+
+                        <a href="/docs/configuration">Configuration</a>
+
+
+                        <a href="/docs/test-methods">Test methods</a>
+
+
+                        <a href="/docs/assertion-libraries">Assertion libraries</a>
+
+
+                        <a href="/docs/appium-support">Appium support</a>
+
+
+                        <a href="https://fluentlenium.io/javadoc">Javadoc</a>
+
+
+                    </div>
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+
+                        <a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+
+                    </div>
+                </li>
+
+
+                <li>
+
+
+                    <a href="/about">About</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+        <div class="avatar-container">
+            <div class="avatar-img-border">
+                <a href="http://fluentlenium.io ">
+                    <img class="avatar-img" src="/img/avatar-icon.png"/>
+                </a>
+            </div>
+        </div>
+
+
     </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-      
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/">Home</a>
-
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/quickstart">Quickstart</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-runners">Supported Test runners</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/locators">Finding elements</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/key_features">Key features</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/configuration">Configuration</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-methods">Test methods</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/assertion-libraries">Assertion libraries</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/appium-support">Appium support</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://fluentlenium.io/javadoc">Javadoc</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/about">About</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-      </ul>
-    </div>
-
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://fluentlenium.io ">
-	      <img class="avatar-img" src="/img/avatar-icon.png" />
-		</a>
-	  </div>
-	</div>
-	
-
-  </div>
 </nav>
 
 <nav class="sidebar">
-    
+
     <ul>
-        
+
         <li><a href="#assertj">AssertJ</a></li>
-        
+
         <li><a href="#junit">Junit</a></li>
-        
+
         <li><a href="#hamcrest">Hamcrest</a></li>
-        
+
     </ul>
-    
+
 </nav>
 
 
-    <!-- TODO this file has become a mess, refactor it -->
-
-
-
+<!-- TODO this file has become a mess, refactor it -->
 
 
 <header class="header-section ">
 
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-heading">
-          <h1>Assertions</h1>
-		  
-		    
-            <hr class="small">
-            <span class="page-subheading">FluentLenium</span>
-			
-		  
-		  
-		  
+    <div class="intro-header no-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Assertions</h1>
+
+
+                        <hr class="small">
+                        <span class="page-subheading">FluentLenium</span>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 </header>
 
 
-
-
 <div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <h2 id="supported-assertions-libraries">Supported Assertions Libraries</h2>
-<ul>
-  <li><a href="#assertj">AssertJ (recommended)</a></li>
-  <li><a href="#junit">Junit</a></li>
-  <li><a href="#hamcrest">Hamcrest</a></li>
-</ul>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <h2 id="supported-assertions-libraries">Supported Assertions Libraries</h2>
+            <ul>
+                <li><a href="#assertj">AssertJ (recommended)</a></li>
+                <li><a href="#junit">Junit</a></li>
+                <li><a href="#hamcrest">Hamcrest</a></li>
+            </ul>
 
-<h2 id="assertj">AssertJ</h2>
+            <h2 id="assertj">AssertJ</h2>
 
-<p>We recommend to use AssertJ because we extend it with FluentWebElement and FluentList custom assertions.</p>
+            <p>We recommend to use AssertJ because we extend it with FluentWebElement and FluentList custom
+                assertions.</p>
 
-<ul>
-  <li>Import this additional maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this additional maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-assertj<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Add those static imports.</li>
-</ul>
+            <ul>
+                <li>Add those static imports.</li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">assertj</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">api</span><span class="o">.</span><span class="na">Assertions</span><span class="o">.*;</span>
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fluentlenium</span><span class="o">.</span><span class="na">assertj</span><span class="o">.</span><span class="na">FluentLeniumAssertions</span><span class="o">.*;</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span
+                        class="n">org</span><span class="o">.</span><span class="na">assertj</span><span
+                        class="o">.</span><span class="na">core</span><span class="o">.</span><span
+                        class="na">api</span><span class="o">.</span><span class="na">Assertions</span><span class="o">.*;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span
+                            class="na">fluentlenium</span><span class="o">.</span><span class="na">assertj</span><span
+                            class="o">.</span><span class="na">FluentLeniumAssertions</span><span class="o">.*;</span>
+</code></pre>
+                </div>
+            </div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)).</span><span class="na">hasText</span><span class="o">(</span><span class="s">"present text"</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)).</span><span class="na">hasNotText</span><span class="o">(</span><span class="s">"not present text"</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".another"</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">7</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".another2"</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">().</span><span class="na">lessThan</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".another2"</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">().</span><span class="na">lessThanOrEqualTo</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".another3"</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">().</span><span class="na">greaterThan</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".another3"</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">().</span><span class="na">greaterThanOrEqualTo</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span
+                        class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="s">"toto"</span><span class="o">);</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">click</span><span class="o">();</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span
+                            class="o">(</span><span class="s">"Hello toto"</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".fluent"</span><span class="o">)).</span><span class="na">hasText</span><span
+                            class="o">(</span><span class="s">"present text"</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".fluent"</span><span class="o">)).</span><span class="na">hasNotText</span><span
+                            class="o">(</span><span class="s">"not present text"</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".another"</span><span class="o">)).</span><span class="na">hasSize</span><span
+                            class="o">(</span><span class="mi">7</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".another2"</span><span class="o">)).</span><span class="na">hasSize</span><span
+                            class="o">().</span><span class="na">lessThan</span><span class="o">(</span><span
+                            class="mi">5</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".another2"</span><span class="o">)).</span><span class="na">hasSize</span><span
+                            class="o">().</span><span class="na">lessThanOrEqualTo</span><span class="o">(</span><span
+                            class="mi">5</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".another3"</span><span class="o">)).</span><span class="na">hasSize</span><span
+                            class="o">().</span><span class="na">greaterThan</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".another3"</span><span class="o">)).</span><span class="na">hasSize</span><span
+                            class="o">().</span><span class="na">greaterThanOrEqualTo</span><span
+                            class="o">(</span><span class="mi">2</span><span class="o">);</span>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="junit">JUnit</h2>
-<p>You can use FluentLenium using <a href="http://www.junit.org">JUnit</a> assertions.</p>
+            <h2 id="junit">JUnit</h2>
+            <p>You can use FluentLenium using <a href="http://www.junit.org">JUnit</a> assertions.</p>
 
-<p>We assume you would like to use Junit assertions together with Junit test runner so no additional imports is required.</p>
+            <p>We assume you would like to use Junit assertions together with Junit test runner so no additional imports
+                is required.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
-<span class="n">assertEqual</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">,</span> <span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">());</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span
+                        class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="s">"toto"</span><span class="o">);</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">click</span><span class="o">();</span>
+<span class="n">assertEqual</span><span class="o">(</span><span class="s">"Hello toto"</span><span
+                            class="o">,</span> <span class="n">window</span><span class="o">().</span><span class="na">title</span><span
+                            class="o">());</span>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="hamcrest">Hamcrest</h2>
+            <h2 id="hamcrest">Hamcrest</h2>
 
-<ul>
-  <li>Import this additional maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this additional maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>org.hamcrest<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>hamcrest-core<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>1.3<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Add those static imports.</li>
-</ul>
+            <ul>
+                <li>Add those static imports.</li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span class="o">.</span><span class="na">Matchers</span><span class="o">.*;</span>
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">static</span> <span
+                        class="n">org</span><span class="o">.</span><span class="na">hamcrest</span><span
+                        class="o">.</span><span class="na">Matchers</span><span class="o">.*;</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span
+                            class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span
+                            class="o">.</span><span class="na">assertThat</span><span class="o">;</span>
+</code></pre>
+                </div>
+            </div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">(),</span> <span class="n">equalTo</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">));</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span
+                        class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="s">"toto"</span><span class="o">);</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">click</span><span class="o">();</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">(),</span> <span class="n">equalTo</span><span
+                            class="o">(</span><span class="s">"Hello toto"</span><span class="o">));</span>
+</code></pre>
+                </div>
+            </div>
 
 
-	    
+        </div>
     </div>
-  </div>
 </div>
 
 
-    <footer>
-  <div class="container beautiful-jekyll-footer">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-          
-          <li>
-            <a href="https://github.com/FluentLenium" title="GitHub">
+<footer>
+    <div class="container beautiful-jekyll-footer">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center footer-links">
+
+
+                    <li>
+                        <a href="https://github.com/FluentLenium" title="GitHub">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-		  
-          <li>
-            <a href="https://twitter.com/FluentLenium" title="Twitter">
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="https://twitter.com/FluentLenium" title="Twitter">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-      
-		  
-		  
-		  
-		  
-      
-      
-      
-      
-		  
-        </ul>
-        <p class="copyright text-muted">
-		  FluentLenium
-		  &nbsp;&bull;&nbsp;
-		  2021
+                        </a>
+                    </li>
 
-		  
-		  &nbsp;&bull;&nbsp;
-		  <a href="http://fluentlenium.io">fluentlenium.io</a>
-		  
-	    </p>
-	        <!-- Please don't remove this, keep my open source work credited :) -->
-		<p class="theme-by text-muted">
-		  Theme by
-		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
-		</p>
-      </div>
+
+                </ul>
+                <p class="copyright text-muted">
+                    FluentLenium
+                    &nbsp;&bull;&nbsp;
+                    2021
+
+
+                    &nbsp;&bull;&nbsp;
+                    <a href="http://fluentlenium.io">fluentlenium.io</a>
+
+                </p>
+                <!-- Please don't remove this, keep my open source work credited :) -->
+                <p class="theme-by text-muted">
+                    Theme by
+                    <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
-  
-    
+
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script>
+    if (typeof jQuery == 'undefined') {
+        document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+    }
+</script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/bootstrap.min.js"></script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/main.js"></script>
 
 
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-      <script>
-      	if (typeof jQuery == 'undefined') {
-      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
-      	}
-      </script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/bootstrap.min.js"></script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/main.js"></script>
-    
-  
-
-
-
-
-  
-  </body>
+</body>
 </html>

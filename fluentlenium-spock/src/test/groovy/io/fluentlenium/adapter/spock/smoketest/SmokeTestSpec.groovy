@@ -13,7 +13,7 @@ class SmokeTestSpec extends FluentSpecification {
         ChromeDriverManager.chromedriver().setup()
     }
 
-    def "smokeTest" () {
+    def "smokeTest"() {
         expect:
         assertThat(getDriver()).isInstanceOf(EventFiringWebDriver.class)
         EventFiringWebDriver driver = (EventFiringWebDriver) getDriver()

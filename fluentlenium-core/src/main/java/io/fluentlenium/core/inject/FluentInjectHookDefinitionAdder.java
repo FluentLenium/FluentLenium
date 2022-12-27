@@ -1,6 +1,11 @@
 package io.fluentlenium.core.inject;
 
-import io.fluentlenium.core.hook.*;
+import io.fluentlenium.core.hook.FluentHook;
+import io.fluentlenium.core.hook.Hook;
+import io.fluentlenium.core.hook.HookControlImpl;
+import io.fluentlenium.core.hook.HookDefinition;
+import io.fluentlenium.core.hook.HookOptions;
+import io.fluentlenium.core.hook.NoHook;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 

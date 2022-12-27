@@ -13,7 +13,7 @@ import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 public class FluentCucumberSharedMutator implements SharedMutator {
     @Override
     public <T> EffectiveParameters<T> getEffectiveParameters(Class<T> testClass, String testName,
-            DriverLifecycle driverLifecycle) {
+                                                             DriverLifecycle driverLifecycle) {
         if (driverLifecycle == DriverLifecycle.CLASS) {
             throw new ConfigurationException("Cucumber doesn't support CLASS driverLifecycle.");
         }

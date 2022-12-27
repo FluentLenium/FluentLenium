@@ -132,7 +132,6 @@
         </module>
 
 
-
         <module name="MethodLength"/> <!-- def to 150 lines -->
         <module name="ParameterNumber">
             <property name="max" value="10"/>

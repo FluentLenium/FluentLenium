@@ -2,7 +2,16 @@ package io.fluentlenium.test.annotations;
 
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.events.NavigateAllListener;
-import io.fluentlenium.core.events.annotations.*;
+import io.fluentlenium.core.events.annotations.AfterClickOn;
+import io.fluentlenium.core.events.annotations.AfterFindBy;
+import io.fluentlenium.core.events.annotations.AfterGetText;
+import io.fluentlenium.core.events.annotations.AfterNavigate;
+import io.fluentlenium.core.events.annotations.AfterNavigateRefresh;
+import io.fluentlenium.core.events.annotations.BeforeClickOn;
+import io.fluentlenium.core.events.annotations.BeforeFindBy;
+import io.fluentlenium.core.events.annotations.BeforeGetText;
+import io.fluentlenium.core.events.annotations.BeforeNavigate;
+import io.fluentlenium.core.events.annotations.BeforeNavigateRefresh;
 import io.fluentlenium.test.IntegrationFluentTest;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;

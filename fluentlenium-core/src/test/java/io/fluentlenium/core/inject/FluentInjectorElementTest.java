@@ -21,7 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FluentInjectorElementTest {
@@ -121,7 +124,7 @@ public class FluentInjectorElementTest {
 
     public static class FluentListSubClass<T extends FluentWebElementSubClass> extends FluentListImpl<T> {
         public FluentListSubClass(Class<T> componentClass, List<T> list, FluentControl fluentControl,
-                ComponentInstantiator instantiator) {
+                                  ComponentInstantiator instantiator) {
             super(componentClass, list, fluentControl, instantiator);
         }
     }

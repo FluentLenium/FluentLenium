@@ -23,7 +23,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit test for {@link FluentListImpl}.
@@ -88,7 +92,7 @@ public class FluentListImplTest {
         assertThat(singleList.single()).isSameAs(element2);
 
         assertThatThrownBy(() -> list.single()).isExactlyInstanceOf(AssertionError.class)
-                                               .hasMessageContaining("list should contain one element only but there are");
+                .hasMessageContaining("list should contain one element only but there are");
     }
 
     //count()
@@ -162,7 +166,7 @@ public class FluentListImplTest {
         when(element3.conditions().clickable()).thenReturn(false);
 
         assertThatThrownBy(() -> list.contextClick()).isExactlyInstanceOf(NoSuchElementException.class)
-                                                     .hasMessageContaining("has no element clickable");
+                .hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -182,7 +186,7 @@ public class FluentListImplTest {
         when(element3.conditions().clickable()).thenReturn(false);
 
         assertThatThrownBy(() -> list.contextClick()).isExactlyInstanceOf(NoSuchElementException.class)
-                                                     .hasMessageContaining("has no element clickable");
+                .hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -202,7 +206,7 @@ public class FluentListImplTest {
         when(element3.conditions().clickable()).thenReturn(false);
 
         assertThatThrownBy(() -> list.contextClick()).isExactlyInstanceOf(NoSuchElementException.class)
-                                                     .hasMessageContaining("has no element clickable");
+                .hasMessageContaining("has no element clickable");
     }
 
     @Test
@@ -242,7 +246,7 @@ public class FluentListImplTest {
         when(element3.enabled()).thenReturn(false);
 
         assertThatThrownBy(() -> list.submit()).isExactlyInstanceOf(NoSuchElementException.class)
-                                               .hasMessageContaining("has no element enabled");
+                .hasMessageContaining("has no element enabled");
     }
 
     @Test
@@ -262,7 +266,7 @@ public class FluentListImplTest {
         when(element3.enabled()).thenReturn(false);
 
         assertThatThrownBy(() -> list.clear()).isExactlyInstanceOf(NoSuchElementException.class)
-                                              .hasMessageContaining("has no element enabled");
+                .hasMessageContaining("has no element enabled");
     }
 
     @Test
@@ -282,7 +286,7 @@ public class FluentListImplTest {
         when(element3.enabled()).thenReturn(false);
 
         assertThatThrownBy(() -> list.clearAll()).isExactlyInstanceOf(NoSuchElementException.class)
-                                                 .hasMessageContaining("has no element enabled");
+                .hasMessageContaining("has no element enabled");
     }
 
     @Test
@@ -302,7 +306,7 @@ public class FluentListImplTest {
         when(element3.enabled()).thenReturn(false);
 
         assertThatThrownBy(() -> list.clearAllReactInputs()).isExactlyInstanceOf(NoSuchElementException.class)
-                                                            .hasMessageContaining("has no element enabled");
+                .hasMessageContaining("has no element enabled");
     }
 
     @Test

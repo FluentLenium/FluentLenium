@@ -9,7 +9,7 @@ public interface AlertListener {
     /**
      * Called when an alert is accepted or dismissed.
      *
-     * @param driver    selenium driver
+     * @param driver selenium driver
      */
     void on(WebDriver driver); // NOPMD ShortMethodName
 }

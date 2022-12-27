@@ -2,8 +2,12 @@ package io.fluentlenium.core.inject;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.pagefactory.*;
+import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.WindowsFindBy;
 import io.appium.java_client.pagefactory.bys.ContentMappedBy;
+import io.appium.java_client.pagefactory.iOSXCUITBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.appium.java_client.pagefactory.iOSXCUITFindBys;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.fluentlenium.configuration.ConfigurationException;
 import io.fluentlenium.core.domain.FluentWebElement;

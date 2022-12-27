@@ -55,7 +55,7 @@ public class FluentInjector implements FluentInjectControl {
      * @param instantiator      container instantiator
      */
     public FluentInjector(FluentControl control, EventsRegistry eventsRegistry, ComponentsManager componentsManager,
-            ContainerInstantiator instantiator) {
+                          ContainerInstantiator instantiator) {
         fluentControl = control;
         this.eventsRegistry = eventsRegistry;
         this.componentsManager = componentsManager;
@@ -212,7 +212,7 @@ public class FluentInjector implements FluentInjectControl {
     }
 
     private void injectComponent(ComponentAndProxy fieldValue, ElementLocator locator, Object container, Field field,
-            ArrayList<HookDefinition<?>> fieldHookDefinitions) {
+                                 ArrayList<HookDefinition<?>> fieldHookDefinitions) {
         if (fieldValue != null) {
             LocatorProxies.setHooks(fieldValue.getProxy(), hookChainBuilder, fieldHookDefinitions);
             try {

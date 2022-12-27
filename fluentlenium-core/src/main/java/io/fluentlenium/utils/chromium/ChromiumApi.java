@@ -2,7 +2,13 @@ package io.fluentlenium.utils.chromium;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import org.openqa.selenium.remote.*;
+import org.openqa.selenium.remote.Command;
+import org.openqa.selenium.remote.CommandExecutor;
+import org.openqa.selenium.remote.CommandInfo;
+import org.openqa.selenium.remote.HttpCommandExecutor;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.Response;
+import org.openqa.selenium.remote.SessionId;
 import org.openqa.selenium.remote.http.HttpMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,9 +58,9 @@ public class ChromiumApi {
             defineCmd = HttpCommandExecutor.class.getDeclaredMethod("defineCommand", String.class, CommandInfo.class);
             defineCmd.setAccessible(true);
             defineCmd.invoke(remoteWebDriver.getCommandExecutor(), SEND_COMMAND_AND_GET_RESULT.getCmdName(),
-                new CommandInfo(SEND_COMMAND_AND_GET_RESULT.getCmdInfo(), HttpMethod.POST));
+                    new CommandInfo(SEND_COMMAND_AND_GET_RESULT.getCmdInfo(), HttpMethod.POST));
             defineCmd.invoke(remoteWebDriver.getCommandExecutor(), SEND_COMMAND.getCmdName(),
-                new CommandInfo(SEND_COMMAND.getCmdInfo(), HttpMethod.POST));
+                    new CommandInfo(SEND_COMMAND.getCmdInfo(), HttpMethod.POST));
         } catch (Exception e) {
             LOGGER.error("Failed to define command via reflection");
         }

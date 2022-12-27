@@ -203,7 +203,7 @@ public final class LocatorProxies {
     public static WebElement createWebElement(ElementLocator locator) {
         ComponentHandler handler = new ComponentHandler(locator);
         WebElement proxy = (WebElement) Proxy.newProxyInstance(locator.getClass().getClassLoader(),
-                new Class[] {WebElement.class, Locatable.class, WrapsElement.class}, handler);
+                new Class[]{WebElement.class, Locatable.class, WrapsElement.class}, handler);
         handler.setProxy(proxy);
         return proxy;
     }
@@ -237,7 +237,7 @@ public final class LocatorProxies {
     public static List<WebElement> createWebElementList(ElementLocator locator) {
         ListHandler handler = new ListHandler(locator);
         List<WebElement> proxy = (List<WebElement>) Proxy
-                .newProxyInstance(locator.getClass().getClassLoader(), new Class[] {List.class, WrapsElements.class}, handler);
+                .newProxyInstance(locator.getClass().getClassLoader(), new Class[]{List.class, WrapsElements.class}, handler);
         handler.setProxy(proxy);
         return proxy;
     }

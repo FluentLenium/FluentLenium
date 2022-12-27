@@ -113,6 +113,7 @@ public class MouseActions {
      * Moves the mouse from its current position (or 0,0) by the given offset. If the coordinates
      * provided are outside the viewport (the mouse will end up outside the browser window) then
      * the viewport is scrolled to match.
+     *
      * @param xOffset horizontal offset. A negative value means moving the mouse left.
      * @param yOffset vertical offset. A negative value means moving the mouse up.
      * @return this object reference to chain calls

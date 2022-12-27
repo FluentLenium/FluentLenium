@@ -21,7 +21,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class FluentDriverScreenshotPersister {
 
-    private static final Logger LOGGER  = LoggerFactory.getLogger(FluentDriverScreenshotPersister.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FluentDriverScreenshotPersister.class);
 
     private final Configuration configuration;
     private final WebDriver driver;

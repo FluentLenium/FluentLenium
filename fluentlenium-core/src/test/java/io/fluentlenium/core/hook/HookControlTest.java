@@ -18,8 +18,14 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HookControlTest {
@@ -64,21 +70,21 @@ public class HookControlTest {
 
     private static class Hook1 extends BaseHook {
         Hook1(FluentControl control, ComponentInstantiator instantiator, Supplier supplier, Supplier supplier2,
-                Supplier toStringSupplier, Object options) {
+              Supplier toStringSupplier, Object options) {
             super(control, instantiator, supplier, supplier2, toStringSupplier, options);
         }
     }
 
     private static class Hook2 extends BaseHook {
         Hook2(FluentControl control, ComponentInstantiator instantiator, Supplier supplier, Supplier supplier2,
-                Supplier toStringSupplier, Object options) {
+              Supplier toStringSupplier, Object options) {
             super(control, instantiator, supplier, supplier2, toStringSupplier, options);
         }
     }
 
     private static class Hook3 extends BaseHook {
         Hook3(FluentControl control, ComponentInstantiator instantiator, Supplier supplier, Supplier supplier2,
-                Supplier toStringSupplier, Object options) {
+              Supplier toStringSupplier, Object options) {
             super(control, instantiator, supplier, supplier2, toStringSupplier, options);
         }
     }

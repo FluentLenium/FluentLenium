@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class ExampleHook extends BaseHook<ExampleHookOptions> {
     public ExampleHook(FluentControl control, ComponentInstantiator instantiator, Supplier<WebElement> elementSupplier,
-            Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, ExampleHookOptions options) {
+                       Supplier<ElementLocator> locatorSupplier, Supplier<String> toStringSupplier, ExampleHookOptions options) {
         super(control, instantiator, elementSupplier, locatorSupplier, toStringSupplier, options);
     }
 

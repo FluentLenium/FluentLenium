@@ -1,15 +1,14 @@
 package io.fluentlenium.adapter.spock
 
-
 import org.openqa.selenium.WebDriver
 
 import java.lang.annotation.Annotation
 
 import static io.fluentlenium.adapter.TestRunnerCommon.*
+import static io.fluentlenium.utils.ScreenshotUtil.isIgnoredException
 
 // Intellij is wrong here - do not delete
 
-import static io.fluentlenium.utils.ScreenshotUtil.isIgnoredException
 import static io.fluentlenium.utils.ThreadLocalAdapterUtil.*
 
 class SpockAdapter extends SpockControl implements io.fluentlenium.adapter.TestRunnerAdapter, io.fluentlenium.adapter.IFluentAdapter {

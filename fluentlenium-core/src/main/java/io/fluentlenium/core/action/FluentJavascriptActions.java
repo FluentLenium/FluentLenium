@@ -36,7 +36,8 @@ public interface FluentJavascriptActions<T> {
 
     /**
      * Modifies element attributes
-     * @param attributeName attribute to be change
+     *
+     * @param attributeName  attribute to be change
      * @param attributeValue new attribute value
      * @return this object reference to chain methods calls
      */

@@ -4,7 +4,12 @@ import io.fluentlenium.core.FluentControl;
 import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.proxy.LocatorProxies;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -32,7 +37,7 @@ public class HookControlImpl<T> implements HookControl<T> {
      * @param noHookInstanceSupplier supplier of new instance without any hook.
      */
     public HookControlImpl(T self, Object proxy, FluentControl control, ComponentInstantiator instantiator,
-            Supplier<T> noHookInstanceSupplier) {
+                           Supplier<T> noHookInstanceSupplier) {
         this.self = self;
         this.proxy = proxy;
         this.noHookInstanceSupplier = noHookInstanceSupplier;
@@ -73,7 +78,7 @@ public class HookControlImpl<T> implements HookControl<T> {
      * @param hooksToRemove hooks to remove
      */
     public static void removeHooksFromDefinitions(Collection<HookDefinition<?>> definitions,
-            Class<? extends FluentHook>... hooksToRemove) {
+                                                  Class<? extends FluentHook>... hooksToRemove) {
         Iterator<HookDefinition<?>> hookDefinitionsIterator = definitions.iterator();
         List<Class<? extends FluentHook>> toRemoveHooks = Arrays.asList(hooksToRemove);
         while (hookDefinitionsIterator.hasNext()) {

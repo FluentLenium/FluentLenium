@@ -13,7 +13,9 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ContextConfiguration(locations = {"classpath:spring-test-config.xml"})
 public class DontRunTestsWhenInitFailTest {
@@ -50,7 +52,7 @@ public class DontRunTestsWhenInitFailTest {
     @Test
     public void testRun() {
         TestNG testNG = new TestNG(false);
-        testNG.setTestClasses(new Class[] {TestClass.class});
+        testNG.setTestClasses(new Class[]{TestClass.class});
 
         TestListenerAdapter listenerAdapter = Mockito.mock(TestListenerAdapter.class);
         testNG.addListener(listenerAdapter);

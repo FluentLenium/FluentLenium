@@ -61,7 +61,7 @@ public class FluentListAssert extends AbstractFluentAssert<FluentListAssert, Flu
         List<String> actualTexts = requiresNonEmpty(actual.texts());
         if (actualTexts.stream().noneMatch(text -> text.contains(textToFind))) {
             failWithMessage("No selected elements contains text: " + textToFind
-                + ". Actual texts found: " + actualTexts);
+                    + ". Actual texts found: " + actualTexts);
         }
         return this;
     }
@@ -95,8 +95,8 @@ public class FluentListAssert extends AbstractFluentAssert<FluentListAssert, Flu
         for (String text : actualTexts) {
             if (text.contains(textToFind)) {
                 failWithMessage(
-                    "At least one selected elements contains text: " + textToFind
-                        + ". Actual texts found: " + actualTexts);
+                        "At least one selected elements contains text: " + textToFind
+                                + ". Actual texts found: " + actualTexts);
             }
         }
         return this;

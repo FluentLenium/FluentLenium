@@ -13,7 +13,9 @@ import org.testng.annotations.Test;
 
 import static io.fluentlenium.assertj.AssertionTestSupport.assertThatAssertionErrorIsThrownBy;
 import static io.fluentlenium.assertj.FluentLeniumAssertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit test for {@link PageAssert}.

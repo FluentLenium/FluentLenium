@@ -1,6 +1,13 @@
 package io.fluentlenium.adapter.junit.integration;
 
-import io.fluentlenium.adapter.junit.integration.shareddriver.*;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriver;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverOnce1;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverOnce2;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverPerClass1;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverPerClass2;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverPerMethodByAnnotation;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverPerMethodByDefault;
+import io.fluentlenium.adapter.junit.integration.shareddriver.SharedDriverSuperClassTest;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

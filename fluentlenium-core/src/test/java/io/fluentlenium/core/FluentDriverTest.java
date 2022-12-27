@@ -10,8 +10,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.withSettings;
 
 /**
  * Unit test for {@link FluentDriver}.
@@ -34,7 +41,7 @@ public class FluentDriverTest {
         fluentDriver = spy(new FluentDriver(webDriver, configuration, adapter));
 
         assertThatIllegalStateException().isThrownBy(() -> fluentDriver.events())
-                                         .withMessageStartingWith("An EventFiringWebDriver instance is required to use events.");
+                .withMessageStartingWith("An EventFiringWebDriver instance is required to use events.");
     }
 
     //url()
@@ -91,7 +98,7 @@ public class FluentDriverTest {
         fluentDriver = spy(new FluentDriver(webDriver, configuration, adapter));
 
         assertThatIllegalArgumentException().isThrownBy(() -> fluentDriver.goTo((FluentPage) null))
-                                            .withMessage("It is required to specify an instance of FluentPage for navigation.");
+                .withMessage("It is required to specify an instance of FluentPage for navigation.");
     }
 
     //goTo(url)
@@ -101,7 +108,7 @@ public class FluentDriverTest {
         fluentDriver = spy(new FluentDriver(webDriver, configuration, adapter));
 
         assertThatIllegalArgumentException().isThrownBy(() -> fluentDriver.goTo((String) null))
-                                            .withMessage("It is required to specify a URL to navigate to.");
+                .withMessage("It is required to specify a URL to navigate to.");
     }
 
     //goToInNewTab(url)
@@ -111,7 +118,7 @@ public class FluentDriverTest {
         fluentDriver = spy(new FluentDriver(webDriver, configuration, adapter));
 
         assertThatIllegalArgumentException().isThrownBy(() -> fluentDriver.goToInNewTab(null))
-                                            .withMessage("It is required to specify a URL to navigate to (in a new tab).");
+                .withMessage("It is required to specify a URL to navigate to (in a new tab).");
     }
 
     //switchTo(element)

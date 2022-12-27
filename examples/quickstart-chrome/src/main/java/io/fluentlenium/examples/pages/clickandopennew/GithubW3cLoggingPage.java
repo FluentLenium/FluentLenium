@@ -1,6 +1,7 @@
 package io.fluentlenium.examples.pages.clickandopennew;
 
 import java.util.concurrent.TimeUnit;
+
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;

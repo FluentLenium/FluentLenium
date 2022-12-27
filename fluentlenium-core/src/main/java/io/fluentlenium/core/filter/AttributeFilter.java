@@ -62,8 +62,8 @@ public class AttributeFilter implements SearchFilter {
         stringBuilder.append("with ").append(getAttribute());
 
         Optional.ofNullable(matcher)
-            .map(AbstractMatcher::toString)
-            .ifPresent(matcherRepr -> stringBuilder.append(' ').append(matcherRepr));
+                .map(AbstractMatcher::toString)
+                .ifPresent(matcherRepr -> stringBuilder.append(' ').append(matcherRepr));
 
         return stringBuilder.append(' ').append('"').append(matcher.getValue()).append('"').toString();
     }
@@ -77,9 +77,9 @@ public class AttributeFilter implements SearchFilter {
     @Override
     public boolean isCssFilterSupported() {
         return matcher != null
-            && matcher.isCssFilterSupported()
-            && !"text".equalsIgnoreCase(getAttribute())
-            && !"textContent".equalsIgnoreCase(getAttribute());
+                && matcher.isCssFilterSupported()
+                && !"text".equalsIgnoreCase(getAttribute())
+                && !"textContent".equalsIgnoreCase(getAttribute());
     }
 
     @Override

@@ -14,7 +14,9 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit test for {@link AbstractLocatorAndInvocationHandler}.
@@ -41,7 +43,7 @@ public class AbstractLocatorAndInvocationHandlerTest {
         when(invocationHandler.getInvocationTarget(toString)).thenReturn(proxy);
 
         assertThat(invocationHandler.invoke(proxy, toString, new Object[0])).asString()
-                                                                            .startsWith("locator (Mock for WebElement");
+                .startsWith("locator (Mock for WebElement");
     }
 
     @Test

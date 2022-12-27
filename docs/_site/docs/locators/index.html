@@ -1,747 +1,779 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+<!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8"/>
 
-  <title>Element locators</title>
-  <meta name="Description" content="FluentLenium is a website automation framework which
+    <title>Element locators</title>
+    <meta name="Description" content="FluentLenium is a website automation framework which
    extends Selenium to write reliable and resilient UI functional tests.
     This framework is React ready. Written and maintained by people who
      are automating browser-based tests on a daily basis.">
-  <meta name="author" content="FluentLenium" />
-  
-  
-  <meta name="description" content="FluentLenium">
-  
+    <meta name="author" content="FluentLenium"/>
 
-  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
-    
-      
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/bootstrap-social.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
-  
+    <meta name="description" content="FluentLenium">
 
-    
-  
-  
 
-  
+    <link rel="alternate" type="application/rss+xml"
+          title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests."
+          href="/feed.xml"/>
 
-  <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Element locators" />
-  <meta property="og:type" content="website" />
-  
-  <meta property="og:url" content="http://fluentlenium.io/docs/locators/" />
-  
-  
-  <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
-  
-  <!-- Twitter summary cards -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@FluentLenium" />
-  <meta name="twitter:creator" content="@FluentLenium" />
-  <meta name="twitter:title" content="Element locators" />
-  <meta name="twitter:description" content="## Fluent Locators FluentLenium provides `$` and `el` methods to build **Fluent Locators**. Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList``` (`$`). Those classes are wrappers of Selenium ```WebElement``` and ```List```. Element can be located by - [CSS Selector](#css-selector): Creates a Fluent Locator from CSS Selector. - [Selenium By..." />
-  
-  <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
 
-  gtag('config', 'UA-132760260-1');
-</script>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+
+    <link rel="stylesheet" href="/css/main.css"/>
+
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"/>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"/>
+
+
+    <!-- Facebook OpenGraph tags -->
+    <meta property="og:title" content="Element locators"/>
+    <meta property="og:type" content="website"/>
+
+    <meta property="og:url" content="http://fluentlenium.io/docs/locators/"/>
+
+
+    <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <!-- Twitter summary cards -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@FluentLenium"/>
+    <meta name="twitter:creator" content="@FluentLenium"/>
+    <meta name="twitter:title" content="Element locators"/>
+    <meta name="twitter:description"
+          content="## Fluent Locators FluentLenium provides `$` and `el` methods to build **Fluent Locators**. Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList``` (`$`). Those classes are wrappers of Selenium ```WebElement``` and ```List```. Element can be located by - [CSS Selector](#css-selector): Creates a Fluent Locator from CSS Selector. - [Selenium By..."/>
+
+    <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132760260-1');
+    </script>
 </head>
 
 
-  <body>
-  
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="nav navbar-nav navbar-right">
+
+
+                <li>
+
+
+                    <a href="/">Home</a>
+
+                </li>
+
+
+                <li>
+
+
+                    <a href="/quickstart">Quickstart</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/docs/test-runners">Supported Test runners</a>
+
+
+                        <a href="/docs/locators">Finding elements</a>
+
+
+                        <a href="/docs/key_features">Key features</a>
+
+
+                        <a href="/docs/configuration">Configuration</a>
+
+
+                        <a href="/docs/test-methods">Test methods</a>
+
+
+                        <a href="/docs/assertion-libraries">Assertion libraries</a>
+
+
+                        <a href="/docs/appium-support">Appium support</a>
+
+
+                        <a href="https://fluentlenium.io/javadoc">Javadoc</a>
+
+
+                    </div>
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+
+                        <a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+
+                    </div>
+                </li>
+
+
+                <li>
+
+
+                    <a href="/about">About</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+        <div class="avatar-container">
+            <div class="avatar-img-border">
+                <a href="http://fluentlenium.io ">
+                    <img class="avatar-img" src="/img/avatar-icon.png"/>
+                </a>
+            </div>
+        </div>
+
+
     </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-      
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/">Home</a>
-
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/quickstart">Quickstart</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-runners">Supported Test runners</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/locators">Finding elements</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/key_features">Key features</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/configuration">Configuration</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-methods">Test methods</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/assertion-libraries">Assertion libraries</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/appium-support">Appium support</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://fluentlenium.io/javadoc">Javadoc</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/about">About</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-      </ul>
-    </div>
-
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://fluentlenium.io ">
-	      <img class="avatar-img" src="/img/avatar-icon.png" />
-		</a>
-	  </div>
-	</div>
-	
-
-  </div>
 </nav>
 
 <nav class="sidebar">
-    
+
     <ul>
-        
+
         <li><a href="#css-selector">CSS Selector</a></li>
-        
+
         <li><a href="#selenium-by-locator">By Locator</a></li>
-        
+
         <li><a href="#filters">Filters</a></li>
-        
+
         <li><a href="#first-last-and-index">Index</a></li>
-        
+
         <li><a href="#xpath-axes">XPath Axes</a></li>
-        
+
         <li><a href="#jquery-syntax">JQuery</a></li>
-        
+
         <li><a href="#actions">Element Actions</a></li>
-        
+
         <li><a href="#information">Element information</a></li>
-        
+
     </ul>
-    
+
 </nav>
 
 
-    <!-- TODO this file has become a mess, refactor it -->
-
-
-
+<!-- TODO this file has become a mess, refactor it -->
 
 
 <header class="header-section ">
 
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-heading">
-          <h1>Element locators</h1>
-		  
-		    
-            <hr class="small">
-            <span class="page-subheading">FluentLenium</span>
-			
-		  
-		  
-		  
+    <div class="intro-header no-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Element locators</h1>
+
+
+                        <hr class="small">
+                        <span class="page-subheading">FluentLenium</span>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 </header>
 
 
-
-
 <div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <h2 id="fluent-locators">Fluent Locators</h2>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <h2 id="fluent-locators">Fluent Locators</h2>
 
-<p>FluentLenium provides <code class="language-plaintext highlighter-rouge">$</code> and <code class="language-plaintext highlighter-rouge">el</code> methods to build <strong>Fluent Locators</strong>. Fluent Locators are implemented by <code class="language-plaintext highlighter-rouge">FluentWebElement</code> (<code class="language-plaintext highlighter-rouge">el</code>) and <code class="language-plaintext highlighter-rouge">FluentList&lt;FluentWebElement&gt;</code> (<code class="language-plaintext highlighter-rouge">$</code>).
-Those classes are wrappers of Selenium <code class="language-plaintext highlighter-rouge">WebElement</code> and <code class="language-plaintext highlighter-rouge">List&lt;WebElement&gt;</code>.</p>
+            <p>FluentLenium provides <code class="language-plaintext highlighter-rouge">$</code> and <code
+                    class="language-plaintext highlighter-rouge">el</code> methods to build <strong>Fluent
+                Locators</strong>. Fluent Locators are implemented by <code
+                    class="language-plaintext highlighter-rouge">FluentWebElement</code> (<code
+                    class="language-plaintext highlighter-rouge">el</code>) and <code
+                    class="language-plaintext highlighter-rouge">FluentList&lt;FluentWebElement&gt;</code> (<code
+                    class="language-plaintext highlighter-rouge">$</code>).
+                Those classes are wrappers of Selenium <code
+                        class="language-plaintext highlighter-rouge">WebElement</code> and <code
+                        class="language-plaintext highlighter-rouge">List&lt;WebElement&gt;</code>.</p>
 
-<p>Element can be located by</p>
+            <p>Element can be located by</p>
 
-<ul>
-  <li><a href="#css-selector">CSS Selector</a>: Creates a Fluent Locator from CSS Selector.</li>
-  <li><a href="#selenium-by-locator">Selenium By Locator</a>: Creates a Fluent Locator with native Selenium API.</li>
-  <li><a href="#filters">Filters</a>: Add an additional filter to the Fluent Locator.</li>
-  <li><a href="#first-last-and-index">First/Last/Index</a>: Get a single element from the Fluent Locator.</li>
-  <li><a href="#xpath-axes">XPath Axes</a>: Get another Fluent Locator from its relative position in the DOM.</li>
-  <li><a href="#jquery-syntax">JQuery syntax</a>: See find() method instead of el() and $()</li>
-</ul>
+            <ul>
+                <li><a href="#css-selector">CSS Selector</a>: Creates a Fluent Locator from CSS Selector.</li>
+                <li><a href="#selenium-by-locator">Selenium By Locator</a>: Creates a Fluent Locator with native
+                    Selenium API.
+                </li>
+                <li><a href="#filters">Filters</a>: Add an additional filter to the Fluent Locator.</li>
+                <li><a href="#first-last-and-index">First/Last/Index</a>: Get a single element from the Fluent Locator.
+                </li>
+                <li><a href="#xpath-axes">XPath Axes</a>: Get another Fluent Locator from its relative position in the
+                    DOM.
+                </li>
+                <li><a href="#jquery-syntax">JQuery syntax</a>: See find() method instead of el() and $()</li>
+            </ul>
 
-<p>Whenever element is find you can:</p>
-<ul>
-  <li><a href="#actions">Perform an action</a> (click, fill form etc)</li>
-  <li><a href="#information">Get some information about it</a> (value, clickability etc)</li>
-</ul>
+            <p>Whenever element is find you can:</p>
+            <ul>
+                <li><a href="#actions">Perform an action</a> (click, fill form etc)</li>
+                <li><a href="#information">Get some information about it</a> (value, clickability etc)</li>
+            </ul>
 
-<h2 id="css-selector">CSS Selector</h2>
+            <h2 id="css-selector">CSS Selector</h2>
 
-<p>You can use CSS Selector with the same restrictions as in Selenium.</p>
+            <p>You can use CSS Selector with the same restrictions as in Selenium.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="s">"#title"</span><span class="o">)</span> <span class="c1">// Elements with id named "title"</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)</span> <span class="c1">// Elements with class named "fluent"</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">)</span> <span class="c1">// Elements with tag name "input"</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="s">"#title"</span><span class="o">)</span> <span class="c1">// Elements with id named "title"</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)</span> <span
+                            class="c1">// Elements with class named "fluent"</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">)</span> <span
+                            class="c1">// Elements with tag name "input"</span>
 
 <span class="c1">// Most of CSS3 syntax is supported.</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"form &gt; input[data-custom=selenium]"</span><span class="o">)</span>
-</code></pre></div></div>
+<span class="err">$</span><span class="o">(</span><span class="s">"form &gt; input[data-custom=selenium]"</span><span
+                            class="o">)</span>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="selenium-by-locator">Selenium By Locator</h2>
+            <h2 id="selenium-by-locator">Selenium By Locator</h2>
 
-<p>You can also use native Selenium By Locator.</p>
+            <p>You can also use native Selenium By Locator.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="nc">By</span><span class="o">.</span><span class="na">cssSelector</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">))</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="nc">By</span><span class="o">.</span><span
+                        class="na">cssSelector</span><span class="o">(</span><span class="s">".fluent"</span><span
+                        class="o">))</span>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="filters">Filters</h2>
+            <h2 id="filters">Filters</h2>
 
-<p>You can use Filters to make your Fluent Selection easier to read and more powerful.</p>
+            <p>You can use Filters to make your Fluent Selection easier to read and more powerful.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Required import to make filters available</span>
-<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">fluentlenium</span><span class="o">.</span><span class="na">core</span><span class="o">.</span><span class="na">filter</span><span class="o">.</span><span class="na">FilterConstructor</span><span class="o">.*;</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// Required import to make filters available</span>
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span
+                            class="na">fluentlenium</span><span class="o">.</span><span class="na">core</span><span
+                            class="o">.</span><span class="na">filter</span><span class="o">.</span><span class="na">FilterConstructor</span><span
+                            class="o">.*;</span>
+</code></pre>
+                </div>
+            </div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">))</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withClass</span><span class="o">(</span><span class="s">"foo"</span><span class="o">))</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withId</span><span class="o">(</span><span class="s">"idOne"</span><span class="o">))</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withText</span><span class="o">(</span><span class="s">"This field is mandatory."</span><span class="o">))</span>
-<span class="err">$</span><span class="o">(</span><span class="n">withId</span><span class="o">(</span><span class="s">"idOne"</span><span class="o">))</span> <span class="c1">// Filter only</span>
-<span class="err">$</span><span class="o">(</span><span class="nc">By</span><span class="o">.</span><span class="na">cssSelector</span><span class="o">(</span><span class="s">".header"</span><span class="o">))</span> <span class="c1">// Native Selenium `By` locator</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">),</span> <span class="n">withId</span><span class="o">(</span><span class="s">"id1"</span><span class="o">))</span> <span class="c1">// Filter chaining</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span
+                        class="o">(</span><span class="s">"foo"</span><span class="o">))</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withClass</span><span class="o">(</span><span class="s">"foo"</span><span
+                            class="o">))</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withId</span><span class="o">(</span><span class="s">"idOne"</span><span
+                            class="o">))</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withText</span><span class="o">(</span><span
+                            class="s">"This field is mandatory."</span><span class="o">))</span>
+<span class="err">$</span><span class="o">(</span><span class="n">withId</span><span class="o">(</span><span class="s">"idOne"</span><span
+                            class="o">))</span> <span class="c1">// Filter only</span>
+<span class="err">$</span><span class="o">(</span><span class="nc">By</span><span class="o">.</span><span class="na">cssSelector</span><span
+                            class="o">(</span><span class="s">".header"</span><span class="o">))</span> <span
+                            class="c1">// Native Selenium `By` locator</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span
+                            class="o">),</span> <span class="n">withId</span><span class="o">(</span><span class="s">"id1"</span><span
+                            class="o">))</span> <span class="c1">// Filter chaining</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>Available filter methods with descriptions are shown in the table below:</p>
+            <p>Available filter methods with descriptions are shown in the table below:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>withName(String text)</td>
-      <td>Filters elements with ‘name’ attribute equals to value passed as an method argument</td>
-    </tr>
-    <tr>
-      <td>withId(String id)</td>
-      <td>Filters elements with ‘id’ attribute equals to value passed as an method argument</td>
-    </tr>
-    <tr>
-      <td>withClass(String cssClassName)</td>
-      <td>Filters elements with ‘class’ attribute equals to value passed as an method argument</td>
-    </tr>
-    <tr>
-      <td>withText(String text)</td>
-      <td>Filters elements with inner text that has to be displayed and equals to value passed as an method argument</td>
-    </tr>
-    <tr>
-      <td>containingText(String text)</td>
-      <td>Filters elements with inner text that has to be displayed and contains the value passed as an method argument</td>
-    </tr>
-    <tr>
-      <td>withTextContent(String text)</td>
-      <td>Filters elements with inner text that can be displayed or hidden and equals to value passed as an method argument</td>
-    </tr>
-    <tr>
-      <td>containingTextContent(String text)</td>
-      <td>Filters elements with inner text that can be displayed or hidden and contains the value passed as an method argument</td>
-    </tr>
-  </tbody>
-</table>
+            <table>
+                <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>withName(String text)</td>
+                    <td>Filters elements with ‘name’ attribute equals to value passed as an method argument</td>
+                </tr>
+                <tr>
+                    <td>withId(String id)</td>
+                    <td>Filters elements with ‘id’ attribute equals to value passed as an method argument</td>
+                </tr>
+                <tr>
+                    <td>withClass(String cssClassName)</td>
+                    <td>Filters elements with ‘class’ attribute equals to value passed as an method argument</td>
+                </tr>
+                <tr>
+                    <td>withText(String text)</td>
+                    <td>Filters elements with inner text that has to be displayed and equals to value passed as an
+                        method argument
+                    </td>
+                </tr>
+                <tr>
+                    <td>containingText(String text)</td>
+                    <td>Filters elements with inner text that has to be displayed and contains the value passed as an
+                        method argument
+                    </td>
+                </tr>
+                <tr>
+                    <td>withTextContent(String text)</td>
+                    <td>Filters elements with inner text that can be displayed or hidden and equals to value passed as
+                        an method argument
+                    </td>
+                </tr>
+                <tr>
+                    <td>containingTextContent(String text)</td>
+                    <td>Filters elements with inner text that can be displayed or hidden and contains the value passed
+                        as an method argument
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-<p>You can do more complex string matching on the above filters using the following methods:</p>
+            <p>You can do more complex string matching on the above filters using the following methods:</p>
 
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">contains</code></li>
-  <li><code class="language-plaintext highlighter-rouge">containsWord</code></li>
-  <li><code class="language-plaintext highlighter-rouge">notContains</code></li>
-  <li><code class="language-plaintext highlighter-rouge">startsWith</code></li>
-  <li><code class="language-plaintext highlighter-rouge">notStartsWith</code></li>
-  <li><code class="language-plaintext highlighter-rouge">endsWith</code></li>
-  <li><code class="language-plaintext highlighter-rouge">notEndsWith</code></li>
-</ul>
+            <ul>
+                <li><code class="language-plaintext highlighter-rouge">contains</code></li>
+                <li><code class="language-plaintext highlighter-rouge">containsWord</code></li>
+                <li><code class="language-plaintext highlighter-rouge">notContains</code></li>
+                <li><code class="language-plaintext highlighter-rouge">startsWith</code></li>
+                <li><code class="language-plaintext highlighter-rouge">notStartsWith</code></li>
+                <li><code class="language-plaintext highlighter-rouge">endsWith</code></li>
+                <li><code class="language-plaintext highlighter-rouge">notEndsWith</code></li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notContains</span><span class="o">(</span><span class="s">"name"</span><span class="o">))</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withId</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="s">"id"</span><span class="o">))</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withText</span><span class="o">().</span><span class="na">endsWith</span><span class="o">(</span><span class="s">"Female"</span><span class="o">))</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">)))</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">().</span><span class="na">notStartsWith</span><span class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">)))</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span
+                        class="o">().</span><span class="na">notContains</span><span class="o">(</span><span class="s">"name"</span><span
+                        class="o">))</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withId</span><span class="o">().</span><span class="na">notStartsWith</span><span
+                            class="o">(</span><span class="s">"id"</span><span class="o">))</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withText</span><span class="o">().</span><span class="na">endsWith</span><span
+                            class="o">(</span><span class="s">"Female"</span><span class="o">))</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withName</span><span class="o">().</span><span class="na">contains</span><span
+                            class="o">(</span><span class="n">regex</span><span class="o">(</span><span class="s">"na?me[0-9]*"</span><span
+                            class="o">)))</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withName</span><span class="o">().</span><span
+                            class="na">notStartsWith</span><span class="o">(</span><span class="n">regex</span><span
+                            class="o">(</span><span class="s">"na?me[0-9]*"</span><span class="o">)))</span>
+</code></pre>
+                </div>
+            </div>
 
-<p><code class="language-plaintext highlighter-rouge">contains</code>, <code class="language-plaintext highlighter-rouge">startsWith</code> and <code class="language-plaintext highlighter-rouge">endsWith</code> with a regexp pattern look for a subsection of the pattern.</p>
+            <p><code class="language-plaintext highlighter-rouge">contains</code>, <code
+                    class="language-plaintext highlighter-rouge">startsWith</code> and <code
+                    class="language-plaintext highlighter-rouge">endsWith</code> with a regexp pattern look for a
+                subsection of the pattern.</p>
 
-<h2 id="first-last-and-index">First, Last and Index</h2>
-<p>If you want the first, last or a particular index element, just use:</p>
+            <h2 id="first-last-and-index">First, Last and Index</h2>
+            <p>If you want the first, last or a particular index element, just use:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">first</span><span class="o">()</span> <span class="c1">// First element</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)</span> <span class="c1">// First element (short form)</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">last</span><span class="o">()</span> <span class="c1">// Last element</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">index</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// Third element</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">index</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="c1">// Third element named "foo"</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">first</span><span
+                        class="o">()</span> <span class="c1">// First element</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)</span> <span
+                            class="c1">// First element (short form)</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">last</span><span class="o">()</span> <span class="c1">// Last element</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">index</span><span class="o">(</span><span class="mi">2</span><span
+                            class="o">)</span> <span class="c1">// Third element</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span
+                            class="o">)).</span><span class="na">index</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">)</span> <span
+                            class="c1">// Third element named "foo"</span>
+</code></pre>
+                </div>
+            </div>
 
-<h3 id="fluent-locator-chains">Fluent Locator chains</h3>
-<p>You can also chain the Fluent Locators.</p>
+            <h3 id="fluent-locator-chains">Fluent Locator chains</h3>
+            <p>You can also chain the Fluent Locators.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// All the "input" tag name elements</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// All the "input" tag name elements</span>
 <span class="c1">// inside "fluent" class element subtree.</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">)</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="err">$</span><span class="o">(</span><span class="s">"input"</span><span
+                            class="o">)</span>
 
 <span class="c1">// The first "input" element named "bar"</span>
 <span class="c1">// inside the third "fluent" class named "foo" element.</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">index</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"bar"</span><span class="o">)).</span><span class="na">first</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span
+                            class="o">)).</span><span class="na">index</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">).</span><span class="err">$</span><span
+                            class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span
+                            class="o">(</span><span class="s">"bar"</span><span class="o">)).</span><span class="na">first</span><span
+                            class="o">()</span>
 <span class="c1">// or using el</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">index</span><span class="o">(</span><span class="mi">2</span><span class="o">).</span><span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span class="o">(</span><span class="s">"bar"</span><span class="o">))</span>
-</code></pre></div></div>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">withName</span><span class="o">(</span><span class="s">"foo"</span><span
+                            class="o">)).</span><span class="na">index</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">).</span><span class="err">$</span><span
+                            class="o">(</span><span class="s">"input"</span><span class="o">,</span> <span class="n">withName</span><span
+                            class="o">(</span><span class="s">"bar"</span><span class="o">))</span>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="xpath-axes">XPath Axes</h2>
+            <h2 id="xpath-axes">XPath Axes</h2>
 
-<p>If you need to build another Fluent Locator from the position in the DOM of an existing one, you
-can use <a href="https://www.w3schools.com/xml/xpath_axes.asp">XPath axes</a>.</p>
+            <p>If you need to build another Fluent Locator from the position in the DOM of an existing one, you
+                can use <a href="https://www.w3schools.com/xml/xpath_axes.asp">XPath axes</a>.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">dom</span><span class="o">().</span><span class="na">parent</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">dom</span><span class="o">().</span><span class="na">descendants</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">dom</span><span class="o">().</span><span class="na">ancestors</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">dom</span><span class="o">().</span><span class="na">followings</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">dom</span><span class="o">().</span><span class="na">followingSiblings</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">dom</span><span class="o">().</span><span class="na">precedings</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">dom</span><span class="o">().</span><span class="na">precedingSiblings</span><span class="o">()</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">el</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                        class="na">dom</span><span class="o">().</span><span class="na">parent</span><span
+                        class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">dom</span><span class="o">().</span><span class="na">descendants</span><span
+                            class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">dom</span><span class="o">().</span><span class="na">ancestors</span><span
+                            class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">dom</span><span class="o">().</span><span class="na">followings</span><span
+                            class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">dom</span><span class="o">().</span><span
+                            class="na">followingSiblings</span><span class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">dom</span><span class="o">().</span><span class="na">precedings</span><span
+                            class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">dom</span><span class="o">().</span><span
+                            class="na">precedingSiblings</span><span class="o">()</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can also call <code class="language-plaintext highlighter-rouge">axes()</code> on a FluentWebElement but that is deprecated and may be removed in any future version.</p>
+            <p>You can also call <code class="language-plaintext highlighter-rouge">axes()</code> on a FluentWebElement
+                but that is deprecated and may be removed in any future version.</p>
 
-<h2 id="jquery-syntax">JQuery syntax</h2>
+            <h2 id="jquery-syntax">JQuery syntax</h2>
 
-<p>If you don’t like the <a href="http://jquery.com/">JQuery</a> syntax, you can replace <code class="language-plaintext highlighter-rouge">$</code> and <code class="language-plaintext highlighter-rouge">el</code> with <code class="language-plaintext highlighter-rouge">find</code> method:</p>
+            <p>If you don’t like the <a href="http://jquery.com/">JQuery</a> syntax, you can replace <code
+                    class="language-plaintext highlighter-rouge">$</code> and <code
+                    class="language-plaintext highlighter-rouge">el</code> with <code
+                    class="language-plaintext highlighter-rouge">find</code> method:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
-<span class="n">find</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span class="na">write</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
-<span class="n">find</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"Hello toto"</span><span class="o">);</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">goTo</span><span
+                        class="o">(</span><span class="s">"http://mywebpage/"</span><span class="o">);</span>
+<span class="n">find</span><span class="o">(</span><span class="s">"#firstName"</span><span class="o">).</span><span
+                            class="na">write</span><span class="o">(</span><span class="s">"toto"</span><span class="o">);</span>
+<span class="n">find</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">click</span><span class="o">();</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span
+                            class="o">(</span><span class="s">"Hello toto"</span><span class="o">);</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>All syntaxes are equivalent. <code class="language-plaintext highlighter-rouge">$</code> is simply an alias for the <code class="language-plaintext highlighter-rouge">find()</code> method, and <code class="language-plaintext highlighter-rouge">el</code> for <code class="language-plaintext highlighter-rouge">find().first()</code>.</p>
+            <p>All syntaxes are equivalent. <code class="language-plaintext highlighter-rouge">$</code> is simply an
+                alias for the <code class="language-plaintext highlighter-rouge">find()</code> method, and <code
+                        class="language-plaintext highlighter-rouge">el</code> for <code
+                        class="language-plaintext highlighter-rouge">find().first()</code>.</p>
 
-<h2 id="located-elements">Located Elements</h2>
+            <h2 id="located-elements">Located Elements</h2>
 
-<h2 id="actions">Actions</h2>
-<p>Fluent Locators have methods to interact with located elements:</p>
+            <h2 id="actions">Actions</h2>
+            <p>Fluent Locators have methods to interact with located elements:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// click/double-click on all the enabled elements.</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">click</span><span class="o">()</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">doubleClick</span><span class="o">()</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// click/double-click on all the enabled elements.</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">click</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">doubleClick</span><span class="o">()</span>
 
 <span class="c1">// Clear all the enabled fields</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#firstname"</span><span class="o">).</span><span class="na">clear</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#firstname"</span><span class="o">).</span><span
+                            class="na">clear</span><span class="o">()</span>
 
 <span class="c1">// Submit all the enabled forms.</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#account"</span><span class="o">).</span><span class="na">submit</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#account"</span><span class="o">).</span><span
+                            class="na">submit</span><span class="o">()</span>
 
 <span class="c1">// Place the mouse over the first found element</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">mouseOver</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">mouseOver</span><span class="o">()</span>
 
 <span class="c1">// Scroll the viewport to make the first found element visible</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">scrollIntoView</span><span class="o">();</span>
-</code></pre></div></div>
+<span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span
+                            class="na">scrollIntoView</span><span class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<h3 id="filling-forms">Filling forms</h3>
+            <h3 id="filling-forms">Filling forms</h3>
 
-<p>A fill() builder method is available to quickly fill forms.</p>
+            <p>A fill() builder method is available to quickly fill forms.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="s">"bar"</span><span class="o">)</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                        class="na">fill</span><span class="o">().</span><span class="na">with</span><span
+                        class="o">(</span><span class="s">"bar"</span><span class="o">)</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>Previous statement will fill all the input elements with bar.</p>
+            <p>Previous statement will fill all the input elements with bar.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="s">"myLogin"</span><span class="o">,</span><span class="s">"myPassword"</span><span class="o">)</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                        class="na">fill</span><span class="o">().</span><span class="na">with</span><span
+                        class="o">(</span><span class="s">"myLogin"</span><span class="o">,</span><span class="s">"myPassword"</span><span
+                        class="o">)</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>Previous statement will fill the first element of the input selection with <code class="language-plaintext highlighter-rouge">myLogin</code>, the second with <code class="language-plaintext highlighter-rouge">myPassword</code>.
-If there are more input elements found, the last value <code class="language-plaintext highlighter-rouge">myPassword</code> will be repeated for each subsequent element.</p>
+            <p>Previous statement will fill the first element of the input selection with <code
+                    class="language-plaintext highlighter-rouge">myLogin</code>, the second with <code
+                    class="language-plaintext highlighter-rouge">myPassword</code>.
+                If there are more input elements found, the last value <code
+                        class="language-plaintext highlighter-rouge">myPassword</code> will be repeated for each
+                subsequent element.</p>
 
-<p>You can also fill <code class="language-plaintext highlighter-rouge">&lt;select&gt;</code> elements</p>
+            <p>You can also fill <code class="language-plaintext highlighter-rouge">&lt;select&gt;</code> elements</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Select "MONDAY" value</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"daySelector"</span><span class="o">).</span><span class="na">fillSelect</span><span class="o">().</span><span class="na">withValue</span><span class="o">(</span><span class="s">"MONDAY"</span><span class="o">)</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// Select "MONDAY" value</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"daySelector"</span><span class="o">).</span><span
+                            class="na">fillSelect</span><span class="o">().</span><span class="na">withValue</span><span
+                            class="o">(</span><span class="s">"MONDAY"</span><span class="o">)</span>
 
 <span class="c1">// Select second value</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"daySelector"</span><span class="o">).</span><span class="na">fillSelect</span><span class="o">().</span><span class="na">withIndex</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<span class="err">$</span><span class="o">(</span><span class="s">"daySelector"</span><span class="o">).</span><span
+                            class="na">fillSelect</span><span class="o">().</span><span class="na">withIndex</span><span
+                            class="o">(</span><span class="mi">1</span><span class="o">)</span>
 
 <span class="c1">// Select value with visible text "Monday"</span>
-<span class="err">$</span><span class="o">(</span><span class="s">"daySelector"</span><span class="o">).</span><span class="na">fillSelect</span><span class="o">().</span><span class="na">withText</span><span class="o">(</span><span class="s">"Monday"</span><span class="o">)</span>
-</code></pre></div></div>
+<span class="err">$</span><span class="o">(</span><span class="s">"daySelector"</span><span class="o">).</span><span
+                            class="na">fillSelect</span><span class="o">().</span><span class="na">withText</span><span
+                            class="o">(</span><span class="s">"Monday"</span><span class="o">)</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>Don’t forget that only visible fields will be modified. It simulates a real person using a browser !</p>
+            <p>Don’t forget that only visible fields will be modified. It simulates a real person using a browser !</p>
 
-<h2 id="information">Information</h2>
+            <h2 id="information">Information</h2>
 
-<p>You can also access a list of all the names, visible text, and ids of a list of elements:</p>
+            <p>You can also access a list of all the names, visible text, and ids of a list of elements:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">names</span><span class="o">()</span>
-<span class="err">$</span><span class="o">(</span><span class="nc">By</span><span class="o">.</span><span class="na">id</span><span class="o">(</span><span class="s">"foo"</span><span class="o">)).</span><span class="na">ids</span><span class="o">()</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">values</span><span class="o">()</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">attributes</span><span class="o">(</span><span class="s">"myCustomAttribute"</span><span class="o">)</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">texts</span><span class="o">()</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">textContents</span><span class="o">()</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">names</span><span
+                        class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="nc">By</span><span class="o">.</span><span
+                            class="na">id</span><span class="o">(</span><span class="s">"foo"</span><span
+                            class="o">)).</span><span class="na">ids</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">values</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">attributes</span><span class="o">(</span><span
+                            class="s">"myCustomAttribute"</span><span class="o">)</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">texts</span><span class="o">()</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">textContents</span><span class="o">()</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can also check if the element is displayed, enabled or selected:</p>
+            <p>You can also check if the element is displayed, enabled or selected:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">displayed</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">enabled</span><span class="o">()</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">selected</span><span class="o">()</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">el</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">displayed</span><span
+                        class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">enabled</span><span class="o">()</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">selected</span><span class="o">()</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>Advanced conditions are also available</p>
+            <p>Advanced conditions are also available</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">conditions</span><span class="o">().</span><span class="na">clickable</span><span class="o">();</span>
-<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">conditions</span><span class="o">().</span><span class="na">rectangle</span><span class="o">().</span><span class="na">size</span><span class="o">().</span><span class="na">width</span><span class="o">().</span><span class="na">greaterThan</span><span class="o">(</span><span class="mi">50</span><span class="o">);</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">el</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">conditions</span><span
+                        class="o">().</span><span class="na">clickable</span><span class="o">();</span>
+<span class="n">el</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">conditions</span><span class="o">().</span><span class="na">rectangle</span><span
+                            class="o">().</span><span class="na">size</span><span class="o">().</span><span class="na">width</span><span
+                            class="o">().</span><span class="na">greaterThan</span><span class="o">(</span><span
+                            class="mi">50</span><span class="o">);</span>
+</code></pre>
+                </div>
+            </div>
 
-	    
+
+        </div>
     </div>
-  </div>
 </div>
 
 
-    <footer>
-  <div class="container beautiful-jekyll-footer">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-          
-          <li>
-            <a href="https://github.com/FluentLenium" title="GitHub">
+<footer>
+    <div class="container beautiful-jekyll-footer">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center footer-links">
+
+
+                    <li>
+                        <a href="https://github.com/FluentLenium" title="GitHub">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-		  
-          <li>
-            <a href="https://twitter.com/FluentLenium" title="Twitter">
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="https://twitter.com/FluentLenium" title="Twitter">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-      
-		  
-		  
-		  
-		  
-      
-      
-      
-      
-		  
-        </ul>
-        <p class="copyright text-muted">
-		  FluentLenium
-		  &nbsp;&bull;&nbsp;
-		  2021
+                        </a>
+                    </li>
 
-		  
-		  &nbsp;&bull;&nbsp;
-		  <a href="http://fluentlenium.io">fluentlenium.io</a>
-		  
-	    </p>
-	        <!-- Please don't remove this, keep my open source work credited :) -->
-		<p class="theme-by text-muted">
-		  Theme by
-		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
-		</p>
-      </div>
+
+                </ul>
+                <p class="copyright text-muted">
+                    FluentLenium
+                    &nbsp;&bull;&nbsp;
+                    2021
+
+
+                    &nbsp;&bull;&nbsp;
+                    <a href="http://fluentlenium.io">fluentlenium.io</a>
+
+                </p>
+                <!-- Please don't remove this, keep my open source work credited :) -->
+                <p class="theme-by text-muted">
+                    Theme by
+                    <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
-  
-    
+
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script>
+    if (typeof jQuery == 'undefined') {
+        document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+    }
+</script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/bootstrap.min.js"></script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/main.js"></script>
 
 
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-      <script>
-      	if (typeof jQuery == 'undefined') {
-      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
-      	}
-      </script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/bootstrap.min.js"></script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/main.js"></script>
-    
-  
-
-
-
-
-  
-  </body>
+</body>
 </html>

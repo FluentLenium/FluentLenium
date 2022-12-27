@@ -1,6 +1,11 @@
 package io.fluentlenium.adapter.testng;
 
-import io.fluentlenium.adapter.*;
+import io.fluentlenium.adapter.DefaultSharedMutator;
+import io.fluentlenium.adapter.IFluentAdapter;
+import io.fluentlenium.adapter.SharedMutator;
+import io.fluentlenium.adapter.TestRunnerAdapter;
+import io.fluentlenium.adapter.TestRunnerCommon;
+import io.fluentlenium.adapter.ThreadLocalFluentControlContainer;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriver;
 import io.fluentlenium.adapter.sharedwebdriver.SharedWebDriverContainer;
 import io.fluentlenium.core.inject.ContainerFluentControl;

@@ -50,7 +50,7 @@ public final class TestRunnerCommon {
             String causeMessage = ExceptionUtil.getCauseMessage(e);
             throw new WebDriverException(String.format(
                     "Browser failed to start, test [ %s ] execution interrupted.%s",
-                            testName, printCauseMessage(causeMessage)), e);
+                    testName, printCauseMessage(causeMessage)), e);
         }
         return sharedWebDriver;
     }

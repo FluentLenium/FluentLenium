@@ -19,8 +19,8 @@ public class RectangleListConditionsImpl extends BaseObjectListConditions<Rectan
      * @param conditionsGetter getter of the underlying rectangle conditions
      */
     public RectangleListConditionsImpl(Conditions<FluentWebElement> conditions,
-            Function<FluentWebElement, Rectangle> objectGetter,
-            Function<FluentWebElement, RectangleConditions> conditionsGetter) {
+                                       Function<FluentWebElement, Rectangle> objectGetter,
+                                       Function<FluentWebElement, RectangleConditions> conditionsGetter) {
         super(conditions, objectGetter, conditionsGetter);
     }
 

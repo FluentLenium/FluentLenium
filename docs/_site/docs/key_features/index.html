@@ -1,1082 +1,1450 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+<!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8"/>
 
-  <title>Key features</title>
-  <meta name="Description" content="FluentLenium is a website automation framework which
+    <title>Key features</title>
+    <meta name="Description" content="FluentLenium is a website automation framework which
    extends Selenium to write reliable and resilient UI functional tests.
     This framework is React ready. Written and maintained by people who
      are automating browser-based tests on a daily basis.">
-  <meta name="author" content="FluentLenium" />
-  
-  
-  <meta name="description" content="FluentLenium">
-  
+    <meta name="author" content="FluentLenium"/>
 
-  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
-    
-      
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/bootstrap-social.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
-  
+    <meta name="description" content="FluentLenium">
 
-    
-  
-  
 
-  
+    <link rel="alternate" type="application/rss+xml"
+          title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests."
+          href="/feed.xml"/>
 
-  <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Key features" />
-  <meta property="og:type" content="website" />
-  
-  <meta property="og:url" content="http://fluentlenium.io/docs/key_features/" />
-  
-  
-  <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
-  
-  <!-- Twitter summary cards -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@FluentLenium" />
-  <meta name="twitter:creator" content="@FluentLenium" />
-  <meta name="twitter:title" content="Key features" />
-  <meta name="twitter:description" content="This section contains information about key FluentLenium features. If you wonder about advantages over pure Selenium this section is for you. ## Table of Contents - [Page Object Pattern Support](#page-object-pattern-support) * [Creating Page Objects](#pages) * [Page Injection](#page-injection) * [Components support](#components) - [Lazy Fluent Locators](#lazy-fluent-locators) - [Extended awaits](#extended-awaits) - [Shadow Root](#shadow-root)..." />
-  
-  <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
 
-  gtag('config', 'UA-132760260-1');
-</script>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+
+    <link rel="stylesheet" href="/css/main.css"/>
+
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"/>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"/>
+
+
+    <!-- Facebook OpenGraph tags -->
+    <meta property="og:title" content="Key features"/>
+    <meta property="og:type" content="website"/>
+
+    <meta property="og:url" content="http://fluentlenium.io/docs/key_features/"/>
+
+
+    <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <!-- Twitter summary cards -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@FluentLenium"/>
+    <meta name="twitter:creator" content="@FluentLenium"/>
+    <meta name="twitter:title" content="Key features"/>
+    <meta name="twitter:description"
+          content="This section contains information about key FluentLenium features. If you wonder about advantages over pure Selenium this section is for you. ## Table of Contents - [Page Object Pattern Support](#page-object-pattern-support) * [Creating Page Objects](#pages) * [Page Injection](#page-injection) * [Components support](#components) - [Lazy Fluent Locators](#lazy-fluent-locators) - [Extended awaits](#extended-awaits) - [Shadow Root](#shadow-root)..."/>
+
+    <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132760260-1');
+    </script>
 </head>
 
 
-  <body>
-  
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="nav navbar-nav navbar-right">
+
+
+                <li>
+
+
+                    <a href="/">Home</a>
+
+                </li>
+
+
+                <li>
+
+
+                    <a href="/quickstart">Quickstart</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/docs/test-runners">Supported Test runners</a>
+
+
+                        <a href="/docs/locators">Finding elements</a>
+
+
+                        <a href="/docs/key_features">Key features</a>
+
+
+                        <a href="/docs/configuration">Configuration</a>
+
+
+                        <a href="/docs/test-methods">Test methods</a>
+
+
+                        <a href="/docs/assertion-libraries">Assertion libraries</a>
+
+
+                        <a href="/docs/appium-support">Appium support</a>
+
+
+                        <a href="https://fluentlenium.io/javadoc">Javadoc</a>
+
+
+                    </div>
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+
+                        <a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+
+                    </div>
+                </li>
+
+
+                <li>
+
+
+                    <a href="/about">About</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+        <div class="avatar-container">
+            <div class="avatar-img-border">
+                <a href="http://fluentlenium.io ">
+                    <img class="avatar-img" src="/img/avatar-icon.png"/>
+                </a>
+            </div>
+        </div>
+
+
     </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-      
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/">Home</a>
-
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/quickstart">Quickstart</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-runners">Supported Test runners</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/locators">Finding elements</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/key_features">Key features</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/configuration">Configuration</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-methods">Test methods</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/assertion-libraries">Assertion libraries</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/appium-support">Appium support</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://fluentlenium.io/javadoc">Javadoc</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/about">About</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-      </ul>
-    </div>
-
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://fluentlenium.io ">
-	      <img class="avatar-img" src="/img/avatar-icon.png" />
-		</a>
-	  </div>
-	</div>
-	
-
-  </div>
 </nav>
 
 <nav class="sidebar">
-    
+
     <ul>
-        
+
         <li><a href="#page-object-pattern-support">Page Object Pattern</a></li>
-        
+
         <li><a href="#lazy-fluent-locators">Lazy Fluent Locators</a></li>
-        
+
         <li><a href="#extended-awaits">Extended awaits</a></li>
-        
+
         <li><a href="#shadow-root">Shadow Root</a></li>
-        
+
     </ul>
-    
+
 </nav>
 
 
-    <!-- TODO this file has become a mess, refactor it -->
-
-
-
+<!-- TODO this file has become a mess, refactor it -->
 
 
 <header class="header-section ">
 
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-heading">
-          <h1>Key features</h1>
-		  
-		    
-            <hr class="small">
-            <span class="page-subheading">FluentLenium</span>
-			
-		  
-		  
-		  
+    <div class="intro-header no-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Key features</h1>
+
+
+                        <hr class="small">
+                        <span class="page-subheading">FluentLenium</span>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 </header>
 
 
-
-
 <div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <p>This section contains information about key FluentLenium features. If you wonder about advantages over pure Selenium this section is for you.</p>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <p>This section contains information about key FluentLenium features. If you wonder about advantages over
+                pure Selenium this section is for you.</p>
 
-<h2 id="table-of-contents">Table of Contents</h2>
-<ul>
-  <li><a href="#page-object-pattern-support">Page Object Pattern Support</a>
-    <ul>
-      <li><a href="#pages">Creating Page Objects</a></li>
-      <li><a href="#page-injection">Page Injection</a></li>
-      <li><a href="#components">Components support</a></li>
-    </ul>
-  </li>
-  <li><a href="#lazy-fluent-locators">Lazy Fluent Locators</a></li>
-  <li><a href="#extended-awaits">Extended awaits</a></li>
-  <li><a href="#shadow-root">Shadow Root</a></li>
-</ul>
+            <h2 id="table-of-contents">Table of Contents</h2>
+            <ul>
+                <li><a href="#page-object-pattern-support">Page Object Pattern Support</a>
+                    <ul>
+                        <li><a href="#pages">Creating Page Objects</a></li>
+                        <li><a href="#page-injection">Page Injection</a></li>
+                        <li><a href="#components">Components support</a></li>
+                    </ul>
+                </li>
+                <li><a href="#lazy-fluent-locators">Lazy Fluent Locators</a></li>
+                <li><a href="#extended-awaits">Extended awaits</a></li>
+                <li><a href="#shadow-root">Shadow Root</a></li>
+            </ul>
 
-<h2 id="page-object-pattern-support">Page Object Pattern support</h2>
+            <h2 id="page-object-pattern-support">Page Object Pattern support</h2>
 
-<h3 id="pages">Pages</h3>
-<p>Selenium tests can easily become a mess. To avoid this, you should use the <a href="http://code.google.com/p/selenium/wiki/PageObjects">Page Object Pattern</a>.
-Page Object Pattern will enclose all the plumbing relating to how pages interact with each other and how the user
-interacts with the page, which makes tests a lot easier to read and to maintain.</p>
+            <h3 id="pages">Pages</h3>
+            <p>Selenium tests can easily become a mess. To avoid this, you should use the <a
+                    href="http://code.google.com/p/selenium/wiki/PageObjects">Page Object Pattern</a>.
+                Page Object Pattern will enclose all the plumbing relating to how pages interact with each other and how
+                the user
+                interacts with the page, which makes tests a lot easier to read and to maintain.</p>
 
-<p>Try to construct your Page thinking that it is better if you offer services from your page rather than just the internals of the page.
-A Page Object can model the whole page or just a part of it.</p>
+            <p>Try to construct your Page thinking that it is better if you offer services from your page rather than
+                just the internals of the page.
+                A Page Object can model the whole page or just a part of it.</p>
 
-<p>To construct a Page, extend <code class="language-plaintext highlighter-rouge">FluentPage</code>.</p>
+            <p>To construct a Page, extend <code class="language-plaintext highlighter-rouge">FluentPage</code>.</p>
 
-<p>You can define the URL of the page by overriding the <code class="language-plaintext highlighter-rouge">getUrl</code> method. Then, it’s possible tu use the <code class="language-plaintext highlighter-rouge">goTo()</code> method in
-your test code to set the current URL to the URL of the page.</p>
+            <p>You can define the URL of the page by overriding the <code class="language-plaintext highlighter-rouge">getUrl</code>
+                method. Then, it’s possible tu use the <code class="language-plaintext highlighter-rouge">goTo()</code>
+                method in
+                your test code to set the current URL to the URL of the page.</p>
 
-<p>You can also override isAt method, to run all the assertions necessary in order to ensure that you are on the right
-page.</p>
+            <p>You can also override isAt method, to run all the assertions necessary in order to ensure that you are on
+                the right
+                page.</p>
 
-<p>For example, if I choose that the title will be sufficient to know if I’m on the right page:</p>
+            <p>For example, if I choose that the title will be sufficient to know if I’m on the right page:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">MyPage</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"/app/my-page"</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">contains</span><span class="o">(</span><span class="s">"Selenium"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">()).</span><span class="na">contains</span><span
+                            class="o">(</span><span class="s">"Selenium"</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Instead of manually implementing <code class="language-plaintext highlighter-rouge">isAt</code> and <code class="language-plaintext highlighter-rouge">getUrl</code> method, you can use Selenium <code class="language-plaintext highlighter-rouge">@FindBy</code> annotation on the page
-class, to define an Element Locator that should identify this page, and <code class="language-plaintext highlighter-rouge">@PageUrl</code> to define the URL
-used by <code class="language-plaintext highlighter-rouge">goTo()</code> method.</p>
+            <p>Instead of manually implementing <code class="language-plaintext highlighter-rouge">isAt</code> and <code
+                    class="language-plaintext highlighter-rouge">getUrl</code> method, you can use Selenium <code
+                    class="language-plaintext highlighter-rouge">@FindBy</code> annotation on the page
+                class, to define an Element Locator that should identify this page, and <code
+                        class="language-plaintext highlighter-rouge">@PageUrl</code> to define the URL
+                used by <code class="language-plaintext highlighter-rouge">goTo()</code> method.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span class="o">(</span><span class="s">"/app/my-page"</span><span class="o">)</span>
-<span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span><span class="o">=</span><span class="s">"#my-page"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span
+                        class="o">(</span><span class="s">"/app/my-page"</span><span class="o">)</span>
+<span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span><span class="o">=</span><span
+                            class="s">"#my-page"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyPage</span> <span
+                            class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
     <span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>If you are creating a page object class for something that doesn’t have URL, e.g. a component of a page, the class won’t have the <code class="language-plaintext highlighter-rouge">@PageUrl</code> annotation applied,
-thus also doesn’t need to extend <code class="language-plaintext highlighter-rouge">FluentPage</code>, but the <code class="language-plaintext highlighter-rouge">@Find...</code> annotated fields in it will be initialized regardless when injecting them using <code class="language-plaintext highlighter-rouge">@Page</code>. The following construct is also valid:</p>
+            <p>If you are creating a page object class for something that doesn’t have URL, e.g. a component of a page,
+                the class won’t have the <code class="language-plaintext highlighter-rouge">@PageUrl</code> annotation
+                applied,
+                thus also doesn’t need to extend <code class="language-plaintext highlighter-rouge">FluentPage</code>,
+                but the <code class="language-plaintext highlighter-rouge">@Find...</code> annotated fields in it will
+                be initialized regardless when injecting them using <code class="language-plaintext highlighter-rouge">@Page</code>.
+                The following construct is also valid:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HeroImage</span> <span class="o">{</span>
-    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">".hero .img"</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="nc">FluentWebElement</span> <span class="n">heroImage</span><span class="o">;</span> 
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">HeroImage</span> <span class="o">{</span>
+    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="s">".hero .img"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">FluentWebElement</span> <span class="n">heroImage</span><span
+                            class="o">;</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<h4 id="pageurl-parameters">PageUrl parameters</h4>
+            <h4 id="pageurl-parameters">PageUrl parameters</h4>
 
-<p>It’s possible to define parameters in FluentPage url using <code class="language-plaintext highlighter-rouge">{[?][/path/]parameter}</code> syntax.
-If it starts with <code class="language-plaintext highlighter-rouge">?</code>, it means that the parameter is optional. Path can be included in the braces so it is removed when parameter value is not defined.</p>
+            <p>It’s possible to define parameters in FluentPage url using <code
+                    class="language-plaintext highlighter-rouge">{[?][/path/]parameter}</code> syntax.
+                If it starts with <code class="language-plaintext highlighter-rouge">?</code>, it means that the
+                parameter is optional. Path can be included in the braces so it is removed when parameter value is not
+                defined.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span class="o">(</span><span class="s">"/document/{document}{?/page/page}{?/format}"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocumentPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nc">DocumentPage</span> <span class="nf">customPageMethod</span><span class="o">(){</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span
+                        class="o">(</span><span class="s">"/document/{document}{?/page/page}{?/format}"</span><span
+                        class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocumentPage</span> <span class="kd">extends</span> <span
+                            class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">DocumentPage</span> <span class="nf">customPageMethod</span><span
+                            class="o">(){</span>
             <span class="o">...</span>
             <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
         <span class="o">}</span>
         <span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Also when a page is open, one might want to extract certain parameter values from the url template defined in the <code class="language-plaintext highlighter-rouge">@PageUrl</code> annotation.
-One can do that by calling <code class="language-plaintext highlighter-rouge">getParam(String)</code> on a FluentPage object. It works only when the FluentPage object is annotated as `@PageUrl’.</p>
+            <p>Also when a page is open, one might want to extract certain parameter values from the url template
+                defined in the <code class="language-plaintext highlighter-rouge">@PageUrl</code> annotation.
+                One can do that by calling <code class="language-plaintext highlighter-rouge">getParam(String)</code> on
+                a FluentPage object. It works only when the FluentPage object is annotated as `@PageUrl’.</p>
 
-<p>So for a template like <code class="language-plaintext highlighter-rouge">/document/{document}{?/page/page}{?/format}</code> with an actual URL value <code class="language-plaintext highlighter-rouge">/document/345/json</code> one can query parameters like:</p>
+            <p>So for a template like <code class="language-plaintext highlighter-rouge">/document/{document}{?/page/page}{?/format}</code>
+                with an actual URL value <code class="language-plaintext highlighter-rouge">/document/345/json</code>
+                one can query parameters like:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">document</span> <span class="o">=</span> <span class="n">documentPage</span><span class="o">.</span><span class="na">getParam</span><span class="o">(</span><span class="s">"document"</span><span class="o">);</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">document</span> <span
+                        class="o">=</span> <span class="n">documentPage</span><span class="o">.</span><span class="na">getParam</span><span
+                        class="o">(</span><span class="s">"document"</span><span class="o">);</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>The queried value will be 345 in this case.</p>
+            <p>The queried value will be 345 in this case.</p>
 
-<p>If the provided parameter name is not defined in the template or it has no value in the actual URL, the returned value is <code class="language-plaintext highlighter-rouge">null</code>.</p>
+            <p>If the provided parameter name is not defined in the template or it has no value in the actual URL, the
+                returned value is <code class="language-plaintext highlighter-rouge">null</code>.</p>
 
-<h4 id="local-files">Local files</h4>
+            <h4 id="local-files">Local files</h4>
 
-<p>You can also refer to files in your test resources directory by specifying the <code class="language-plaintext highlighter-rouge">file</code> attribute with a file name:</p>
+            <p>You can also refer to files in your test resources directory by specifying the <code
+                    class="language-plaintext highlighter-rouge">file</code> attribute with a file name:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span class="o">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">"page2url.html"</span><span class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">"?param1={param1}&amp;param2={param2}"</span><span class="o">)</span>
-<span class="kd">class</span> <span class="nc">Page2DynamicP2P1</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span
+                        class="o">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">"page2url.html"</span><span
+                        class="o">,</span> <span class="n">value</span> <span class="o">=</span> <span class="s">"?param1={param1}&amp;param2={param2}"</span><span
+                        class="o">)</span>
+<span class="kd">class</span> <span class="nc">Page2DynamicP2P1</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span
+                            class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">isAtUsingUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlTemplate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">isAtUsingUrl</span><span
+                            class="o">(</span><span class="nc">String</span> <span class="n">urlTemplate</span><span
+                            class="o">)</span> <span class="o">{</span>
         <span class="c1">//overridden to skip URL check because PageUrl is not able to get local file path relatively</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>In case you don’t specify the <code class="language-plaintext highlighter-rouge">file</code> attribute but you override either <code class="language-plaintext highlighter-rouge">FluentPage#getUrl()</code> or <code class="language-plaintext highlighter-rouge">FluentPage#getUrl(Object...)</code> in a way that it retrieves a local test resource,
-you need to also override <code class="language-plaintext highlighter-rouge">FluentPage#isAtUsingUrl(String)</code> and leave its body empty to skip URL check because PageUrl is not able to get local file path relatively.</p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"?param1={param1}&amp;param2={param2}"</span><span class="o">)</span>
-<span class="kd">class</span> <span class="nc">Page2DynamicP2P1</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
+            <p>In case you don’t specify the <code class="language-plaintext highlighter-rouge">file</code> attribute
+                but you override either <code class="language-plaintext highlighter-rouge">FluentPage#getUrl()</code> or
+                <code class="language-plaintext highlighter-rouge">FluentPage#getUrl(Object...)</code> in a way that it
+                retrieves a local test resource,
+                you need to also override <code class="language-plaintext highlighter-rouge">FluentPage#isAtUsingUrl(String)</code>
+                and leave its body empty to skip URL check because PageUrl is not able to get local file path
+                relatively.</p>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span
+                        class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"?param1={param1}&amp;param2={param2}"</span><span
+                        class="o">)</span>
+<span class="kd">class</span> <span class="nc">Page2DynamicP2P1</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span
+                            class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="nc">String</span> <span class="nf">getUrl</span><span
+                            class="o">()</span> <span class="o">{</span>
          <span class="k">return</span> <span class="n">someLocalResource</span><span class="o">;</span>
     <span class="o">}</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAtUsingUrl</span><span class="o">(</span><span class="nc">String</span> <span class="n">urlTemplate</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAtUsingUrl</span><span
+                            class="o">(</span><span class="nc">String</span> <span class="n">urlTemplate</span><span
+                            class="o">)</span> <span class="o">{</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<h4 id="navigation-and-interaction-on-pages-using-parameters">Navigation and interaction on pages using parameters</h4>
+            <h4 id="navigation-and-interaction-on-pages-using-parameters">Navigation and interaction on pages using
+                parameters</h4>
 
-<p>Parameter values are given in order to <code class="language-plaintext highlighter-rouge">isAt</code> and <code class="language-plaintext highlighter-rouge">go</code> methods.</p>
+            <p>Parameter values are given in order to <code class="language-plaintext highlighter-rouge">isAt</code> and
+                <code class="language-plaintext highlighter-rouge">go</code> methods.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Page</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@Page</span>
 <span class="kd">private</span> <span class="nc">DocumentPage</span> <span class="n">page</span><span class="o">;</span>
 
 <span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span class="mi">267</span><span class="o">);</span> <span class="c1">// go to "/document/267"</span>
-    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span class="mi">174</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span> <span class="c1">// go to "/document/174/page/3"</span>
-    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span class="mi">124</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="s">"pdf"</span><span class="o">);</span> <span class="c1">// go to "/document/124/page/1/pdf"</span>
-    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span class="mi">124</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"html"</span><span class="o">);</span> <span class="c1">// go to "/document/124/html"</span>
-    <span class="n">page</span><span class="o">.</span><span class="na">isAt</span><span class="o">(</span><span class="mi">174</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span> <span class="c1">// Assert that current url is "/document/174/page/3"</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span
+                            class="o">{</span>
+    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span
+                            class="mi">267</span><span class="o">);</span> <span
+                            class="c1">// go to "/document/267"</span>
+    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span
+                            class="mi">174</span><span class="o">,</span> <span class="mi">3</span><span
+                            class="o">);</span> <span class="c1">// go to "/document/174/page/3"</span>
+    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span
+                            class="mi">124</span><span class="o">,</span> <span class="mi">1</span><span
+                            class="o">,</span> <span class="s">"pdf"</span><span class="o">);</span> <span class="c1">// go to "/document/124/page/1/pdf"</span>
+    <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span
+                            class="mi">124</span><span class="o">,</span> <span class="kc">null</span><span
+                            class="o">,</span> <span class="s">"html"</span><span class="o">);</span> <span class="c1">// go to "/document/124/html"</span>
+    <span class="n">page</span><span class="o">.</span><span class="na">isAt</span><span class="o">(</span><span
+                            class="mi">174</span><span class="o">,</span> <span class="mi">3</span><span
+                            class="o">);</span> <span
+                            class="c1">// Assert that current url is "/document/174/page/3"</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>In order to be able to chain or return <code class="language-plaintext highlighter-rouge">Page</code> class which extends <code class="language-plaintext highlighter-rouge">FluentPage</code> as a result of <code class="language-plaintext highlighter-rouge">go()</code> method you need to
-provide your <code class="language-plaintext highlighter-rouge">FluentPage</code> extending class name as follows.</p>
+            <p>In order to be able to chain or return <code class="language-plaintext highlighter-rouge">Page</code>
+                class which extends <code class="language-plaintext highlighter-rouge">FluentPage</code> as a result of
+                <code class="language-plaintext highlighter-rouge">go()</code> method you need to
+                provide your <code class="language-plaintext highlighter-rouge">FluentPage</code> extending class name
+                as follows.</p>
 
-<p>The example above can be implemented as follows:</p>
+            <p>The example above can be implemented as follows:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Page</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@Page</span>
 <span class="kd">private</span> <span class="nc">DocumentPage</span> <span class="n">page</span><span class="o">;</span>
 
 <span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">page</span><span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span class="n">go</span><span class="o">(</span><span class="mi">267</span><span class="o">)</span> <span class="c1">// go to "/document/267"</span>
-        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span class="n">go</span><span class="o">(</span><span class="mi">174</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="c1">// go to "/document/174/page/3"</span>
-        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span class="n">go</span><span class="o">(</span><span class="mi">124</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="s">"pdf"</span><span class="o">)</span> <span class="c1">// go to "/document/124/page/1/pdf"</span>
-        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span class="n">go</span><span class="o">(</span><span class="mi">124</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"html"</span><span class="o">)</span> <span class="c1">// go to "/document/124/html"</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">test</span><span class="o">()</span> <span
+                            class="o">{</span>
+    <span class="n">page</span><span class="o">.&lt;</span><span class="nc">DocumentPage</span><span
+                            class="o">&gt;</span><span class="n">go</span><span class="o">(</span><span
+                            class="mi">267</span><span class="o">)</span> <span
+                            class="c1">// go to "/document/267"</span>
+        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span
+                            class="n">go</span><span class="o">(</span><span class="mi">174</span><span
+                            class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="c1">// go to "/document/174/page/3"</span>
+        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span
+                            class="n">go</span><span class="o">(</span><span class="mi">124</span><span
+                            class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span
+                            class="s">"pdf"</span><span class="o">)</span> <span class="c1">// go to "/document/124/page/1/pdf"</span>
+        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span
+                            class="n">go</span><span class="o">(</span><span class="mi">124</span><span
+                            class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"html"</span><span
+                            class="o">)</span> <span class="c1">// go to "/document/124/html"</span>
         <span class="o">.</span><span class="na">customPageMethod</span><span class="o">()</span> <span class="c1">//do the custom actions</span>
-        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span class="n">go</span><span class="o">(</span><span class="mi">267</span><span class="o">);</span> <span class="c1">// go to "document/267"</span>
+        <span class="o">.&lt;</span><span class="nc">DocumentPage</span><span class="o">&gt;</span><span
+                            class="n">go</span><span class="o">(</span><span class="mi">267</span><span
+                            class="o">);</span> <span class="c1">// go to "document/267"</span>
         <span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>As a result the <code class="language-plaintext highlighter-rouge">go</code> method will return <code class="language-plaintext highlighter-rouge">DocumentPage</code> type instead of generic <code class="language-plaintext highlighter-rouge">FluentPage</code></p>
+            <p>As a result the <code class="language-plaintext highlighter-rouge">go</code> method will return <code
+                    class="language-plaintext highlighter-rouge">DocumentPage</code> type instead of generic <code
+                    class="language-plaintext highlighter-rouge">FluentPage</code></p>
 
-<p>You can always override default <code class="language-plaintext highlighter-rouge">go</code> method in your <code class="language-plaintext highlighter-rouge">DocumentPage</code> class instead of typing <code class="language-plaintext highlighter-rouge">&lt;DocumentPage&gt;</code> for every
-single method call</p>
+            <p>You can always override default <code class="language-plaintext highlighter-rouge">go</code> method in
+                your <code class="language-plaintext highlighter-rouge">DocumentPage</code> class instead of typing
+                <code class="language-plaintext highlighter-rouge">&lt;DocumentPage&gt;</code> for every
+                single method call</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span class="o">(</span><span class="s">"/document/{document}{?/page/page}{?/format}"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocumentPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@PageUrl</span><span
+                        class="o">(</span><span class="s">"/document/{document}{?/page/page}{?/format}"</span><span
+                        class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DocumentPage</span> <span class="kd">extends</span> <span
+                            class="nc">FluentPage</span> <span class="o">{</span>
     <span class="nd">@Override</span>
     <span class="nc">DocumentPage</span> <span class="nf">go</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">go</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span
+                            class="na">go</span><span class="o">();</span>
     <span class="o">}</span>
 
 
-    <span class="kd">public</span> <span class="nc">DocumentPage</span> <span class="nf">customPageMethod</span><span class="o">(){</span>
+    <span class="kd">public</span> <span class="nc">DocumentPage</span> <span class="nf">customPageMethod</span><span
+                            class="o">(){</span>
         <span class="o">...</span>
         <span class="k">return</span> <span class="k">this</span><span class="o">;</span>
     <span class="o">}</span>
     <span class="o">...</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Create your own methods to easily fill out forms, go to another or whatever else may be needed in your test.</p>
+            <p>Create your own methods to easily fill out forms, go to another or whatever else may be needed in your
+                test.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">LoginPage</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"myCustomUrl"</span><span class="o">;</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"MyTitle"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span
+                            class="o">(</span><span class="s">"MyTitle"</span><span class="o">);</span>
     <span class="o">}</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span class="o">)</span> <span class="o">{</span>
-        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="n">paramsOrdered</span><span class="o">);</span>
-        <span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span
+                            class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span
+                            class="o">)</span> <span class="o">{</span>
+        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="n">paramsOrdered</span><span class="o">);</span>
+        <span class="err">$</span><span class="o">(</span><span class="s">"#create-button"</span><span
+                            class="o">).</span><span class="na">click</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>And the corresponding test:</p>
+            <p>And the corresponding test:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span
+                        class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span
+                        class="o">{</span>
     <span class="n">goTo</span><span class="o">(</span><span class="n">loginPage</span><span class="o">);</span>
-    <span class="n">loginPage</span><span class="o">.</span><span class="na">fillAndSubmitLoginForm</span><span class="o">(</span><span class="s">"login"</span><span class="o">,</span> <span class="s">"wrongPass"</span><span class="o">);</span>
+    <span class="n">loginPage</span><span class="o">.</span><span class="na">fillAndSubmitLoginForm</span><span
+                            class="o">(</span><span class="s">"login"</span><span class="o">,</span> <span class="s">"wrongPass"</span><span
+                            class="o">);</span>
     <span class="n">loginPage</span><span class="o">.</span><span class="na">isAt</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Or using <a href="https://github.com/joel-costigliola/assertj-core">AssertJ</a>.</p>
+            <p>Or using <a href="https://github.com/joel-costigliola/assertj-core">AssertJ</a>.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span
+                        class="kt">void</span> <span class="nf">checkLoginFailed</span><span class="o">()</span> <span
+                        class="o">{</span>
     <span class="n">goTo</span><span class="o">(</span><span class="n">loginPage</span><span class="o">);</span>
-    <span class="n">loginPage</span><span class="o">.</span><span class="na">fillAndSubmitLoginForm</span><span class="o">(</span><span class="s">"login"</span><span class="o">,</span> <span class="s">"wrongPass"</span><span class="o">);</span>
-    <span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".error"</span><span class="o">)).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
-    <span class="n">assertThat</span><span class="o">(</span><span class="n">loginPage</span><span class="o">).</span><span class="na">isAt</span><span class="o">();</span>
+    <span class="n">loginPage</span><span class="o">.</span><span class="na">fillAndSubmitLoginForm</span><span
+                            class="o">(</span><span class="s">"login"</span><span class="o">,</span> <span class="s">"wrongPass"</span><span
+                            class="o">);</span>
+    <span class="n">assertThat</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span
+                            class="s">".error"</span><span class="o">)).</span><span class="na">hasSize</span><span
+                            class="o">(</span><span class="mi">1</span><span class="o">);</span>
+    <span class="n">assertThat</span><span class="o">(</span><span class="n">loginPage</span><span
+                            class="o">).</span><span class="na">isAt</span><span class="o">();</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<h3 id="page-injection">Page Injection</h3>
-<p>You can use the annotation <code class="language-plaintext highlighter-rouge">@Page</code> to construct your Page Objects easily.</p>
+            <h3 id="page-injection">Page Injection</h3>
+            <p>You can use the annotation <code class="language-plaintext highlighter-rouge">@Page</code> to construct
+                your Page Objects easily.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnnotationInitialization</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">AnnotationInitialization</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span
+                        class="o">{</span>
     <span class="nd">@Page</span>
     <span class="kd">private</span> <span class="nc">MyPage</span> <span class="n">page</span><span class="o">;</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_no_exception</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_no_exception</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="n">goTo</span><span class="o">(</span><span class="n">page</span><span class="o">);</span>
         <span class="c1">//put your assertions here</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can also use the factory method <code class="language-plaintext highlighter-rouge">newInstance</code>:</p>
+            <p>You can also use the factory method <code class="language-plaintext highlighter-rouge">newInstance</code>:
+            </p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BeforeInitialization</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">BeforeInitialization</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span
+                        class="o">{</span>
     <span class="kd">private</span> <span class="nc">MyPage</span> <span class="n">page</span><span class="o">;</span>
 
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeTest</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">page</span> <span class="o">=</span> <span class="n">newInstance</span><span class="o">(</span><span class="nc">MyPage</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeTest</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="n">page</span> <span class="o">=</span> <span class="n">newInstance</span><span
+                            class="o">(</span><span class="nc">MyPage</span><span class="o">.</span><span class="na">class</span><span
+                            class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_no_exception</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">test_no_exception</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="n">page</span><span class="o">.</span><span class="na">go</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Anyway, Page Objects constructors should never be called directly.</p>
+            <p>Anyway, Page Objects constructors should never be called directly.</p>
 
-<p>All <code class="language-plaintext highlighter-rouge">FluentWebElement</code> fields are automatically searched for by name or id. For example, if you declare a
-<code class="language-plaintext highlighter-rouge">FluentWebElement</code> named <code class="language-plaintext highlighter-rouge">createButton</code>, it will search the page for an element where <code class="language-plaintext highlighter-rouge">id</code> is <code class="language-plaintext highlighter-rouge">createButton</code> or
-name is <code class="language-plaintext highlighter-rouge">createButton</code>.</p>
+            <p>All <code class="language-plaintext highlighter-rouge">FluentWebElement</code> fields are automatically
+                searched for by name or id. For example, if you declare a
+                <code class="language-plaintext highlighter-rouge">FluentWebElement</code> named <code
+                        class="language-plaintext highlighter-rouge">createButton</code>, it will search the page for an
+                element where <code class="language-plaintext highlighter-rouge">id</code> is <code
+                        class="language-plaintext highlighter-rouge">createButton</code> or
+                name is <code class="language-plaintext highlighter-rouge">createButton</code>.</p>
 
-<p>Keep in mind that all elements are Lazy Proxy Locators, they behave exactly like if they where found with <code class="language-plaintext highlighter-rouge">$</code> method.</p>
+            <p>Keep in mind that all elements are Lazy Proxy Locators, they behave exactly like if they where found with
+                <code class="language-plaintext highlighter-rouge">$</code> method.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">createButton</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">LoginPage</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">createButton</span><span
+                            class="o">;</span>
 
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span
+                            class="o">()</span> <span class="o">{</span>
        <span class="k">return</span> <span class="s">"myCustomUrl"</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span class="o">()</span> <span class="o">{</span>
-       <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"MyTitle"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span
+                            class="o">()</span> <span class="o">{</span>
+       <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span
+                            class="o">().</span><span class="na">title</span><span class="o">()).</span><span
+                            class="na">isEqualTo</span><span class="o">(</span><span class="s">"MyTitle"</span><span
+                            class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span class="o">)</span> <span class="o">{</span>
-        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="n">paramsOrdered</span><span class="o">);</span>
-        <span class="n">createButton</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span
+                            class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span
+                            class="o">)</span> <span class="o">{</span>
+        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="n">paramsOrdered</span><span class="o">);</span>
+        <span class="n">createButton</span><span class="o">.</span><span class="na">click</span><span
+                            class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Not only <code class="language-plaintext highlighter-rouge">FluentWebElement</code> fields are populated. Every type with a constructor taking a <code class="language-plaintext highlighter-rouge">WebElement</code> is a candidate.
-This makes it possible for the page to expose fields with functional methods and not (only) the ‘technical’ methods
-that <code class="language-plaintext highlighter-rouge">FluentWebElement</code> exposes.</p>
+            <p>Not only <code class="language-plaintext highlighter-rouge">FluentWebElement</code> fields are populated.
+                Every type with a constructor taking a <code
+                        class="language-plaintext highlighter-rouge">WebElement</code> is a candidate.
+                This makes it possible for the page to expose fields with functional methods and not (only) the
+                ‘technical’ methods
+                that <code class="language-plaintext highlighter-rouge">FluentWebElement</code> exposes.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-   <span class="kd">private</span> <span class="nc">MyButton</span> <span class="n">createButton</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">LoginPage</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+   <span class="kd">private</span> <span class="nc">MyButton</span> <span class="n">createButton</span><span
+                            class="o">;</span>
 
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span class="o">)</span> <span class="o">{</span>
-       <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="n">paramsOrdered</span><span class="o">);</span>
-       <span class="n">createButton</span><span class="o">.</span><span class="na">clickTwice</span><span class="o">();</span>
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span class="o">(</span><span
+                            class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span
+                            class="o">)</span> <span class="o">{</span>
+       <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="n">paramsOrdered</span><span class="o">);</span>
+       <span class="n">createButton</span><span class="o">.</span><span class="na">clickTwice</span><span
+                            class="o">();</span>
    <span class="o">}</span>
 
-   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">MyButton</span> <span class="o">{</span>
-       <span class="kd">private</span> <span class="nc">WebElement</span> <span class="n">webElement</span><span class="o">;</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span
+                            class="nc">MyButton</span> <span class="o">{</span>
+       <span class="kd">private</span> <span class="nc">WebElement</span> <span class="n">webElement</span><span
+                            class="o">;</span>
 
-       <span class="kd">public</span> <span class="nf">MyButton</span><span class="o">(</span><span class="nc">WebElement</span> <span class="n">webElement</span><span class="o">)</span> <span class="o">{</span>
-           <span class="k">this</span><span class="o">.</span><span class="na">webElement</span> <span class="o">=</span> <span class="n">webElement</span><span class="o">;</span>
+       <span class="kd">public</span> <span class="nf">MyButton</span><span class="o">(</span><span class="nc">WebElement</span> <span
+                            class="n">webElement</span><span class="o">)</span> <span class="o">{</span>
+           <span class="k">this</span><span class="o">.</span><span class="na">webElement</span> <span
+                            class="o">=</span> <span class="n">webElement</span><span class="o">;</span>
        <span class="o">}</span>
 
-       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clickTwice</span><span class="o">()</span> <span class="o">{</span>
-           <span class="n">webElement</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
-           <span class="n">webElement</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
+       <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clickTwice</span><span
+                            class="o">()</span> <span class="o">{</span>
+           <span class="n">webElement</span><span class="o">.</span><span class="na">click</span><span
+                            class="o">();</span>
+           <span class="n">webElement</span><span class="o">.</span><span class="na">click</span><span
+                            class="o">();</span>
        <span class="o">}</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>If the naming conventions of your HTML ids and names don’t match with the naming conventions of your Java fields,
-or if you want to select an element with something other than the id or name, you can annotate the field with the
-Selenium <code class="language-plaintext highlighter-rouge">@FindBy</code> (or <code class="language-plaintext highlighter-rouge">@FindBys</code>) annotation. The following example shows how to find the create button if its CSS class is
-<code class="language-plaintext highlighter-rouge">create-button</code>.</p>
+            <p>If the naming conventions of your HTML ids and names don’t match with the naming conventions of your Java
+                fields,
+                or if you want to select an element with something other than the id or name, you can annotate the field
+                with the
+                Selenium <code class="language-plaintext highlighter-rouge">@FindBy</code> (or <code
+                        class="language-plaintext highlighter-rouge">@FindBys</code>) annotation. The following example
+                shows how to find the create button if its CSS class is
+                <code class="language-plaintext highlighter-rouge">create-button</code>.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">"button.create-button"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">createButton</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">LoginPage</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="s">"button.create-button"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">createButton</span><span
+                            class="o">;</span>
 
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span
+                            class="o">()</span> <span class="o">{</span>
        <span class="k">return</span> <span class="s">"myCustomUrl"</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span class="o">()</span> <span class="o">{</span>
-       <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"MyTitle"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span
+                            class="o">()</span> <span class="o">{</span>
+       <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span
+                            class="o">().</span><span class="na">title</span><span class="o">()).</span><span
+                            class="na">isEqualTo</span><span class="o">(</span><span class="s">"MyTitle"</span><span
+                            class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span class="o">)</span> <span class="o">{</span>
-        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="n">paramsOrdered</span><span class="o">);</span>
-        <span class="n">createButton</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span
+                            class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span
+                            class="o">)</span> <span class="o">{</span>
+        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="n">paramsOrdered</span><span class="o">);</span>
+        <span class="n">createButton</span><span class="o">.</span><span class="na">click</span><span
+                            class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can also refer to the list of FluentWebElements using <code class="language-plaintext highlighter-rouge">FluentList</code> dedicated interface,
-or <code class="language-plaintext highlighter-rouge">java.util.List</code>.</p>
+            <p>You can also refer to the list of FluentWebElements using <code
+                    class="language-plaintext highlighter-rouge">FluentList</code> dedicated interface,
+                or <code class="language-plaintext highlighter-rouge">java.util.List</code>.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LoginPage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">"button.create-button"</span><span class="o">)</span>
-    <span class="kd">private</span> <span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span class="o">&gt;</span> <span class="n">createButtons</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">LoginPage</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="s">"button.create-button"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span
+                            class="o">&gt;</span> <span class="n">createButtons</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUrl</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="s">"myCustomUrl"</span><span class="o">;</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">"MyTitle"</span><span class="o">);</span>
-        <span class="n">assertThat</span><span class="o">(</span><span class="n">buttons</span><span class="o">).</span><span class="na">hasSize</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">isAt</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">window</span><span class="o">().</span><span
+                            class="na">title</span><span class="o">()).</span><span class="na">isEqualTo</span><span
+                            class="o">(</span><span class="s">"MyTitle"</span><span class="o">);</span>
+        <span class="n">assertThat</span><span class="o">(</span><span class="n">buttons</span><span class="o">).</span><span
+                            class="na">hasSize</span><span class="o">(</span><span class="mi">2</span><span
+                            class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span class="o">)</span> <span class="o">{</span>
-        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span class="n">paramsOrdered</span><span class="o">);</span>
-        <span class="n">createButtons</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">).</span><span class="na">click</span><span class="o">();</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">fillAndSubmitForm</span><span
+                            class="o">(</span><span class="nc">String</span><span class="o">...</span> <span class="n">paramsOrdered</span><span
+                            class="o">)</span> <span class="o">{</span>
+        <span class="err">$</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                            class="na">fill</span><span class="o">().</span><span class="na">with</span><span class="o">(</span><span
+                            class="n">paramsOrdered</span><span class="o">);</span>
+        <span class="n">createButtons</span><span class="o">.</span><span class="na">get</span><span
+                            class="o">(</span><span class="mi">1</span><span class="o">).</span><span
+                            class="na">click</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Injection is recursive, and it’s possible to retrieve the parent container using <code class="language-plaintext highlighter-rouge">@Parent</code> annotation.</p>
+            <p>Injection is recursive, and it’s possible to retrieve the parent container using <code
+                    class="language-plaintext highlighter-rouge">@Parent</code> annotation.</p>
 
-<h3 id="labeling">Labeling</h3>
+            <h3 id="labeling">Labeling</h3>
 
-<p>Using the <code class="language-plaintext highlighter-rouge">@Label</code> and <code class="language-plaintext highlighter-rouge">@LabelHint</code> annotations you can define a custom <code class="language-plaintext highlighter-rouge">toString()</code> representation for <code class="language-plaintext highlighter-rouge">FluentWebElement</code>s and <code class="language-plaintext highlighter-rouge">FluentList</code>s.</p>
+            <p>Using the <code class="language-plaintext highlighter-rouge">@Label</code> and <code
+                    class="language-plaintext highlighter-rouge">@LabelHint</code> annotations you can define a custom
+                <code class="language-plaintext highlighter-rouge">toString()</code> representation for <code
+                        class="language-plaintext highlighter-rouge">FluentWebElement</code>s and <code
+                        class="language-plaintext highlighter-rouge">FluentList</code>s.</p>
 
-<p><code class="language-plaintext highlighter-rouge">@Label</code> can be added with or without a custom value. If a value is not defined, it defaults to empty value.</p>
+            <p><code class="language-plaintext highlighter-rouge">@Label</code> can be added with or without a custom
+                value. If a value is not defined, it defaults to empty value.</p>
 
-<p>The purpose of <code class="language-plaintext highlighter-rouge">@LabelHint</code> is to provide additional information (kind of tags) to the <code class="language-plaintext highlighter-rouge">toString()</code> representation of the object that is annotated with it. It may be used with or without the <code class="language-plaintext highlighter-rouge">@Label</code> annotation, they don’t depend on each other.</p>
+            <p>The purpose of <code class="language-plaintext highlighter-rouge">@LabelHint</code> is to provide
+                additional information (kind of tags) to the <code class="language-plaintext highlighter-rouge">toString()</code>
+                representation of the object that is annotated with it. It may be used with or without the <code
+                        class="language-plaintext highlighter-rouge">@Label</code> annotation, they don’t depend on each
+                other.</p>
 
-<p>Below you can find some examples of what labeling combinations will result in what toString() values.</p>
+            <p>Below you can find some examples of what labeling combinations will result in what toString() values.</p>
 
-<h5 id="label">Label</h5>
+            <h5 id="label">Label</h5>
 
-<p>If no label value is provided, it will use the class name and field name as the label.</p>
+            <p>If no label value is provided, it will use the class name and field name as the label.</p>
 
-<p><strong>FluentWebElement + Label without value</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Homepage</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">".hero img"</span><span class="o">)</span>
+            <p><strong>FluentWebElement + Label without value</strong></p>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">Homepage</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="s">".hero img"</span><span class="o">)</span>
     <span class="nd">@Label</span>
-    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">heroImage</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">heroImage</span><span
+                            class="o">;</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<p>will give the following toString: <em>Homepage.heroImage (Lazy Element)</em></p>
+</code></pre>
+                </div>
+            </div>
+            <p>will give the following toString: <em>Homepage.heroImage (Lazy Element)</em></p>
 
-<p><strong>FluentList + Label without value</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">"img"</span><span class="o">)</span>
+            <p><strong>FluentList + Label without value</strong></p>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span
+                        class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                        class="s">"img"</span><span class="o">)</span>
 <span class="nd">@Label</span><span class="o">(</span><span class="s">"pictures"</span><span class="o">)</span>
-<span class="kd">private</span> <span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span class="o">&gt;</span> <span class="n">images</span><span class="o">;</span>
-</code></pre></div></div>
-<p>will give the following toString: <em>pictures ([])</em></p>
+<span class="kd">private</span> <span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span
+                            class="o">&gt;</span> <span class="n">images</span><span class="o">;</span>
+</code></pre>
+                </div>
+            </div>
+            <p>will give the following toString: <em>pictures ([])</em></p>
 
-<h5 id="labelhint">LabelHint</h5>
-<p>If the label value is defined, the toString value will being with the value, and by specifying label hints, they will be list after the label value enclosed with [ and ].</p>
+            <h5 id="labelhint">LabelHint</h5>
+            <p>If the label value is defined, the toString value will being with the value, and by specifying label
+                hints, they will be list after the label value enclosed with [ and ].</p>
 
-<p><strong>Label + single label hint</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">".teaser img"</span><span class="o">)</span>
+            <p><strong>Label + single label hint</strong></p>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span
+                        class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">".teaser img"</span><span
+                        class="o">)</span>
 <span class="nd">@Label</span><span class="o">(</span><span class="s">"teaser"</span><span class="o">)</span>
 <span class="nd">@LabelHint</span><span class="o">(</span><span class="s">"img"</span><span class="o">)</span>
-<span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">teaserImage</span><span class="o">;</span>
-</code></pre></div></div>
-<p>will give the following toString: <em>teaser [img] (Lazy Element)</em></p>
+<span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">teaserImage</span><span
+                            class="o">;</span>
+</code></pre>
+                </div>
+            </div>
+            <p>will give the following toString: <em>teaser [img] (Lazy Element)</em></p>
 
-<p><strong>Label + multiple label hints</strong></p>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">".banner img"</span><span class="o">)</span>
+            <p><strong>Label + multiple label hints</strong></p>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span
+                        class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">".banner img"</span><span
+                        class="o">)</span>
 <span class="nd">@Label</span><span class="o">(</span><span class="s">"banner"</span><span class="o">)</span>
-<span class="nd">@LabelHint</span><span class="o">({</span><span class="s">"ad"</span><span class="o">,</span> <span class="s">"img"</span><span class="o">})</span>
-<span class="kd">private</span> <span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span class="o">&gt;</span> <span class="n">bannerImages</span><span class="o">;</span>
-</code></pre></div></div>
-<p>will give the following toString: <em>banner [ad, img] ([])</em></p>
+<span class="nd">@LabelHint</span><span class="o">({</span><span class="s">"ad"</span><span class="o">,</span> <span
+                            class="s">"img"</span><span class="o">})</span>
+<span class="kd">private</span> <span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span
+                            class="o">&gt;</span> <span class="n">bannerImages</span><span class="o">;</span>
+</code></pre>
+                </div>
+            </div>
+            <p>will give the following toString: <em>banner [ad, img] ([])</em></p>
 
-<h3 id="components">Components</h3>
+            <h3 id="components">Components</h3>
 
-<p>A <code class="language-plaintext highlighter-rouge">Component</code> is an object wrapping a <code class="language-plaintext highlighter-rouge">WebElement</code> instance.</p>
+            <p>A <code class="language-plaintext highlighter-rouge">Component</code> is an object wrapping a <code
+                    class="language-plaintext highlighter-rouge">WebElement</code> instance.</p>
 
-<p>A <code class="language-plaintext highlighter-rouge">Component</code> supports injection like a Page Object, but all searches are performed in the local context of the wrapped element.</p>
+            <p>A <code class="language-plaintext highlighter-rouge">Component</code> supports injection like a Page
+                Object, but all searches are performed in the local context of the wrapped element.</p>
 
-<p>Using components improves readability of both Page Objects and Tests.</p>
+            <p>Using components improves readability of both Page Objects and Tests.</p>
 
-<p><code class="language-plaintext highlighter-rouge">FluentWebElement</code> is the default component class in FluentLenium, so you can implement your own custom component by extending <code class="language-plaintext highlighter-rouge">FluentWebElement</code> to add custom logic.</p>
+            <p><code class="language-plaintext highlighter-rouge">FluentWebElement</code> is the default component class
+                in FluentLenium, so you can implement your own custom component by extending <code
+                        class="language-plaintext highlighter-rouge">FluentWebElement</code> to add custom logic.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SelectComponent</span> <span class="kd">extends</span> <span class="nc">FluentWebElement</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="nf">SelectComponent</span><span class="o">(</span><span class="nc">WebElement</span> <span class="n">webElement</span><span class="o">,</span> <span class="nc">WebDriver</span> <span class="n">driver</span><span class="o">,</span> <span class="nc">ComponentInstantiator</span> <span class="n">instantiator</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kd">super</span><span class="o">(</span><span class="n">webElement</span><span class="o">,</span> <span class="n">driver</span><span class="o">,</span> <span class="n">instantiator</span><span class="o">);</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">SelectComponent</span> <span class="kd">extends</span> <span class="nc">FluentWebElement</span> <span
+                        class="o">{</span>
+    <span class="kd">public</span> <span class="nf">SelectComponent</span><span class="o">(</span><span class="nc">WebElement</span> <span
+                            class="n">webElement</span><span class="o">,</span> <span class="nc">WebDriver</span> <span
+                            class="n">driver</span><span class="o">,</span> <span
+                            class="nc">ComponentInstantiator</span> <span class="n">instantiator</span><span
+                            class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">webElement</span><span
+                            class="o">,</span> <span class="n">driver</span><span class="o">,</span> <span class="n">instantiator</span><span
+                            class="o">);</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSelect</span><span class="o">(</span><span class="nc">String</span> <span class="n">selection</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">doSelect</span><span class="o">(</span><span
+                            class="nc">String</span> <span class="n">selection</span><span class="o">)</span> <span
+                            class="o">{</span>
         <span class="c1">// Implement selection provided by this component.</span>
     <span class="o">}</span>
 
-    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSelection</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getSelection</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="c1">// Return the selected value as text.</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Components are created automatically by injection,
-or programmatically by calling <code class="language-plaintext highlighter-rouge">as(Class&lt;?&gt; componentClass)</code> method of <code class="language-plaintext highlighter-rouge">FluentWebElement</code> or <code class="language-plaintext highlighter-rouge">FluentList</code>.</p>
+            <p>Components are created automatically by injection,
+                or programmatically by calling <code class="language-plaintext highlighter-rouge">as(Class&lt;?&gt;
+                    componentClass)</code> method of <code
+                        class="language-plaintext highlighter-rouge">FluentWebElement</code> or <code
+                        class="language-plaintext highlighter-rouge">FluentList</code>.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SelectComponent</span> <span class="n">comp</span> <span class="o">=</span> <span class="n">el</span><span class="o">(</span><span class="s">"#some-select"</span><span class="o">).</span><span class="na">as</span><span class="o">(</span><span class="nc">SelectComponent</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nc">SelectComponent</span> <span
+                        class="n">comp</span> <span class="o">=</span> <span class="n">el</span><span class="o">(</span><span
+                        class="s">"#some-select"</span><span class="o">).</span><span class="na">as</span><span
+                        class="o">(</span><span class="nc">SelectComponent</span><span class="o">.</span><span
+                        class="na">class</span><span class="o">);</span>
 
-<span class="n">comp</span><span class="o">.</span><span class="na">doSelect</span><span class="o">(</span><span class="s">"Value to select"</span><span class="o">);</span>
-<span class="n">assertThat</span><span class="o">(</span><span class="n">comp</span><span class="o">.</span><span class="na">getSelection</span><span class="o">()).</span><span class="na">isEquals</span><span class="o">(</span><span class="s">"Value to select"</span><span class="o">);</span>
-</code></pre></div></div>
+<span class="n">comp</span><span class="o">.</span><span class="na">doSelect</span><span class="o">(</span><span
+                            class="s">"Value to select"</span><span class="o">);</span>
+<span class="n">assertThat</span><span class="o">(</span><span class="n">comp</span><span class="o">.</span><span
+                            class="na">getSelection</span><span class="o">()).</span><span
+                            class="na">isEquals</span><span class="o">(</span><span
+                            class="s">"Value to select"</span><span class="o">);</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>It’s not mandatory to extend <code class="language-plaintext highlighter-rouge">FluentWebElement</code>, but a constructor with at least WebElement parameter is required.</p>
+            <p>It’s not mandatory to extend <code class="language-plaintext highlighter-rouge">FluentWebElement</code>,
+                but a constructor with at least WebElement parameter is required.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SelectComponent</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="nc">WebElement</span> <span class="n">element</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">SelectComponent</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">WebElement</span> <span class="n">element</span><span
+                            class="o">;</span>
 
-    <span class="kd">private</span> <span class="nf">SelectComponent</span><span class="o">(</span><span class="nc">WebElement</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// This constructor MUST exist ! But can be private.</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">element</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nf">SelectComponent</span><span class="o">(</span><span class="nc">WebElement</span> <span
+                            class="n">element</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// This constructor MUST exist ! But can be private.</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">element</span> <span
+                            class="o">=</span> <span class="n">element</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Simple &amp; working Component example can be found in our dedicated <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox/src/test/java/org/fluentlenium/examples/test/componentexample">GitHub section</a>.</p>
+            <p>Simple &amp; working Component example can be found in our dedicated <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/quickstart-firefox/src/test/java/org/fluentlenium/examples/test/componentexample">GitHub
+                section</a>.</p>
 
-<h2 id="lazy-fluent-locators">Lazy Fluent Locators</h2>
+            <h2 id="lazy-fluent-locators">Lazy Fluent Locators</h2>
 
-<p><code class="language-plaintext highlighter-rouge">$</code> always returns Lazy Fluent Locators. Building a Locator doesn’t perform the search immediately.
-It will be searched later, just before it’s really needed to interact with the located elements.
-(ie: clicking, retrieving text value, send user input).</p>
+            <p><code class="language-plaintext highlighter-rouge">$</code> always returns Lazy Fluent Locators. Building
+                a Locator doesn’t perform the search immediately.
+                It will be searched later, just before it’s really needed to interact with the located elements.
+                (ie: clicking, retrieving text value, send user input).</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Creates the Fluent Locator, but doesn't perform the search</span>
-<span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span class="o">&gt;</span> <span class="n">fluentElements</span> <span class="o">=</span> <span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">);</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// Creates the Fluent Locator, but doesn't perform the search</span>
+<span class="nc">FluentList</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span class="o">&gt;</span> <span
+                            class="n">fluentElements</span> <span class="o">=</span> <span class="err">$</span><span
+                            class="o">(</span><span class="s">".fluent"</span><span class="o">);</span>
 
 <span class="c1">// Perform the search and call click() on found elements</span>
 <span class="n">fluentElements</span><span class="o">.</span><span class="na">click</span><span class="o">();</span>
 
 <span class="c1">// NoSuchElementException will be throw if no element is found.</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can control the state of those Lazy Fluent Locators.</p>
+            <p>You can control the state of those Lazy Fluent Locators.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Check if the element is present in DOM (boolean)</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">present</span><span class="o">();</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// Check if the element is present in DOM (boolean)</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">present</span><span class="o">();</span>
 
 <span class="c1">// Force the underlying search if it's not already loaded</span>
 <span class="c1">// Throws NoSuchElementException if not found</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">now</span><span class="o">();</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">now</span><span class="o">();</span>
 
 <span class="c1">// Forget the underlying search results.</span>
 <span class="c1">// You can then reuse the same locator to perform the search again</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">reset</span><span class="o">();</span>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">reset</span><span class="o">();</span>
 
 <span class="c1">// Check if the underlying element has been loaded (boolean)</span>
-<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span class="na">loaded</span><span class="o">();</span>
-</code></pre></div></div>
+<span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">).</span><span
+                            class="na">loaded</span><span class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<h2 id="extended-awaits">Extended awaits</h2>
+            <h2 id="extended-awaits">Extended awaits</h2>
 
-<h3 id="wait-for-an-ajax-element-to-be-available">Wait for an Ajax Element to be available</h3>
+            <h3 id="wait-for-an-ajax-element-to-be-available">Wait for an Ajax Element to be available</h3>
 
-<p>There are multiple ways to make your driver wait for the result of an asynchronous call.
-FluentLenium provides a rich and fluent API in order to help you to handle AJAX calls.
-If you want to wait for at most 2 seconds until the number of elements corresponding to the until criteria (here the class fluent) has the requested size:</p>
+            <p>There are multiple ways to make your driver wait for the result of an asynchronous call.
+                FluentLenium provides a rich and fluent API in order to help you to handle AJAX calls.
+                If you want to wait for at most 2 seconds until the number of elements corresponding to the until
+                criteria (here the class fluent) has the requested size:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">)).</span><span class="na">size</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-</code></pre></div></div>
-<p>The default wait is 5 seconds.</p>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span
+                        class="na">until</span><span class="o">(</span><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">)).</span><span class="na">size</span><span
+                        class="o">(</span><span class="mi">3</span><span class="o">);</span>
+</code></pre>
+                </div>
+            </div>
+            <p>The default wait is 5 seconds.</p>
 
-<p>You can also use after <code class="language-plaintext highlighter-rouge">size()</code> : <code class="language-plaintext highlighter-rouge">greaterThan(int)</code>, <code class="language-plaintext highlighter-rouge">lessThan(int)</code>, <code class="language-plaintext highlighter-rouge">lessThanOrEqualTo(int)</code>, <code class="language-plaintext highlighter-rouge">greaterThanOrEqualTo(int)</code> , <code class="language-plaintext highlighter-rouge">equalTo(int)</code>, <code class="language-plaintext highlighter-rouge">notEqualTo(int)</code></p>
+            <p>You can also use after <code class="language-plaintext highlighter-rouge">size()</code> : <code
+                    class="language-plaintext highlighter-rouge">greaterThan(int)</code>, <code
+                    class="language-plaintext highlighter-rouge">lessThan(int)</code>, <code
+                    class="language-plaintext highlighter-rouge">lessThanOrEqualTo(int)</code>, <code
+                    class="language-plaintext highlighter-rouge">greaterThanOrEqualTo(int)</code> , <code
+                    class="language-plaintext highlighter-rouge">equalTo(int)</code>, <code
+                    class="language-plaintext highlighter-rouge">notEqualTo(int)</code></p>
 
-<p>Many others conditions like <code class="language-plaintext highlighter-rouge">size(3)</code> are available, like <code class="language-plaintext highlighter-rouge">present()</code>, <code class="language-plaintext highlighter-rouge">displayed()</code>, <code class="language-plaintext highlighter-rouge">enabled()</code>, <code class="language-plaintext highlighter-rouge">text()</code>, <code class="language-plaintext highlighter-rouge">id()</code>, <code class="language-plaintext highlighter-rouge">name()</code>.</p>
+            <p>Many others conditions like <code class="language-plaintext highlighter-rouge">size(3)</code> are
+                available, like <code class="language-plaintext highlighter-rouge">present()</code>, <code
+                        class="language-plaintext highlighter-rouge">displayed()</code>, <code
+                        class="language-plaintext highlighter-rouge">enabled()</code>, <code
+                        class="language-plaintext highlighter-rouge">text()</code>, <code
+                        class="language-plaintext highlighter-rouge">id()</code>, <code
+                        class="language-plaintext highlighter-rouge">name()</code>.</p>
 
-<p>You can use <code class="language-plaintext highlighter-rouge">not()</code> function to negate any condition.</p>
+            <p>You can use <code class="language-plaintext highlighter-rouge">not()</code> function to negate any
+                condition.</p>
 
-<p>If you need to be more precise, you can also use filters and matchers in the search:</p>
+            <p>If you need to be more precise, you can also use filters and matchers in the search:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withText</span><span class="o">(</span><span class="s">"myText"</span><span class="o">))).</span><span class="na">size</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withText</span><span class="o">().</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"start"</span><span class="o">))).</span><span class="na">present</span><span class="o">();</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span
+                        class="na">until</span><span class="o">(</span><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">withText</span><span
+                        class="o">(</span><span class="s">"myText"</span><span class="o">))).</span><span class="na">size</span><span
+                        class="o">(</span><span class="mi">3</span><span class="o">);</span>
+<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span
+                            class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span
+                            class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span
+                            class="o">,</span> <span class="n">withText</span><span class="o">().</span><span
+                            class="na">startsWith</span><span class="o">(</span><span class="s">"start"</span><span
+                            class="o">))).</span><span class="na">present</span><span class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>Just use <code class="language-plaintext highlighter-rouge">startsWith</code>, <code class="language-plaintext highlighter-rouge">notStartsWith</code>, <code class="language-plaintext highlighter-rouge">endsWith</code>, <code class="language-plaintext highlighter-rouge">notEndsWith</code>, <code class="language-plaintext highlighter-rouge">contains</code>, <code class="language-plaintext highlighter-rouge">notContains</code>, <code class="language-plaintext highlighter-rouge">equalTo</code>, <code class="language-plaintext highlighter-rouge">containsWord</code>.</p>
+            <p>Just use <code class="language-plaintext highlighter-rouge">startsWith</code>, <code
+                    class="language-plaintext highlighter-rouge">notStartsWith</code>, <code
+                    class="language-plaintext highlighter-rouge">endsWith</code>, <code
+                    class="language-plaintext highlighter-rouge">notEndsWith</code>, <code
+                    class="language-plaintext highlighter-rouge">contains</code>, <code
+                    class="language-plaintext highlighter-rouge">notContains</code>, <code
+                    class="language-plaintext highlighter-rouge">equalTo</code>, <code
+                    class="language-plaintext highlighter-rouge">containsWord</code>.</p>
 
-<p>If you need to filter on a custom attribute name, this syntax will help:</p>
+            <p>If you need to filter on a custom attribute name, this syntax will help:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">))).</span><span class="na">present</span><span class="o">();</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span
+                        class="na">until</span><span class="o">(</span><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                        class="n">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span
+                        class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span
+                        class="o">))).</span><span class="na">present</span><span class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can also give instance of elements or list of elements if required.</p>
+            <p>You can also give instance of elements or list of elements if required.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="s">".button"</span><span class="o">)</span>
-<span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">button</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@FindBy</span><span
+                        class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                        class="s">".button"</span><span class="o">)</span>
+<span class="kd">private</span> <span class="nc">FluentWebElement</span> <span class="n">button</span><span
+                            class="o">;</span>
 
-<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="n">element</span><span class="o">).</span><span class="na">enabled</span><span class="o">();</span>
-</code></pre></div></div>
+<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span
+                            class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span
+                            class="o">(</span><span class="n">element</span><span class="o">).</span><span class="na">enabled</span><span
+                            class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>When running Java 8, you can use lambdas with <code class="language-plaintext highlighter-rouge">until</code>, <code class="language-plaintext highlighter-rouge">untilPredicate</code>, <code class="language-plaintext highlighter-rouge">untilElement</code> or <code class="language-plaintext highlighter-rouge">untilElements</code>.</p>
+            <p>When running Java 8, you can use lambdas with <code
+                    class="language-plaintext highlighter-rouge">until</code>, <code
+                    class="language-plaintext highlighter-rouge">untilPredicate</code>, <code
+                    class="language-plaintext highlighter-rouge">untilElement</code> or <code
+                    class="language-plaintext highlighter-rouge">untilElements</code>.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilElement</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">el</span><span class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">enabled</span><span class="o">());</span>
-<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilElements</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="err">$</span><span class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">each</span><span class="o">().</span><span class="na">enabled</span><span class="o">());</span>
-<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilElements</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="err">$</span><span class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">one</span><span class="o">().</span><span class="na">enabled</span><span class="o">());</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilElement</span><span
+                        class="o">(()</span> <span class="o">-&gt;</span> <span class="n">el</span><span
+                        class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">enabled</span><span
+                        class="o">());</span>
+<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span
+                            class="na">SECONDS</span><span class="o">).</span><span class="na">untilElements</span><span
+                            class="o">(()</span> <span class="o">-&gt;</span> <span class="err">$</span><span class="o">(</span><span
+                            class="s">".button"</span><span class="o">).</span><span class="na">each</span><span
+                            class="o">().</span><span class="na">enabled</span><span class="o">());</span>
+<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span
+                            class="na">SECONDS</span><span class="o">).</span><span class="na">untilElements</span><span
+                            class="o">(()</span> <span class="o">-&gt;</span> <span class="err">$</span><span class="o">(</span><span
+                            class="s">".button"</span><span class="o">).</span><span class="na">one</span><span
+                            class="o">().</span><span class="na">enabled</span><span class="o">());</span>
 
-<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilPredicate</span><span class="o">((</span><span class="n">f</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">el</span><span class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">enabled</span><span class="o">());</span>
-</code></pre></div></div>
+<span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                            class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span
+                            class="na">SECONDS</span><span class="o">).</span><span
+                            class="na">untilPredicate</span><span class="o">((</span><span class="n">f</span><span
+                            class="o">)</span> <span class="o">-&gt;</span> <span class="n">el</span><span
+                            class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">enabled</span><span
+                            class="o">());</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>Using <code class="language-plaintext highlighter-rouge">Supplier</code> as <code class="language-plaintext highlighter-rouge">until</code> argument will help you to write <code class="language-plaintext highlighter-rouge">awaits</code> which can work with dynamic pages.</p>
+            <p>Using <code class="language-plaintext highlighter-rouge">Supplier</code> as <code
+                    class="language-plaintext highlighter-rouge">until</code> argument will help you to write <code
+                    class="language-plaintext highlighter-rouge">awaits</code> which can work with dynamic pages.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">el</span><span class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">enabled</span><span class="o">());</span>
-<span class="n">await</span><span class="o">().</span><span class="na">until</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="err">$</span><span class="o">(</span><span class="s">".listItem"</span><span class="o">).</span><span class="na">first</span><span class="o">().</span><span class="na">displayed</span><span class="o">());</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span
+                        class="na">until</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">el</span><span
+                        class="o">(</span><span class="s">".button"</span><span class="o">).</span><span class="na">enabled</span><span
+                        class="o">());</span>
+<span class="n">await</span><span class="o">().</span><span class="na">until</span><span class="o">(()</span> <span
+                            class="o">-&gt;</span> <span class="err">$</span><span class="o">(</span><span class="s">".listItem"</span><span
+                            class="o">).</span><span class="na">first</span><span class="o">().</span><span class="na">displayed</span><span
+                            class="o">());</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can also check if the page is loaded.</p>
+            <p>You can also check if the page is loaded.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="no">NANOSECONDS</span><span class="o">).</span><span class="na">untilPage</span><span class="o">().</span><span class="na">loaded</span><span class="o">();</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">1</span><span class="o">,</span> <span class="no">NANOSECONDS</span><span class="o">).</span><span
+                        class="na">untilPage</span><span class="o">().</span><span class="na">loaded</span><span
+                        class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>If you want to wait until the page you want is the page that you are at, you can use:</p>
+            <p>If you want to wait until the page you want is the page that you are at, you can use:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilPage</span><span class="o">(</span><span class="n">myPage</span><span class="o">).</span><span class="na">isAt</span><span class="o">();</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">untilPage</span><span
+                        class="o">(</span><span class="n">myPage</span><span class="o">).</span><span
+                        class="na">isAt</span><span class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<p>You can override <code class="language-plaintext highlighter-rouge">await()</code> method in your own test class to define default settings for wait objects:</p>
+            <p>You can override <code class="language-plaintext highlighter-rouge">await()</code> method in your own
+                test class to define default settings for wait objects:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
-<span class="kd">public</span> <span class="nc">FluentWait</span> <span class="nf">await</span><span class="o">()</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span class="na">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">ignoring</span><span class="o">(</span><span class="nc">NoSuchElementException</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">ElementNotVisibleException</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="nc">FluentWait</span> <span class="nf">await</span><span class="o">()</span> <span
+                            class="o">{</span>
+    <span class="k">return</span> <span class="kd">super</span><span class="o">.</span><span
+                            class="na">await</span><span class="o">().</span><span class="na">atMost</span><span
+                            class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                            class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">ignoring</span><span
+                            class="o">(</span><span class="nc">NoSuchElementException</span><span
+                            class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="nc">ElementNotVisibleException</span><span
+                            class="o">.</span><span class="na">class</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<h3 id="polling-every">Polling Every</h3>
-<p>You can also define the polling frequency, for example, if you want to poll every 5 seconds:</p>
+            <h3 id="polling-every">Polling Every</h3>
+            <p>You can also define the polling frequency, for example, if you want to poll every 5 seconds:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">pollingEvery</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">))).</span><span class="na">present</span><span class="o">();</span>
-</code></pre></div></div>
-<p>The default value is 500ms.</p>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">pollingEvery</span><span class="o">(</span><span
+                        class="mi">5</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span
+                        class="na">until</span><span class="o">(</span><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                        class="n">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span
+                        class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span
+                        class="o">))).</span><span class="na">present</span><span class="o">();</span>
+</code></pre>
+                </div>
+            </div>
+            <p>The default value is 500ms.</p>
 
-<p>You can also chain filter in the asynchronous API:</p>
+            <p>You can also chain filter in the asynchronous API:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span class="o">),</span> <span class="n">with</span><span class="o">(</span><span class="s">"a second attribute"</span><span class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"my@ndValue"</span><span class="o">))).</span><span class="na">present</span><span class="o">();</span>
-</code></pre></div></div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="n">await</span><span
+                        class="o">().</span><span class="na">atMost</span><span class="o">(</span><span
+                        class="mi">2</span><span class="o">,</span> <span class="nc">TimeUnit</span><span
+                        class="o">.</span><span class="na">SECONDS</span><span class="o">).</span><span
+                        class="na">until</span><span class="o">(</span><span class="err">$</span><span
+                        class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                        class="n">with</span><span class="o">(</span><span class="s">"myAttribute"</span><span
+                        class="o">).</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"myValue"</span><span
+                        class="o">),</span> <span class="n">with</span><span class="o">(</span><span class="s">"a second attribute"</span><span
+                        class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"my@ndValue"</span><span
+                        class="o">))).</span><span class="na">present</span><span class="o">();</span>
+</code></pre>
+                </div>
+            </div>
 
-<h3 id="wait-hook">@Wait Hook</h3>
+            <h3 id="wait-hook">@Wait Hook</h3>
 
-<p><code class="language-plaintext highlighter-rouge">Wait</code> hook automatically waits for conditions to be applied before interacting with Elements, avoiding the need
-of writing technical waiting and condition code in tests and page objects.</p>
+            <p><code class="language-plaintext highlighter-rouge">Wait</code> hook automatically waits for conditions to
+                be applied before interacting with Elements, avoiding the need
+                of writing technical waiting and condition code in tests and page objects.</p>
 
-<h2 id="shadow-root">Shadow root</h2>
+            <h2 id="shadow-root">Shadow root</h2>
 
-<p>Shadow DOM/Shadow root <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">definition</a></p>
+            <p>Shadow DOM/Shadow root <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM">definition</a>
+            </p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HomepageTest</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span> 
-    <span class="nd">@Unshadow</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="o">{</span><span class="s">"outer-shadow-root"</span><span class="o">,</span> <span class="s">"inner-shadow-root"</span><span class="o">,</span> <span class="s">".element"</span><span class="o">})</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code> <span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">HomepageTest</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="nd">@Unshadow</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="o">{</span><span class="s">"outer-shadow-root"</span><span class="o">,</span> <span
+                            class="s">"inner-shadow-root"</span><span class="o">,</span> <span
+                            class="s">".element"</span><span class="o">})</span>
     <span class="nc">FluentWebElement</span> <span class="n">element</span><span class="o">;</span>
     <span class="c1">//Element is instantiated and can be used by test methods.</span>
  <span class="o">}</span>
-</code></pre></div></div>
-<p>It can also handle List and Set collections if many objects are found</p>
+</code></pre>
+                </div>
+            </div>
+            <p>It can also handle List and Set collections if many objects are found</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">HomepageTest</span> <span class="kd">extends</span> <span class="nc">FluentPage</span> <span class="o">{</span>
-    <span class="nd">@Unshadow</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="o">{</span><span class="s">"outer-shadow-root"</span><span class="o">,</span> <span class="s">"inner-shadow-root"</span><span class="o">,</span> <span class="s">"div"</span><span class="o">})</span>
-    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span class="o">&gt;</span> <span class="n">elementsList</span><span class="o">;</span>
-    <span class="nd">@Unshadow</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span class="o">{</span><span class="s">"outer-shadow-root"</span><span class="o">,</span> <span class="s">"inner-shadow-root"</span><span class="o">,</span> <span class="s">"span"</span><span class="o">})</span>
-    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span class="o">&gt;</span> <span class="n">elementsSet</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">HomepageTest</span> <span class="kd">extends</span> <span
+                        class="nc">FluentPage</span> <span class="o">{</span>
+    <span class="nd">@Unshadow</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="o">{</span><span class="s">"outer-shadow-root"</span><span class="o">,</span> <span
+                            class="s">"inner-shadow-root"</span><span class="o">,</span> <span
+                            class="s">"div"</span><span class="o">})</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span
+                            class="o">&gt;</span> <span class="n">elementsList</span><span class="o">;</span>
+    <span class="nd">@Unshadow</span><span class="o">(</span><span class="n">css</span> <span class="o">=</span> <span
+                            class="o">{</span><span class="s">"outer-shadow-root"</span><span class="o">,</span> <span
+                            class="s">"inner-shadow-root"</span><span class="o">,</span> <span
+                            class="s">"span"</span><span class="o">})</span>
+    <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">FluentWebElement</span><span
+                            class="o">&gt;</span> <span class="n">elementsSet</span><span class="o">;</span>
     <span class="c1">//elementsList and elementsSet are instantiated and can be used by test methods.</span>
  <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>It is an experimental feature and works only on annotation level for fields</p>
+            <p>It is an experimental feature and works only on annotation level for fields</p>
 
-	    
+
+        </div>
     </div>
-  </div>
 </div>
 
 
-    <footer>
-  <div class="container beautiful-jekyll-footer">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-          
-          <li>
-            <a href="https://github.com/FluentLenium" title="GitHub">
+<footer>
+    <div class="container beautiful-jekyll-footer">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center footer-links">
+
+
+                    <li>
+                        <a href="https://github.com/FluentLenium" title="GitHub">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-		  
-          <li>
-            <a href="https://twitter.com/FluentLenium" title="Twitter">
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="https://twitter.com/FluentLenium" title="Twitter">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-      
-		  
-		  
-		  
-		  
-      
-      
-      
-      
-		  
-        </ul>
-        <p class="copyright text-muted">
-		  FluentLenium
-		  &nbsp;&bull;&nbsp;
-		  2021
+                        </a>
+                    </li>
 
-		  
-		  &nbsp;&bull;&nbsp;
-		  <a href="http://fluentlenium.io">fluentlenium.io</a>
-		  
-	    </p>
-	        <!-- Please don't remove this, keep my open source work credited :) -->
-		<p class="theme-by text-muted">
-		  Theme by
-		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
-		</p>
-      </div>
+
+                </ul>
+                <p class="copyright text-muted">
+                    FluentLenium
+                    &nbsp;&bull;&nbsp;
+                    2021
+
+
+                    &nbsp;&bull;&nbsp;
+                    <a href="http://fluentlenium.io">fluentlenium.io</a>
+
+                </p>
+                <!-- Please don't remove this, keep my open source work credited :) -->
+                <p class="theme-by text-muted">
+                    Theme by
+                    <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
-  
-    
+
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script>
+    if (typeof jQuery == 'undefined') {
+        document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+    }
+</script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/bootstrap.min.js"></script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/main.js"></script>
 
 
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-      <script>
-      	if (typeof jQuery == 'undefined') {
-      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
-      	}
-      </script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/bootstrap.min.js"></script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/main.js"></script>
-    
-  
-
-
-
-
-  
-  </body>
+</body>
 </html>

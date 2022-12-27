@@ -1,6 +1,11 @@
 package io.fluentlenium.core.conditions.wait;
 
-import io.fluentlenium.core.conditions.*;
+import io.fluentlenium.core.conditions.AtLeastOneElementConditions;
+import io.fluentlenium.core.conditions.Conditions;
+import io.fluentlenium.core.conditions.EachElementConditions;
+import io.fluentlenium.core.conditions.FluentConditions;
+import io.fluentlenium.core.conditions.FluentListConditions;
+import io.fluentlenium.core.conditions.WebElementConditions;
 import io.fluentlenium.core.conditions.message.MessageProxy;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.wait.FluentWait;

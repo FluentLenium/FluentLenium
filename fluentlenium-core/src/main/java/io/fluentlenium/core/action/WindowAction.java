@@ -5,7 +5,11 @@ import io.fluentlenium.core.components.ComponentInstantiator;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.switchto.FluentTargetLocator;
 import io.fluentlenium.core.switchto.FluentTargetLocatorImpl;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 
 import java.util.ArrayList;
 import java.util.HashSet;

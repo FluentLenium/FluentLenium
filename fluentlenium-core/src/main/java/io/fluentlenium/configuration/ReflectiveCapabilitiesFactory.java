@@ -84,7 +84,8 @@ public class ReflectiveCapabilitiesFactory implements CapabilitiesFactory, Facto
 
         try {
             return ReflectionUtils.newInstance(capabilitiesClass, args);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                 InvocationTargetException e) {
             throw new ConfigurationException("Can't create new Capabilities instance", e);
         }
     }

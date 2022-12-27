@@ -39,7 +39,7 @@ public class WaitConditionInvocationHandler<C extends Conditions<?>> implements 
      * @param conditionSupplier supplier of conditions
      */
     public WaitConditionInvocationHandler(Class<C> conditionClass, FluentWait wait, String context,
-            Supplier<C> conditionSupplier) {
+                                          Supplier<C> conditionSupplier) {
         this.conditionClass = conditionClass;
         this.wait = wait;
         this.context = context;
