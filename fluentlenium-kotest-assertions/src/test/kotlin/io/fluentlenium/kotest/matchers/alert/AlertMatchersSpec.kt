@@ -2,7 +2,7 @@ package io.fluentlenium.kotest.matchers.alert
 
 import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.kotest.matchers.config.MatcherBase
-import io.fluentlenium.kotest.matchers.config.shouldAssert
+import io.kotest.assertions.shouldFail
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 
@@ -21,11 +21,11 @@ class AlertMatchersSpec : MatcherBase({
     "presentNegative" {
         jq("#alertButton").click()
 
-        shouldAssert {
+        shouldFail {
             alert().shouldNotBePresent()
         }
 
-        shouldAssert {
+        shouldFail {
             alert() shouldNot bePresent()
         }
     }
@@ -42,18 +42,18 @@ class AlertMatchersSpec : MatcherBase({
     "haveTextNegative" {
         jq("#alertButton").click()
 
-        shouldAssert {
+        shouldFail {
             alert() should haveText("should fail")
         }
 
-        shouldAssert {
+        shouldFail {
             alert().shouldHaveText("should fail")
         }
 
-        shouldAssert {
+        shouldFail {
             alert() shouldNot haveText("Hello! I am an alert box")
         }
-        shouldAssert {
+        shouldFail {
             alert().shouldNotHaveText("Hello! I am an alert box")
         }
     }

@@ -2,7 +2,6 @@ package io.fluentlenium.kotest.matchers.config
 
 import io.fluentlenium.adapter.kotest.FluentStringSpec
 import io.fluentlenium.utils.UrlUtils
-import io.kotest.assertions.throwables.shouldThrow
 
 abstract class MatcherBase(
     body: FluentStringSpec.() -> Unit = {}
@@ -17,6 +16,3 @@ abstract class MatcherBase(
         }
     }
 }
-
-fun shouldAssert(block: () -> Any?): AssertionError =
-    shouldThrow(block)

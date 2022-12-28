@@ -1,7 +1,7 @@
 package io.fluentlenium.kotest.matchers.el
 
 import io.fluentlenium.kotest.matchers.config.MatcherBase
-import io.fluentlenium.kotest.matchers.config.shouldAssert
+import io.kotest.assertions.shouldFail
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 import org.openqa.selenium.By
@@ -17,11 +17,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "presentNegative" {
-        shouldAssert {
+        shouldFail {
             el("#doesNotExist") should bePresent()
         }
 
-        shouldAssert {
+        shouldFail {
             el("h1") shouldNot bePresent()
         }
     }
@@ -35,11 +35,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "enabledNegative" {
-        shouldAssert {
+        shouldFail {
             el("#alertButton") shouldNot beEnabled()
         }
 
-        shouldAssert {
+        shouldFail {
             el("#disabledButton") should beEnabled()
         }
     }
@@ -54,11 +54,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "displayedNegative" {
-        shouldAssert {
+        shouldFail {
             el("h1") shouldNot beDisplayed()
         }
 
-        shouldAssert {
+        shouldFail {
             el("#hiddenElement") should beDisplayed()
         }
     }
@@ -72,11 +72,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "clickableNegative" {
-        shouldAssert {
+        shouldFail {
             el("#alertButton") shouldNot beClickable()
         }
 
-        shouldAssert {
+        shouldFail {
             el("#disabledButton") should beClickable()
         }
     }
@@ -90,11 +90,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "selectedNegative" {
-        shouldAssert {
+        shouldFail {
             el("#choice #second") shouldNot beSelected()
         }
 
-        shouldAssert {
+        shouldFail {
             el("#choice #first") should beSelected()
         }
     }
@@ -109,11 +109,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "containTextNegative" {
-        shouldAssert {
+        shouldFail {
             el("#oneline") shouldNot containText("A single line")
         }
 
-        shouldAssert {
+        shouldFail {
             el("#oneline") should containText("other text")
         }
     }
@@ -127,11 +127,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "matchTextNegative" {
-        shouldAssert {
+        shouldFail {
             el("#oneline") shouldNot matchText("A single.*text")
         }
 
-        shouldAssert {
+        shouldFail {
             el("#oneline") should matchText("foo.*abc")
         }
     }
@@ -145,10 +145,10 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveIdNegative" {
-        shouldAssert {
+        shouldFail {
             el("#oneline") should haveId("other")
         }
-        shouldAssert {
+        shouldFail {
             el("#oneline") shouldNot haveId("oneline")
         }
     }
@@ -167,11 +167,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveClassNegative" {
-        shouldAssert {
+        shouldFail {
             el("span.child") shouldNot haveClass("child")
         }
 
-        shouldAssert {
+        shouldFail {
             el("span.child") should haveClass("other")
         }
     }
@@ -185,11 +185,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveValueNegative" {
-        shouldAssert {
+        shouldFail {
             el("#choice #first") shouldNot haveValue("first")
         }
 
-        shouldAssert {
+        shouldFail {
             el("#choice #first") should haveValue("second")
         }
     }
@@ -203,11 +203,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveNameNegative" {
-        shouldAssert {
+        shouldFail {
             el(By.name("name")) shouldNot haveName("name")
         }
 
-        shouldAssert {
+        shouldFail {
             el(By.name("name")) should haveName("other")
         }
     }
@@ -221,11 +221,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveTagNameNegative" {
-        shouldAssert {
+        shouldFail {
             el("h1") shouldNot haveTagName("h1")
         }
 
-        shouldAssert {
+        shouldFail {
             el("h1") should haveTagName("h2")
         }
     }
@@ -242,11 +242,11 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveDimensionNegative" {
-        shouldAssert {
+        shouldFail {
             el("h1") shouldNot haveDimension(784 to 37)
         }
 
-        shouldAssert {
+        shouldFail {
             el("h1") should haveDimension(Dimension(100, 37))
         }
     }
@@ -268,19 +268,19 @@ class FluentWebElementMatchersSpec : MatcherBase({
     }
 
     "haveAttributeNegative" {
-        shouldAssert {
+        shouldFail {
             el("#choice #first") shouldNot haveAttribute("value")
         }
 
-        shouldAssert {
+        shouldFail {
             el("#choice #first") should haveAttribute("other")
         }
 
-        shouldAssert {
+        shouldFail {
             el("#choice #first") shouldNot haveAttributeValue("value", "first")
         }
 
-        shouldAssert {
+        shouldFail {
             el("#choice #first") should haveAttributeValue("value", "other")
         }
     }

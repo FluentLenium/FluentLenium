@@ -6,7 +6,7 @@ import io.fluentlenium.kotest.matchers.config.MatcherBase
 import io.fluentlenium.kotest.matchers.config.pages.FluentleniumPage
 import io.fluentlenium.kotest.matchers.config.pages.IndexPage
 import io.fluentlenium.kotest.matchers.config.pages.IndexPageWrongClassAnnotations
-import io.fluentlenium.kotest.matchers.config.shouldAssert
+import io.kotest.assertions.shouldFail
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 
@@ -32,11 +32,11 @@ class PageMatchersSpec : MatcherBase() {
         "haveUrlNegative" {
             goTo(fluentleniumPage)
 
-            shouldAssert {
+            shouldFail {
                 indexPage shouldNot haveUrl("https://fluentlenium.io/")
             }
 
-            shouldAssert {
+            shouldFail {
                 indexPage should haveUrl("https://acme.com/")
             }
         }
@@ -55,13 +55,13 @@ class PageMatchersSpec : MatcherBase() {
         }
 
         "haveExpectedUrlNegative" {
-            shouldAssert {
+            shouldFail {
                 fluentleniumPage should haveExpectedUrl()
             }
 
             goTo(fluentleniumPage)
 
-            shouldAssert {
+            shouldFail {
                 fluentleniumPage shouldNot haveExpectedUrl()
             }
         }
@@ -75,11 +75,11 @@ class PageMatchersSpec : MatcherBase() {
         }
 
         "haveExpectedElementsNegative" {
-            shouldAssert {
+            shouldFail {
                 indexPageWrongClassAnnotation should haveExpectedElements()
             }
 
-            shouldAssert {
+            shouldFail {
                 indexPage shouldNot haveExpectedElements()
             }
         }
@@ -93,11 +93,11 @@ class PageMatchersSpec : MatcherBase() {
         }
 
         "titleNegative" {
-            shouldAssert {
+            shouldFail {
                 indexPage shouldNot haveTitle("Fluent Selenium Documentation")
             }
 
-            shouldAssert {
+            shouldFail {
                 indexPage should haveTitle("Wrong title")
             }
         }
@@ -117,10 +117,10 @@ class PageMatchersSpec : MatcherBase() {
         }
 
         "haveElementNegative" {
-            shouldAssert {
+            shouldFail {
                 indexPage shouldNot haveElement(el("h1"))
             }
-            shouldAssert {
+            shouldFail {
                 indexPage should haveElement(el("h2"))
             }
         }
@@ -138,10 +138,10 @@ class PageMatchersSpec : MatcherBase() {
         }
 
         "haveElementDisplayedNegative" {
-            shouldAssert {
+            shouldFail {
                 indexPage shouldNot haveElementDisplayed(el("h1"))
             }
-            shouldAssert {
+            shouldFail {
                 indexPage should haveElementDisplayed(el("#doesNotExist"))
             }
         }
@@ -155,10 +155,10 @@ class PageMatchersSpec : MatcherBase() {
         }
 
         "haveElementsNegative" {
-            shouldAssert {
+            shouldFail {
                 indexPage shouldNot haveElements(jq("h1"))
             }
-            shouldAssert {
+            shouldFail {
                 indexPage should haveElements(jq("h2"))
             }
         }
