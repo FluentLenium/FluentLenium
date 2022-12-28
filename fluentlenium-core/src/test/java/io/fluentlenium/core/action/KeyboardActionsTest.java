@@ -1,80 +1,78 @@
 package io.fluentlenium.core.action;
 
-import org.assertj.core.api.Assertions;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Coordinates;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.Mouse;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Interactive;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KeyboardActionsTest {
-    @Mock
-    private Keyboard keyboard;
-
-    @Mock
-    private Mouse mouse;
 
     @Mock
     private InputDevicesDriver driver;
 
-    @Before
-    public void before() {
-        when(driver.getKeyboard()).thenReturn(keyboard);
-        when(driver.getMouse()).thenReturn(mouse);
-    }
+    @Spy
+    @InjectMocks
+    private Actions actions;
 
     @After
     public void after() {
-        reset(driver, keyboard, mouse);
+        reset(driver, actions);
     }
 
     @Test
     public void testKeyDown() {
-        KeyboardActions actions = new KeyboardActions(driver);
+        KeyboardActionsTestable actions = new KeyboardActionsTestable(driver, this.actions);
         actions.keyDown(Keys.SHIFT);
 
-        verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(keyboard).pressKey(Keys.SHIFT);
+        verify(this.actions, never()).moveToElement(any());
+        verify(this.actions).keyDown(Keys.SHIFT);
     }
 
     @Test
     public void testKeyUp() {
-        KeyboardActions actions = new KeyboardActions(driver);
+        KeyboardActionsTestable actions = new KeyboardActionsTestable(driver, this.actions);
         actions.keyUp(Keys.SHIFT);
 
-        verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(keyboard).releaseKey(Keys.SHIFT);
+        verify(this.actions, never()).moveToElement(any());
+        verify(this.actions).keyUp(Keys.SHIFT);
     }
 
     @Test
     public void testSendKeys() {
-        KeyboardActions actions = new KeyboardActions(driver);
+        KeyboardActionsTestable actions = new KeyboardActionsTestable(driver, this.actions);
         actions.sendKeys(Keys.ENTER, Keys.SPACE);
 
-        verify(mouse, never()).mouseMove(any(Coordinates.class));
-        verify(keyboard).sendKeys(Keys.ENTER, Keys.SPACE);
+        verify(this.actions, never()).moveToElement(any());
+        verify(this.actions).sendKeys(Keys.ENTER, Keys.SPACE);
     }
 
-    @Test
-    public void testBasic() {
-        KeyboardActions actions = new KeyboardActions(driver);
-        Assertions.assertThat(actions.basic()).isSameAs(keyboard);
+    private abstract static class InputDevicesDriver implements WebDriver, Interactive { // NOPMD AbstractNaming
     }
 
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
+    static class KeyboardActionsTestable extends KeyboardActions {
+        Actions actions;
+
+        public KeyboardActionsTestable(WebDriver driver, Actions actions) {
+            super(driver);
+            this.actions = actions;
+        }
+
+        @Override
+        protected Actions actions() {
+            return actions;
+        }
     }
 }

@@ -1,21 +1,21 @@
 package io.fluentlenium.core.action;
 
 import io.fluentlenium.core.domain.FluentWebElement;
-import org.assertj.core.api.Assertions;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Coordinates;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.interactions.Interactive;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.Mouse;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.times;
@@ -24,11 +24,9 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MouseElementActionsTest {
-    @Mock
-    private Keyboard keyboard;
-
-    @Mock
-    private Mouse mouse;
+    @Spy
+    @InjectMocks
+    private Actions actions;
 
     @Mock
     private InputDevicesDriver driver;
@@ -39,186 +37,152 @@ public class MouseElementActionsTest {
     @Mock
     private FluentWebElement fluentWebElement;
 
-    @Mock
-    private Coordinates coordinates;
-
-    @Before
-    public void before() {
-        when(driver.getKeyboard()).thenReturn(keyboard);
-        when(driver.getMouse()).thenReturn(mouse);
-
-        when(element.getCoordinates()).thenReturn(coordinates);
-    }
-
     @After
     public void after() {
-        reset(driver, keyboard, mouse);
+        reset(driver, actions);
     }
 
     @Test
     public void testClickAndHold() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.clickAndHold();
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).mouseDown(coordinates);
+        verify(this.actions).clickAndHold(element);
     }
 
     @Test
     public void testClickWebElement() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.click();
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).click(coordinates);
+        verify(this.actions).click(element);
     }
 
     @Test
     public void testClickFluentWebElement() {
-        when(fluentWebElement.getElement()).thenReturn(element);
-
-        MouseElementActions actions = new MouseElementActions(driver, fluentWebElement);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.click();
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).click(coordinates);
+        verify(this.actions).click(element);
     }
 
 
     @Test
     public void testContextClick() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.contextClick();
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).contextClick(coordinates);
+        verify(this.actions).contextClick(element);
     }
 
     @Test
     public void testDoubleClick() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.doubleClick();
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).doubleClick(coordinates);
+        verify(this.actions).doubleClick(element);
     }
 
     @Test
     public void testRelease() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.release();
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).mouseUp(coordinates);
+        verify(this.actions).release(element);
     }
 
     @Test
     public void moveToElement() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.moveToElement();
 
-        verify(mouse).mouseMove(coordinates);
+        verify(this.actions).moveToElement(element);
     }
 
     @Test
     public void moveToTargetElement() {
         LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
-        when(target.getCoordinates()).thenReturn(targetCoordinates);
 
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.moveToElement(target);
 
-        verify(mouse).mouseMove(targetCoordinates);
+        verify(this.actions).moveToElement(target);
     }
 
     @Test
     public void moveToElementOffset() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.moveToElement(10, 20);
 
-        verify(mouse).mouseMove(coordinates, 10, 20);
+        verify(this.actions).moveToElement(element, 10, 20);
     }
 
     @Test
     public void moveToTargetElementOffset() {
         LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
-        when(target.getCoordinates()).thenReturn(targetCoordinates);
-
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.moveToElement(target, 10, 20);
 
-        verify(mouse).mouseMove(targetCoordinates, 10, 20);
+        verify(this.actions).moveToElement(target, 10, 20);
     }
 
     @Test
     public void dragAndDropFrom() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
 
         LocatableElement source = mock(LocatableElement.class);
-        Coordinates sourceCoordinates = mock(Coordinates.class);
-        when(source.getCoordinates()).thenReturn(sourceCoordinates);
-
         actions.dragAndDropFrom(source);
 
-        verify(mouse).mouseMove(sourceCoordinates);
-        verify(mouse).mouseDown(sourceCoordinates);
-        verify(mouse, times(2)).mouseMove(coordinates);
-        verify(mouse).mouseUp(coordinates);
+        verify(this.actions).dragAndDrop(source, element);
     }
 
     @Test
     public void dragAndDropTo() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
 
         LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
-        when(target.getCoordinates()).thenReturn(targetCoordinates);
-
         actions.dragAndDropTo(target);
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).mouseDown(coordinates);
-        verify(mouse, times(2)).mouseMove(targetCoordinates);
-        verify(mouse).mouseUp(targetCoordinates);
+        verify(this.actions).dragAndDrop(element, target);
     }
 
     @Test
     public void dragAndDropBy() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
         actions.dragAndDropBy(10, 20);
 
-        verify(mouse).mouseMove(coordinates);
-        verify(mouse).mouseDown(coordinates);
-        verify(mouse).mouseMove(null, 10, 20);
-        verify(mouse).mouseUp(null);
+        verify(this.actions).dragAndDropBy(element, 10, 20);
     }
 
     @Test
     public void dragAndDropByWithTargetOffset() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
+        MouseElementActionsTestable actions = new MouseElementActionsTestable(driver, element, this.actions);
 
         LocatableElement target = mock(LocatableElement.class);
-        Coordinates targetCoordinates = mock(Coordinates.class);
-        when(target.getCoordinates()).thenReturn(targetCoordinates);
-
         actions.dragAndDropByWithTargetOffset(target, 10, 20);
 
-        verify(mouse).mouseDown(coordinates);
-        verify(mouse).mouseMove(targetCoordinates, 10, 20);
-        verify(mouse).mouseUp(null);
+        verify(this.actions).clickAndHold(element);
+        verify(this.actions).moveToElement(target, 10, 20);
+        verify(this.actions).release();
     }
 
-    @Test
-    public void testBasic() {
-        MouseElementActions actions = new MouseElementActions(driver, element);
-        Assertions.assertThat(actions.basic()).isSameAs(mouse);
-    }
-
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
+    private abstract static class InputDevicesDriver implements WebDriver, Interactive { // NOPMD AbstractNaming
     }
 
     private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
+    }
+
+    static class MouseElementActionsTestable extends MouseElementActions {
+        Actions actions;
+
+        public MouseElementActionsTestable(WebDriver driver, WebElement element, Actions actions) {
+            super(driver, element);
+            this.actions = actions;
+        }
+
+        @Override
+        protected Actions actions() {
+            return actions;
+        }
     }
 }
