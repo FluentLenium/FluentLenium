@@ -3,12 +3,14 @@ package io.fluentlenium.core.action;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Execute actions with the keyboard.
  */
 public class KeyboardActions {
     private final WebDriver driver;
+    private Actions actions;
 
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver.
@@ -19,13 +21,29 @@ public class KeyboardActions {
         this.driver = driver;
     }
 
+
+    /**
+     * Creates a new object to execute actions with the keyboard, using given selenium driver.
+     *
+     * @param driver  selenium driver
+     * @param actions selenium actions
+     */
+    public KeyboardActions(WebDriver driver, Actions actions) {
+        this.driver = driver;
+        this.actions = actions;
+    }
+
     /**
      * Get selenium interactions actions.
      *
      * @return selenium actions
      */
-    protected org.openqa.selenium.interactions.Actions actions() {
-        return new org.openqa.selenium.interactions.Actions(driver);
+    protected Actions actions() {
+        if (actions == null) {
+            this.actions = new Actions(driver);
+        }
+
+        return actions;
     }
 
     /**

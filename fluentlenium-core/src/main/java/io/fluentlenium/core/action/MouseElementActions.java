@@ -1,5 +1,6 @@
 package io.fluentlenium.core.action;
 
+import com.beust.ah.A;
 import io.fluentlenium.core.domain.FluentWebElement;
 import io.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 public class MouseElementActions {
     private final WebDriver driver;
     private final WebElement element;
+    private Actions actions;
 
     /**
      * Creates a new mouse element actions.
@@ -27,6 +29,19 @@ public class MouseElementActions {
     /**
      * Creates a new mouse element actions.
      *
+     * @param driver  selenium driver
+     * @param element selenium element
+     * @param actions selenium actions
+     */
+    public MouseElementActions(WebDriver driver, WebElement element, Actions actions) {
+        this.driver = driver;
+        this.element = element;
+        this.actions = actions;
+    }
+
+    /**
+     * Creates a new mouse element actions.
+     *
      * @param driver           selenium driver
      * @param fluentWebElement FluentWebElement
      */
@@ -34,8 +49,23 @@ public class MouseElementActions {
         this(driver, fluentWebElement.getElement());
     }
 
+    /**
+     * Creates a new mouse element actions.
+     *
+     * @param driver  selenium driver
+     * @param fluentWebElement selenium FluentWebElement
+     * @param actions selenium actions
+     */
+    public MouseElementActions(WebDriver driver, FluentWebElement fluentWebElement, Actions actions) {
+        this(driver, fluentWebElement.getElement(), actions);
+    }
+
     protected Actions actions() {
-        return new Actions(driver);
+        if (actions == null) {
+            this.actions = new Actions(driver);
+        }
+
+        return actions;
     }
 
     /**

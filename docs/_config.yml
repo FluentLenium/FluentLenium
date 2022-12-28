@@ -5,10 +5,10 @@
 
 # If you are building a simple GitHub user page (http://username.github.io) then use these settings:
 fluentlenium:
-  version: "4.2.2"
+  version: "6.0.0"
 
 selenium:
-  version: "4.0.0-alpha-1"
+  version: "4.7.2"
 
 url: "http://fluentlenium.io"
 baseurl: ""

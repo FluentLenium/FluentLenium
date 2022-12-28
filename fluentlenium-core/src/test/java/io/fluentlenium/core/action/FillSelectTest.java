@@ -72,10 +72,17 @@ public class FillSelectTest {
         WebElement option3 = mock(WebElement.class);
         WebElement option4 = mock(WebElement.class);
 
+        when(option1.isEnabled()).thenReturn(true);
+        when(option3.isEnabled()).thenReturn(true);
+
         when(element1.findElements(any(By.class))).thenReturn(singletonList(option1));
         when(element2.findElements(any(By.class))).thenReturn(singletonList(option2));
         when(element3.findElements(any(By.class))).thenReturn(singletonList(option3));
         when(element4.findElements(any(By.class))).thenReturn(singletonList(option4));
+
+        when(element1.isEnabled()).thenReturn(true);
+        when(element2.isEnabled()).thenReturn(true);
+        when(element3.isEnabled()).thenReturn(true);
 
         when(option1.getAttribute("index")).thenReturn("1");
         when(option3.getAttribute("index")).thenReturn("1");
@@ -105,6 +112,15 @@ public class FillSelectTest {
         when(element3.findElements(any(By.class))).thenReturn(singletonList(option3));
         when(element4.findElements(any(By.class))).thenReturn(singletonList(option4));
 
+        when(element1.isEnabled()).thenReturn(true);
+        when(element2.isEnabled()).thenReturn(true);
+        when(element3.isEnabled()).thenReturn(true);
+        when(element4.isEnabled()).thenReturn(true);
+
+        when(option1.isEnabled()).thenReturn(true);
+        when(option3.isEnabled()).thenReturn(true);
+        when(option4.isEnabled()).thenReturn(true);
+
         fillConstructor.withText("text");
 
         verify(option1).click();
@@ -121,7 +137,9 @@ public class FillSelectTest {
 
         WebElement option1 = mock(WebElement.class);
 
+        when(element1.isEnabled()).thenReturn(true);
         when(element1.findElements(any(By.class))).thenReturn(singletonList(option1));
+        when(option1.isEnabled()).thenReturn(true);
 
         fillConstructor.withValue("1");
 

@@ -18,28 +18,28 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
-            <version>4.2.2</version>
+            <version>4.7.2</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-api</artifactId>
-            <version>4.2.2</version>
+            <version>4.7.2</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-remote-driver</artifactId>
-            <version>4.2.2</version>
+            <version>4.7.2</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>4.2.2</version>
+            <version>4.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>4.2.2</version>
+            <version>4.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>

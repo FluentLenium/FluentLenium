@@ -1,12 +1,14 @@
 package io.fluentlenium.core.action;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Execute actions with the mouse.
  */
 public class MouseActions {
     private final WebDriver driver;
+    private Actions actions;
 
     /**
      * Creates a new mouse actions.
@@ -18,12 +20,26 @@ public class MouseActions {
     }
 
     /**
+     * Creates a new mouse actions.
+     *
+     * @param driver driver
+     */
+    public MouseActions(WebDriver driver, Actions actions) {
+        this.driver = driver;
+        this.actions = actions;
+    }
+
+    /**
      * Get the actions object.
      *
      * @return actions object
      */
-    protected org.openqa.selenium.interactions.Actions actions() {
-        return new org.openqa.selenium.interactions.Actions(driver);
+    protected Actions actions() {
+        if (actions == null) {
+            this.actions = new Actions(driver);
+        }
+
+        return actions;
     }
 
     /**
