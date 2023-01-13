@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.22"
+    kotlin("jvm") version "1.8.0"
 }
 
 repositories {
@@ -15,8 +15,8 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         jvmTarget = "11"
-        apiVersion = "1.6"
-        languageVersion = "1.6"
+        apiVersion = "1.8"
+        languageVersion = "1.8"
         freeCompilerArgs = listOf("-Xjsr305=strict")
     }
 }
