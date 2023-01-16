@@ -63,7 +63,7 @@ public class FluentPageTest {
         assertThatExceptionOfType(AssertionError.class).isThrownBy(() -> fluentPage.isAtUsingSelector(by))
                 .withMessageStartingWith(
                         "@FindBy element not found for page io.fluentlenium.core"
-                                + ".FluentPage$MockitoMock");
+                                + ".FluentPage");
     }
 
     @Test
