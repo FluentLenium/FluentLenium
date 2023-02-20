@@ -14,7 +14,7 @@
 
     <properties>
         <fluentlenium.version>6.0.0-SNAPSHOT</fluentlenium.version>
-        <spring.version>6.0.4</spring.version>
+        <spring.version>6.0.5</spring.version>
         <selenium.version>4.2.2</selenium.version>
     </properties>
 
@@ -30,7 +30,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M8</version>
+                    <version>3.0.0-M9</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -38,7 +38,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.0</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>

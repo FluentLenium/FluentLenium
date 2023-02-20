@@ -124,7 +124,7 @@
         <testng.version>7.7.0</testng.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
-        <spring.version>6.0.4</spring.version>
+        <spring.version>6.0.5</spring.version>
         <slf4j.version>2.0.6</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v102</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu",
@@ -257,7 +257,7 @@
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.24.1</version>
+                <version>3.24.2</version>
             </dependency>
             <dependency>
                 <groupId>org.opentest4j</groupId>
@@ -267,17 +267,17 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.11.0</version>
+                <version>5.1.1</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>4.11.0</version>
+                <version>5.1.1</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.12.22</version>
+                <version>1.14.0</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -298,7 +298,7 @@
             <dependency>
                 <groupId>org.apache.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>4.0.7</version>
+                <version>4.0.9</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -314,7 +314,7 @@
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-model</artifactId>
-                <version>3.8.7</version>
+                <version>3.9.0</version>
             </dependency>
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
@@ -371,7 +371,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
@@ -387,7 +387,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.1</version>
+                    <version>3.5.0</version>
                     <configuration>
                         <additionalparam>-Xdoclint:none</additionalparam>
                         <additionalOptions>-Xdoclint:none</additionalOptions>
@@ -404,7 +404,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M8</version>
+                    <version>3.0.0-M9</version>
                     <configuration>
                         <excludes>
                             <exclude>**/integration/**/*</exclude>
@@ -418,7 +418,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M8</version>
+                    <version>3.0.0-M9</version>
                     <executions>
                         <execution>
                             <goals>
@@ -461,7 +461,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -721,7 +721,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.4.1</version>
+                        <version>3.5.0</version>
                     </plugin>
                 </plugins>
             </build>
