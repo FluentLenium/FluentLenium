@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.7.22'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.10'
 }
 
 repositories {
@@ -19,6 +19,8 @@ dependencies {
     implementation "io.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
     testImplementation 'ch.qos.logback:logback-classic:1.4.5'
     testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.2.2'
+    testImplementation "io.github.bonigarcia:webdrivermanager:5.3.2"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
