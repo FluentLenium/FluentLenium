@@ -18,7 +18,7 @@ jobs:
         env:
           URL: ${{ secrets.BROWSER_STACK_URL }}
         if: "${{ env.URL != '' }}"
-        run: echo "::set-output name=defined::true"
+        run: echo "defined=true" >> "$GITHUB_OUTPUT"
 
   edge:
     needs: [ check-env ]
