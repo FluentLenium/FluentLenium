@@ -20,10 +20,10 @@ jobs:
       repo-token-available: ${{ steps.repo-token.outputs.defined }}
     steps:
       - id: repo-token
+        if: "${{ env.REPO_TOKEN != '' }}"
         env:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-        if: "${{ env.REPO_TOKEN != '' }}"
-        run: echo "::set-output name=defined::true"
+        run: echo "defined=true" >> "$GITHUB_OUTPUT"
 
   java11-build:
     needs: [ check-env ]
