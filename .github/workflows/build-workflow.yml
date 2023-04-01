@@ -96,6 +96,13 @@ jobs:
       - name: Java 17 - unit & integration tests
         run: ./mvnw -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Java 17 Parallelism Test Reports
+          report_paths: '**/target/*-reports/TEST-*.xml'
+
   java17-javadoc:
     runs-on: ubuntu-latest
     steps:
@@ -129,6 +136,14 @@ jobs:
         run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin -Pfluentlenium.version=$FLUENTLENIUM_VERSION
       - name: Run gradle kotest example
         run: cd examples/kotest && ./gradlew -i check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Gradle Kotest examples Test Reports
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+
 
   compile-maven-examples:
     runs-on: ubuntu-latest
