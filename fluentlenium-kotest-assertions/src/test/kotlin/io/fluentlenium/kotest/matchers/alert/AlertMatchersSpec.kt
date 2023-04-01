@@ -15,6 +15,8 @@ class AlertMatchersSpec : MatcherBase({
         alert().shouldBePresent()
 
         alert().accept()
+
+        alert() shouldNot bePresent()
     }
 
     "presentNegative" {
