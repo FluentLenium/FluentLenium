@@ -28,16 +28,18 @@ public class AlertAssertTest {
 
     @Test
     public void testHasTextPositive() {
+        when(alert.present()).thenReturn(true);
         when(alert.getText()).thenReturn("some text");
         assertThatCode(() -> alertAssert.hasText("some text")).doesNotThrowAnyException();
     }
 
     @Test
     public void testHasTextNegative() {
+        when(alert.present()).thenReturn(true);
         when(alert.getText()).thenReturn("other text");
         assertThatThrownBy(() -> alertAssert.hasText("some text"))
                 .isInstanceOf(AssertionError.class)
-                .hasMessage("The alert box does not contain the text: some text. Actual text found : other text");
+                .hasMessage("The alert box does not contain the expected text");
     }
 
     @Test
