@@ -234,7 +234,7 @@ class FluentListMatchersSpec : MatcherBase(
 
         "haveDimensionNegative" {
             shouldFail {
-                jq("h1") shouldNot haveDimension(1184 to 37)
+                jq("h1") shouldNot haveDimension(expectedWidth to 37)
             }
 
             shouldFail {
