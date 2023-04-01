@@ -1,17 +1,17 @@
 package io.fluentlenium.example.kotest
 
+import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
 import io.kotest.extensions.testcontainers.LifecycleMode
 import io.kotest.extensions.testcontainers.TestContainerExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import io.fluentlenium.adapter.kotest.FluentFreeSpec
+import java.io.File
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.VncRecordingContainer
-import java.io.File
 
 /**
  * This test demonstrates how to use Fluentlenium in combination
@@ -33,7 +33,10 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
         // this is a workaround to avoid kotlin/generics issue:
         // https://github.com/testcontainers/testcontainers-java/issues/318
 
-        withCapabilities(ChromeOptions())
+        withCapabilities(ChromeOptions().apply {
+            addArguments("--remote-allow-origins=*")
+            addArguments("--headless=new")
+        })
         withRecordingMode(
             BrowserWebDriverContainer.VncRecordingMode.RECORD_ALL,
             videoDirectory,

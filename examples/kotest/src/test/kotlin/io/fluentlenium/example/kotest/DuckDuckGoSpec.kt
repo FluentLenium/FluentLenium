@@ -34,6 +34,7 @@ class DuckDuckGoSpec : FluentFreeSpec() {
     override fun getCapabilities(): Capabilities {
         return ChromeOptions().apply {
             addArguments("--remote-allow-origins=*")
+            addArguments("--headless=new")
         }
     }
 
