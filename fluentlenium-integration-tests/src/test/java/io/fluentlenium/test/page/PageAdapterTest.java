@@ -45,6 +45,7 @@ class PageAdapterTest extends FluentAdapter {
     void before() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setHeadless(true);
+        chromeOptions.addArguments("--remote-allow-origins=*");
         initFluent(new ChromeDriver(chromeOptions));
 
         page = newInstance(InjectedIndexPage.class);

@@ -28,6 +28,8 @@ public class ConstructorInitializationTest extends FluentTest {
     public WebDriver newWebDriver() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setHeadless(true);
+        chromeOptions.addArguments("--remote-allow-origins=*");
+
         driver = new ChromeDriver(chromeOptions);
         return driver;
     }
