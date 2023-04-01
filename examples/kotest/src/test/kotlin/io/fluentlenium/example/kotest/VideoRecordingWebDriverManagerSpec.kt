@@ -1,14 +1,15 @@
 package io.fluentlenium.example.kotest
 
+import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import io.github.bonigarcia.wdm.WebDriverManager
 import io.kotest.core.spec.Spec
 import io.kotest.matchers.paths.shouldExist
 import io.kotest.matchers.string.shouldContain
-import io.fluentlenium.adapter.kotest.FluentFreeSpec
-import org.openqa.selenium.WebDriver
 import kotlin.io.path.Path
 import kotlin.io.path.createDirectory
 import kotlin.io.path.exists
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.chrome.ChromeOptions
 
 /**
  * This test demonstrates how to use Fluentlenium in combination
@@ -26,6 +27,10 @@ class VideoRecordingWebDriverManagerSpec : FluentFreeSpec() {
 
     private val wdm =
         WebDriverManager.chromedriver()
+            .capabilities(ChromeOptions().apply {
+                addArguments("--remote-allow-origins=*")
+                addArguments("--headless=new")
+            })
             .browserInDocker()
             .enableVnc()
             .dockerRecordingOutput(videoDirectory)
