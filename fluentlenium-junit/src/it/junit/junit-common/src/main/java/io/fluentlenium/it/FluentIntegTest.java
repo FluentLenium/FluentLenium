@@ -10,11 +10,25 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
 import java.util.Date;
+
+import static org.junit.Assert.assertTrue;
 
 public class FluentIntegTest extends FluentTest {
     @Rule
     public TestName name = new TestName();
+
+    String inputsHtmlLocation;
+
+    @Before
+    public void locateInputsHtml() {
+        File file = new File("../junit-common/src/main/resources/inputs.html");
+
+        assertTrue(file.exists());
+
+        inputsHtmlLocation = file.toURI().toString();
+    }
 
     @BeforeClass
     public static void setUpChrome() {

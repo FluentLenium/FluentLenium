@@ -1,16 +1,16 @@
 package io.fluentlenium.it;
 
-import java.util.Date;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.fluentlenium.adapter.junit.jupiter.FluentTest;
 import io.fluentlenium.core.FluentControl;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.platform.launcher.TestExecutionListener;
 import org.openqa.selenium.WebDriver;
+
+import java.util.Date;
 
 public class FluentIntegTest extends FluentTest implements TestExecutionListener {
 

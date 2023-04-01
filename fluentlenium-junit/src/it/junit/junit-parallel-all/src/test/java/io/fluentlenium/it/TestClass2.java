@@ -2,18 +2,16 @@ package io.fluentlenium.it;
 
 import org.junit.Test;
 
-import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestClass2 extends FluentIntegTest {
 
-    private static final String LOCAL_FILE_PATH = "inputs.html";
     private static final String SELECTOR = "input";
     private static final Class<?> CLASS = TestClass2.class;
 
     @Test
     public void testMethod5() {
-        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(inputsHtmlLocation);
         el(SELECTOR).fill().with("5");
         await().until(el(SELECTOR)).value().equalTo("5");
         assertThat(el(SELECTOR).value()).isEqualTo("5");
@@ -23,7 +21,7 @@ public class TestClass2 extends FluentIntegTest {
 
     @Test
     public void testMethod6() {
-        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(inputsHtmlLocation);
         el(SELECTOR).fill().with("6");
         await().until(el(SELECTOR)).value().equalTo("6");
         assertThat(el(SELECTOR).value()).isEqualTo("6");
@@ -33,7 +31,7 @@ public class TestClass2 extends FluentIntegTest {
 
     @Test
     public void testMethod7() {
-        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(inputsHtmlLocation);
         el(SELECTOR).fill().with("7");
         await().until(el(SELECTOR)).value().equalTo("7");
         assertThat(el(SELECTOR).value()).isEqualTo("7");
@@ -43,7 +41,7 @@ public class TestClass2 extends FluentIntegTest {
 
     @Test
     public void testMethod8() {
-        goTo(getAbsoluteUrlFromFile(LOCAL_FILE_PATH));
+        goTo(inputsHtmlLocation);
         el(SELECTOR).fill().with("8");
         await().until(el(SELECTOR)).value().equalTo("8");
         assertThat(el(SELECTOR).value()).isEqualTo("8");
