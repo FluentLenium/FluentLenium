@@ -19,6 +19,9 @@
     <properties>
         <it.project.version>6.0.0-SNAPSHOT</it.project.version>
         <selenium.version>4.2.2</selenium.version>
+        <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
+            "disable-dev-shm-usage", "remote-allow-origins=*"]}}
+        </fluentlenium.capabilities.default>
     </properties>
 
     <dependencyManagement>
@@ -99,6 +102,15 @@
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <systemPropertyVariables>
+                            <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
+                            <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
+                        </systemPropertyVariables>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

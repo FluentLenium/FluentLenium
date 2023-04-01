@@ -1,9 +1,9 @@
 package io.fluentlenium.it;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
-
 import org.junit.jupiter.api.Test;
+
+import static io.fluentlenium.utils.UrlUtils.getAbsoluteUrlFromFile;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class TestClass2 extends FluentIntegTest {
 

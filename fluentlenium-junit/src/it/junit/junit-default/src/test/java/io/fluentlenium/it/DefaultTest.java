@@ -1,7 +1,7 @@
 package io.fluentlenium.it;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.fluentlenium.adapter.junit.FluentTest;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
