@@ -135,7 +135,7 @@ jobs:
       - name: Compile gradle example
         run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin -Pfluentlenium.version=$FLUENTLENIUM_VERSION
       - name: Run gradle kotest example
-        run: cd examples/kotest && ./gradlew -i check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+        run: cd examples/kotest && ./gradlew  check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
