@@ -17,6 +17,7 @@ class SmokeTestNewWebDriverSpec extends FluentSpecification {
     @Override
     WebDriver newWebDriver() {
         ChromeOptions chromeOptions = new ChromeOptions()
+        chromeOptions.addArguments("--remote-allow-origins=*")
         chromeOptions.setHeadless(true)
         return new ChromeDriver(chromeOptions)
     }

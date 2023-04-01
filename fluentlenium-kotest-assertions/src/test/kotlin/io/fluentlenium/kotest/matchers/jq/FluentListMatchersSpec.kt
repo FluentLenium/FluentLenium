@@ -212,10 +212,11 @@ class FluentListMatchersSpec : MatcherBase(
             jq("h1").shouldNotHaveTagName("h2")
         }
 
+        val expectedWidth = 764
         "haveDimension" {
-            jq("h1") should haveDimension(Dimension(784, 37))
-            jq("h1") should haveDimension(784 to 37)
-            jq("h1").shouldHaveDimension(Dimension(784, 37))
+            jq("h1") should haveDimension(Dimension(expectedWidth, 37))
+            jq("h1") should haveDimension(expectedWidth to 37)
+            jq("h1").shouldHaveDimension(Dimension(expectedWidth, 37))
 
             jq("h1") shouldNot haveDimension(Dimension(100, 37))
             jq("h1").shouldNotHaveDimension(Dimension(100, 37))
@@ -233,7 +234,7 @@ class FluentListMatchersSpec : MatcherBase(
 
         "haveDimensionNegative" {
             shouldFail {
-                jq("h1") shouldNot haveDimension(784 to 37)
+                jq("h1") shouldNot haveDimension(expectedWidth to 37)
             }
 
             shouldFail {

@@ -32,6 +32,7 @@ public class AfterFailedTest {
         public WebDriver newWebDriver() {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.setHeadless(true);
+            chromeOptions.addArguments("--remote-allow-origins=*");
             return new ChromeDriver(chromeOptions);
         }
 

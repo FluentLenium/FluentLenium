@@ -1,11 +1,5 @@
 package io.fluentlenium.example.kotest
 
-import io.kotest.engine.spec.tempdir
-import io.kotest.matchers.collections.shouldHaveAtLeastSize
-import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.should
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldContain
 import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.core.hook.wait.Wait
@@ -14,9 +8,17 @@ import io.fluentlenium.kotest.matchers.el.haveDimension
 import io.fluentlenium.kotest.matchers.el.shouldHaveDimension
 import io.fluentlenium.kotest.matchers.jq.haveTagName
 import io.fluentlenium.kotest.matchers.jq.shouldHaveTagName
-import org.openqa.selenium.Cookie
+import io.kotest.engine.spec.tempdir
+import io.kotest.matchers.collections.shouldHaveAtLeastSize
+import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import java.io.File
 import java.io.FilenameFilter
+import org.openqa.selenium.Capabilities
+import org.openqa.selenium.Cookie
+import org.openqa.selenium.chrome.ChromeOptions
 import io.fluentlenium.kotest.matchers.jq.haveClass as listHaveClass
 
 @Wait
@@ -28,6 +30,13 @@ class DuckDuckGoSpec : FluentFreeSpec() {
     }
 
     override fun getWebDriver(): String = "chrome"
+
+    override fun getCapabilities(): Capabilities {
+        return ChromeOptions().apply {
+            addArguments("--remote-allow-origins=*")
+            addArguments("--headless=new")
+        }
+    }
 
     private fun File.getScreenshots(): List<String> =
         this.list(PNG_FILTER)?.asList() ?: emptyList()

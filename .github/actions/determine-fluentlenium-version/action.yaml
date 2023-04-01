@@ -1,0 +1,10 @@
+name: 'Maven install Fluentlenium (no tests)'
+description: "this will build & install fluentlenium to the local repo"
+runs:
+  using: "composite"
+  steps:
+    - name: determine Fluentlenium version
+      run: echo "FLUENTLENIUM_VERSION=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> $GITHUB_ENV
+      shell: bash
+      env:
+        MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
