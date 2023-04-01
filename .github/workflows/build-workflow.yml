@@ -38,7 +38,7 @@ jobs:
           cache: "maven"
       - name: Java 11 - unit & integration tests code coverage
         run: |
-          mvn -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+          ./mvnw -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
@@ -50,7 +50,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: |
-          mvn -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
+          ./mvnw -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-build:
     needs: [ check-env ]
@@ -65,7 +65,7 @@ jobs:
           cache: "maven"
       - name: Java 17 - unit & integration tests code coverage
         run: |
-          mvn -T 1C -B -Pjava17 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+          ./mvnw -T 1C -B -Pjava17 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
@@ -77,7 +77,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
         run: |
-          mvn -B -Pjava17 -DrepoToken=$REPO_TOKEN coveralls:report
+          ./mvnw -B -Pjava17 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-parallelism-tests:
     runs-on: ubuntu-latest
@@ -91,10 +91,10 @@ jobs:
           cache: "maven"
 
       - name: determine Fluentlenium version
-        run: echo "FLUENTLENIUM_VERSION=$(mvn -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
+        run: echo "FLUENTLENIUM_VERSION=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
 
       - name: Java 17 - unit & integration tests
-        run: mvn -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
+        run: ./mvnw -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
   java17-javadoc:
     runs-on: ubuntu-latest
@@ -107,7 +107,7 @@ jobs:
           distribution: 'zulu'
           cache: "maven"
       - name: Java 17 - JavaDoc
-        run: mvn -B -Pjava17 javadoc:aggregate
+        run: ./mvnw -B -Pjava17 javadoc:aggregate
 
   compile-gradle-example:
     runs-on: ubuntu-latest
@@ -122,7 +122,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: determine Fluentlenium version
-        run: echo "FLUENTLENIUM_VERSION=$(mvn -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
+        run: echo "FLUENTLENIUM_VERSION=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
       - name: FluentLenium version
         run: echo $FLUENTLENIUM_VERSION
       - name: Compile gradle example
@@ -143,4 +143,4 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: Compile maven examples
-        run: mvn -B -nsu -Pexamples clean test-compile
+        run: ./mvnw -B -nsu -Pexamples clean test-compile

@@ -33,7 +33,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Edge
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   ie:
     needs: [ check-env ]
@@ -48,7 +48,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on IE
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   chrome:
     needs: [ check-env ]
@@ -63,7 +63,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Chrome
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   firefox:
     needs: [ check-env ]
@@ -78,7 +78,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   safari:
     needs: [ check-env ]
@@ -93,7 +93,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   iphone:
     needs: [ check-env ]
@@ -108,7 +108,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Iphone Web test (Safari on Iphone)
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   android:
     needs: [ check-env ]
@@ -123,5 +123,5 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Android Web test (Chrome on Android device)
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
