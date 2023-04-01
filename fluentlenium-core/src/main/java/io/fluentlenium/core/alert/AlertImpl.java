@@ -1,5 +1,6 @@
 package io.fluentlenium.core.alert;
 
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebDriver;
  */
 public class AlertImpl implements Alert {
 
-    private final org.openqa.selenium.Alert alert;  // NOPMD UnusedPrivateMethod
+    private org.openqa.selenium.Alert alert;  // NOPMD UnusedPrivateMethod
 
     /**
      * Creates a new alert object.
@@ -23,7 +24,11 @@ public class AlertImpl implements Alert {
      * @param driver selenium driver
      */
     public AlertImpl(WebDriver driver) {
-        alert = driver.switchTo().alert();
+        try {
+            alert = driver.switchTo().alert();
+        } catch (NoAlertPresentException e) {
+            // ignored. alert will stay null
+        }
     }
 
     /**
@@ -36,6 +41,10 @@ public class AlertImpl implements Alert {
     }
 
     public org.openqa.selenium.Alert getAlert() {
+        if (alert == null) {
+            throw new NoAlertPresentException();
+        }
+
         return alert;
     }
 
@@ -53,7 +62,7 @@ public class AlertImpl implements Alert {
      */
     @Override
     public boolean present() {
-        return true;
+        return alert != null;
     }
 
     @Override
