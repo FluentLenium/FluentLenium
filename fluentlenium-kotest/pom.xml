@@ -179,28 +179,6 @@
             </build>
         </profile>
 
-        <profile>
-            <id>ci</id>
-
-            <activation>
-                <property>
-                    <name>CI</name>
-                </property>
-            </activation>
-
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.gantsign.maven</groupId>
-                        <artifactId>ktlint-maven-plugin</artifactId>
-
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
     </profiles>
 
 </project>
