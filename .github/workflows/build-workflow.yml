@@ -91,7 +91,7 @@ jobs:
           cache: "maven"
 
       - name: determine Fluentlenium version
-        run: echo "FLUENTLENIUM_VERSION=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
+        uses: ./.github/actions/determine-fluentlenium-version
 
       - name: Java 17 - unit & integration tests
         run: ./mvnw -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
@@ -122,7 +122,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: determine Fluentlenium version
-        run: echo "FLUENTLENIUM_VERSION=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]')" >> $GITHUB_ENV
+        uses: ./.github/actions/determine-fluentlenium-version
       - name: FluentLenium version
         run: echo $FLUENTLENIUM_VERSION
       - name: Compile gradle example
