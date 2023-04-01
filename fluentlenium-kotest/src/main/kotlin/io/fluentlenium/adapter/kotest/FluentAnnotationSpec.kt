@@ -10,7 +10,7 @@ import io.fluentlenium.core.inject.ContainerFluentControl
 import io.kotest.core.spec.style.AnnotationSpec
 
 abstract class FluentAnnotationSpec internal constructor(
-    private val fluentAdapter: KoTestFluentAdapter
+    private val fluentAdapter: KoTestFluentAdapter,
 ) :
     AnnotationSpec(),
     IFluentAdapter by fluentAdapter,

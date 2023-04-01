@@ -8,7 +8,7 @@ import io.kotest.matchers.shouldBe
 
 @FluentConfiguration(
     driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,
-    custom = [CustomProperty(name = "foo", value = "bar")]
+    custom = [CustomProperty(name = "foo", value = "bar")],
 )
 class ConfigurationSpec : FluentDescribeSpec() {
 

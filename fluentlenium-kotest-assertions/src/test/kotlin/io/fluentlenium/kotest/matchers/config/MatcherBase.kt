@@ -4,7 +4,7 @@ import io.fluentlenium.adapter.kotest.FluentStringSpec
 import io.fluentlenium.utils.UrlUtils
 
 abstract class MatcherBase(
-    body: FluentStringSpec.() -> Unit = {}
+    body: FluentStringSpec.() -> Unit = {},
 ) : FluentStringSpec(body) {
 
     fun goToFile(file: String) =

@@ -9,7 +9,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 
 @FluentConfiguration(
-    driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD
+    driverLifecycle = ConfigurationProperties.DriverLifecycle.THREAD,
 )
 class ThreadWebDriverSpec : FluentDescribeSpec({
 

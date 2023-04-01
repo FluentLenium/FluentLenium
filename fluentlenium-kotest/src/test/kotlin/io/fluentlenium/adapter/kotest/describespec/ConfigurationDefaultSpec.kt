@@ -14,7 +14,7 @@ import io.kotest.matchers.string.shouldContain
 @FluentConfiguration(
     driverLifecycle = ConfigurationProperties.DriverLifecycle.JVM,
     configurationDefaults = CustomConfigurationDefault::class,
-    webDriver = "chrome"
+    webDriver = "chrome",
 )
 class ConfigurationDefaultSpec : FluentDescribeSpec({
     it("remoteUrl via custom default class") {
