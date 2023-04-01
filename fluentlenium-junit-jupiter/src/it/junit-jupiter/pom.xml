@@ -17,7 +17,7 @@
     </modules>
 
     <properties>
-        <it.project.version>5.0.1</it.project.version>
+        <it.project.version>6.0.0-SNAPSHOT</it.project.version>
         <selenium.version>4.2.2</selenium.version>
     </properties>
 
