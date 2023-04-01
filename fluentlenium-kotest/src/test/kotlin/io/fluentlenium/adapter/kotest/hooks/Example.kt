@@ -8,7 +8,7 @@ import java.lang.annotation.Inherited
 @Target(AnnotationTarget.FIELD, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 @Hook(
-    ExampleHook::class
+    ExampleHook::class,
 )
 @HookOptions(ExampleHookOptions::class)
 annotation class Example(val message: String = "")

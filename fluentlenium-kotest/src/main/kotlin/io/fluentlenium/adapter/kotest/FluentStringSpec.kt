@@ -11,7 +11,7 @@ import io.kotest.core.spec.style.StringSpec
 
 abstract class FluentStringSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
-    body: FluentStringSpec.() -> Unit
+    body: FluentStringSpec.() -> Unit,
 ) : StringSpec({}),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {

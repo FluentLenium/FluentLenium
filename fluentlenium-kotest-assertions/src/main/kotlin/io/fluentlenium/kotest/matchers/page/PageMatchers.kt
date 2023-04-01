@@ -16,7 +16,7 @@ fun haveElement(element: FluentWebElement) = object : Matcher<FluentPage> {
             { "Page should have element '$element'" },
             {
                 "Page should not have element '$element'"
-            }
+            },
         )
 }
 
@@ -30,7 +30,7 @@ fun haveElements(elements: FluentList<FluentWebElement>) = object : Matcher<Flue
             { "Page should have elements '$elements'" },
             {
                 "Page should not have elements '$elements'"
-            }
+            },
         )
 }
 
@@ -46,7 +46,7 @@ fun haveElementDisplayed(element: FluentWebElement) = object : Matcher<FluentPag
             { "Page should display '$element'" },
             {
                 "Page should not display element '$element'"
-            }
+            },
         )
 }
 
@@ -63,7 +63,7 @@ fun haveTitle(title: String) = object : Matcher<FluentPage> {
             { "Actual page title is '$pageTitle'. Expected title is '$title'" },
             {
                 "Current page should not have title '$pageTitle'."
-            }
+            },
         )
     }
 }
@@ -80,7 +80,7 @@ fun haveUrl(url: String) = object : Matcher<FluentPage> {
             { "Current page url is '$currentUrl'. Expected '$url'" },
             {
                 "Current page url is '$currentUrl' Should not be '$url'."
-            }
+            },
         )
     }
 }
@@ -101,7 +101,7 @@ fun haveExpectedElements() = object : Matcher<FluentPage> {
             { "should have elements located by '$by'" },
             {
                 "should not have elements located by '$by'"
-            }
+            },
         )
     }
 }
@@ -116,7 +116,7 @@ fun haveExpectedUrl() = object : Matcher<FluentPage> {
             { "no page url available" },
             {
                 "no page url available"
-            }
+            },
         )
 
         val isAt = try {
@@ -131,7 +131,7 @@ fun haveExpectedUrl() = object : Matcher<FluentPage> {
             { "Should be at '$url', current url is ${value.driver.currentUrl}" },
             {
                 "Should not be at '$url'"
-            }
+            },
         )
     }
 }

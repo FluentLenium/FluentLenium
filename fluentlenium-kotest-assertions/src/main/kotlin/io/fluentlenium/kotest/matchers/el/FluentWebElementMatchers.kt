@@ -24,7 +24,7 @@ fun bePresent() = object : Matcher<FluentWebElement> {
             },
             {
                 "Element '$value' should not be present"
-            }
+            },
         )
 }
 
@@ -55,7 +55,7 @@ fun beEnabled() = object : Matcher<FluentWebElement> {
             { "Element $value should be enabled" },
             {
                 "Element $value should not be enabled"
-            }
+            },
         )
 }
 
@@ -85,7 +85,7 @@ fun beDisplayed() = object : Matcher<FluentWebElement> {
             { "Element $value should be displayed" },
             {
                 "Element $value should not be displayed"
-            }
+            },
         )
 }
 
@@ -114,7 +114,7 @@ fun beClickable() = object : Matcher<FluentWebElement> {
             { "Element $value should be clickable" },
             {
                 "Element $value should not be clickable"
-            }
+            },
         )
 }
 
@@ -143,7 +143,7 @@ fun beSelected() = object : Matcher<FluentWebElement> {
             { "Element $value should be selected" },
             {
                 "Element $value should not be selected"
-            }
+            },
         )
 }
 
@@ -174,7 +174,7 @@ fun containText(expectedText: String) = object : Matcher<FluentWebElement> {
             { "Expected element to contain text '$expectedText', actual text is '$actualText'." },
             {
                 "Expected element to not contain text '$expectedText', actual text is '$actualText'."
-            }
+            },
         )
     }
 }
@@ -206,7 +206,7 @@ fun matchText(pattern: String) = object : Matcher<FluentWebElement> {
             { "Expected element text to match pattern '$pattern', actual text is '$actualText'." },
             {
                 "Expected element text to not match pattern '$pattern', actual text is '$actualText'."
-            }
+            },
         )
     }
 }
@@ -238,7 +238,7 @@ fun haveId(id: String) = object : Matcher<FluentWebElement> {
             { "Expected element to have id '$id', actual id is '$actualId'." },
             {
                 "Expected element to not have id '$id'."
-            }
+            },
         )
     }
 }
@@ -275,7 +275,7 @@ fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentWebElemen
             { "Expected element to have classes $expectedList, actual classes are $actualClasses." },
             {
                 "Expected element to not have classes $expectedList, actual classes are $actualClasses."
-            }
+            },
         )
     }
 }
@@ -307,7 +307,7 @@ fun haveValue(expectedValue: String) = object : Matcher<FluentWebElement> {
             { "Expected element to have value '$expectedValue', actual value is '$actualValue'." },
             {
                 "Expected element to not have value '$actualValue'."
-            }
+            },
         )
     }
 }
@@ -338,7 +338,7 @@ fun haveName(expectedName: String) = object : Matcher<FluentWebElement> {
             { "Expected element to have name '$expectedName', actual name is '$actualName'." },
             {
                 "Expected element to not have name '$actualName'."
-            }
+            },
         )
     }
 }
@@ -369,7 +369,7 @@ fun haveTagName(expectedTagName: String) = object : Matcher<FluentWebElement> {
             { "Expected element to be a '$expectedTagName' tag, actually it is a '$actualTagName' tag." },
             {
                 "Expected element to not to be a '$actualTagName' tag."
-            }
+            },
         )
     }
 }
@@ -400,7 +400,7 @@ fun haveDimension(expectedDimension: Dimension) = object : Matcher<FluentWebElem
             { "Expected element to have dimension '$expectedDimension', actual dimension is '$actualDimension'." },
             {
                 "Expected element to not have dimension '$actualDimension'."
-            }
+            },
         )
     }
 }
@@ -458,7 +458,7 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentWebElement
             { "Expected element to have attribute '$expectedAttribute'." },
             {
                 "Expected element to not have attribute '$expectedAttribute'. attribute exists and has value '$actualAttributeValue'."
-            }
+            },
         )
     }
 }
@@ -491,7 +491,7 @@ fun haveAttributeValue(attribute: String, expectedValue: String?) = object : Mat
             { "Expected element to have attribute '$attribute' with value '$expectedValue'. actual value is '$actualAttributeValue'" },
             {
                 "Expected element to not have attribute '$attribute' with value '$expectedValue'."
-            }
+            },
         )
     }
 }

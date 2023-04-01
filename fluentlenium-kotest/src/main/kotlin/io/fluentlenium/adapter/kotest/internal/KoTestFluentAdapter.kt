@@ -24,11 +24,11 @@ import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestType
+import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.concurrent.atomic.AtomicReference
 
-internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
+internal class KoTestFluentAdapter(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
     IFluentAdapter,
     FluentAdapter() {
 
@@ -104,7 +104,7 @@ internal class KoTestFluentAdapter constructor(var useConfigurationOverride: () 
                 theTestInstance::newWebDriver,
                 this@KoTestFluentAdapter::failed,
                 configuration,
-                sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle)
+                sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle),
             )
 
         initFluent(driver.driver, testCase.spec)

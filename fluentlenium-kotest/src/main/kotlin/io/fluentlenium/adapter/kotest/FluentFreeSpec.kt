@@ -11,7 +11,7 @@ import io.kotest.core.spec.style.FreeSpec
 
 abstract class FluentFreeSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
-    body: FluentFreeSpec.() -> Unit
+    body: FluentFreeSpec.() -> Unit,
 ) : FreeSpec({}),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {

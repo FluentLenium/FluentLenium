@@ -26,7 +26,7 @@ fun haveText(expectedText: String) = object : Matcher<FluentList<FluentWebElemen
             { "No selected elements has text '$expectedText', found texts $actualTexts" },
             {
                 "No selected elements should have '$expectedText',"
-            }
+            },
         )
     }
 }
@@ -60,7 +60,7 @@ fun haveTextContaining(expectedText: String) = object : Matcher<FluentList<Fluen
             { "No selected elements text contains '$expectedText', found texts $actualTexts" },
             {
                 "No selected elements should contain '$expectedText',"
-            }
+            },
         )
     }
 }
@@ -95,7 +95,7 @@ fun haveTextMatching(expectedPattern: String) = object : Matcher<FluentList<Flue
             { "No selected elements text matches '$expectedPattern', found texts $actualTexts" },
             {
                 "No selected elements should match '$expectedPattern',"
-            }
+            },
         )
     }
 }
@@ -130,7 +130,7 @@ fun haveId(id: String) = object : Matcher<FluentList<FluentWebElement>> {
             { "No selected elements has id '$id', found ids $actualIds" },
             {
                 "No selected elements should have id '$id',"
-            }
+            },
         )
     }
 }
@@ -177,7 +177,7 @@ fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentList<Flue
             { "No selected elements has expected classes $expectedList, found $actualClasses" },
             {
                 "No selected elements should have classes $expectedList"
-            }
+            },
         )
     }
 }
@@ -212,7 +212,7 @@ fun haveName(expectedName: String) = object : Matcher<FluentList<FluentWebElemen
             { "No selected elements with name '$expectedName', found $actualNames." },
             {
                 "No selected elements should have name '$expectedName'."
-            }
+            },
         )
     }
 }
@@ -249,7 +249,7 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentList<Fluen
             { "No selected elements with name attribute '$expectedAttribute'." },
             {
                 "No selected elements should have name '$expectedAttribute'. found $anyPresent"
-            }
+            },
         )
     }
 }
@@ -284,7 +284,7 @@ fun haveValue(expectedValue: String) = object : Matcher<FluentList<FluentWebElem
             { "No selected elements with value '$expectedValue'." },
             {
                 "No selected elements should have value '$expectedValue'."
-            }
+            },
         )
     }
 }
@@ -320,7 +320,7 @@ fun haveAttributeValue(key: String, expectedValue: String) = object : Matcher<Fl
             { "No selected elements with attribute value '$key' = '$expectedValue'. found values $actualValues" },
             {
                 "No selected elements should have attribute value '$key' = '$expectedValue'."
-            }
+            },
         )
     }
 }
@@ -367,7 +367,7 @@ fun haveTagName(expectedTag: String) = object : Matcher<FluentList<FluentWebElem
             { "No selected elements with tag '$expectedTag'. found tags $actualTags" },
             {
                 "No selected elements should be a '$expectedTag'."
-            }
+            },
         )
     }
 }
@@ -402,7 +402,7 @@ fun haveDimension(expectedDimension: Dimension) = object : Matcher<FluentList<Fl
             { "No selected elements with dimension '$expectedDimension'. found $actualDimensions" },
             {
                 "No selected elements should have dimension '$expectedDimension'."
-            }
+            },
         )
     }
 }
@@ -440,7 +440,7 @@ fun bePresent() = object : Matcher<FluentList<FluentWebElement>> {
             { "Elements '$value' should be present" },
             {
                 "Elements '$value' should not be present"
-            }
+            },
         )
 }
 

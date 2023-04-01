@@ -170,14 +170,14 @@ class FluentListMatchersSpec : MatcherBase(
 
             jq("#choice option") should haveAttributeValue(
                 "value",
-                "first"
+                "first",
             )
             jq("#choice option").shouldHaveAttributeValue("value", "first")
             jq("#choice option").shouldHaveAttributeValue("value" to "first")
 
             jq("#choice option") shouldNot haveAttributeValue(
                 "value",
-                "other"
+                "other",
             )
             jq("#choice #first").shouldNotHaveAttributeValue("value", "other")
             jq("#choice #first").shouldNotHaveAttributeValue("value" to "other")
@@ -190,7 +190,7 @@ class FluentListMatchersSpec : MatcherBase(
             shouldFail {
                 jq("#choice option") shouldNot haveAttributeValue(
                     "value",
-                    "first"
+                    "first",
                 )
             }
             shouldFail {
@@ -199,7 +199,7 @@ class FluentListMatchersSpec : MatcherBase(
             shouldFail {
                 jq("#choice option") should haveAttributeValue(
                     "value",
-                    "other"
+                    "other",
                 )
             }
         }
@@ -241,5 +241,5 @@ class FluentListMatchersSpec : MatcherBase(
                 jq("h1") should haveDimension(Dimension(100, 37))
             }
         }
-    }
+    },
 )
