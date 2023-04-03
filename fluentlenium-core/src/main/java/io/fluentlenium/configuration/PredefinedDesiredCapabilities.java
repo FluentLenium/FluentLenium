@@ -1,8 +1,7 @@
 package io.fluentlenium.configuration;
 
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class PredefinedDesiredCapabilities {
@@ -12,47 +11,42 @@ public class PredefinedDesiredCapabilities {
     }
 
     public static DesiredCapabilities android() {
-        return new DesiredCapabilities(BrowserType.ANDROID, "", Platform.ANDROID);
+        return new DesiredCapabilities(Browser.CHROME.browserName(), "", Platform.ANDROID);
     }
 
     public static DesiredCapabilities chrome() {
-        return new DesiredCapabilities(BrowserType.CHROME, "", Platform.ANY);
+        return new DesiredCapabilities(Browser.CHROME.browserName(), "", Platform.ANY);
     }
 
     public static DesiredCapabilities firefox() {
-        DesiredCapabilities capabilities = new DesiredCapabilities(BrowserType.FIREFOX, "", Platform.ANY);
+        DesiredCapabilities capabilities = new DesiredCapabilities(Browser.FIREFOX.browserName(), "", Platform.ANY);
         capabilities.setCapability("acceptInsecureCerts", true);
         return capabilities;
     }
 
     public static DesiredCapabilities htmlUnit() {
-        return new DesiredCapabilities(BrowserType.HTMLUNIT, "", Platform.ANY);
+        return new DesiredCapabilities(Browser.HTMLUNIT.browserName(), "", Platform.ANY);
     }
 
     public static DesiredCapabilities edge() {
-        return new DesiredCapabilities(BrowserType.EDGE, "", Platform.WINDOWS);
+        return new DesiredCapabilities(Browser.EDGE.browserName(), "", Platform.WINDOWS);
     }
 
     public static DesiredCapabilities internetExplorer() {
-        DesiredCapabilities capabilities = new DesiredCapabilities(BrowserType.IE, "", Platform.WINDOWS);
-        capabilities.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+        DesiredCapabilities capabilities = new DesiredCapabilities(Browser.IE.browserName(), "", Platform.WINDOWS);
         return capabilities;
     }
 
     public static DesiredCapabilities iphone() {
-        return new DesiredCapabilities(BrowserType.IPHONE, "", Platform.MAC);
+        return new DesiredCapabilities(Browser.SAFARI.browserName(), "", Platform.MAC);
     }
 
     public static DesiredCapabilities ipad() {
-        return new DesiredCapabilities(BrowserType.IPAD, "", Platform.MAC);
-    }
-
-    public static DesiredCapabilities opera() {
-        return new DesiredCapabilities(BrowserType.OPERA, "", Platform.ANY);
+        return new DesiredCapabilities(Browser.SAFARI.browserName(), "", Platform.MAC);
     }
 
     public static DesiredCapabilities safari() {
-        return new DesiredCapabilities(BrowserType.SAFARI, "", Platform.MAC);
+        return new DesiredCapabilities(Browser.SAFARI.browserName(), "", Platform.MAC);
     }
 
 }

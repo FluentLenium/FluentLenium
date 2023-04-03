@@ -32,10 +32,10 @@ public final class SeleniumVersionChecker {
                     + " Skipped compatibility check."
                     + " Please make sure you are using correct Selenium version - {}";
     static final String WRONG_VERSION_MESSAGE =
-            "You are using incompatible Selenium version. Please change it to {}. "
+            "You are using incompatible Selenium version {}. Please change it to {}. "
                     + "You can find example on project main page {}";
 
-    private static final String EXPECTED_VERSION = "4.2.2";
+    private static final String EXPECTED_VERSION = "4.8.3";
     private static final String SELENIUM_GROUP_ID = "org.seleniumhq.selenium";
     private static final String FL_URL = "https://github.com/FluentLenium/FluentLenium";
     private static final String POM = "pom.xml";
@@ -106,7 +106,7 @@ public final class SeleniumVersionChecker {
             }
 
             if (!Objects.equals(resolvedSeleniumVersion, EXPECTED_VERSION)) {
-                LOGGER.warn(WRONG_VERSION_MESSAGE, EXPECTED_VERSION, FL_URL);
+                LOGGER.warn(WRONG_VERSION_MESSAGE, resolvedSeleniumVersion, EXPECTED_VERSION, FL_URL);
             }
         }
     }

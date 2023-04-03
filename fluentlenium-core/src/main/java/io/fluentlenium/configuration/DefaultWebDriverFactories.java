@@ -3,14 +3,19 @@ package io.fluentlenium.configuration;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Utility class with default WebDriver factories.
@@ -36,11 +41,29 @@ public class DefaultWebDriverFactories {
     @FactoryPriority(64)
     @DefaultFactory
     public static class ChromeWebDriverFactory extends ReflectiveWebDriverFactory {
+
+        private static final Logger LOG = LoggerFactory.getLogger(ChromeWebDriverFactory.class);
+
         /**
          * Creates a new chrome WebDriver factory.
          */
         public ChromeWebDriverFactory() {
             super("chrome", "org.openqa.selenium.chrome.ChromeDriver");
+        }
+
+        @Override
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            LOG.debug("newInstance {}, {}, {}", webDriverClass, configuration, args);
+
+
+            Capabilities oCaps = (Capabilities) args[0];
+            Map<String, Object> oOpts = (Map<String, Object>) oCaps.getCapability("goog:chromeOptions");
+            List<String> oArgs = (List<String>) oOpts.get("args");
+            ChromeOptions chromeOptions = new ChromeOptions();
+
+            chromeOptions.addArguments(oArgs);
+
+            return super.newInstance(webDriverClass, configuration, new Object[]{chromeOptions});
         }
     }
 
@@ -103,7 +126,7 @@ public class DefaultWebDriverFactories {
         protected DesiredCapabilities newDefaultCapabilities() {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setJavascriptEnabled(true);
-            desiredCapabilities.setBrowserName(BrowserType.HTMLUNIT);
+            desiredCapabilities.setBrowserName(Browser.HTMLUNIT.browserName());
             return desiredCapabilities;
         }
     }

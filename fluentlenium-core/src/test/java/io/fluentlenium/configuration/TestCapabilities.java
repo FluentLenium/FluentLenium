@@ -11,12 +11,12 @@ public class TestCapabilities implements Capabilities {
         return null;
     }
 
-    @Override
+    // @Override
     public Platform getPlatform() {
         return null;
     }
 
-    @Override
+    // @Override
     public String getVersion() {
         return null;
     }

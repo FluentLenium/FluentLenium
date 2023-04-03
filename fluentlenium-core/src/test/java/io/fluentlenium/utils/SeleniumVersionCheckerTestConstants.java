@@ -4,7 +4,7 @@ final class SeleniumVersionCheckerTestConstants {
 
     private static final String POM_NAME = "dummy_pom.xml";
     private static final String PATH_TO_TEST_FOLDER = "src/test/resources/io/fluentlenium/utils/poms/";
-    static final String EXPECTED_VERSION = "4.2.2";
+    static final String EXPECTED_VERSION = "4.8.3";
     static final String PARENT_POM = PATH_TO_TEST_FOLDER + POM_NAME;
     static final String MISSING_SELENIUM_POM = PATH_TO_TEST_FOLDER + "missing" + POM_NAME;
     static final String CHILD_POM = PATH_TO_TEST_FOLDER + "dummy/" + POM_NAME;
