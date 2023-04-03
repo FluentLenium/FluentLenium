@@ -1,0 +1,11 @@
+{
+  "name": "appium-demo",
+  "version": "1.0.0",
+  "description": "Appium demo",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "appium": "^1.22.3"
+  }
+}

@@ -5,6 +5,8 @@ import io.fluentlenium.example.appium.ExampleFluentTest;
 import io.fluentlenium.example.appium.app.android.SwiftNoteHomePage;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AndroidSwiftNotesApp extends ExampleFluentTest {
 
     private static final String SAMPLE_TITLE = "SampleTitle";
@@ -12,6 +14,12 @@ public class AndroidSwiftNotesApp extends ExampleFluentTest {
 
     @Page
     private SwiftNoteHomePage noteApp;
+
+    @Test
+    public void verifyAndroidSdkConfiguration() {
+        // sdk must be available and environment variable configured. see pom.xml
+        assertThat(System.getenv("ANDROID_HOME")).isNotNull();
+    }
 
     @Test
     public void shouldCorrectlyAddNote() {
