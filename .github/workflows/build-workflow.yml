@@ -188,3 +188,31 @@ jobs:
         with:
           check_name: Safari example
           report_paths: '**/target/*-reports/TEST-*.xml'
+
+  windows-example:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+
+      - name: Run windows examples
+        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Microsoft example
+          report_paths: '**/target/*-reports/TEST-*.xml'
