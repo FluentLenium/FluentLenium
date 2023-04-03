@@ -39,12 +39,11 @@ public class ExampleFluentTest extends FluentTest {
     @BeforeClass
     public static void startServer() {
         DesiredCapabilities cap = new DesiredCapabilities();
-        cap.setCapability("noReset", "false");
+        // cap.setCapability("noReset", "false");
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .withCapabilities(cap)
-                .withArgument(GeneralServerFlag.BASEPATH, "/wd/hub/")
                 .withArgument(GeneralServerFlag.RELAXED_SECURITY)
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
                 .withArgument(GeneralServerFlag.LOG_LEVEL, "info");

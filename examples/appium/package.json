@@ -6,6 +6,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "appium": "^1.22.3"
+    "appium": "next",
+    "appium-uiautomator2-driver": "^2.12.7",
+    "appium-xcuitest-driver": "^4.21.4"
+  },
+  "scripts": {
+    "xcuitest": "appium driver install xcuitest",
+    "uiautomator2": "appium driver install uiautomator2"
   }
 }

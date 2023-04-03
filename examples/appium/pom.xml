@@ -97,6 +97,39 @@
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
+
+                    <execution>
+                        <id>install appium driver xcuitest</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+
+                        <!-- optional: default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+
+                        <configuration>
+                            <!-- todo should only run once -->
+                            <skip>true</skip>
+                            <arguments>run xcuitest</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>install appium driver UiAutomator2</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+
+                        <!-- optional: default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+
+                        <configuration>
+                            <!-- todo should only run once -->
+                            <skip>true</skip>
+
+                            <arguments>run uiautomator2</arguments>
+                        </configuration>
+                    </execution>
                 </executions>
 
                 <configuration>

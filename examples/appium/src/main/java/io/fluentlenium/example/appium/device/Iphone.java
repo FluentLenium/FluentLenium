@@ -24,7 +24,7 @@ public class Iphone implements Device {
         capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
         capabilities.setCapability("useNewWDA", false);
-        capabilities.setCapability("showXcodeLog", true);
+        capabilities.setCapability("showXcodeLog", false);
 
         return capabilities;
     }
