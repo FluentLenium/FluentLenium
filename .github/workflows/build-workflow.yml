@@ -204,6 +204,9 @@ jobs:
           distribution: 'zulu'
           java-version: 17
 
+      - name: dir
+        run: dir
+
       - name: run maven install
         run: mvnw.cmd -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
         env:
