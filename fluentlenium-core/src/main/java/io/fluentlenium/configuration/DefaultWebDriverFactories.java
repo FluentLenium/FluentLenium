@@ -38,9 +38,9 @@ public class DefaultWebDriverFactories {
         protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
             Capabilities oCaps = (Capabilities) args[0];
-            FirefoxOptions fOptions = new FirefoxOptions(oCaps);
+            FirefoxOptions options = new FirefoxOptions(oCaps);
 
-            return super.newInstance(webDriverClass, configuration, new Object[]{fOptions});
+            return super.newInstance(webDriverClass, configuration, options);
         }
     }
 
@@ -65,7 +65,7 @@ public class DefaultWebDriverFactories {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions = chromeOptions.merge(oCaps);
 
-            return super.newInstance(webDriverClass, configuration, new Object[]{chromeOptions});
+            return super.newInstance(webDriverClass, configuration, chromeOptions);
         }
     }
 
@@ -87,7 +87,7 @@ public class DefaultWebDriverFactories {
             Capabilities oCaps = (Capabilities) args[0];
             InternetExplorerOptions options = new InternetExplorerOptions(oCaps);
 
-            return super.newInstance(webDriverClass, configuration, new Object[]{options});
+            return super.newInstance(webDriverClass, configuration, options);
         }
     }
 
@@ -109,7 +109,7 @@ public class DefaultWebDriverFactories {
             Capabilities oCaps = (Capabilities) args[0];
             EdgeOptions options = new EdgeOptions().merge(oCaps);
 
-            return super.newInstance(webDriverClass, configuration, new Object[]{options});
+            return super.newInstance(webDriverClass, configuration, options);
         }
     }
 
@@ -131,7 +131,7 @@ public class DefaultWebDriverFactories {
             Capabilities oCaps = (Capabilities) args[0];
             SafariOptions options = new SafariOptions(oCaps);
 
-            return super.newInstance(webDriverClass, configuration, new Object[]{options});
+            return super.newInstance(webDriverClass, configuration, options);
         }
     }
 
