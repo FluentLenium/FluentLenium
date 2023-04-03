@@ -159,3 +159,39 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
       - name: Compile maven examples
         run: ./mvnw -B -nsu -Pexamples clean test-compile
+
+  safari-example:
+    runs-on: macos-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+
+      - name: Enable Safari Driver
+        run: |
+            # Workaround for `sudo safardriver --enable` not working:
+            # https://github.com/web-platform-tests/wpt/issues/19845
+            # https://github.com/web-platform-tests/wpt/blob/master/tools/ci/azure/install_safari.yml
+            mkdir -p ~/Library/WebDriver/
+            curl https://raw.githubusercontent.com/web-platform-tests/wpt/master/tools/ci/azure/com.apple.Safari.plist -o ~/Library/WebDriver/com.apple.Safari.plist
+            defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically 1
+            # sudo safaridriver --enable
+
+      - name: Compile maven examples
+        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
+
+      - name: Upload reports
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'quickstart-safari'
+          report_paths: '**/target/*-reports/TEST-*.xml'
