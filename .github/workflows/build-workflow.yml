@@ -178,15 +178,9 @@ jobs:
 
       - name: Enable Safari Driver
         run: |
-            # Workaround for `sudo safardriver --enable` not working:
-            # https://github.com/web-platform-tests/wpt/issues/19845
-            # https://github.com/web-platform-tests/wpt/blob/master/tools/ci/azure/install_safari.yml
-            mkdir -p ~/Library/WebDriver/
-            curl https://raw.githubusercontent.com/web-platform-tests/wpt/master/tools/ci/azure/com.apple.Safari.plist -o ~/Library/WebDriver/com.apple.Safari.plist
-            defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically 1
-            # sudo safaridriver --enable
+            sudo safaridriver --enable
 
-      - name: Compile maven examples
+      - name: Run safari examples
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
 
       - name: Upload reports
