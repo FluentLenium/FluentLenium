@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 public class KeyboardElementActions {
     private final WebDriver driver;
     private final WebElement element;
+    private Actions actions;
 
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
@@ -36,12 +37,38 @@ public class KeyboardElementActions {
     }
 
     /**
+     * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
+     *
+     * @param driver  selenium driver
+     * @param element element on which to execute actions
+     */
+    public KeyboardElementActions(WebDriver driver, WebElement element, Actions actions) {
+        this.driver = driver;
+        this.element = element;
+        this.actions = actions;
+    }
+
+    /**
+     * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
+     *
+     * @param driver           selenium driver
+     * @param fluentWebElement FluentWebElement on which to execute actions
+     */
+    public KeyboardElementActions(WebDriver driver, FluentWebElement fluentWebElement, Actions actions) {
+        this(driver, fluentWebElement.getElement(), actions);
+    }
+
+    /**
      * Get selenium interactions actions.
      *
      * @return selenium actions
      */
     protected Actions actions() {
-        return new Actions(driver);
+        if (actions == null) {
+            this.actions = new Actions(driver);
+        }
+
+        return actions;
     }
 
     /**
