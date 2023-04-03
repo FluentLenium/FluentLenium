@@ -1,33 +1,29 @@
 package io.fluentlenium.core.action;
 
 import io.fluentlenium.core.domain.FluentWebElement;
-import org.assertj.core.api.Assertions;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.Coordinates;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.interactions.Interactive;
 import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.Mouse;
 
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class KeyboardElementActionsTest {
-    @Mock
-    private Keyboard keyboard;
-
-    @Mock
-    private Mouse mouse;
+    @Spy
+    @InjectMocks
+    private Actions actions;
 
     @Mock
     private InputDevicesDriver driver;
@@ -41,66 +37,60 @@ public class KeyboardElementActionsTest {
     @Mock
     private Coordinates coordinates;
 
-    @Before
-    public void before() {
-        when(driver.getKeyboard()).thenReturn(keyboard);
-        when(driver.getMouse()).thenReturn(mouse);
-
-        when(element.getCoordinates()).thenReturn(coordinates);
-    }
-
     @After
     public void after() {
-        reset(driver, keyboard, mouse);
+        reset(driver, actions);
     }
 
     @Test
     public void testKeyDownWebElement() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
+        KeyboardElementActionTestable actions = new KeyboardElementActionTestable(driver, element, this.actions);
         actions.keyDown(Keys.SHIFT);
 
-        verify(mouse).click(coordinates);
-        verify(keyboard).pressKey(Keys.SHIFT);
+        verify(this.actions).keyDown(element, Keys.SHIFT);
     }
 
     @Test
     public void testKeyDownFluentWebElement() {
-        when(fluentWebElement.getElement()).thenReturn(element);
-
-        KeyboardElementActions actions = new KeyboardElementActions(driver, fluentWebElement);
+        KeyboardElementActionTestable actions = new KeyboardElementActionTestable(driver, element, this.actions);
         actions.keyDown(Keys.SHIFT);
 
-        verify(mouse).click(coordinates);
-        verify(keyboard).pressKey(Keys.SHIFT);
+        verify(this.actions).keyDown(element, Keys.SHIFT);
     }
 
     @Test
     public void testKeyUp() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
+        KeyboardElementActionTestable actions = new KeyboardElementActionTestable(driver, element, this.actions);
         actions.keyUp(Keys.SHIFT);
 
-        verify(mouse).click(coordinates);
-        verify(keyboard).releaseKey(Keys.SHIFT);
+        verify(this.actions).keyUp(element, Keys.SHIFT);
     }
 
     @Test
     public void testSendKeys() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
+        KeyboardElementActionTestable actions = new KeyboardElementActionTestable(driver, element, this.actions);
         actions.sendKeys(Keys.ENTER, Keys.SPACE);
 
-        verify(mouse).click(coordinates);
-        verify(keyboard).sendKeys(Keys.ENTER, Keys.SPACE);
+        verify(this.actions).sendKeys(element, Keys.ENTER, Keys.SPACE);
     }
 
-    @Test
-    public void testBasic() {
-        KeyboardElementActions actions = new KeyboardElementActions(driver, element);
-        Assertions.assertThat(actions.basic()).isSameAs(keyboard);
-    }
-
-    private abstract static class InputDevicesDriver implements WebDriver, HasInputDevices { // NOPMD AbstractNaming
+    private abstract static class InputDevicesDriver implements WebDriver, Interactive { // NOPMD AbstractNaming
     }
 
     private abstract static class LocatableElement implements WebElement, Locatable { // NOPMD AbstractNaming
+    }
+
+    static class KeyboardElementActionTestable extends KeyboardElementActions {
+        Actions actions;
+
+        public KeyboardElementActionTestable(WebDriver driver, WebElement element, Actions actions) {
+            super(driver, element);
+            this.actions = actions;
+        }
+
+        @Override
+        protected Actions actions() {
+            return actions;
+        }
     }
 }
