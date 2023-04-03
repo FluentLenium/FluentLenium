@@ -208,12 +208,12 @@ jobs:
         run: dir
 
       - name: run maven install
-        run: .\mvnw.cmd -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+        run: .\mvnw.cmd -B clean install -DskipTests=true
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
       - name: Run windows examples
-        run: mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
