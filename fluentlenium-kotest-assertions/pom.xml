@@ -13,9 +13,9 @@
     <description>Kotest FluentLenium Assertions</description>
 
     <properties>
-        <kotlin.version>1.8.10</kotlin.version>
+        <kotlin.version>1.8.20</kotlin.version>
         <kotest.version>5.5.5</kotest.version>
-        <dokka.version>1.8.10</dokka.version>
+        <dokka.version>1.8.20</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 

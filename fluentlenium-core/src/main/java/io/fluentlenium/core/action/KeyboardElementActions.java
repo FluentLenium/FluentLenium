@@ -40,7 +40,7 @@ public class KeyboardElementActions {
      *
      * @return selenium actions
      */
-    private Actions actions() {
+    protected Actions actions() {
         return new Actions(driver);
     }
 

@@ -3,7 +3,6 @@ package io.fluentlenium.core.action;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 /**
  * Execute actions with the keyboard.
@@ -26,9 +25,8 @@ public class KeyboardActions {
      * @return selenium actions
      */
     protected org.openqa.selenium.interactions.Actions actions() {
-        return new Actions(driver);
+        return new org.openqa.selenium.interactions.Actions(driver);
     }
-
 
     /**
      * Performs a modifier key press. Does not release the modifier key - subsequent interactions

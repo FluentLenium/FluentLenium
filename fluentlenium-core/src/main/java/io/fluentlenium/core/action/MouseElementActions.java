@@ -34,7 +34,7 @@ public class MouseElementActions {
         this(driver, fluentWebElement.getElement());
     }
 
-    private Actions actions() {
+    protected Actions actions() {
         return new Actions(driver);
     }
 

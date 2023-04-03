@@ -15,7 +15,7 @@
     <description>Cucumber Extension for FluentLenium</description>
 
     <properties>
-        <cucumber.version>7.11.1</cucumber.version>
+        <cucumber.version>7.11.2</cucumber.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 
