@@ -19,6 +19,7 @@ class DuckDuckMainPage : FluentPage() {
     private lateinit var searchButton: FluentWebElement
 
     fun typeSearchPhraseIn(searchPhrase: String) {
+        await().until(searchInput).enabled()
         searchInput.write(searchPhrase)
     }
 
