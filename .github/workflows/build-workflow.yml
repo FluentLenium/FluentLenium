@@ -138,6 +138,11 @@ jobs:
       - name: Run gradle firefox quickstart
         run: cd examples/quickstart-firefox && ./gradlew -i check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
 
+      - uses: actions/upload-artifact@v3
+        with:
+          name: gradle-firefox-screenshots
+          path: examples/quickstart-firefox/build/screenshots
+
       - name: Run gradle kotest quickstart
         run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
 
