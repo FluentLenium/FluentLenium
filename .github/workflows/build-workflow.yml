@@ -142,6 +142,7 @@ jobs:
         with:
           name: gradle-firefox-screenshots
           path: examples/quickstart-firefox/build/screenshots
+        if: always() # always run even if the previous step fails
 
       - name: Run gradle kotest quickstart
         run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
