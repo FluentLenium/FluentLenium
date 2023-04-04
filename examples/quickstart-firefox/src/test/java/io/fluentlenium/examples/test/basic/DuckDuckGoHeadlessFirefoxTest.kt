@@ -15,7 +15,7 @@ class DuckDuckGoHeadlessFirefoxTest : AbstractFirefoxTest() {
 
     override fun newWebDriver(): WebDriver =
         FirefoxDriver(FirefoxOptions().apply {
-            addArguments("--headless")
+            addArguments("-headless")
         })
 
     @Test
