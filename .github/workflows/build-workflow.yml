@@ -116,7 +116,7 @@ jobs:
       - name: Java 17 - JavaDoc
         run: ./mvnw -B -Pjava17 javadoc:aggregate
 
-  compile-gradle-example:
+  run-gradle-examples:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -128,12 +128,16 @@ jobs:
           cache: "maven"
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
+
       - name: determine Fluentlenium version
         uses: ./.github/actions/determine-fluentlenium-version
+
       - name: FluentLenium version
         run: echo $FLUENTLENIUM_VERSION
+
       - name: Run gradle firefox quickstart
-        run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+        run: cd examples/quickstart-firefox && ./gradlew -i check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+
       - name: Run gradle kotest quickstart
         run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
 
@@ -159,7 +163,7 @@ jobs:
       - name: Compile maven examples
         run: ./mvnw -B -nsu -Pexamples clean test-compile
 
-  safari-example:
+  run-safari-example:
     runs-on: macos-latest
     timeout-minutes: 10
 
@@ -189,7 +193,7 @@ jobs:
           check_name: Safari example
           report_paths: '**/target/*-reports/TEST-*.xml'
 
-  windows-example:
+  run-windows-example:
     runs-on: windows-latest
     timeout-minutes: 10
 
