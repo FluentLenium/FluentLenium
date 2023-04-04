@@ -1,21 +1,21 @@
 package io.fluentlenium.examples.pages.basic
 
-import org.assertj.core.api.Assertions.assertThat
 import io.fluentlenium.core.FluentPage
 import io.fluentlenium.core.annotation.PageUrl
 import io.fluentlenium.core.domain.FluentWebElement
-import org.openqa.selenium.support.FindBy
 import java.util.concurrent.TimeUnit
+import org.assertj.core.api.Assertions.assertThat
+import org.openqa.selenium.support.FindBy
 
 @PageUrl("https://duckduckgo.com")
 class DuckDuckMainPage : FluentPage() {
 
     fun perform(fn: DuckDuckMainPage.() -> Unit) = this.apply(fn)
 
-    @FindBy(css = "#search_form_input_homepage")
+    @FindBy(css = "#searchbox_input")
     private lateinit var searchInput: FluentWebElement
 
-    @FindBy(css = "#search_button_homepage")
+    @FindBy(css = "button[type=submit]")
     private lateinit var searchButton: FluentWebElement
 
     fun typeSearchPhraseIn(searchPhrase: String) {
@@ -28,7 +28,9 @@ class DuckDuckMainPage : FluentPage() {
     }
 
     fun assertIsPhrasePresentInTheResults(searchPhrase: String) {
-        assertThat(window().title()).contains(searchPhrase)
+        await().atMost(5, TimeUnit.SECONDS).untilAsserted {
+            assertThat(window().title()).contains(searchPhrase)
+        }
     }
 
     private fun awaitUntilSearchFormDisappear() {

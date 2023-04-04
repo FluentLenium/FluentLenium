@@ -15,7 +15,7 @@ class DuckDuckGoHeadlessFirefoxTest : AbstractFirefoxTest() {
 
     override fun newWebDriver(): WebDriver {
         val firefoxOptions = FirefoxOptions()
-        firefoxOptions.addArguments("--headless")
+        firefoxOptions.addArguments("--headless=new")
         return FirefoxDriver(firefoxOptions)
     }
 
