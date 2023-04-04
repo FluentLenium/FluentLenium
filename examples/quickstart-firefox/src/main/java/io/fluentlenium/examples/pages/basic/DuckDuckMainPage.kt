@@ -12,19 +12,13 @@ class DuckDuckMainPage : FluentPage() {
 
     fun perform(fn: DuckDuckMainPage.() -> Unit) = this.apply(fn)
 
-    @FindBy(css = "#searchbox_input")
+    @FindBy(css = "#search_form_input_homepage")
     private lateinit var searchInput: FluentWebElement
 
     @FindBy(css = "button[type=submit]")
     private lateinit var searchButton: FluentWebElement
 
     fun typeSearchPhraseIn(searchPhrase: String) {
-
-
-        `$`("input").forEach {
-            println("id: ${it.id()}")
-        }
-
         await().until(searchInput).enabled()
         searchInput.write(searchPhrase)
     }
