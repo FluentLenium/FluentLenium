@@ -13,11 +13,10 @@ class DuckDuckGoHeadlessFirefoxTest : AbstractFirefoxTest() {
     @Page
     private lateinit var onDuckDuckGoMainPage: DuckDuckMainPage
 
-    override fun newWebDriver(): WebDriver {
-        val firefoxOptions = FirefoxOptions()
-        firefoxOptions.addArguments("--headless=new")
-        return FirefoxDriver(firefoxOptions)
-    }
+    override fun newWebDriver(): WebDriver =
+        FirefoxDriver(FirefoxOptions().apply {
+            addArguments("--headless")
+        })
 
     @Test
     fun titleOfDuckDuckGoShouldContainSearchQueryName() {
