@@ -136,7 +136,7 @@ jobs:
         run: echo $FLUENTLENIUM_VERSION
 
       - name: Run gradle firefox quickstart
-        run: cd examples/quickstart-firefox && ./gradlew -i check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+        run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
 
       - uses: actions/upload-artifact@v3
         with:
