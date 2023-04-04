@@ -15,7 +15,7 @@ class DuckDuckMainPage : FluentPage() {
     @FindBy(css = "#search_form_input_homepage")
     private lateinit var searchInput: FluentWebElement
 
-    @FindBy(css = "button[type=submit]")
+    @FindBy(css = "#search_button_homepage")
     private lateinit var searchButton: FluentWebElement
 
     fun typeSearchPhraseIn(searchPhrase: String) {
