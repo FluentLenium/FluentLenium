@@ -108,8 +108,6 @@
                         <phase>generate-resources</phase>
 
                         <configuration>
-                            <!-- todo should only run once -->
-                            <skip>true</skip>
                             <arguments>run xcuitest</arguments>
                         </configuration>
                     </execution>
@@ -124,9 +122,6 @@
                         <phase>generate-resources</phase>
 
                         <configuration>
-                            <!-- todo should only run once -->
-                            <skip>true</skip>
-
                             <arguments>run uiautomator2</arguments>
                         </configuration>
                     </execution>

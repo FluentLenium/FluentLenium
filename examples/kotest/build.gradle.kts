@@ -54,10 +54,10 @@ dependencies {
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v111:$seleniumVersion")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.4")
-    testImplementation("org.testcontainers:selenium:1.17.6")
+    testImplementation("org.testcontainers:selenium:1.18.0")
 
     testImplementation("ch.qos.logback:logback-classic:1.4.5")
-    testRuntimeOnly("org.slf4j:jul-to-slf4j:2.0.6")
+    testRuntimeOnly("org.slf4j:jul-to-slf4j:2.0.7")
 }
 
 configurations.all {

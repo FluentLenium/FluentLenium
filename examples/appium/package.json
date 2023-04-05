@@ -11,7 +11,7 @@
     "appium-xcuitest-driver": "^4.21.4"
   },
   "scripts": {
-    "xcuitest": "appium driver install xcuitest",
-    "uiautomator2": "appium driver install uiautomator2"
+    "xcuitest": "appium driver install xcuitest || echo \"xcuitest already installed\"",
+    "uiautomator2": "appium driver install uiautomator2 || echo \"uiautomator2 already installed\""
   }
 }
