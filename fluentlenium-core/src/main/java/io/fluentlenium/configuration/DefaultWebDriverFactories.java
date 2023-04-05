@@ -37,13 +37,8 @@ public class DefaultWebDriverFactories {
         @Override
         protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 
-            final FirefoxOptions options;
-            if (args.length > 0) {
-                Capabilities oCaps = (Capabilities) args[0];
-                options = new FirefoxOptions(oCaps);
-            } else {
-                options = new FirefoxOptions();
-            }
+            Capabilities oCaps = (Capabilities) args[0];
+            FirefoxOptions options = new FirefoxOptions(oCaps);
 
             return super.newInstance(webDriverClass, configuration, options);
         }
