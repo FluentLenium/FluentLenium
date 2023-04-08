@@ -26,6 +26,7 @@ jobs:
         run: echo "defined=true" >> "$GITHUB_OUTPUT"
 
   java11-build:
+    timeout-minutes: 20
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
@@ -53,6 +54,7 @@ jobs:
           ./mvnw -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-build:
+    timeout-minutes: 20
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
@@ -80,6 +82,7 @@ jobs:
           ./mvnw -B -Pjava17 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-parallelism-tests:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -104,6 +107,7 @@ jobs:
           report_paths: '**/target/*-reports/TEST-*.xml'
 
   java17-javadoc:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
