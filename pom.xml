@@ -361,7 +361,6 @@
                     <version>3.11.0</version>
 
                     <configuration>
-                        <proc>none</proc>
                         <release>11</release>
                     </configuration>
                 </plugin>
