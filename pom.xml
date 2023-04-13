@@ -135,6 +135,42 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>9.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>31.1-jre</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.15</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>4.1.91.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.9.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy-bom</artifactId>
+                <version>4.0.11</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>io.fluentlenium</groupId>
                 <artifactId>fluentlenium-testing-private</artifactId>
                 <version>${project.version}</version>
@@ -468,6 +504,7 @@
                                     <version>3.9.0</version>
                                 </requireMavenVersion>
                                 <banDuplicatePomDependencyVersions/>
+                                <dependencyConvergence/>
                             </rules>
                         </configuration>
                     </execution>
@@ -546,7 +583,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
+                <version>0.8.9</version>
                 <configuration>
                     <excludes>
                         <exclude>**com.steadystate*</exclude>

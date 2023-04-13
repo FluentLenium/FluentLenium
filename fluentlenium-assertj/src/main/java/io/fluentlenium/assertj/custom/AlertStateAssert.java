@@ -25,4 +25,6 @@ public interface AlertStateAssert {
      * @return this assertion object
      */
     AlertStateAssert isPresent();
+
+    AlertStateAssert isNotPresent();
 }

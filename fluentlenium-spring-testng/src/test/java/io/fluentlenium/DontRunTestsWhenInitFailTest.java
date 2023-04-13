@@ -12,6 +12,9 @@ import org.testng.TestNG;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -57,7 +60,17 @@ public class DontRunTestsWhenInitFailTest {
         TestListenerAdapter listenerAdapter = Mockito.mock(TestListenerAdapter.class);
         testNG.addListener(listenerAdapter);
 
-        testNG.run();
+        ByteArrayOutputStream consoleContent = new ByteArrayOutputStream();
+
+        PrintStream originalStdOut = System.out;
+        System.setOut(new PrintStream(consoleContent));
+
+        try {
+            // test run is supposed to fail, capture output
+            testNG.run();
+        } finally {
+            System.setOut(originalStdOut);
+        }
 
         verify(listenerAdapter, times(3)).onConfigurationFailure(any(ITestResult.class));
         verify(listenerAdapter, times(2)).onTestSkipped(any(ITestResult.class));

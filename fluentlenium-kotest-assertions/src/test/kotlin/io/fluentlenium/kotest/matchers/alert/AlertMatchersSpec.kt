@@ -8,14 +8,15 @@ import io.kotest.matchers.shouldNot
 
 class AlertMatchersSpec : MatcherBase({
     "present" {
+        alert() shouldNot bePresent()
+
         jq("#alertButton").click()
         alert() should bePresent()
         alert().shouldBePresent()
 
         alert().accept()
 
-        // we cannot really test absence using the matcher
-        // alert() will already throw when no alert is present
+        alert() shouldNot bePresent()
     }
 
     "presentNegative" {
