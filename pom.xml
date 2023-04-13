@@ -771,7 +771,7 @@
 
                         <executions>
                             <execution>
-                                <phase>validate</phase>
+                                <phase>post-integration-test</phase>
 
                                 <goals>
                                     <goal>exec</goal>
