@@ -762,6 +762,8 @@
         <profile>
             <id>ci</id>
 
+            <!-- this is executed at the end of each module and should kill any leftover chrome* processes -->
+            <!-- executed on github actions (workflow enables profile) -->
             <build>
                 <plugins>
                     <plugin>
