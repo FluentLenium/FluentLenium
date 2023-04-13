@@ -26,7 +26,7 @@ jobs:
         run: echo "defined=true" >> "$GITHUB_OUTPUT"
 
   java11-build:
-    timeout-minutes: 30
+    timeout-minutes: 20
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,7 @@ jobs:
           cache: "maven"
       - name: Java 11 - unit & integration tests code coverage
         run: |
-          ./mvnw -T 1C -B -Pjava11 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+          ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
@@ -54,7 +54,7 @@ jobs:
           ./mvnw -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-build:
-    timeout-minutes: 30
+    timeout-minutes: 20
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
@@ -67,7 +67,7 @@ jobs:
           cache: "maven"
       - name: Java 17 - unit & integration tests code coverage
         run: |
-          ./mvnw -T 1C -B -Pjava17 -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+          ./mvnw -B -Pjava17,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
