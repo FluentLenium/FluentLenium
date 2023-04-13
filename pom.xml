@@ -764,6 +764,7 @@
 
             <!-- this is executed at the end of each module and should kill any leftover chrome* processes -->
             <!-- executed on github actions (workflow enables profile) -->
+            <!-- incompatible with parallel maven execution -->
             <build>
                 <plugins>
                     <plugin>
