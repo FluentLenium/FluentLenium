@@ -10,9 +10,8 @@ on:
   pull_request:
     branches: [ develop ]
 
-# https://maven.apache.org/wagon/wagon-providers/wagon-http/
 env:
-  MAVEN_OPTS: "-Dmaven.wagon.rto=180000 -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Didea.ignore.disabled.plugins=true -Didea.home.path=/tmp"
+  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Didea.ignore.disabled.plugins=true -Didea.home.path=/tmp"
 
 jobs:
   check-env:
