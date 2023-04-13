@@ -6,5 +6,7 @@
             <url>https://gradle.com/terms-of-service</url>
             <accept>true</accept>
         </termsOfService>
+
+        <backgroundBuildScanUpload>#{env['CI'] == null}</backgroundBuildScanUpload>
     </buildScan>
 </gradleEnterprise>
