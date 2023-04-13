@@ -124,7 +124,7 @@
         <testng.version>7.7.1</testng.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
-        <spring.version>6.0.7</spring.version>
+        <spring.version>6.0.8</spring.version>
         <slf4j.version>2.0.7</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v111</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
