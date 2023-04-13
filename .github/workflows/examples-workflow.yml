@@ -15,6 +15,7 @@ env:
 
 jobs:
   gradle-kotest-example:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -44,6 +45,7 @@ jobs:
           report_paths: '**/build/test-results/test/TEST-*.xml'
 
   gradle-firefox-example:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -73,6 +75,7 @@ jobs:
           report_paths: '**/build/test-results/test/TEST-*.xml'
 
   maven-examples-compileonly:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
