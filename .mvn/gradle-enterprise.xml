@@ -1,6 +1,6 @@
 <gradleEnterprise>
     <buildScan>
-        <publish>#{env['CI'] == null ? 'ON_DEMAND' : 'ALWAYS'}</publish>
+        <publish>ON_DEMAND</publish>
 
         <termsOfService>
             <url>https://gradle.com/terms-of-service</url>
