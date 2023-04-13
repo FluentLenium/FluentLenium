@@ -758,6 +758,34 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>ci</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.1.0</version>
+
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <executable>${maven.multiModuleProjectDirectory}/cleanup-browser.sh</executable>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>
