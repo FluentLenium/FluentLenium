@@ -1,14 +1,10 @@
-#!/bin/bash -x
+#!/bin/bash
 
-echo "killing orphan chrome* processes"
+echo "killing orphan chrome* processes with fire"
 
-which killall
-killall -help
+killall -qv -s SIGKILL chromedriver
+killall -qv -s SIGKILL google-chrome
+killall -qv -s SIGKILL chrome
+killall -qv -s SIGKILL chrome_crashpad_handler
 
-killall -qv chromedriver
-killall -qv google-chrome
-killall -qv chrome_crashpad_handler
-
-set +e
 ps aux |grep chrome
-set -e
