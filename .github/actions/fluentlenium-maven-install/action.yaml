@@ -4,7 +4,7 @@ runs:
   using: "composite"
   steps:
     - name: run maven install
-      run: ./mvnw -B clean install -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+      run: ./mvnw -B clean install -DskipTests=true
       shell: bash
       env:
         MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
