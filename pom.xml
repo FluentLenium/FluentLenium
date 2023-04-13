@@ -14,7 +14,6 @@
 
     <modules>
         <module>fluentlenium-core</module>
-        <module>fluentlenium-integration-tests</module>
         <module>fluentlenium-assertj</module>
         <module>fluentlenium-junit</module>
         <module>fluentlenium-junit-jupiter</module>
@@ -22,6 +21,7 @@
         <module>fluentlenium-spring-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
+        <module>fluentlenium-integration-tests</module>
         <module>fluentlenium-kotest</module>
         <module>fluentlenium-kotest-assertions</module>
         <module>fluentlenium-coverage-report</module>
@@ -754,6 +754,37 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.5.0</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>ci</id>
+
+            <!-- this is executed at the end of each module and should kill any leftover chrome* processes -->
+            <!-- executed on github actions (workflow enables profile) -->
+            <!-- incompatible with parallel maven execution -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.1.0</version>
+
+                        <executions>
+                            <execution>
+                                <phase>post-integration-test</phase>
+
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <executable>${maven.multiModuleProjectDirectory}/cleanup-browser.sh</executable>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
