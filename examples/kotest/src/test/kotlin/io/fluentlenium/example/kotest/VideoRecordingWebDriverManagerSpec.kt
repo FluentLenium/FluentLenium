@@ -2,6 +2,7 @@ package io.fluentlenium.example.kotest
 
 import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import io.github.bonigarcia.wdm.WebDriverManager
+import io.kotest.core.annotation.EnabledIf
 import io.kotest.core.spec.Spec
 import io.kotest.matchers.paths.shouldExist
 import io.kotest.matchers.string.shouldContain
@@ -18,6 +19,7 @@ import org.openqa.selenium.chrome.ChromeOptions
  *
  * check https://github.com/bonigarcia/webdrivermanager#browsers-in-docker
  */
+@EnabledIf(IsNotMacOS::class)
 class VideoRecordingWebDriverManagerSpec : FluentFreeSpec() {
 
     /**

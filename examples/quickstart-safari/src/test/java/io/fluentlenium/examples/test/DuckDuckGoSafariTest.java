@@ -3,11 +3,11 @@ package io.fluentlenium.examples.test;
 import io.fluentlenium.adapter.junit.FluentTest;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.examples.pages.DuckDuckMainPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.safari.SafariOptions;
 
 public class DuckDuckGoSafariTest extends FluentTest {
 
@@ -16,7 +16,12 @@ public class DuckDuckGoSafariTest extends FluentTest {
 
     @Override
     public WebDriver newWebDriver() {
-        return new SafariDriver();
+
+        WebDriverManager.safaridriver().setup();
+
+        SafariOptions options = new SafariOptions();
+
+        return new SafariDriver(options);
     }
 
     @Test

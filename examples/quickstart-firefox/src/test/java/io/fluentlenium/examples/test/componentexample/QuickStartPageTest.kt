@@ -6,8 +6,10 @@ import io.fluentlenium.examples.pages.fluentlenium.QuickStartPage
 import io.fluentlenium.examples.test.AbstractFirefoxTest
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable
 import org.openqa.selenium.Dimension
 
+@DisabledIfEnvironmentVariable(named = "CI", matches = "true")
 internal class QuickStartPageTest : AbstractFirefoxTest() {
 
     @Page

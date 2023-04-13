@@ -54,6 +54,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -112,6 +113,37 @@ public class FluentWebElement extends Component
         dom = new Dom(element, this.instantiator);
         mouseActions = new MouseElementActions(this.control.getDriver(), element);
         keyboardActions = new KeyboardElementActions(this.control.getDriver(), element);
+        conditions = new WebElementConditions(this);
+        label = new FluentLabelImpl<>(this, () -> getElement().toString());
+        javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));
+        unshadowAllFields();
+    }
+
+    /**
+     * Creates a new fluent web element.
+     *
+     * @param element      underlying element
+     * @param control      control interface
+     * @param instantiator component instantiator
+     */
+    public FluentWebElement(WebElement element, FluentControl control, ComponentInstantiator instantiator, Actions actions) {
+        super(element, control, instantiator);
+
+        hookControl = new HookControlImpl<>(this, webElement, this.control, this.instantiator,
+                /*do not change it to lambda - change will affect w/ PMD warning
+                Overridable method 'getElement' called during object construction*/
+
+                () -> {
+                    LocatorHandler locatorHandler = LocatorProxies.getLocatorHandler(getElement());
+                    ElementLocator locator = locatorHandler.getLocator();
+                    WebElement noHookElement = LocatorProxies.createWebElement(locator);
+                    return control.newComponent(this.getClass(), noHookElement);
+                });
+
+        search = new Search(element, this, this.instantiator, this.control);
+        dom = new Dom(element, this.instantiator);
+        mouseActions = new MouseElementActions(this.control.getDriver(), element, actions);
+        keyboardActions = new KeyboardElementActions(this.control.getDriver(), element, actions);
         conditions = new WebElementConditions(this);
         label = new FluentLabelImpl<>(this, () -> getElement().toString());
         javascriptActions = new FluentJavascriptActionsImpl<>(this, this.control, new SupplierOfInstance<>(this));

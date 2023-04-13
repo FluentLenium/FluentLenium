@@ -26,6 +26,7 @@ jobs:
         run: echo "defined=true" >> "$GITHUB_OUTPUT"
 
   java11-build:
+    timeout-minutes: 20
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
@@ -53,6 +54,7 @@ jobs:
           ./mvnw -B -Pjava11 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-build:
+    timeout-minutes: 20
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
@@ -80,6 +82,7 @@ jobs:
           ./mvnw -B -Pjava17 -DrepoToken=$REPO_TOKEN coveralls:report
 
   java17-parallelism-tests:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -104,6 +107,7 @@ jobs:
           report_paths: '**/target/*-reports/TEST-*.xml'
 
   java17-javadoc:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -115,47 +119,3 @@ jobs:
           cache: "maven"
       - name: Java 17 - JavaDoc
         run: ./mvnw -B -Pjava17 javadoc:aggregate
-
-  compile-gradle-example:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'zulu'
-          cache: "maven"
-      - name: Install Fluentlenium
-        uses: ./.github/actions/fluentlenium-maven-install
-      - name: determine Fluentlenium version
-        uses: ./.github/actions/determine-fluentlenium-version
-      - name: FluentLenium version
-        run: echo $FLUENTLENIUM_VERSION
-      - name: Compile gradle example
-        run: cd examples/quickstart-firefox && ./gradlew compileTestKotlin -Pfluentlenium.version=$FLUENTLENIUM_VERSION
-      - name: Run gradle kotest example
-        run: cd examples/kotest && ./gradlew  check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
-
-      - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
-        if: always() # always run even if the previous step fails
-        with:
-          check_name: Gradle Kotest examples Test Reports
-          report_paths: '**/build/test-results/test/TEST-*.xml'
-
-
-  compile-maven-examples:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          distribution: 'zulu'
-          cache: "maven"
-      - name: Install Fluentlenium
-        uses: ./.github/actions/fluentlenium-maven-install
-      - name: Compile maven examples
-        run: ./mvnw -B -nsu -Pexamples clean test-compile

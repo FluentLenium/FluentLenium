@@ -120,13 +120,13 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>4.2.2</selenium.version>
+        <selenium.version>4.8.3</selenium.version>
         <testng.version>7.7.1</testng.version>
         <junit.jupiter.version>5.6.1</junit.jupiter.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
         <spring.version>6.0.7</spring.version>
         <slf4j.version>2.0.7</slf4j.version>
-        <seleniumDevtools.artifactId>selenium-devtools-v102</seleniumDevtools.artifactId>
+        <seleniumDevtools.artifactId>selenium-devtools-v111</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
             "disable-dev-shm-usage", "remote-allow-origins=*"]}}
         </fluentlenium.capabilities.default>
@@ -181,13 +181,8 @@
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-opera-driver</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>4.5.0</version>
+                <version>4.8.1.1</version>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
@@ -197,7 +192,7 @@
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>8.1.1</version>
+                <version>8.2.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -267,17 +262,17 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>5.2.0</version>
+                <version>5.3.0</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>5.2.0</version>
+                <version>5.3.0</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.14.2</version>
+                <version>1.14.4</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
@@ -298,7 +293,7 @@
             <dependency>
                 <groupId>org.apache.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>4.0.10</version>
+                <version>4.0.11</version>
                 <type>pom</type>
             </dependency>
             <dependency>
@@ -460,7 +455,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>

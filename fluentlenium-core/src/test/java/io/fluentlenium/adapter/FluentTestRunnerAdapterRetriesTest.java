@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
@@ -39,17 +39,15 @@ public class FluentTestRunnerAdapterRetriesTest {
 
     @Spy
     @InjectMocks
-    static FluentTestRunnerAdapter adapter;
+    FluentTestRunnerAdapter adapter;
 
     @Test
     public void testFailedWhenBrowserCrashed() {
         String testName = "test1";
 
-        try {
-            adapter.starting("test1");
-        } catch (WebDriverException ex) {
-            assertThat(ex.getMessage()).contains("Browser failed to start");
-        }
+        assertThatThrownBy(() -> adapter.starting("test1"))
+                .isInstanceOf(WebDriverException.class)
+                .hasMessageContaining("Browser failed to start");
 
         verify(adapter, times(1)).starting(testName);
         verify(adapter, times(1)).starting(any(), eq(testName));
@@ -61,12 +59,8 @@ public class FluentTestRunnerAdapterRetriesTest {
         when(future.get()).thenReturn(null);
         when(executorService.submit(any(Callable.class))).thenReturn(future);
 
-        try {
-            SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
-                    null, executorService, adapter::newWebDriver, adapter.getConfiguration());
-        } catch (WebDriverException ex) {
-            assertThat(ex.getMessage()).contains("Browser failed to start");
-        }
+        SharedWebDriverContainer.INSTANCE.getSharedWebDriver(
+                null, executorService, adapter::newWebDriver, adapter.getConfiguration());
 
         verify(executorService, times(2)).submit(any(Callable.class));
         verify(executorService, times(2)).shutdownNow();

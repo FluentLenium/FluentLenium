@@ -5,9 +5,6 @@ import io.fluentlenium.core.proxy.LocatorProxies;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Coordinates;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Mouse;
 
 /**
  * Element specific mouse control interface. Triggers element search before performing an action.
@@ -15,6 +12,7 @@ import org.openqa.selenium.interactions.Mouse;
 public class MouseElementActions {
     private final WebDriver driver;
     private final WebElement element;
+    private Actions actions;
 
     /**
      * Creates a new mouse element actions.
@@ -30,6 +28,19 @@ public class MouseElementActions {
     /**
      * Creates a new mouse element actions.
      *
+     * @param driver  selenium driver
+     * @param element selenium element
+     * @param actions selenium actions
+     */
+    public MouseElementActions(WebDriver driver, WebElement element, Actions actions) {
+        this.driver = driver;
+        this.element = element;
+        this.actions = actions;
+    }
+
+    /**
+     * Creates a new mouse element actions.
+     *
      * @param driver           selenium driver
      * @param fluentWebElement FluentWebElement
      */
@@ -37,34 +48,23 @@ public class MouseElementActions {
         this(driver, fluentWebElement.getElement());
     }
 
-    private Actions actions() {
-        return new Actions(driver);
+    /**
+     * Creates a new mouse element actions.
+     *
+     * @param driver  selenium driver
+     * @param fluentWebElement selenium FluentWebElement
+     * @param actions selenium actions
+     */
+    public MouseElementActions(WebDriver driver, FluentWebElement fluentWebElement, Actions actions) {
+        this(driver, fluentWebElement.getElement(), actions);
     }
 
-    /**
-     * Basic mouse operations
-     *
-     * @return low level interface to control the mouse
-     * @deprecated Use the following mapping for updating your code:
-     * <p>
-     * {@link Mouse#click(Coordinates)} to {@link MouseElementActions#click()}
-     * <p>
-     * {@link Mouse#doubleClick(Coordinates)} to {@link MouseElementActions#doubleClick()}
-     * <p>
-     * {@link Mouse#mouseDown(Coordinates)} to {@link MouseElementActions#moveToElement()}
-     * then {@link MouseElementActions#clickAndHold()}
-     * <p>
-     * {@link Mouse#mouseUp(Coordinates)} to {@link MouseElementActions#release()}
-     * <p>
-     * {@link Mouse#mouseMove(Coordinates)} to {@link MouseElementActions#moveToElement()}
-     * <p>
-     * {@link Mouse#mouseMove(Coordinates, long, long)} to {@link MouseElementActions#moveToElement(int, int)}
-     * <p>
-     * {@link Mouse#contextClick(Coordinates)} to {@link MouseElementActions#contextClick()}
-     */
-    @Deprecated
-    public Mouse basic() {
-        return ((HasInputDevices) driver).getMouse();
+    protected Actions actions() {
+        if (actions == null) {
+            this.actions = new Actions(driver);
+        }
+
+        return actions;
     }
 
     /**

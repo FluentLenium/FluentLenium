@@ -6,8 +6,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.HasInputDevices;
-import org.openqa.selenium.interactions.Keyboard;
 
 /**
  * Execute actions with the keyboard on a defined element. Triggers element search before performing an action.
@@ -15,6 +13,7 @@ import org.openqa.selenium.interactions.Keyboard;
 public class KeyboardElementActions {
     private final WebDriver driver;
     private final WebElement element;
+    private Actions actions;
 
     /**
      * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
@@ -38,24 +37,38 @@ public class KeyboardElementActions {
     }
 
     /**
+     * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
+     *
+     * @param driver  selenium driver
+     * @param element element on which to execute actions
+     */
+    public KeyboardElementActions(WebDriver driver, WebElement element, Actions actions) {
+        this.driver = driver;
+        this.element = element;
+        this.actions = actions;
+    }
+
+    /**
+     * Creates a new object to execute actions with the keyboard, using given selenium driver and element.
+     *
+     * @param driver           selenium driver
+     * @param fluentWebElement FluentWebElement on which to execute actions
+     */
+    public KeyboardElementActions(WebDriver driver, FluentWebElement fluentWebElement, Actions actions) {
+        this(driver, fluentWebElement.getElement(), actions);
+    }
+
+    /**
      * Get selenium interactions actions.
      *
      * @return selenium actions
      */
-    private Actions actions() {
-        return new Actions(driver);
-    }
+    protected Actions actions() {
+        if (actions == null) {
+            this.actions = new Actions(driver);
+        }
 
-    /**
-     * Basic keyboard operations
-     *
-     * @return low level interface to control the keyboard
-     * @deprecated Use {@link KeyboardActions#keyDown(Keys)} and {@link KeyboardActions#keyUp(Keys)}
-     * and {@link KeyboardActions#sendKeys(CharSequence...)} instead
-     */
-    @Deprecated
-    public Keyboard basic() {
-        return ((HasInputDevices) driver).getKeyboard();
+        return actions;
     }
 
     /**

@@ -4,10 +4,10 @@ import com.google.common.collect.ImmutableMap;
 import io.fluentlenium.adapter.testng.FluentTestNg;
 import io.fluentlenium.core.annotation.Page;
 import io.fluentlenium.examples.pages.DuckDuckMainPage;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.Response;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -16,21 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DuckDuckGoEdgeTest extends FluentTestNg {
 
-    private static final String PATH_TO_EDGE_DRIVER = "/Users/s.radzyminski/Downloads/msedgedriver";
-    private static final String EDGE_DRIVER_PROPERTY = "webdriver.edge.driver";
-
     @Page
     private DuckDuckMainPage duckDuckMainPage;
 
-    @BeforeClass
-    public static void setup() {
-        if (System.getProperty(EDGE_DRIVER_PROPERTY) == null) {
-            System.setProperty(EDGE_DRIVER_PROPERTY, PATH_TO_EDGE_DRIVER);
-        }
-    }
-
     @Override
     public WebDriver newWebDriver() {
+        WebDriverManager.edgedriver().setup();
         return new EdgeDriver();
     }
 

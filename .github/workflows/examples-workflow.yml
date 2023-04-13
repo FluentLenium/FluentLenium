@@ -1,0 +1,151 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Check examples
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches: [ develop ]
+
+env:
+  MAVEN_OPTS: "-Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Didea.ignore.disabled.plugins=true -Didea.home.path=/tmp"
+
+jobs:
+  gradle-kotest-example:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+          cache: "maven"
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+
+      - name: determine Fluentlenium version
+        uses: ./.github/actions/determine-fluentlenium-version
+
+      - name: FluentLenium version
+        run: echo $FLUENTLENIUM_VERSION
+
+      - name: Run gradle kotest quickstart
+        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Gradle Kotest examples Test Reports
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+
+  gradle-firefox-example:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+          cache: "maven"
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+
+      - name: determine Fluentlenium version
+        uses: ./.github/actions/determine-fluentlenium-version
+
+      - name: FluentLenium version
+        run: echo $FLUENTLENIUM_VERSION
+
+      - name: Run gradle firefox quickstart
+        run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Gradle Firefox example Test Reports
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+
+  maven-examples-compileonly:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+          cache: "maven"
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+      - name: Compile maven examples
+        run: ./mvnw -B -nsu -Pexamples clean test-compile
+
+  maven-safari-example:
+    runs-on: macos-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+
+      - name: Enable Safari Driver
+        run: |
+          sudo safaridriver --enable
+
+      - name: Run safari examples
+        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
+
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Safari example
+          report_paths: '**/target/*-reports/TEST-*.xml'
+
+  maven-windows-example:
+    runs-on: windows-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: run maven install
+        run: .\mvnw.cmd -B clean install -DskipTests=true
+        env:
+          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+
+      - name: Run windows examples
+        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+
+      - name: Publish Test reports
+        uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          check_name: Microsoft example
+          report_paths: '**/target/*-reports/TEST-*.xml'

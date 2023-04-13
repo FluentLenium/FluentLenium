@@ -11,7 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.Arrays;
@@ -47,7 +46,6 @@ public class WebDriversRegistryImplSpecificDriversTest {
                 {"chrome", DefaultWebDriverFactories.ChromeWebDriverFactory.class, ChromeDriver.class},
                 {"ie", DefaultWebDriverFactories.InternetExplorerWebDriverFactory.class, InternetExplorerDriver.class},
                 {"edge", DefaultWebDriverFactories.EdgeWebDriverFactory.class, EdgeDriver.class},
-                {"opera", DefaultWebDriverFactories.OperaWebDriverFactory.class, OperaDriver.class},
                 {"safari", DefaultWebDriverFactories.SafariWebDriverFactory.class, SafariDriver.class}
         });
     }
