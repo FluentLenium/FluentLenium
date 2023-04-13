@@ -11,7 +11,7 @@
     <properties>
         <it.project.version>6.0.0-SNAPSHOT</it.project.version>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
-            "disable-dev-shm-usage", "remote-allow-origins=*"]}}
+            "disable-dev-shm-usage"]}}
         </fluentlenium.capabilities.default>
     </properties>
 

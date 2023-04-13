@@ -27,8 +27,7 @@ public class ConstructorInitializationTest extends FluentTest {
     @Override
     public WebDriver newWebDriver() {
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setHeadless(true);
-        chromeOptions.addArguments("--remote-allow-origins=*");
+        chromeOptions.addArguments("--headless=new");
 
         driver = new ChromeDriver(chromeOptions);
         return driver;

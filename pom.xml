@@ -128,7 +128,7 @@
         <slf4j.version>2.0.7</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v111</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
-            "disable-dev-shm-usage", "remote-allow-origins=*"]}}
+            "disable-dev-shm-usage"]}}
         </fluentlenium.capabilities.default>
     </properties>
 
