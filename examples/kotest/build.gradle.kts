@@ -27,7 +27,7 @@ tasks.withType<Test>().configureEach {
     systemProperties(
         mapOf(
             "fluentlenium.capabilities" to
-                    """{"goog:chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}""",
+                    """{"goog:chromeOptions": {"args": ["remote-allow-origins=*", "headless=new","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}""",
             "java.util.logging.config.file" to "${projectDir}/src/test/resources/logging.properties"
         )
     )
@@ -42,22 +42,23 @@ dependencies {
 
     val koTestVersion = "5.5.5"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
+    implementation(platform("org.junit:junit-bom:5.9.2"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.2")
 
-    val seleniumVersion = "4.2.2"
+    val seleniumVersion = "4.8.3"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
-    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v102:$seleniumVersion")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v111:$seleniumVersion")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.4")
-    testImplementation("org.testcontainers:selenium:1.17.6")
+    testImplementation("org.testcontainers:selenium:1.18.0")
 
     testImplementation("ch.qos.logback:logback-classic:1.4.5")
-    testRuntimeOnly("org.slf4j:jul-to-slf4j:2.0.6")
+    testRuntimeOnly("org.slf4j:jul-to-slf4j:2.0.7")
 }
 
 configurations.all {

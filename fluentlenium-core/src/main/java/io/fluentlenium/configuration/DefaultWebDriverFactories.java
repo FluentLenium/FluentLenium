@@ -1,10 +1,15 @@
 package io.fluentlenium.configuration;
 
+import io.appium.java_client.safari.options.SafariOptions;
 import io.fluentlenium.utils.ReflectionUtils;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -28,6 +33,15 @@ public class DefaultWebDriverFactories {
         public FirefoxWebDriverFactory() {
             super("firefox", "org.openqa.selenium.firefox.FirefoxDriver");
         }
+
+        @Override
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+
+            Capabilities oCaps = (Capabilities) args[0];
+            FirefoxOptions options = new FirefoxOptions(oCaps);
+
+            return super.newInstance(webDriverClass, configuration, options);
+        }
     }
 
     /**
@@ -36,11 +50,22 @@ public class DefaultWebDriverFactories {
     @FactoryPriority(64)
     @DefaultFactory
     public static class ChromeWebDriverFactory extends ReflectiveWebDriverFactory {
+
         /**
          * Creates a new chrome WebDriver factory.
          */
         public ChromeWebDriverFactory() {
             super("chrome", "org.openqa.selenium.chrome.ChromeDriver");
+        }
+
+        @Override
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+
+            Capabilities oCaps = (Capabilities) args[0];
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions = chromeOptions.merge(oCaps);
+
+            return super.newInstance(webDriverClass, configuration, chromeOptions);
         }
     }
 
@@ -56,6 +81,14 @@ public class DefaultWebDriverFactories {
         public InternetExplorerWebDriverFactory() {
             super("ie", "org.openqa.selenium.ie.InternetExplorerDriver");
         }
+
+        @Override
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            Capabilities oCaps = (Capabilities) args[0];
+            InternetExplorerOptions options = new InternetExplorerOptions(oCaps);
+
+            return super.newInstance(webDriverClass, configuration, options);
+        }
     }
 
     /**
@@ -70,6 +103,14 @@ public class DefaultWebDriverFactories {
         public EdgeWebDriverFactory() {
             super("edge", "org.openqa.selenium.edge.EdgeDriver");
         }
+
+        @Override
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            Capabilities oCaps = (Capabilities) args[0];
+            EdgeOptions options = new EdgeOptions().merge(oCaps);
+
+            return super.newInstance(webDriverClass, configuration, options);
+        }
     }
 
     /**
@@ -83,6 +124,14 @@ public class DefaultWebDriverFactories {
          */
         public SafariWebDriverFactory() {
             super("safari", "org.openqa.selenium.safari.SafariDriver");
+        }
+
+        @Override
+        protected WebDriver newInstance(Class<? extends WebDriver> webDriverClass, ConfigurationProperties configuration, Object... args) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            Capabilities oCaps = (Capabilities) args[0];
+            SafariOptions options = new SafariOptions(oCaps);
+
+            return super.newInstance(webDriverClass, configuration, options);
         }
     }
 
@@ -103,22 +152,8 @@ public class DefaultWebDriverFactories {
         protected DesiredCapabilities newDefaultCapabilities() {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setJavascriptEnabled(true);
-            desiredCapabilities.setBrowserName(BrowserType.HTMLUNIT);
+            desiredCapabilities.setBrowserName(Browser.HTMLUNIT.browserName());
             return desiredCapabilities;
-        }
-    }
-
-    /**
-     * Opera WebDriver factory.
-     */
-    @FactoryPriority(2)
-    @DefaultFactory
-    public static class OperaWebDriverFactory extends ReflectiveWebDriverFactory {
-        /**
-         * Creates a new Opera WebDriver factory.
-         */
-        public OperaWebDriverFactory() {
-            super("opera", "org.openqa.selenium.opera.OperaDriver");
         }
     }
 

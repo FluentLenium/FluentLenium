@@ -12,7 +12,7 @@
         <fluentlenium.version>6.0.0-SNAPSHOT</fluentlenium.version>
 
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.2.2</selenium.version>
+        <selenium.version>4.8.3</selenium.version>
     </properties>
 
     <name>FluentLenium Examples Edge IE</name>
@@ -62,6 +62,18 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-edge-driver</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v111</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>

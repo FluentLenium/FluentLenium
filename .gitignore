@@ -203,3 +203,6 @@ Gemfile.lock
 examples/spring/gridurl.txt
 
 .sdkmanrc
+
+node_modules/
+node/

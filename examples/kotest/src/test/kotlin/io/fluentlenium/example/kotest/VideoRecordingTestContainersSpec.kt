@@ -1,6 +1,7 @@
 package io.fluentlenium.example.kotest
 
 import io.fluentlenium.adapter.kotest.FluentFreeSpec
+import io.kotest.core.annotation.EnabledIf
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.Spec
 import io.kotest.extensions.testcontainers.LifecycleMode
@@ -18,6 +19,7 @@ import org.testcontainers.containers.VncRecordingContainer
  * with a Docker/Chrome container (managed by TestContainers)
  * that hosts the browser.
  */
+@EnabledIf(IsNotMacOS::class)
 class VideoRecordingTestContainersSpec : FluentFreeSpec() {
 
     /**
