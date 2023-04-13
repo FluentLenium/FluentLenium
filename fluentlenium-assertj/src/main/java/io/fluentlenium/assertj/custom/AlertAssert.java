@@ -1,28 +1,25 @@
 package io.fluentlenium.assertj.custom;
 
-import io.fluentlenium.core.alert.AlertImpl;
+import io.fluentlenium.core.alert.Alert;
 import org.assertj.core.api.AbstractAssert;
-import org.openqa.selenium.NoAlertPresentException;
 
 /**
  * Default implementation for alert assertions.
  */
-public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> implements AlertStateAssert {
+public class AlertAssert extends AbstractAssert<AlertAssert, Alert> implements AlertStateAssert {
 
-    public AlertAssert(AlertImpl actual) {
+    public AlertAssert(Alert actual) {
         super(actual, AlertAssert.class);
     }
 
     @Override
     public AlertStateAssert hasText(String text) {
-        try {
-            String actualText = actual.getText();
-            if (!actualText.contains(text)) {
-                failWithMessage(
-                        "The alert box does not contain the text: " + text + ". Actual text found : " + actualText);
-            }
-        } catch (NoAlertPresentException e) {
-            failWithMessage("There is no alert box");
+        isPresent();
+
+        String actualText = actual.getText();
+
+        if (!actualText.contains(text)) {
+            failWithActualExpectedAndMessage(actualText, text, "The alert box does not contain the expected text");
         }
 
         return this;
@@ -35,5 +32,14 @@ public class AlertAssert extends AbstractAssert<AlertAssert, AlertImpl> implemen
         }
         return this;
     }
+
+    @Override
+    public AlertStateAssert isNotPresent() {
+        if (actual.present()) {
+            failWithMessage("There should be no alert box");
+        }
+        return this;
+    }
+
 
 }

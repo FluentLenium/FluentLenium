@@ -4,7 +4,6 @@ import io.fluentlenium.adapter.spock.FluentSpecification
 import io.fluentlenium.adapter.spock.page.Page1
 import io.fluentlenium.adapter.spock.page.Page2
 import io.github.bonigarcia.wdm.managers.ChromeDriverManager
-import org.openqa.selenium.NoAlertPresentException
 import org.openqa.selenium.WebDriver
 
 import static org.hamcrest.CoreMatchers.is
@@ -61,35 +60,27 @@ class SpockControlSpec extends FluentSpecification {
         expect caps, is(not(null))
     }
 
-    def 'shuld return performance timing'() {
+    def 'should return performance timing'() {
         expect:
         performanceTiming() instanceof io.fluentlenium.core.performance.PerformanceTiming
     }
 
-    def 'shuld return keyboard'() {
+    def 'should return keyboard'() {
         expect:
         keyboard() instanceof io.fluentlenium.core.action.KeyboardActions
     }
 
-    def 'shuld throw on alert'() {
-        when:
-        alert()
-
-        then:
-        thrown(NoAlertPresentException)
-    }
-
-    def 'shuld return mouse'() {
+    def 'should return mouse'() {
         expect:
         mouse() instanceof io.fluentlenium.core.action.MouseActions
     }
 
-    def 'shuld return css support'() {
+    def 'should return css support'() {
         expect:
         css() instanceof io.fluentlenium.core.css.CssSupport
     }
 
-    def 'shuld return events registry'() {
+    def 'should return events registry'() {
         expect:
         eventsEnabled
         events() instanceof io.fluentlenium.core.events.EventsRegistry
