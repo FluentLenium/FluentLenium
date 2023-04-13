@@ -5,7 +5,7 @@ import io.fluentlenium.assertj.custom.FluentListAssert;
 import io.fluentlenium.assertj.custom.FluentWebElementAssert;
 import io.fluentlenium.assertj.custom.PageAssert;
 import io.fluentlenium.core.FluentPage;
-import io.fluentlenium.core.alert.AlertImpl;
+import io.fluentlenium.core.alert.Alert;
 import io.fluentlenium.core.domain.FluentList;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.assertj.core.api.Assertions;
@@ -25,7 +25,7 @@ public final class FluentLeniumAssertions extends Assertions {
      * @param actual actual alert
      * @return Alert assertion object
      */
-    public static AlertAssert assertThat(AlertImpl actual) {
+    public static AlertAssert assertThat(Alert actual) {
         return new AlertAssert(actual);
     }
 
