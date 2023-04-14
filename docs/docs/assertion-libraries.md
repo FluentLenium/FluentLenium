@@ -27,7 +27,7 @@ We recommend to use AssertJ because we extend it with FluentWebElement and Fluen
 <dependency>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-assertj</artifactId>
-    <version>5.0.1</version>
+    <version>6.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
