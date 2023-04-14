@@ -94,6 +94,7 @@
 
                 <configuration>
                     <forkCount>2</forkCount>
+                    <rerunFailingTestsCount>2</rerunFailingTestsCount>
 
                     <systemPropertyVariables>
                         <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
