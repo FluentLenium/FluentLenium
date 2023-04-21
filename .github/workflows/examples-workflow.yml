@@ -172,7 +172,8 @@ jobs:
     env:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
-      MVNW_VERBOSE: true
+      MVNW_VERBOSE: "true"
+      MAVEN_BATCH_ECHO: "on"
     steps:
       - uses: actions/checkout@v3
         with:
