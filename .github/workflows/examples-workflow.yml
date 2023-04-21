@@ -127,7 +127,11 @@ jobs:
           cache: "maven"
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
-      - name: Compile maven examples
+      - name: Compile maven examples as they are
+        if: ${{ false }}
+        run: ./mvnw -B -nsu -Pexamples clean test-compile
+
+      - name: Compile maven examples with current branch
         run: ./mvnw -B -nsu -Pexamples clean test-compile -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
   maven-safari-example:
