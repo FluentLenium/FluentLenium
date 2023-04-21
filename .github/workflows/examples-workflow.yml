@@ -18,9 +18,39 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  versions:
+    runs-on: ubuntu-latest
+    env:
+      MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+    outputs:
+      fluentlenium: ${{ steps.fluentlenium.outputs.version }}
+      selenium: ${{ steps.selenium.outputs.version }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'zulu'
+          cache: "maven"
+      - id: fluentlenium
+        name: "determine fluentlenium version"
+        run: |
+          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
+          cat $GITHUB_OUTPUT
+      - id: selenium
+        name: "determine selenium version"
+        run: |
+          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
+          cat $GITHUB_OUTPUT
+
   gradle-kotest-example:
+    needs: [ versions ]
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    env:
+      FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
+      SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -32,14 +62,13 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
 
-      - name: determine Fluentlenium version
-        uses: ./.github/actions/determine-fluentlenium-version
+# io.fluentlenium not released yet
+      - name: Run gradle kotest quickstart as it is
+        if: ${{ false }}
+        run: cd examples/kotest && ./gradlew check
 
-      - name: FluentLenium version
-        run: echo $FLUENTLENIUM_VERSION
-
-      - name: Run gradle kotest quickstart
-        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+      - name: Run gradle kotest quickstart with current branch
+        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
@@ -49,8 +78,12 @@ jobs:
           report_paths: '**/build/test-results/test/TEST-*.xml'
 
   gradle-firefox-example:
+    needs: [ versions ]
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    env:
+      FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
+      SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -62,14 +95,13 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
 
-      - name: determine Fluentlenium version
-        uses: ./.github/actions/determine-fluentlenium-version
+# io.fluentlenium not released yet
+      - name: Run gradle firefox quickstart as it is
+        if: ${{ false }}
+        run: cd examples/quickstart-firefox && ./gradlew check
 
-      - name: FluentLenium version
-        run: echo $FLUENTLENIUM_VERSION
-
-      - name: Run gradle firefox quickstart
-        run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+      - name: Run gradle firefox quickstart with current branch
+        run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Pselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
@@ -79,8 +111,12 @@ jobs:
           report_paths: '**/build/test-results/test/TEST-*.xml'
 
   maven-examples-compileonly:
+    needs: [ versions ]
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    env:
+      FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
+      SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -91,13 +127,21 @@ jobs:
           cache: "maven"
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
-      - name: Compile maven examples
+      - name: Compile maven examples as they are
+        if: ${{ false }}
         run: ./mvnw -B -nsu -Pexamples clean test-compile
 
-  maven-safari-example:
-    runs-on: macos-latest
-    timeout-minutes: 10
+      - name: Compile maven examples with current branch
+        run: ./mvnw -B -nsu -Pexamples clean test-compile -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
+  maven-safari-example:
+    needs: [ versions ]
+
+    timeout-minutes: 10
+    runs-on: macos-latest
+    env:
+      FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
+      SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
       - uses: actions/checkout@v3
 
@@ -114,8 +158,12 @@ jobs:
         run: |
           sudo safaridriver --enable
 
-      - name: Run safari examples
+      - name: Run safari examples as they are
+        if: ${{ false }}
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
+
+      - name: Run safari examples with current branch
+        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
@@ -125,9 +173,12 @@ jobs:
           report_paths: '**/target/*-reports/TEST-*.xml'
 
   maven-windows-example:
-    runs-on: windows-latest
+    needs: [ versions ]
     timeout-minutes: 10
-
+    runs-on: windows-latest
+    env:
+      FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
+      SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -144,7 +195,8 @@ jobs:
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
-      - name: Run windows examples
+      - name: Run windows examples as it is
+        if: ${{ false }}
         run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
       - name: Publish Test reports
