@@ -202,6 +202,7 @@ jobs:
           set MAVEN_OPTS="-Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }}"
           .\mvnw.cmd  -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property
           type examples\quickstart-microsoft-browsers\pom.xml
+          set MAVEN_OPTS=
           .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
         env:
           MAVEN_BATCH_ECHO: "on"
