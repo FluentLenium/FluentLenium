@@ -57,15 +57,12 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
 
-      - name: determine Fluentlenium version
-        uses: ./.github/actions/determine-fluentlenium-version
-
 # io.fluentlenium not released yet
 #      - name: Run gradle kotest quickstart with current release
 #        run: cd examples/kotest && ./gradlew check
 
       - name: Run gradle kotest quickstart with current branch
-        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=FLUENTLENIUM_VERSION -Dselenium.version=SELENIUM_VERSION
+        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
