@@ -197,9 +197,11 @@ jobs:
 
       - name: Run windows examples with current branch
         run: |
-          .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=fluentlenium.version -DnewVersion=${{ needs.versions.outputs.fluentlenium }}
-          .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }}
+          .\mvnw.cmd -Dproperty=fluentlenium.version -DnewVersion=${{ needs.versions.outputs.fluentlenium }} -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property 
+          .\mvnw.cmd -Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }} -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property 
           .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        env:
+          MAVEN_BATCH_ECHO: "on"
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
