@@ -63,8 +63,9 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
 
 # io.fluentlenium not released yet
-#      - name: Run gradle kotest quickstart as it is
-#        run: cd examples/kotest && ./gradlew check
+      - name: Run gradle kotest quickstart as it is
+        if: ${{ false }}
+        run: cd examples/kotest && ./gradlew check
 
       - name: Run gradle kotest quickstart with current branch
         run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
@@ -95,8 +96,9 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
 
 # io.fluentlenium not released yet
-#      - name: Run gradle firefox quickstart as it is
-#        run: cd examples/quickstart-firefox && ./gradlew check
+      - name: Run gradle firefox quickstart as it is
+        if: ${{ false }}
+        run: cd examples/quickstart-firefox && ./gradlew check
 
       - name: Run gradle firefox quickstart with current branch
         run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Pselenium.version=$SELENIUM_VERSION
@@ -152,8 +154,9 @@ jobs:
         run: |
           sudo safaridriver --enable
 
-#      - name: Run safari examples as they are
-#        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
+      - name: Run safari examples as they are
+        if: ${{ false }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
 
       - name: Run safari examples with current branch
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
@@ -172,8 +175,6 @@ jobs:
     env:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
-      MVNW_VERBOSE: "true"
-      MAVEN_BATCH_ECHO: "on"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -190,13 +191,15 @@ jobs:
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
-#      - name: Run windows examples as it is
-#        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+      - name: Run windows examples as it is
+        if: ${{ false }}
+        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
       - name: Run windows examples with current branch
-        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
-        env:
-          MAVEN_OPTS: "-Dfluentlenium.version=${{ needs.versions.outputs.fluentlenium }} -Dselenium.version=${{ needs.versions.outputs.selenium }}"
+        run: |
+          .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=fluentlenium.version -DnewVersion=${{ needs.versions.outputs.fluentlenium }}
+          .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }}
+          .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
