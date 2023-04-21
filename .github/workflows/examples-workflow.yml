@@ -34,11 +34,18 @@ jobs:
         shell: bash
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+      - name: print
+        run: |
+          echo fluentlenium ${{ steps.fluentlenium.outputs.version }}
+          echo selenium ${{ steps.selenium.outputs.version }}
 
   gradle-kotest-example:
     needs: [ versions ]
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    environment:
+      FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
+      SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -53,14 +60,12 @@ jobs:
       - name: determine Fluentlenium version
         uses: ./.github/actions/determine-fluentlenium-version
 
-      - name: FluentLenium version
-        run: echo $FLUENTLENIUM_VERSION
-
-      - name: Run gradle kotest quickstart with current release
-        run: cd examples/kotest && ./gradlew check
+# io.fluentlenium not released yet
+#      - name: Run gradle kotest quickstart with current release
+#        run: cd examples/kotest && ./gradlew check
 
       - name: Run gradle kotest quickstart with current branch
-        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=${needs.versions.outputs.fluentlenium} -Dselenium.version=${needs.versions.outputs.selenium}
+        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=FLUENTLENIUM_VERSION -Dselenium.version=SELENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
