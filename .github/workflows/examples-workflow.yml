@@ -36,12 +36,12 @@ jobs:
       - id: fluentlenium
         name: "determine fluentlenium version"
         run: |
-          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
+          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')|xargs" >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
       - id: selenium
         name: "determine selenium version"
         run: |
-          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
+          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')|xargs" >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
 
   print:
@@ -105,6 +105,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
 
+# io.fluentlenium not released yet
 #      - name: Run gradle firefox quickstart with current release
 #        run: cd examples/quickstart-firefox && ./gradlew check
 
@@ -191,7 +192,7 @@ jobs:
           java-version: 17
 
       - name: run maven install
-        run: .\mvnw.cmd -B clean install -DskipTests=true -Dselenium.version=$SELENIUM_VERSION
+        run: .\mvnw.cmd -B clean install -DskipTests=true
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
