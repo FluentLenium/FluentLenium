@@ -43,7 +43,7 @@ jobs:
     needs: [ versions ]
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    environment:
+    env:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
