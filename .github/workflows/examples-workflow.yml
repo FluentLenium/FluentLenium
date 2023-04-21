@@ -34,10 +34,17 @@ jobs:
         shell: bash
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
-      - name: print
+
+  print:
+    needs: [ versions ]
+    runs-on: ubuntu-latest
+    env:
+      fluentlenium: ${{ needs.versions.outputs.fluentlenium }}
+    steps:
+      - name: fluentlenium
         run: |
-          echo fluentlenium ${{ steps.fluentlenium.outputs.version }}
-          echo selenium ${{ steps.selenium.outputs.version }}
+          echo ${fluentlenium}
+          echo ${{ needs.versions.outputs.fluentlenium }}
 
   gradle-kotest-example:
     needs: [ versions ]
