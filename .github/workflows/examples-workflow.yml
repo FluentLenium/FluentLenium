@@ -197,7 +197,7 @@ jobs:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
       - name: Run windows examples
-        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
+        run: .\mvnw.cmd -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
