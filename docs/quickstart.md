@@ -34,7 +34,9 @@ Starting from FluentLenium 3.1.0 you can use all sparks of Java 8, including lam
 comparison to Selenium 3 which is still basing on Guava objects. Please take a look on documentation to find `await`
 lambda usage example.
 
-If you want to keep up to date please choose FluentLenium 4.x
+For Java 1.8 you need to pick Fluentlenium 5.x, the support was dropped since 6.x release
+
+If you want to keep up to date please choose FluentLenium 6.x
 
 ## Maven pom configuration
 
@@ -43,8 +45,8 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 ```xml
 
 <properties>
-    <fluentlenium.version>5.0.1</fluentlenium.version>
-    <selenium.version>4.2.2</selenium.version>
+    <fluentlenium.version>6.0.0</fluentlenium.version>
+    <selenium.version>4.8.3</selenium.version>
 </properties>
 
 <dependency>
@@ -62,7 +64,7 @@ Assuming you want to use Java 11, Junit and AssertJ please add the following dep
 <dependency>
 <groupId>org.seleniumhq.selenium</groupId>
 <artifactId>htmlunit-driver</artifactId>
-<version>3.55.0</version>
+<version>4.8.1</version>
 <scope>test</scope>
 </dependency>
 ```
