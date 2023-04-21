@@ -183,10 +183,12 @@ jobs:
       - name: run maven install
         run: .\mvnw.cmd -B clean install -DskipTests=true
         env:
-          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip -Dfluentlenium.version=${{ needs.versions.outputs.fluentlenium }} -Dselenium.version=${{ needs.versions.outputs.selenium }}"
+          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
       - name: Run windows examples
         run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        env:
+          MAVEN_OPTS: "-Dfluentlenium.version=${{ needs.versions.outputs.fluentlenium }} -Dselenium.version=${{ needs.versions.outputs.selenium }}"
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
