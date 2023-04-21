@@ -36,12 +36,12 @@ jobs:
       - id: fluentlenium
         name: "determine fluentlenium version"
         run: |
-          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')|xargs" >> "$GITHUB_OUTPUT"
+          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
       - id: selenium
         name: "determine selenium version"
         run: |
-          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')|xargs" >> "$GITHUB_OUTPUT"
+          echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
 
   print:
