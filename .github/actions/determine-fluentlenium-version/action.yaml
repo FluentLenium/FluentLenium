@@ -8,3 +8,8 @@ runs:
       shell: bash
       env:
         MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+    - name: determine Selenium version
+      run: echo "SELENIUM_VERSION=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> $GITHUB_ENV
+      shell: bash
+      env:
+        MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"

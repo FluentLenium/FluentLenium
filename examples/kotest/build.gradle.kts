@@ -36,7 +36,7 @@ tasks.withType<Test>().configureEach {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
-    val fluentleniumVersion = properties["fluentlenium.version"] ?: "6.0.0-SNAPSHOT"
+    val fluentleniumVersion = properties["fluentlenium.version"] ?: "5.0.4"
     testImplementation("io.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("io.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
@@ -49,7 +49,7 @@ dependencies {
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.2")
 
-    val seleniumVersion = "4.8.3"
+    val seleniumVersion = properties["selenium.version"] ?: "4.8.3"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v111:$seleniumVersion")

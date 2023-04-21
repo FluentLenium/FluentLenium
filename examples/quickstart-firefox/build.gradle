@@ -13,7 +13,7 @@ test {
 }
 
 dependencies {
-    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "6.0.0-SNAPSHOT"
+    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "5.0.4"
 
     implementation "io.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
     implementation "io.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
@@ -30,7 +30,6 @@ configurations.all {
 }
 
 group = 'io.fluentlenium'
-version = '6.0.0-SNAPSHOT'
 description = 'FluentLenium Examples Firefox'
 sourceCompatibility = '11'
 compileKotlin {

@@ -18,7 +18,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  versions:
+    runs-on: ubuntu-latest
+    outputs:
+      fluentlenium: ${{ steps.fluentlenium.outputs.version }}
+      selenium: ${{ steps.selenium.outputs.version }}
+    steps:
+      - name: fluentlenium
+        run: echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
+        shell: bash
+        env:
+          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+      - name: selenium
+        run: echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
+        shell: bash
+        env:
+          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+
   gradle-kotest-example:
+    needs: [ versions ]
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -38,8 +56,11 @@ jobs:
       - name: FluentLenium version
         run: echo $FLUENTLENIUM_VERSION
 
-      - name: Run gradle kotest quickstart
-        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+      - name: Run gradle kotest quickstart with current release
+        run: cd examples/kotest && ./gradlew check
+
+      - name: Run gradle kotest quickstart with current branch
+        run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=${needs.versions.outputs.fluentlenium} -Dselenium.version=${needs.versions.outputs.selenium}
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
@@ -68,8 +89,11 @@ jobs:
       - name: FluentLenium version
         run: echo $FLUENTLENIUM_VERSION
 
-      - name: Run gradle firefox quickstart
-        run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION
+      - name: Run gradle firefox quickstart with current release
+        run: cd examples/quickstart-firefox && ./gradlew check
+
+      - name: Run gradle firefox quickstart with current branch
+        run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
@@ -110,12 +134,15 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
 
+      - name: determine Fluentlenium version
+        uses: ./.github/actions/determine-fluentlenium-version
+
       - name: Enable Safari Driver
         run: |
           sudo safaridriver --enable
 
       - name: Run safari examples
-        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
+        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
