@@ -40,7 +40,7 @@ dependencies {
     testImplementation("io.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("io.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.5.5"
+    val koTestVersion = "5.6.1"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
     implementation(platform("org.junit:junit-bom:5.9.2"))
 
@@ -49,10 +49,10 @@ dependencies {
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.2")
 
-    val seleniumVersion = "4.8.3"
+    val seleniumVersion = "4.9.0"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
-    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v111:$seleniumVersion")
+    testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v112:$seleniumVersion")
 
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:1.3.4")
     testImplementation("org.testcontainers:selenium:1.18.0")
