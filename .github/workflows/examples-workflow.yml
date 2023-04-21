@@ -44,17 +44,6 @@ jobs:
           echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
 
-  print:
-    needs: [ versions ]
-    runs-on: ubuntu-latest
-    env:
-      fluentlenium: ${{ needs.versions.outputs.fluentlenium }}
-    steps:
-      - name: fluentlenium
-        run: |
-          echo A ${fluentlenium}
-          echo B ${{ needs.versions.outputs.fluentlenium }}
-
   gradle-kotest-example:
     needs: [ versions ]
     timeout-minutes: 10
@@ -197,7 +186,7 @@ jobs:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
       - name: Run windows examples
-        run: .\mvnw.cmd -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        run: .\mvnw.cmd -Dfluentlenium.version=${{ needs.versions.outputs.fluentlenium }} -Dselenium.version=${{ needs.versions.outputs.selenium }} -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
