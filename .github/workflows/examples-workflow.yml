@@ -33,11 +33,11 @@ jobs:
           java-version: 17
           distribution: 'zulu'
           cache: "maven"
-      - name: fluentlenium
+      - id: fluentlenium
         run: |
           echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
-      - name: selenium
+      - id: selenium
         run: |
           echo "version=$(./mvnw -B -N org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=selenium.version| fgrep -v '[INFO]'|fgrep -v '[WARNING]')" >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
