@@ -15,7 +15,7 @@
         <fluentlenium.version>6.0.0</fluentlenium.version>
 
         <!-- Make sure the selenium.version won't be overriden by another pom.xml -->
-        <selenium.version>4.8.3</selenium.version>
+        <selenium.version>4.9.0</selenium.version>
     </properties>
 
     <dependencies>
