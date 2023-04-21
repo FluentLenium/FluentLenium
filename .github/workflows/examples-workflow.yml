@@ -63,7 +63,7 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
 
 # io.fluentlenium not released yet
-#      - name: Run gradle kotest quickstart with current release
+#      - name: Run gradle kotest quickstart as it is
 #        run: cd examples/kotest && ./gradlew check
 
       - name: Run gradle kotest quickstart with current branch
@@ -95,7 +95,7 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
 
 # io.fluentlenium not released yet
-#      - name: Run gradle firefox quickstart with current release
+#      - name: Run gradle firefox quickstart as it is
 #        run: cd examples/quickstart-firefox && ./gradlew check
 
       - name: Run gradle firefox quickstart with current branch
@@ -152,7 +152,10 @@ jobs:
         run: |
           sudo safaridriver --enable
 
-      - name: Run safari examples
+#      - name: Run safari examples as they are
+#        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
+
+      - name: Run safari examples with current branch
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
@@ -169,6 +172,7 @@ jobs:
     env:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
+      MVNW_VERBOSE: true
     steps:
       - uses: actions/checkout@v3
         with:
@@ -185,7 +189,10 @@ jobs:
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
-      - name: Run windows examples
+#      - name: Run windows examples as it is
+#        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+
+      - name: Run windows examples with current branch
         run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
         env:
           MAVEN_OPTS: "-Dfluentlenium.version=${{ needs.versions.outputs.fluentlenium }} -Dselenium.version=${{ needs.versions.outputs.selenium }}"
