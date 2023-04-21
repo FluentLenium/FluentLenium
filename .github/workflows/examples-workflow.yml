@@ -197,13 +197,12 @@ jobs:
 
       - name: Run windows examples with current branch
         run: |
-          set MAVEN_OPTS="-Dproperty=fluentlenium.version -DnewVersion=${{ needs.versions.outputs.fluentlenium }}"
-          set
+          set $env:MAVEN_OPTS="-Dproperty=fluentlenium.version -DnewVersion=${{ needs.versions.outputs.fluentlenium }}"
+          dir env
           .\mvnw.cmd "-B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property" 
-          set MAVEN_OPTS="-Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }}"
+          $env:MAVEN_OPTS="-Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }}"
           .\mvnw.cmd  -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property
           type examples\quickstart-microsoft-browsers\pom.xml
-          set MAVEN_OPTS=
           .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
         env:
           MAVEN_BATCH_ECHO: "on"
