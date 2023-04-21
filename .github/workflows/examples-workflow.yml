@@ -195,16 +195,25 @@ jobs:
         if: ${{ false }}
         run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
-      - name: Run windows examples with current branch
+      - name: patch fluentlenium version
         run: |
-          set $env:MAVEN_OPTS="-Dproperty=fluentlenium.version -DnewVersion=${{ needs.versions.outputs.fluentlenium }}"
           .\mvnw.cmd "-B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property" 
-          $env:MAVEN_OPTS="-Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }}"
+          type examples\quickstart-microsoft-browsers\pom.xml
+        env:
+          MAVEN_OPTS: "-Dproperty=fluentlenium.version -DnewVersion=${{ needs.versions.outputs.fluentlenium }}"
+          MAVEN_BATCH_ECHO: "on"
+
+      - name: patch selenium version
+        run: |
           .\mvnw.cmd  -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers versions:set-property
           type examples\quickstart-microsoft-browsers\pom.xml
-          .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
         env:
+          MAVEN_OPTS: "-Dproperty=selenium.version -DnewVersion=${{ needs.versions.outputs.selenium }}"
           MAVEN_BATCH_ECHO: "on"
+
+      - name: Run windows examples with current branch
+        run: |
+          .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
