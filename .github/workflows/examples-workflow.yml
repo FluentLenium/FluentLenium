@@ -129,10 +129,10 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
       - name: Compile maven examples as they are
         if: ${{ false }}
-        run: ./mvnw -B -nsu -Pexamples clean test-compile
+        run: ./mvnw -B -nsu -Pexamples test-compile
 
       - name: Compile maven examples with current branch
-        run: ./mvnw -B -nsu -Pexamples clean test-compile -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
+        run: ./mvnw -B -nsu -Pexamples test-compile -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
   maven-safari-example:
     needs: [ versions ]
@@ -191,7 +191,7 @@ jobs:
           java-version: 17
 
       - name: run maven install
-        run: .\mvnw.cmd -B clean install -DskipTests=true
+        run: .\mvnw.cmd -B install -DskipTests=true
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 

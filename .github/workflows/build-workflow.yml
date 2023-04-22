@@ -43,7 +43,7 @@ jobs:
           cache: "maven"
       - name: Java 11 - unit & integration tests code coverage
         run: |
-          ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+          ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 verify jacoco:report
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
@@ -71,7 +71,7 @@ jobs:
           cache: "maven"
       - name: Java 17 - unit & integration tests code coverage
         run: |
-          ./mvnw -B -Pjava17,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report
+          ./mvnw -B -Pjava17,ci -Dfailsafe.rerunFailingTestsCount=1 verify jacoco:report
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
@@ -101,7 +101,7 @@ jobs:
         uses: ./.github/actions/determine-fluentlenium-version
 
       - name: Java 17 - unit & integration tests
-        run: ./mvnw -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
+        run: ./mvnw -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
