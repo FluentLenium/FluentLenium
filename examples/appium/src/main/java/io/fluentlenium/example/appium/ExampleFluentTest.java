@@ -39,7 +39,7 @@ public class ExampleFluentTest extends FluentTest {
     @BeforeClass
     public static void startServer() {
         DesiredCapabilities cap = new DesiredCapabilities();
-        // cap.setCapability("noReset", "false");
+        cap.setCapability("appium:noReset", "false");
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)

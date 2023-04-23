@@ -15,7 +15,8 @@
     <properties>
         <fluentlenium.version>6.0.0</fluentlenium.version>
         <spring.version>6.0.8</spring.version>
-        <selenium.version>4.9.0</selenium.version>
+        <!-- io.appium:java-client currently incompatible with selenium later than 4.8.1-->
+        <appium.selenium.version>4.8.1</appium.selenium.version>
     </properties>
 
     <dependencyManagement>
@@ -29,19 +30,19 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-support</artifactId>
-                <version>${selenium.version}</version>
+                <version>${appium.selenium.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-api</artifactId>
-                <version>${selenium.version}</version>
+                <version>${appium.selenium.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-remote-driver</artifactId>
-                <version>${selenium.version}</version>
+                <version>${appium.selenium.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
