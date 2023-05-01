@@ -3,7 +3,7 @@ package io.fluentlenium.kotest.matchers.el
 import io.fluentlenium.core.domain.FluentWebElement
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
-import io.kotest.matchers.equals.beEqual
+import io.kotest.matchers.equalityMatcher
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 import io.kotest.matchers.string.contain
@@ -220,7 +220,6 @@ fun FluentWebElement.shouldMatchText(matcher: Matcher<String>) = also { it shoul
  * See [matchText]
  */
 fun FluentWebElement.shouldNotMatchText(matcher: Matcher<String>) = also { it shouldNot matchText(matcher) }
-
 
 /**
  * Checks if the element has the expected id.
@@ -484,8 +483,8 @@ fun FluentWebElement.shouldNotHaveAttribute(expectedAttribute: String) =
  *
  * @return the matcher object.
  */
-fun haveAttributeValue(attribute: String, expectedValue: String?) =
-    matchAttributeValue(attribute, beEqual(expectedValue))
+fun haveAttributeValue(attribute: String, expectedValue: String?): Matcher<FluentWebElement> =
+    matchAttributeValue(attribute, equalityMatcher(expectedValue))
 
 /**
  * See [haveAttributeValue]
@@ -510,7 +509,6 @@ fun FluentWebElement.shouldNotHaveAttributeValue(attribute: String, expectedValu
  */
 fun FluentWebElement.shouldNotHaveAttributeValue(pair: Pair<String, String?>) =
     also { it shouldNot haveAttributeValue(pair.first, pair.second) }
-
 
 fun matchAttributeValue(attribute: String, matcher: Matcher<String?>): Matcher<FluentWebElement> =
     matcher.contramap {

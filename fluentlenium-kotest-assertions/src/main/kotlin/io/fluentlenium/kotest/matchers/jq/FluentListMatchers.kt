@@ -4,7 +4,7 @@ import io.fluentlenium.core.domain.FluentList
 import io.fluentlenium.core.domain.FluentWebElement
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
-import io.kotest.matchers.equals.beEqual
+import io.kotest.matchers.equalityMatcher
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 import io.kotest.matchers.string.contain
@@ -20,7 +20,7 @@ import org.openqa.selenium.Dimension
  * @return the matcher object
  */
 fun haveText(expectedText: String) =
-    haveTextMatching(beEqual(expectedText))
+    haveTextMatching(equalityMatcher(expectedText))
 
 /**
  * See [haveText]
@@ -81,15 +81,13 @@ fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
 fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
     also { it shouldNot haveTextMatching(text) }
 
-
 fun haveTextMatching(matcher: Matcher<String?>): Matcher<FluentList<FluentWebElement>> = object : Matcher<FluentList<FluentWebElement>> {
     override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualTexts = value.texts()
-
-        val result = actualTexts.map { matcher.test(it) }
+        val matches = actualTexts.map { matcher.test(it) }
 
         return MatcherResult(
-            result.any { it.passed() },
+            matches.any { it.passed() },
             { "No selected elements text matches '$matcher', actual texts $actualTexts" },
             {
                 "No selected elements should match '$matcher',"
