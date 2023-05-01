@@ -31,7 +31,7 @@ jobs:
       - name: setup environment
         uses: ./.github/actions/setup-environment
         with:
-          java-version: 11
+          java-version: 17
 
       - id: fluentlenium
         name: "determine fluentlenium version"
@@ -57,7 +57,7 @@ jobs:
       - name: setup environment
         uses: ./.github/actions/setup-environment
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
@@ -90,7 +90,7 @@ jobs:
       - name: setup environment
         uses: ./.github/actions/setup-environment
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
@@ -123,7 +123,7 @@ jobs:
       - name: setup environment
         uses: ./.github/actions/setup-environment
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
@@ -149,7 +149,7 @@ jobs:
       - name: setup environment
         uses: ./.github/actions/setup-environment
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
