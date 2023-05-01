@@ -118,7 +118,7 @@ jobs:
       - name: setup environment
         uses: ./.github/actions/setup-environment
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Java 17 - JavaDoc
         run: ./mvnw -B -Pjava17 javadoc:aggregate
