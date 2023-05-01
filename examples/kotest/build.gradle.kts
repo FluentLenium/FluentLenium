@@ -42,7 +42,7 @@ dependencies {
 
     val koTestVersion = "5.6.1"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
-    implementation(platform("org.junit:junit-bom:5.9.2"))
+    implementation(platform("org.junit:junit-bom:5.9.3"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
