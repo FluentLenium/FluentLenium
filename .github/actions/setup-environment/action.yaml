@@ -1,0 +1,23 @@
+name: 'Setup environment'
+description: "install java, maven wrapper & checkout repo"
+
+inputs:
+  java-version:
+    description: 'java version to install'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK ${{ inputs.java-version }}
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: 'zulu'
+        cache: "maven"
+
+    - name: Cache Maven Wrapper
+      uses: actions/cache@v3
+      with:
+        key: mavenWrapper-${{ hashfiles('.mvn/wrapper/maven-wrapper.*') }}
+        path: ~/.m2/wrapper
