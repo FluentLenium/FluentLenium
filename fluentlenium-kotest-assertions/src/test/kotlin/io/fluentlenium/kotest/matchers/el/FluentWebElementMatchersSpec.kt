@@ -5,6 +5,8 @@ import io.kotest.assertions.shouldFail
 import io.kotest.inspectors.forOne
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
+import io.kotest.matchers.string.endWith
+import io.kotest.matchers.string.startWith
 import org.openqa.selenium.By
 import org.openqa.selenium.Dimension
 
@@ -119,12 +121,20 @@ class FluentWebElementMatchersSpec : MatcherBase({
         }
     }
 
-    "matchText" {
+    "matchText with regexp" {
         el("#oneline") should matchText("A single.*text")
         el("#oneline").shouldMatchText("A single.*text")
 
         el("#oneline") shouldNot matchText("foo.*abc")
         el("#oneline").shouldNotMatchText("foo.*abc")
+    }
+
+    "matchText with matcher" {
+        el("#oneline") should matchText(startWith("A single"))
+        el("#oneline").shouldMatchText(startWith("A single"))
+
+        el("#oneline") shouldNot matchText(endWith("abc"))
+        el("#oneline").shouldNotMatchText(endWith("abc"))
     }
 
     "matchTextNegative" {

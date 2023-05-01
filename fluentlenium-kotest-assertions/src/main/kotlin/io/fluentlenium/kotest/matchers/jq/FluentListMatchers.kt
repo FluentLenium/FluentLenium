@@ -4,8 +4,10 @@ import io.fluentlenium.core.domain.FluentList
 import io.fluentlenium.core.domain.FluentWebElement
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
+import io.kotest.matchers.equals.beEqual
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
+import io.kotest.matchers.string.contain
 import org.openqa.selenium.Dimension
 
 /**
@@ -17,19 +19,8 @@ import org.openqa.selenium.Dimension
  * @param expectedText text to find
  * @return the matcher object
  */
-fun haveText(expectedText: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTexts = value.texts()
-
-        return MatcherResult(
-            actualTexts.contains(expectedText),
-            { "No selected elements has text '$expectedText', found texts $actualTexts" },
-            {
-                "No selected elements should have '$expectedText',"
-            },
-        )
-    }
-}
+fun haveText(expectedText: String) =
+    haveTextMatching(beEqual(expectedText))
 
 /**
  * See [haveText]
@@ -51,19 +42,8 @@ fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) =
  * @param expectedText substring to find
  * @return the matcher object
  */
-fun haveTextContaining(expectedText: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTexts = value.texts()
-
-        return MatcherResult(
-            actualTexts.any { it.contains(expectedText) },
-            { "No selected elements text contains '$expectedText', found texts $actualTexts" },
-            {
-                "No selected elements should contain '$expectedText',"
-            },
-        )
-    }
-}
+fun haveTextContaining(expectedText: String) =
+    haveTextMatching(contain(expectedText))
 
 /**
  * See [haveTextContaining]
@@ -86,19 +66,8 @@ fun FluentList<FluentWebElement>.shouldNotHaveTextContaining(text: String) =
  * @param expectedPattern pattern to match
  * @return the matcher object
  */
-fun haveTextMatching(expectedPattern: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTexts = value.texts()
-
-        return MatcherResult(
-            actualTexts.any { it.matches(expectedPattern.toRegex()) },
-            { "No selected elements text matches '$expectedPattern', found texts $actualTexts" },
-            {
-                "No selected elements should match '$expectedPattern',"
-            },
-        )
-    }
-}
+fun haveTextMatching(expectedPattern: String) =
+    haveTextMatching(contain(Regex(expectedPattern)))
 
 /**
  * See [haveTextMatching]
@@ -111,6 +80,23 @@ fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
  */
 fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
     also { it shouldNot haveTextMatching(text) }
+
+
+fun haveTextMatching(matcher: Matcher<String?>): Matcher<FluentList<FluentWebElement>> = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+        val actualTexts = value.texts()
+
+        val result = actualTexts.map { matcher.test(it) }
+
+        return MatcherResult(
+            result.any { it.passed() },
+            { "No selected elements text matches '$matcher', actual texts $actualTexts" },
+            {
+                "No selected elements should match '$matcher',"
+            },
+        )
+    }
+}
 
 /**
  * Checks if at least one element in a list of elements, has the given id.

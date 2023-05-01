@@ -3,8 +3,10 @@ package io.fluentlenium.kotest.matchers.el
 import io.fluentlenium.core.domain.FluentWebElement
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
+import io.kotest.matchers.equals.beEqual
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
+import io.kotest.matchers.string.contain
 import org.openqa.selenium.Dimension
 
 /**
@@ -165,19 +167,7 @@ fun FluentWebElement.shouldNotBeSelected() = also { it shouldNot beSelected() }
  *
  * @return the matcher object.
  */
-fun containText(expectedText: String) = object : Matcher<FluentWebElement> {
-    override fun test(value: FluentWebElement): MatcherResult {
-        val actualText = value.text()
-
-        return MatcherResult(
-            actualText.contains(expectedText),
-            { "Expected element to contain text '$expectedText', actual text is '$actualText'." },
-            {
-                "Expected element to not contain text '$expectedText', actual text is '$actualText'."
-            },
-        )
-    }
-}
+fun containText(expectedText: String) = matchText(expectedText)
 
 /**
  * See [containText]
@@ -197,19 +187,8 @@ fun FluentWebElement.shouldNotContainText(text: String) = also { it shouldNot co
  *
  * @return the matcher object.
  */
-fun matchText(pattern: String) = object : Matcher<FluentWebElement> {
-    override fun test(value: FluentWebElement): MatcherResult {
-        val actualText = value.text()
-
-        return MatcherResult(
-            actualText.matches(pattern.toRegex()),
-            { "Expected element text to match pattern '$pattern', actual text is '$actualText'." },
-            {
-                "Expected element text to not match pattern '$pattern', actual text is '$actualText'."
-            },
-        )
-    }
-}
+fun matchText(regexp: String): Matcher<FluentWebElement> =
+    matchText(contain(Regex(regexp)))
 
 /**
  * See [matchText]
@@ -220,6 +199,28 @@ fun FluentWebElement.shouldMatchText(pattern: String) = also { it should matchTe
  * See [matchText]
  */
 fun FluentWebElement.shouldNotMatchText(pattern: String) = also { it shouldNot matchText(pattern) }
+
+/**
+ * Checks if the element has text that can be matched with the given matcher.
+ *
+ * Example:
+ * `el("button") should matchText(startWith("text"))`
+ *
+ * @return the matcher object.
+ */
+fun matchText(matcher: Matcher<String>): Matcher<FluentWebElement> =
+    matcher.contramap { it.text() }
+
+/**
+ * See [matchText]
+ */
+fun FluentWebElement.shouldMatchText(matcher: Matcher<String>) = also { it should matchText(matcher) }
+
+/**
+ * See [matchText]
+ */
+fun FluentWebElement.shouldNotMatchText(matcher: Matcher<String>) = also { it shouldNot matchText(matcher) }
+
 
 /**
  * Checks if the element has the expected id.
@@ -483,18 +484,8 @@ fun FluentWebElement.shouldNotHaveAttribute(expectedAttribute: String) =
  *
  * @return the matcher object.
  */
-fun haveAttributeValue(attribute: String, expectedValue: String?) = object : Matcher<FluentWebElement> {
-    override fun test(value: FluentWebElement): MatcherResult {
-        val actualAttributeValue = value.attribute(attribute)
-        return MatcherResult(
-            actualAttributeValue == expectedValue,
-            { "Expected element to have attribute '$attribute' with value '$expectedValue'. actual value is '$actualAttributeValue'" },
-            {
-                "Expected element to not have attribute '$attribute' with value '$expectedValue'."
-            },
-        )
-    }
-}
+fun haveAttributeValue(attribute: String, expectedValue: String?) =
+    matchAttributeValue(attribute, beEqual(expectedValue))
 
 /**
  * See [haveAttributeValue]
@@ -519,3 +510,15 @@ fun FluentWebElement.shouldNotHaveAttributeValue(attribute: String, expectedValu
  */
 fun FluentWebElement.shouldNotHaveAttributeValue(pair: Pair<String, String?>) =
     also { it shouldNot haveAttributeValue(pair.first, pair.second) }
+
+
+fun matchAttributeValue(attribute: String, matcher: Matcher<String?>): Matcher<FluentWebElement> =
+    matcher.contramap {
+        it.attribute(attribute)
+    }
+
+fun FluentWebElement.shouldMatchAttributeValue(attribute: String, matcher: Matcher<String?>) =
+    also { it should matchAttributeValue(attribute, matcher) }
+
+fun FluentWebElement.shouldNotMatchAttributeValue(attribute: String, matcher: Matcher<String?>) =
+    also { it shouldNot matchAttributeValue(attribute, matcher) }
