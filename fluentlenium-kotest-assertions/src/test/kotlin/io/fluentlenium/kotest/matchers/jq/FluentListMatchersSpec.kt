@@ -3,15 +3,25 @@ package io.fluentlenium.kotest.matchers.jq
 import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.kotest.matchers.config.MatcherBase
 import io.kotest.assertions.shouldFail
+import io.kotest.inspectors.forNone
 import io.kotest.inspectors.forOne
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 import org.openqa.selenium.Dimension
 
 class FluentListMatchersSpec : MatcherBase(
     {
+        "jq without text: text() is not null" {
+            jq("#empty").texts().forNone { it.shouldBeNull() }
+        }
+
+        "jq without text: textContent() is not null" {
+            jq("#empty").textContents().forNone { it.shouldBeNull() }
+        }
+
         "can use collection asserts" {
             jq("#doesNotExist").shouldBeEmpty()
             jq("h1").shouldHaveSize(1)

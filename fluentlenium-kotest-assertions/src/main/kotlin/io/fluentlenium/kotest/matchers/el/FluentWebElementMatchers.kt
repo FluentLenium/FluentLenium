@@ -510,13 +510,28 @@ fun FluentWebElement.shouldNotHaveAttributeValue(attribute: String, expectedValu
 fun FluentWebElement.shouldNotHaveAttributeValue(pair: Pair<String, String?>) =
     also { it shouldNot haveAttributeValue(pair.first, pair.second) }
 
+/**
+ * Checks if the element has the expected attribute that matches the given matcher
+ *
+ * Example:
+ * `el("button") should matchAttributeValue("key", be("myValue"))`
+ *
+ * @return the matcher object.
+ */
+
 fun matchAttributeValue(attribute: String, matcher: Matcher<String?>): Matcher<FluentWebElement> =
     matcher.contramap {
         it.attribute(attribute)
     }
 
+/**
+ * See [matchAttributeValue]
+ */
 fun FluentWebElement.shouldMatchAttributeValue(attribute: String, matcher: Matcher<String?>) =
     also { it should matchAttributeValue(attribute, matcher) }
 
+/**
+ * See [matchAttributeValue]
+ */
 fun FluentWebElement.shouldNotMatchAttributeValue(attribute: String, matcher: Matcher<String?>) =
     also { it shouldNot matchAttributeValue(attribute, matcher) }

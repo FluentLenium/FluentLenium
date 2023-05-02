@@ -81,7 +81,7 @@ fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
 fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
     also { it shouldNot haveTextMatching(text) }
 
-fun haveTextMatching(matcher: Matcher<String?>): Matcher<FluentList<FluentWebElement>> = object : Matcher<FluentList<FluentWebElement>> {
+fun haveTextMatching(matcher: Matcher<String>): Matcher<FluentList<FluentWebElement>> = object : Matcher<FluentList<FluentWebElement>> {
     override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualTexts = value.texts()
         val matches = actualTexts.map { matcher.test(it) }
