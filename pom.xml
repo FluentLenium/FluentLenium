@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -9,7 +8,7 @@
     </parent>
     <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>6.0.0-SNAPSHOT</version>
+    <version>6.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -42,7 +41,7 @@
         <url>https://github.com/FluentLenium/FluentLenium</url>
         <connection>scm:git:git@github.com:FluentLenium/FluentLenium.git</connection>
         <developerConnection>scm:git:git@github.com:FluentLenium/FluentLenium.git</developerConnection>
-        <tag>v5.0.2</tag>
+        <tag>v6.0.0</tag>
     </scm>
 
     <distributionManagement>
@@ -514,8 +513,8 @@
                                 <requireMavenVersion>
                                     <version>3.9.0</version>
                                 </requireMavenVersion>
-                                <banDuplicatePomDependencyVersions/>
-                                <dependencyConvergence/>
+                                <banDuplicatePomDependencyVersions />
+                                <dependencyConvergence />
                             </rules>
                         </configuration>
                     </execution>
