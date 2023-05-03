@@ -121,4 +121,7 @@ jobs:
           java-version: 17
 
       - name: Java 17 - JavaDoc
-        run: ./mvnw -B -Pjava17,sonatype-oss-release org.jetbrains.dokka:dokka-maven-plugin:dokka javadoc:aggregate
+        run: ./mvnw -B -Pjava17 javadoc:aggregate
+
+      - name: Java 17 - Dokka
+        run: ./mvnw -B -pl fluentlenium-kotest,fluentlenium-kotest-assertions -P sonatype-oss-release org.jetbrains.dokka:dokka-maven-plugin:dokka
