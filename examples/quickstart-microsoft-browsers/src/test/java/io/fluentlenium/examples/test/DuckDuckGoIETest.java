@@ -16,7 +16,9 @@ public class DuckDuckGoIETest extends FluentTestNg {
     @Override
     public WebDriver newWebDriver() {
         WebDriverManager.iedriver().setup();
-        return new InternetExplorerDriver();
+        InternetExplorerDriver driver = new InternetExplorerDriver();
+        driver.manage().window().maximize();
+        return driver;
     }
 
     @Test
