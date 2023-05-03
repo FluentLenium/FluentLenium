@@ -3,33 +3,35 @@ layout: page
 title: Element locators
 subtitle: FluentLenium
 sidebar:
-  CSS Selector: "#css-selector"
-  By Locator: "#selenium-by-locator"
-  Filters: "#filters"
-  Index: "#first-last-and-index"
-  XPath Axes: "#xpath-axes"
-  JQuery: "#jquery-syntax"
-  Element Actions: "#actions"
-  Element information: "#information"
+CSS Selector: "#css-selector"
+By Locator: "#selenium-by-locator"
+Filters: "#filters"
+Index: "#first-last-and-index"
+XPath Axes: "#xpath-axes"
+JQuery: "#jquery-syntax"
+Element Actions: "#actions"
+Element information: "#information"
 ---
 
-##  Fluent Locators
+## Fluent Locators
 
-FluentLenium provides `$` and `el` methods to build **Fluent Locators**. Fluent Locators are implemented by ```FluentWebElement``` (`el`) and ```FluentList<FluentWebElement>``` (`$`).
+FluentLenium provides `$` and `el` methods to build **Fluent Locators**. Fluent Locators are implemented
+by ```FluentWebElement``` (`el`) and ```FluentList<FluentWebElement>``` (`$`).
 Those classes are wrappers of Selenium ```WebElement``` and ```List<WebElement>```.
 
 Element can be located by
 
-  - [CSS Selector](#css-selector): Creates a Fluent Locator from CSS Selector.
-  - [Selenium By Locator](#selenium-by-locator): Creates a Fluent Locator with native Selenium API.
-  - [Filters](#filters): Add an additional filter to the Fluent Locator.
-  - [First/Last/Index](#first-last-and-index): Get a single element from the Fluent Locator.
-  - [XPath Axes](#xpath-axes): Get another Fluent Locator from its relative position in the DOM.
-  - [JQuery syntax](#jquery-syntax): See find() method instead of el() and $()
+- [CSS Selector](#css-selector): Creates a Fluent Locator from CSS Selector.
+- [Selenium By Locator](#selenium-by-locator): Creates a Fluent Locator with native Selenium API.
+- [Filters](#filters): Add an additional filter to the Fluent Locator.
+- [First/Last/Index](#first-last-and-index): Get a single element from the Fluent Locator.
+- [XPath Axes](#xpath-axes): Get another Fluent Locator from its relative position in the DOM.
+- [JQuery syntax](#jquery-syntax): See find() method instead of el() and $()
 
 Whenever element is find you can:
-  - [Perform an action](#actions) (click, fill form etc)
-  - [Get some information about it](#information) (value, clickability etc)
+
+- [Perform an action](#actions) (click, fill form etc)
+- [Get some information about it](#information) (value, clickability etc)
 
 ## CSS Selector
 
@@ -37,11 +39,11 @@ You can use CSS Selector with the same restrictions as in Selenium.
 
 ```java
 $("#title") // Elements with id named "title"
-$(".fluent") // Elements with class named "fluent"
-$("input") // Elements with tag name "input"
+        $(".fluent") // Elements with class named "fluent"
+        $("input") // Elements with tag name "input"
 
 // Most of CSS3 syntax is supported.
-$("form > input[data-custom=selenium]")
+        $("form > input[data-custom=selenium]")
 ```
 
 ## Selenium By Locator
@@ -58,17 +60,18 @@ You can use Filters to make your Fluent Selection easier to read and more powerf
 
 ```java
 // Required import to make filters available
-import static org.fluentlenium.core.filter.FilterConstructor.*;
+
+import static io.fluentlenium.core.filter.FilterConstructor.*;
 ```
 
 ```java
-$(".fluent", withName("foo"))
-$(".fluent", withClass("foo"))
-$(".fluent", withId("idOne"))
-$(".fluent", withText("This field is mandatory."))
-$(withId("idOne")) // Filter only
-$(By.cssSelector(".header")) // Native Selenium `By` locator
-$(".fluent", withName("foo"), withId("id1")) // Filter chaining
+$(".fluent",withName("foo"))
+        $(".fluent",withClass("foo"))
+        $(".fluent",withId("idOne"))
+        $(".fluent",withText("This field is mandatory."))
+        $(withId("idOne")) // Filter only
+        $(By.cssSelector(".header")) // Native Selenium `By` locator
+        $(".fluent",withName("foo"),withId("id1")) // Filter chaining
 ```
 
 Available filter methods with descriptions are shown in the table below:
@@ -85,36 +88,38 @@ Available filter methods with descriptions are shown in the table below:
 
 You can do more complex string matching on the above filters using the following methods:
 
-  - `contains`
-  - `containsWord`
-  - `notContains`
-  - `startsWith`
-  - `notStartsWith`
-  - `endsWith`
-  - `notEndsWith`
+- `contains`
+- `containsWord`
+- `notContains`
+- `startsWith`
+- `notStartsWith`
+- `endsWith`
+- `notEndsWith`
 
 ```java
-$(".fluent", withName().notContains("name"))
-$(".fluent", withId().notStartsWith("id"))
-$(".fluent", withText().endsWith("Female"))
-$(".fluent", withName().contains(regex("na?me[0-9]*")))
-$(".fluent", withName().notStartsWith(regex("na?me[0-9]*")))
+$(".fluent",withName().notContains("name"))
+        $(".fluent",withId().notStartsWith("id"))
+        $(".fluent",withText().endsWith("Female"))
+        $(".fluent",withName().contains(regex("na?me[0-9]*")))
+        $(".fluent",withName().notStartsWith(regex("na?me[0-9]*")))
 ```
 
 `contains`, `startsWith` and `endsWith` with a regexp pattern look for a subsection of the pattern.
 
 ## First, Last and Index
+
 If you want the first, last or a particular index element, just use:
 
 ```java
 $(".fluent").first() // First element
-el(".fluent") // First element (short form)
-$(".fluent").last() // Last element
-$(".fluent").index(2) // Third element
-$(".fluent", withName("foo")).index(2) // Third element named "foo"
+        el(".fluent") // First element (short form)
+        $(".fluent").last() // Last element
+        $(".fluent").index(2) // Third element
+        $(".fluent",withName("foo")).index(2) // Third element named "foo"
 ```
 
 ### Fluent Locator chains
+
 You can also chain the Fluent Locators.
 
 ```java
@@ -124,9 +129,9 @@ $(".fluent").$("input")
 
 // The first "input" element named "bar"
 // inside the third "fluent" class named "foo" element.
-$(".fluent", withName("foo")).index(2).$("input", withName("bar")).first()
+        $(".fluent",withName("foo")).index(2).$("input",withName("bar")).first()
 // or using el
-el(".fluent", withName("foo")).index(2).$("input", withName("bar"))
+        el(".fluent",withName("foo")).index(2).$("input",withName("bar"))
 ```
 
 ## XPath Axes
@@ -136,12 +141,12 @@ can use [XPath axes](https://www.w3schools.com/xml/xpath_axes.asp).
 
 ```java
 el(".fluent").dom().parent()
-el(".fluent").dom().descendants()
-el(".fluent").dom().ancestors()
-el(".fluent").dom().followings()
-el(".fluent").dom().followingSiblings()
-el(".fluent").dom().precedings()
-el(".fluent").dom().precedingSiblings()
+        el(".fluent").dom().descendants()
+        el(".fluent").dom().ancestors()
+        el(".fluent").dom().followings()
+        el(".fluent").dom().followingSiblings()
+        el(".fluent").dom().precedings()
+        el(".fluent").dom().precedingSiblings()
 ```
 
 You can also call `axes()` on a FluentWebElement but that is deprecated and may be removed in any future version.
@@ -152,9 +157,9 @@ If you don't like the [JQuery](http://jquery.com/) syntax, you can replace `$` a
 
 ```java
 goTo("http://mywebpage/");
-find("#firstName").write("toto");
-find("#create-button").click();
-assertThat(window().title()).isEqualTo("Hello toto");
+        find("#firstName").write("toto");
+        find("#create-button").click();
+        assertThat(window().title()).isEqualTo("Hello toto");
 ```
 
 All syntaxes are equivalent. `$` is simply an alias for the `find()` method, and `el` for `find().first()`.
@@ -162,24 +167,25 @@ All syntaxes are equivalent. `$` is simply an alias for the `find()` method, and
 ## Located Elements
 
 ## Actions
+
 Fluent Locators have methods to interact with located elements:
 
 ```java
 // click/double-click on all the enabled elements.
 $("#create-button").click()
-$("#create-button").doubleClick()
+        $("#create-button").doubleClick()
 
 // Clear all the enabled fields
-$("#firstname").clear()
+        $("#firstname").clear()
 
 // Submit all the enabled forms.
-$("#account").submit()
+        $("#account").submit()
 
 // Place the mouse over the first found element
-$("#create-button").hoverOver()
+        $("#create-button").hoverOver()
 
 // Scroll the viewport to make the first found element visible
-$("#create-button").scrollIntoView();
+        $("#create-button").scrollIntoView();
 ```
 
 ### Filling forms
@@ -206,10 +212,10 @@ You can also fill `<select>` elements
 $("daySelector").fillSelect().withValue("MONDAY")
 
 // Select second value
-$("daySelector").fillSelect().withIndex(1)
+        $("daySelector").fillSelect().withIndex(1)
 
 // Select value with visible text "Monday"
-$("daySelector").fillSelect().withText("Monday")
+        $("daySelector").fillSelect().withText("Monday")
 ```
 
 Don't forget that only visible fields will be modified. It simulates a real person using a browser !
@@ -220,24 +226,24 @@ You can also access a list of all the names, visible text, and ids of a list of 
 
 ```java
 $(".fluent").names()
-$(By.id("foo")).ids()
-$(".fluent").values()
-$(".fluent").attributes("myCustomAttribute")
-$(".fluent").texts()
-$(".fluent").textContents()
+        $(By.id("foo")).ids()
+        $(".fluent").values()
+        $(".fluent").attributes("myCustomAttribute")
+        $(".fluent").texts()
+        $(".fluent").textContents()
 ```
 
 You can also check if the element is displayed, enabled or selected:
 
 ```java
 el(".fluent").displayed()
-el(".fluent").enabled()
-el(".fluent").selected()
+        el(".fluent").enabled()
+        el(".fluent").selected()
 ```
 
 Advanced conditions are also available
 
 ```java
 el(".fluent").conditions().clickable();
-el(".fluent").conditions().rectangle().size().width().greaterThan(50);
+        el(".fluent").conditions().rectangle().size().width().greaterThan(50);
 ```

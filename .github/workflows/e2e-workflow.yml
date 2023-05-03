@@ -3,10 +3,14 @@
 
 name: E2E pipeline
 
-on: [pull_request]
+on: [ pull_request ]
 
 env:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   check-env:
@@ -18,29 +22,29 @@ jobs:
         env:
           URL: ${{ secrets.BROWSER_STACK_URL }}
         if: "${{ env.URL != '' }}"
-        run: echo "::set-output name=defined::true"
+        run: echo "defined=true" >> "$GITHUB_OUTPUT"
 
   edge:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
-    - name: Install Fluentlenium
-      uses: ./.github/actions/fluentlenium-maven-install
-    - name: E2E on Edge
-      run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+      - name: E2E on Edge
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=edge -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   ie:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -48,14 +52,14 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on IE
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=ie -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   chrome:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -63,14 +67,14 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Chrome
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=chrome -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   firefox:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -78,14 +82,14 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=firefox -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   safari:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -93,14 +97,14 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Firefox
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=safari -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   iphone:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -108,14 +112,14 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Iphone Web test (Safari on Iphone)
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=iphone -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 
   android:
     needs: [ check-env ]
     if: needs.check-env.outputs.browserStackUrl-available == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -123,5 +127,5 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
       - name: E2E on Android Web test (Chrome on Android device)
-        run: mvn -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
+        run: ./mvnw -B -nsu -Pexamples -pl examples/spring clean test -DbrowserName=android -Dmobile.simulator=false -DuseHub=true -DgridUrl=${{ secrets.BROWSER_STACK_URL }}
 

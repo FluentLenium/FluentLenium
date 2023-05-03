@@ -40,37 +40,38 @@ Some methods have been renamed and others have been removed to improve consisten
 
 Element method names
 --------------------
+
 - Many method prefixes like `is`, `has` and `get` have been removed from method names.
-Methods like `isDisplayed`, `isEnabled`, `getValue()`, `getAttribute(name)` have been
-renamed with their shorter form `displayed()`, `enabled()`, `value()`, `attribute(name)`.
+  Methods like `isDisplayed`, `isEnabled`, `getValue()`, `getAttribute(name)` have been
+  renamed with their shorter form `displayed()`, `enabled()`, `value()`, `attribute(name)`.
 
 - `text(...)` setter has been renamed in `write(...)` to avoid collision with `text()` getter;
 
 - `fill().withValues()` has been renamed to `fill().withText()` to avoid confusion with `value()`
-that retrieves the `value` attribute.
+  that retrieves the `value` attribute.
 
 Conditions and await()
 ----------------------
-`await()` now supports more conditions, provides better error message, and is easier to maintain. 
+`await()` now supports more conditions, provides better error message, and is easier to maintain.
 
 `await().untilEach()` match the condition when each element match the condition
 
 `await().until()` match the condition when at least one element match the condition.
 
 `isNotPresent()` has been removed, in favor of `not().present()`. `not()` method on condition builder
- allows to negate any condition.
+allows to negate any condition.
 
 You can also check the exact same conditions on elements or list of elements, using
 `FluentWebElement#conditions()`, `FluentList#one()` and `FluentList#each()`
 
 - Replace `await().until("some-selector")...` with `await().until($(some-selector))...` or
-`$(some-selector).await().until()...`.
+  `$(some-selector).await().until()...`.
 
 Pages and Components
 --------------------
 
-- Each method available in `FluentTest` is now available in both `FluentPage` and `FluentWebElement`, allowing 
-implementation of any logic into Pages and Components.
+- Each method available in `FluentTest` is now available in both `FluentPage` and `FluentWebElement`, allowing
+  implementation of any logic into Pages and Components.
 - Ensure your Page Objects extends `FluentPage` and have a public empty constructor.
 - Ensure your Components extends `FluentWebElement` and have a constructor matching `FluentWebElement` constructor.
 - `createPage` method has been removed in favor of `newInstance`.
@@ -84,14 +85,14 @@ Ajax support
 FluentLenium now supports Ajax natively, using either injected elements or `$`/`el`/`find` search methods.
 `@WaitHook` makes writing Ajax Webapp tests as simple as writing Static Website tests.
 
-- `@AjaxElement` has been removed. 
+- `@AjaxElement` has been removed.
 
 Lazy Locators
 -------------
 
 When using search methods `find`, `$` or `el`, effective search is **NOT** performed at invocation time.
-It's a major change in FluentLenium 1.0. Those methods now returns a **Lazy Locator** implementing 
-`FluentWebElement` / `FluentList`. 
+It's a major change in FluentLenium 1.0. Those methods now returns a **Lazy Locator** implementing
+`FluentWebElement` / `FluentList`.
 
 Those locators looks like elements from previous versions, but the search will be performed lazily, when invoking the
 first action or check on the element.
@@ -105,9 +106,10 @@ Implicit waits
 --------------
 When using raw Selenium, explicit waits may spoil testing code and using implicit wait can be a solution.
 But using implicit waits may hard to diagnose delays when running tests.
- 
+
 FluentLenium now advocates for never using implicit wait, in favor of using explicit waits only. FluentLenium hides the
-complexity of explicit waits so them become readable when invoked manually, and can even automate them before each action with the
+complexity of explicit waits so them become readable when invoked manually, and can even automate them before each
+action with the
 use of `@Wait` hook so you don't have to care about them.
 
 - `withDefaultSearchWait` has been removed. Use `@Wait` instead.

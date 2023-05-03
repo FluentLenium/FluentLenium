@@ -2,10 +2,9 @@
 
 ![FluentLenium CI pipeline](https://github.com/FluentLenium/FluentLenium/workflows/FluentLenium%20CI%20pipeline/badge.svg)
 [![Coveralls](https://coveralls.io/repos/github/FluentLenium/FluentLenium/badge.svg?branch=develop)](https://coveralls.io/github/FluentLenium/FluentLenium?branch=develop)
-[![Javadoc](https://javadoc-badge.appspot.com/org.fluentlenium/fluentlenium-core.svg?label=javadoc)](https://fluentlenium.io/javadoc)
-[![Maven Central](https://img.shields.io/maven-central/v/org.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
+[![javadoc](https://javadoc.io/badge2/io.fluentlenium/fluentlenium-core/javadoc.svg)](https://fluentlenium.io/javadoc)
+[![Maven Central](https://img.shields.io/maven-central/v/io.fluentlenium/fluentlenium-parent.svg)](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22io.fluentlenium%22%20AND%20a%3A%22fluentlenium-parent%22)
 [![Website](https://img.shields.io/website-up-down-green-red/http/fluentlenium.io.svg)](https://fluentlenium.io)
-[![xscode](https://img.shields.io/badge/Available%20on-xs%3Acode-blue?style=?style=plastic&logo=appveyor&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////////VXz1bAAAAAJ0Uk5T/wDltzBKAAAAlUlEQVR42uzXSwqAMAwE0Mn9L+3Ggtgkk35QwcnSJo9S+yGwM9DCooCbgn4YrJ4CIPUcQF7/XSBbx2TEz4sAZ2q1RAECBAiYBlCtvwN+KiYAlG7UDGj59MViT9hOwEqAhYCtAsUZvL6I6W8c2wcbd+LIWSCHSTeSAAECngN4xxIDSK9f4B9t377Wd7H5Nt7/Xz8eAgwAvesLRjYYPuUAAAAASUVORK5CYII=)](https://xscode.com/filipcynarski/FluentLenium)
 
 FluentLenium helps you writing readable, reusable, reliable and resilient UI functional tests for the browser and mobile
 app.
@@ -29,13 +28,6 @@ easier to maintain.
 
 FluentLenium gives you [multiple methods](https://fluentlenium.io/docs/test-methods/) which help you write tests
 quicker. All those methods are tested daily by commercial regression test suites maintained by project developers.
-
-# Support
-
-FluentLenium is an OpenSource project. If you or your company needs more assitance or custom features we are open to
-colaborate and support you over the xs:code platform.
-
-[![FluentLenium on XS:CODE](FluentLenium-banner.png)](https://xscode.com/filipcynarski/FluentLenium)
 
 # Quickstart
 
@@ -96,5 +88,3 @@ To help you navigate through FluentLenium, here's a short summary about its modu
 
 If you have any comment, remark or issue, please open an issue on
 [FluentLenium Issue Tracker](https://github.com/FluentLenium/FluentLenium/issues)
-
-[![Foo](https://xscode.com/assets/promo-banner.svg)](https://xscode.com/filipcynarski/FluentLenium)

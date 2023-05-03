@@ -8,6 +8,7 @@
             row.innerHTML = "<div class=\"inner-row\">added row</div>";
             document.getElementsByClassName('container')[0].appendChild(row);
         }
+
         function replaceRow() {
             var myAnchor = document.getElementById("deleted");
             var replaced = document.createElement("div");
@@ -20,7 +21,7 @@
 <body>
 <script lang="javascript">
     window.setTimeout(addRow, 1000);
-    window.setTimeout(replaceRow,1500);
+    window.setTimeout(replaceRow, 1500);
     window.setTimeout(addRow, 2000);
 
 </script>

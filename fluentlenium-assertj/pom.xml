@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
-        <groupId>org.fluentlenium</groupId>
-        <version>5.0.3-SNAPSHOT</version>
+        <groupId>io.fluentlenium</groupId>
+        <version>6.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>fluentlenium-assertj</artifactId>
     <packaging>jar</packaging>
@@ -18,7 +18,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -48,7 +48,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-testng</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v95</artifactId>
+            <artifactId>${seleniumDevtools.artifactId}</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -96,8 +96,9 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
-                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties
+                        </java.util.logging.config.file>
                         <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
                     </systemPropertyVariables>
                 </configuration>

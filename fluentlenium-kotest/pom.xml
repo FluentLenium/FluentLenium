@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.fluentlenium</groupId>
+        <groupId>io.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>5.0.3-SNAPSHOT</version>
+        <version>6.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -12,28 +12,34 @@
     <description>Kotest Adapter for FluentLenium</description>
 
     <properties>
-        <kotlin.version>1.6.10</kotlin.version>
-        <kotest.version>5.1.0</kotest.version>
-        <dokka.version>1.6.10</dokka.version>
+        <kotlin.version>1.8.21</kotlin.version>
+        <kotest.version>5.6.1</kotest.version>
+        <dokka.version>1.8.10</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.8.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>io.kotest</groupId>
                 <artifactId>kotest-bom</artifactId>
                 <version>${kotest.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-bom</artifactId>
+                <version>${kotlin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>1.14.4</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -46,7 +52,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -54,6 +60,21 @@
             <groupId>io.kotest</groupId>
             <artifactId>kotest-runner-junit5-jvm</artifactId>
             <version>${kotest.version}</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-http-jdk-client</artifactId>
+            <version>4.9.0</version>
+        </dependency>
+-->
+        
+        <dependency>
+            <groupId>io.kotest</groupId>
+            <artifactId>kotest-framework-datatest-jvm</artifactId>
+            <version>${kotest.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -69,12 +90,11 @@
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.0.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v95</artifactId>
+            <artifactId>${seleniumDevtools.artifactId}</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
@@ -97,7 +117,7 @@
 
                 <configuration>
                     <args>
-                        <arg>-Xopt-in=kotlin.RequiresOptIn</arg>
+                        <arg>-opt-in=kotlin.RequiresOptIn</arg>
                     </args>
                 </configuration>
 
@@ -126,8 +146,9 @@
                     </includes>
 
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
-                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties
+                        </java.util.logging.config.file>
                         <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
                     </systemPropertyVariables>
                 </configuration>
@@ -171,6 +192,7 @@
                 </plugins>
             </build>
         </profile>
+
     </profiles>
 
 </project>

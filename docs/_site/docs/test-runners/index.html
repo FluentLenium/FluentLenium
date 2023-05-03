@@ -1,457 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8" />
+<!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="msvalidate.01" content="CB7D41B769EED78B294F9EB873406AA8"/>
 
-  <title>Test runners</title>
-  <meta name="Description" content="FluentLenium is a website automation framework which
+    <title>Test runners</title>
+    <meta name="Description" content="FluentLenium is a website automation framework which
    extends Selenium to write reliable and resilient UI functional tests.
     This framework is React ready. Written and maintained by people who
      are automating browser-based tests on a daily basis.">
-  <meta name="author" content="FluentLenium" />
-  
-  
-  <meta name="description" content="FluentLenium">
-  
+    <meta name="author" content="FluentLenium"/>
 
-  <link rel="alternate" type="application/rss+xml" title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests." href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
-    
-      
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/bootstrap-social.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
-  
+    <meta name="description" content="FluentLenium">
 
-    
-  
-  
 
-  
+    <link rel="alternate" type="application/rss+xml"
+          title="FluentLenium - FluentLenium is a website automation framework which extends Selenium to write reliable and resilient UI functional tests."
+          href="/feed.xml"/>
 
-  <!-- Facebook OpenGraph tags -->
-  <meta property="og:title" content="Test runners" />
-  <meta property="og:type" content="website" />
-  
-  <meta property="og:url" content="http://fluentlenium.io/docs/test-runners/" />
-  
-  
-  <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
-  
-  <!-- Twitter summary cards -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@FluentLenium" />
-  <meta name="twitter:creator" content="@FluentLenium" />
-  <meta name="twitter:title" content="Test runners" />
-  <meta name="twitter:description" content="## Supported Test Runners - [Junit 4](#junit-4) - [Junit 5 Jupiter](#junit-5-jupiter) - [TestNG](#testng) - [Cucumber](#cucumber) - [Spock](#spock) - [Spring TestNG](#spring-testng) ## Standalone mode (no 3rd party test-runner) - [Standalone mode](#standalone-mode) ## JUnit 4 - Import this maven dependency. ```xml org.fluentlenium fluentlenium-junit 4.5.1 test ``` - Extends FluentTest. Fluent Test is..." />
-  
-  <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png" />
-  
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"/>
 
-  gtag('config', 'UA-132760260-1');
-</script>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+
+    <link rel="stylesheet" href="/css/main.css"/>
+
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"/>
+
+    <link rel="stylesheet"
+          href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"/>
+
+
+    <!-- Facebook OpenGraph tags -->
+    <meta property="og:title" content="Test runners"/>
+    <meta property="og:type" content="website"/>
+
+    <meta property="og:url" content="http://fluentlenium.io/docs/test-runners/"/>
+
+
+    <meta property="og:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <!-- Twitter summary cards -->
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@FluentLenium"/>
+    <meta name="twitter:creator" content="@FluentLenium"/>
+    <meta name="twitter:title" content="Test runners"/>
+    <meta name="twitter:description"
+          content="## Supported Test Runners - [Junit 4](#junit-4) - [Junit 5 Jupiter](#junit-5-jupiter) - [TestNG](#testng) - [Cucumber](#cucumber) - [Spock](#spock) - [Spring TestNG](#spring-testng) ## Standalone mode (no 3rd party test-runner) - [Standalone mode](#standalone-mode) ## JUnit 4 - Import this maven dependency. ```xml io.fluentlenium fluentlenium-junit 4.5.1 test ``` - Extends FluentTest. Fluent Test is..."/>
+
+    <meta name="twitter:image" content="http://fluentlenium.io/img/avatar-icon.png"/>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132760260-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-132760260-1');
+    </script>
 </head>
 
 
-  <body>
-  
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://fluentlenium.io">FluentLenium</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="nav navbar-nav navbar-right">
+
+
+                <li>
+
+
+                    <a href="/">Home</a>
+
+                </li>
+
+
+                <li>
+
+
+                    <a href="/quickstart">Quickstart</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/docs/test-runners">Supported Test runners</a>
+
+
+                        <a href="/docs/locators">Finding elements</a>
+
+
+                        <a href="/docs/key_features">Key features</a>
+
+
+                        <a href="/docs/configuration">Configuration</a>
+
+
+                        <a href="/docs/test-methods">Test methods</a>
+
+
+                        <a href="/docs/assertion-libraries">Assertion libraries</a>
+
+
+                        <a href="/docs/appium-support">Appium support</a>
+
+
+                        <a href="https://fluentlenium.io/javadoc">Javadoc</a>
+
+
+                    </div>
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
+
+
+                        <a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
+
+
+                    </div>
+                </li>
+
+
+                <li>
+
+
+                    <a href="/about">About</a>
+
+                </li>
+
+
+                <li class="navlinks-container">
+                    <a class="navlinks-parent" href="javascript:void(0)">Github</a>
+                    <div class="navlinks-children">
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
+
+
+                        <a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
+
+
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+        <div class="avatar-container">
+            <div class="avatar-img-border">
+                <a href="http://fluentlenium.io ">
+                    <img class="avatar-img" src="/img/avatar-icon.png"/>
+                </a>
+            </div>
+        </div>
+
+
     </div>
-
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-      
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/">Home</a>
-
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/quickstart">Quickstart</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Docs</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-runners">Supported Test runners</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/locators">Finding elements</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/key_features">Key features</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/configuration">Configuration</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/test-methods">Test methods</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/assertion-libraries">Assertion libraries</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/docs/appium-support">Appium support</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://fluentlenium.io/javadoc">Javadoc</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Migration</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/from-0.13.2-to-1.0-or-3.0">to 3.0</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="/migration/3.0-to-4.0">from 3.0 to 4.0</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-        
-          <li>
-            
-            
-
-
-
-
-
-<a href="/about">About</a>
-
-          </li>
-        
-        
-        
-          <li class="navlinks-container">
-            <a class="navlinks-parent" href="javascript:void(0)">Github</a>
-            <div class="navlinks-children">
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium">Sources</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/issues">Issues</a>
-
-                
-              
-                
-                  
-            
-
-
-
-
-
-<a href="https://github.com/FluentLenium/FluentLenium/releases">Releases</a>
-
-                
-              
-            </div>
-          </li>
-        
-        
-      </ul>
-    </div>
-
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://fluentlenium.io ">
-	      <img class="avatar-img" src="/img/avatar-icon.png" />
-		</a>
-	  </div>
-	</div>
-	
-
-  </div>
 </nav>
 
 <nav class="sidebar">
-    
+
     <ul>
-        
+
         <li><a href="#junit-4">JUnit 4</a></li>
-        
+
         <li><a href="#junit-5-jupiter">JUnit 5 Jupiter</a></li>
-        
+
         <li><a href="#testng">TestNG</a></li>
-        
+
         <li><a href="#cucumber">Cucumber</a></li>
-        
+
         <li><a href="#spock">Spock</a></li>
-        
+
         <li><a href="#spring-testng">Spring TestNG</a></li>
-        
+
         <li><a href="#standalone-mode">FluentStandalone</a></li>
-        
+
     </ul>
-    
+
 </nav>
 
 
-    <!-- TODO this file has become a mess, refactor it -->
-
-
-
+<!-- TODO this file has become a mess, refactor it -->
 
 
 <header class="header-section ">
 
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-heading">
-          <h1>Test runners</h1>
-		  
-		    
-            <hr class="small">
-            <span class="page-subheading">FluentLenium</span>
-			
-		  
-		  
-		  
+    <div class="intro-header no-img">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Test runners</h1>
+
+
+                        <hr class="small">
+                        <span class="page-subheading">FluentLenium</span>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 </header>
 
 
-
-
 <div class="container" role="main">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <h2 id="supported-test-runners">Supported Test Runners</h2>
-<ul>
-  <li><a href="#junit-4">Junit 4</a></li>
-  <li><a href="#junit-5-jupiter">Junit 5 Jupiter</a></li>
-  <li><a href="#testng">TestNG</a></li>
-  <li><a href="#cucumber">Cucumber</a></li>
-  <li><a href="#spock">Spock</a></li>
-  <li><a href="#spring-testng">Spring TestNG</a></li>
-</ul>
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <h2 id="supported-test-runners">Supported Test Runners</h2>
+            <ul>
+                <li><a href="#junit-4">Junit 4</a></li>
+                <li><a href="#junit-5-jupiter">Junit 5 Jupiter</a></li>
+                <li><a href="#testng">TestNG</a></li>
+                <li><a href="#cucumber">Cucumber</a></li>
+                <li><a href="#spock">Spock</a></li>
+                <li><a href="#spring-testng">Spring TestNG</a></li>
+            </ul>
 
-<h2 id="standalone-mode-no-3rd-party-test-runner">Standalone mode (no 3rd party test-runner)</h2>
-<ul>
-  <li><a href="#standalone-mode">Standalone mode</a></li>
-</ul>
+            <h2 id="standalone-mode-no-3rd-party-test-runner">Standalone mode (no 3rd party test-runner)</h2>
+            <ul>
+                <li><a href="#standalone-mode">Standalone mode</a></li>
+            </ul>
 
-<h2 id="junit-4">JUnit 4</h2>
+            <h2 id="junit-4">JUnit 4</h2>
 
-<ul>
-  <li>Import this maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-junit<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Extends FluentTest.</li>
-</ul>
+            <ul>
+                <li>Extends FluentTest.</li>
+            </ul>
 
-<p>Fluent Test is the entry point of FluentLenium. You only have to extend <code class="language-plaintext highlighter-rouge">FluentTest</code> and implement a test as usual.</p>
+            <p>Fluent Test is the entry point of FluentLenium. You only have to extend <code
+                    class="language-plaintext highlighter-rouge">FluentTest</code> and implement a test as usual.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyTest</span> <span class="kd">extends</span> <span class="nc">FluentTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">MyTest</span> <span class="kd">extends</span> <span
+                        class="nc">FluentTest</span> <span class="o">{</span>
     <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGoogle</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">goTo</span><span class="o">(</span><span class="s">"http://www.google.com"</span><span class="o">);</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testGoogle</span><span
+                            class="o">()</span> <span class="o">{</span>
+        <span class="n">goTo</span><span class="o">(</span><span class="s">"http://www.google.com"</span><span
+                            class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>If you need to make your tests run concurrently to speed them up, you should use dedicated libraries/extensions.
-You can use the Surefire maven plugin for example.</p>
+            <p>If you need to make your tests run concurrently to speed them up, you should use dedicated
+                libraries/extensions.
+                You can use the Surefire maven plugin for example.</p>
 
-<p><strong>Surefire JUnit example</strong></p>
+            <p><strong>Surefire JUnit example</strong></p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;profile&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;profile&gt;</span>
     <span class="nt">&lt;id&gt;</span>junit-tests<span class="nt">&lt;/id&gt;</span>
     <span class="nt">&lt;build&gt;</span>
         <span class="nt">&lt;plugins&gt;</span>
             <span class="nt">&lt;plugin&gt;</span>
                 <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span
+                            class="nt">&lt;/artifactId&gt;</span>
                 <span class="nt">&lt;configuration&gt;</span>
                     <span class="nt">&lt;parallel&gt;</span>methods<span class="nt">&lt;/parallel&gt;</span>
                     <span class="nt">&lt;threadCount&gt;</span>4<span class="nt">&lt;/threadCount&gt;</span>
@@ -462,62 +329,81 @@ You can use the Surefire maven plugin for example.</p>
         <span class="nt">&lt;/plugins&gt;</span>
     <span class="nt">&lt;/build&gt;</span>
 <span class="nt">&lt;/profile&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>More configuration examples can be found in our <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit/src/it/junit">Integration tests</a>.
-Enable them by activating <code class="language-plaintext highlighter-rouge">framework-integration-tests</code> Maven profile.</p>
+            <p>More configuration examples can be found in our <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit/src/it/junit">Integration
+                tests</a>.
+                Enable them by activating <code
+                        class="language-plaintext highlighter-rouge">framework-integration-tests</code> Maven profile.
+            </p>
 
-<h2 id="junit-5-jupiter">JUnit 5 Jupiter</h2>
+            <h2 id="junit-5-jupiter">JUnit 5 Jupiter</h2>
 
-<ul>
-  <li>Import this maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-junit-jupiter<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Extends FluentTest.</li>
-</ul>
+            <ul>
+                <li>Extends FluentTest.</li>
+            </ul>
 
-<p>If you need to run your tests in parallel please take a look into our <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit-jupiter/src/it/junit-jupiter">Integration tests examples</a>.
-Enable them by activating <code class="language-plaintext highlighter-rouge">framework-integration-tests</code> Maven profile.</p>
+            <p>If you need to run your tests in parallel please take a look into our <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-junit-jupiter/src/it/junit-jupiter">Integration
+                tests examples</a>.
+                Enable them by activating <code
+                        class="language-plaintext highlighter-rouge">framework-integration-tests</code> Maven profile.
+            </p>
 
-<h2 id="testng">TestNG</h2>
+            <h2 id="testng">TestNG</h2>
 
-<ul>
-  <li>Import this maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-testng<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Extends FluentTestNG instead of FluentTest.</li>
-</ul>
+            <ul>
+                <li>Extends FluentTestNG instead of FluentTest.</li>
+            </ul>
 
-<p>If you need to make your tests run concurrently to speed them up, you should use dedicated libraries/extensions.
-You can use the Surefire maven plugin for example.</p>
+            <p>If you need to make your tests run concurrently to speed them up, you should use dedicated
+                libraries/extensions.
+                You can use the Surefire maven plugin for example.</p>
 
-<p><strong>Surefire TestNG example</strong></p>
+            <p><strong>Surefire TestNG example</strong></p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;profile&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;profile&gt;</span>
     <span class="nt">&lt;id&gt;</span>testng-tests<span class="nt">&lt;/id&gt;</span>
     <span class="nt">&lt;build&gt;</span>
         <span class="nt">&lt;plugins&gt;</span>
             <span class="nt">&lt;plugin&gt;</span>
                 <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span class="nt">&lt;/artifactId&gt;</span>
+                <span class="nt">&lt;artifactId&gt;</span>maven-surefire-plugin<span
+                            class="nt">&lt;/artifactId&gt;</span>
                 <span class="nt">&lt;configuration&gt;</span>
                     <span class="nt">&lt;suiteXmlFiles&gt;</span>
                         <span class="nt">&lt;suiteXmlFile&gt;</span>test-suites/basic.xml<span class="nt">&lt;/suiteXmlFile&gt;</span>
@@ -528,410 +414,597 @@ You can use the Surefire maven plugin for example.</p>
         <span class="nt">&lt;/plugins&gt;</span>
     <span class="nt">&lt;/build&gt;</span>
 <span class="nt">&lt;/profile&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p><strong>TestNG test suite file</strong></p>
+            <p><strong>TestNG test suite file</strong></p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;suite</span> <span class="na">name=</span><span class="s">"Parallel tests"</span> <span class="na">parallel=</span><span class="s">"tests"</span> <span class="na">thread-count=</span><span class="s">"10"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;test</span> <span class="na">name=</span><span class="s">"Home Page Tests"</span> <span class="na">parallel=</span><span class="s">"methods"</span> <span class="na">thread-count=</span><span class="s">"10"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"test-name"</span> <span class="na">value=</span><span class="s">"Home page"</span><span class="nt">/&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;suite</span> <span class="na">name=</span><span
+                        class="s">"Parallel tests"</span> <span class="na">parallel=</span><span
+                        class="s">"tests"</span> <span class="na">thread-count=</span><span class="s">"10"</span><span
+                        class="nt">&gt;</span>
+    <span class="nt">&lt;test</span> <span class="na">name=</span><span class="s">"Home Page Tests"</span> <span
+                            class="na">parallel=</span><span class="s">"methods"</span> <span
+                            class="na">thread-count=</span><span class="s">"10"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"test-name"</span> <span
+                            class="na">value=</span><span class="s">"Home page"</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;classes&gt;</span>
-            <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"com.example.testng.OurLocationTest"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"com.example.testng.OurStoryTest"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"com.example.testng.OurLocationTest"</span><span
+                            class="nt">/&gt;</span>
+            <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"com.example.testng.OurStoryTest"</span><span
+                            class="nt">/&gt;</span>
         <span class="nt">&lt;/classes&gt;</span>
     <span class="nt">&lt;/test&gt;</span>
-    <span class="nt">&lt;test</span> <span class="na">name=</span><span class="s">"Another Home Page Tests"</span> <span class="na">parallel=</span><span class="s">"classes"</span> <span class="na">thread-count=</span><span class="s">"2"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"test-name"</span> <span class="na">value=</span><span class="s">"another home page"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;test</span> <span class="na">name=</span><span class="s">"Another Home Page Tests"</span> <span
+                            class="na">parallel=</span><span class="s">"classes"</span> <span
+                            class="na">thread-count=</span><span class="s">"2"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;parameter</span> <span class="na">name=</span><span class="s">"test-name"</span> <span
+                            class="na">value=</span><span class="s">"another home page"</span><span
+                            class="nt">/&gt;</span>
         <span class="nt">&lt;classes&gt;</span>
-            <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"com.example.testng.HomeTest"</span><span class="nt">/&gt;</span>
-            <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"com.example.testng.JoinUsTest"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;class</span> <span class="na">name=</span><span
+                            class="s">"com.example.testng.HomeTest"</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">"com.example.testng.JoinUsTest"</span><span
+                            class="nt">/&gt;</span>
         <span class="nt">&lt;/classes&gt;</span>
     <span class="nt">&lt;/test&gt;</span>
 <span class="nt">&lt;/suite&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>TestNG gives you more flexibility in order to the concurrency level, test suites and having better control on executed
- scenarios.</p>
+            <p>TestNG gives you more flexibility in order to the concurrency level, test suites and having better
+                control on executed
+                scenarios.</p>
 
-<p>Both test frameworks are giving possibility to define the parallelism level of tests.</p>
+            <p>Both test frameworks are giving possibility to define the parallelism level of tests.</p>
 
-<p>It is possible when you have multiple execution/concurrency levels set in your tests to face driver sharing issues,
-so please use <code class="language-plaintext highlighter-rouge">METHOD</code> <code class="language-plaintext highlighter-rouge">driverLifecycle</code> configuration property when your execution methods are mixed up.</p>
+            <p>It is possible when you have multiple execution/concurrency levels set in your tests to face driver
+                sharing issues,
+                so please use <code class="language-plaintext highlighter-rouge">METHOD</code> <code
+                        class="language-plaintext highlighter-rouge">driverLifecycle</code> configuration property when
+                your execution methods are mixed up.</p>
 
-<p>More configuration examples can be found in our <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-testng/src/it/testng">Integration tests</a>.
-Enable them by activating <code class="language-plaintext highlighter-rouge">framework-integration-tests</code> Maven profile.</p>
+            <p>More configuration examples can be found in our <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/fluentlenium-testng/src/it/testng">Integration
+                tests</a>.
+                Enable them by activating <code
+                        class="language-plaintext highlighter-rouge">framework-integration-tests</code> Maven profile.
+            </p>
 
-<h2 id="cucumber">Cucumber</h2>
+            <h2 id="cucumber">Cucumber</h2>
 
-<ul>
-  <li>Import this maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-cucumber<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.4.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Create runner class annotated with Cucumber.class</li>
-</ul>
+            <ul>
+                <li>Create runner class annotated with Cucumber.class</li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@RunWith</span><span class="o">(</span><span class="nc">Cucumber</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@RunWith</span><span
+                        class="o">(</span><span class="nc">Cucumber</span><span class="o">.</span><span
+                        class="na">class</span><span class="o">)</span>
 <span class="nd">@CucumberOptions</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Runner</span> <span class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Extend <code class="language-plaintext highlighter-rouge">FluentCucumberTest</code> class in all of your steps classes:</li>
-</ul>
+            <ul>
+                <li>Extend <code class="language-plaintext highlighter-rouge">FluentCucumberTest</code> class in all of
+                    your steps classes:
+                </li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleSteps1</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">ExampleSteps1</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span
+                        class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleSteps2</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+</code></pre>
+                </div>
+            </div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">ExampleSteps2</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span
+                        class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<p>or only in your <code class="language-plaintext highlighter-rouge">BaseTest</code> class:</p>
+</code></pre>
+                </div>
+            </div>
+            <p>or only in your <code class="language-plaintext highlighter-rouge">BaseTest</code> class:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseTest</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">BaseTest</span> <span class="kd">extends</span> <span
+                        class="nc">FluentCucumberTest</span> <span class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ExampleSteps1</span> <span class="kd">extends</span> <span class="nc">BaseTest</span> <span class="o">{</span>
+</code></pre>
+                </div>
+            </div>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">ExampleSteps1</span> <span class="kd">extends</span> <span class="nc">BaseTest</span> <span
+                        class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Add <code class="language-plaintext highlighter-rouge">Before</code> and <code class="language-plaintext highlighter-rouge">After</code> hooks:</li>
-</ul>
+            <ul>
+                <li>Add <code class="language-plaintext highlighter-rouge">Before</code> and <code
+                        class="language-plaintext highlighter-rouge">After</code> hooks:
+                </li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.cucumber.java.Scenario</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.cucumber.java.Scenario</span><span
+                        class="o">;</span>
 <span class="kn">import</span> <span class="nn">io.cucumber.java.After</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">io.cucumber.java.Before</span><span class="o">;</span>
 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FluentHooks</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FluentHooks</span> <span class="kd">extends</span> <span
+                            class="nc">FluentCucumberTest</span> <span class="o">{</span>
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
         <span class="n">before</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
     <span class="o">}</span>
 
     <span class="nd">@After</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
         <span class="n">after</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>When using Cucumber with Java 8 (package <code class="language-plaintext highlighter-rouge">cucumber-java8</code>), hooks can be added like this:</p>
+            <p>When using Cucumber with Java 8 (package <code class="language-plaintext highlighter-rouge">cucumber-java8</code>),
+                hooks can be added like this:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FluentHooks</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">FluentHooks</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span
+                        class="o">{</span>
     
     <span class="kd">public</span> <span class="nf">FluentHooks</span><span class="o">(){</span>
-        <span class="nc">Before</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">before</span><span class="o">);</span>
+        <span class="nc">Before</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span
+                            class="n">before</span><span class="o">);</span>
         
-        <span class="nc">After</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span class="n">after</span><span class="o">);</span>
+        <span class="nc">After</span><span class="o">(</span><span class="k">this</span><span class="o">::</span><span
+                            class="n">after</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p><strong>Notes related to Cucumber hooks:</strong></p>
+            <p><strong>Notes related to Cucumber hooks:</strong></p>
 
-<p>1) Hooks should be added <strong>ONCE</strong> for your tests. Do not add these hooks in all your steps classes.</p>
+            <p>1) Hooks should be added <strong>ONCE</strong> for your tests. Do not add these hooks in all your steps
+                classes.</p>
 
-<p>2) Adding these hooks starts FluentLenium context during execution of scenario. It means that driver will start 
-automatically. If you want to start WebDriver only for some scenarios, you can use tagged Cucumber hooks, for example:</p>
+            <p>2) Adding these hooks starts FluentLenium context during execution of scenario. It means that driver will
+                start
+                automatically. If you want to start WebDriver only for some scenarios, you can use tagged Cucumber
+                hooks, for example:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@fluent
+            <div class="language-plaintext highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code>@fluent
 Scenario: Driver should start when tag is present above scenario
     Then WebDriver starts as expected
-</code></pre></div></div>
-<p>and add tags to your hooks:</p>
+</code></pre>
+                </div>
+            </div>
+            <p>and add tags to your hooks:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Before</span><span class="o">({</span><span class="s">"@fluent"</span><span class="o">})</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nd">@Before</span><span
+                        class="o">({</span><span class="s">"@fluent"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
     <span class="n">before</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
 <span class="o">}</span>
 
 <span class="nd">@After</span><span class="o">({</span><span class="s">"@fluent"</span><span class="o">})</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
     <span class="n">after</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
 <span class="o">}</span>
-</code></pre></div></div>
-<p>3) Hooks in <code class="language-plaintext highlighter-rouge">Cucumber</code> cannot be extended. So do not add <code class="language-plaintext highlighter-rouge">Before</code> and <code class="language-plaintext highlighter-rouge">After</code> hooks in <code class="language-plaintext highlighter-rouge">BaseTest</code> (if you use such
-pattern) but add them in any other class:</p>
+</code></pre>
+                </div>
+            </div>
+            <p>3) Hooks in <code class="language-plaintext highlighter-rouge">Cucumber</code> cannot be extended. So do
+                not add <code class="language-plaintext highlighter-rouge">Before</code> and <code
+                        class="language-plaintext highlighter-rouge">After</code> hooks in <code
+                        class="language-plaintext highlighter-rouge">BaseTest</code> (if you use such
+                pattern) but add them in any other class:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FluentHooks</span> <span class="kd">extends</span> <span class="nc">BaseTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">FluentHooks</span> <span class="kd">extends</span> <span
+                        class="nc">BaseTest</span> <span class="o">{</span>
     
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
         <span class="n">before</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
     <span class="o">}</span>
     
     <span class="nd">@After</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
         <span class="n">after</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>It is possible to access current <code class="language-plaintext highlighter-rouge">FluentCucumberTest</code> context using syntax:</li>
-</ul>
+            <ul>
+                <li>It is possible to access current <code class="language-plaintext highlighter-rouge">FluentCucumberTest</code>
+                    context using syntax:
+                </li>
+            </ul>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FluentTestContainer.FLUENT_TEST.instance()
-</code></pre></div></div>
+            <div class="language-plaintext highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code>FluentTestContainer.FLUENT_TEST.instance()
+</code></pre>
+                </div>
+            </div>
 
-<p>It can be handy if you want to have access to the current WebDriver instance. The purpose of <code class="language-plaintext highlighter-rouge">FluentTestContainer</code> is to share
-state between many steps classes.</p>
+            <p>It can be handy if you want to have access to the current WebDriver instance. The purpose of <code
+                    class="language-plaintext highlighter-rouge">FluentTestContainer</code> is to share
+                state between many steps classes.</p>
 
-<ul>
-  <li>Keep your configuration in <code class="language-plaintext highlighter-rouge">BaseTest</code>:</li>
-</ul>
+            <ul>
+                <li>Keep your configuration in <code class="language-plaintext highlighter-rouge">BaseTest</code>:</li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// example configuration</span>
-<span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span class="o">=</span> <span class="s">"chrome"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseTest</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// example configuration</span>
+<span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span
+                            class="o">=</span> <span class="s">"chrome"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseTest</span> <span
+                            class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span
+                            class="o">{</span>
 
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">Capabilities</span> <span class="nf">getCapabilities</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Capabilities</span> <span class="nf">getCapabilities</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">ChromeOptions</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>or class with Cucumber hooks:</p>
+            <p>or class with Cucumber hooks:</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// example configuration</span>
-<span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span class="o">=</span> <span class="s">"chrome"</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FluentHooks</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="c1">// example configuration</span>
+<span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span
+                            class="o">=</span> <span class="s">"chrome"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FluentHooks</span> <span class="kd">extends</span> <span
+                            class="nc">FluentCucumberTest</span> <span class="o">{</span>
  
     <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="nc">Capabilities</span> <span class="nf">getCapabilities</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nc">Capabilities</span> <span class="nf">getCapabilities</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">ChromeOptions</span><span class="o">();</span>
     <span class="o">}</span>
     
     <span class="nd">@Before</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">beforeScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
         <span class="n">before</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
     <span class="o">}</span>
     
     <span class="nd">@After</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">afterScenario</span><span
+                            class="o">(</span><span class="nc">Scenario</span> <span class="n">scenario</span><span
+                            class="o">)</span> <span class="o">{</span>
         <span class="n">after</span><span class="o">(</span><span class="n">scenario</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>By default, a new instance of WebDriver is created for each scenario. If you want to run single WebDriver for all 
-scenarios in feature, change DriverLifecycle to JVM level:</li>
-</ul>
+            <ul>
+                <li>By default, a new instance of WebDriver is created for each scenario. If you want to run single
+                    WebDriver for all
+                    scenarios in feature, change DriverLifecycle to JVM level:
+                </li>
+            </ul>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.fluentlenium.adapter.cucumber.FluentCucumberTest</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.configuration.ConfigurationProperties</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">org.fluentlenium.configuration.FluentConfiguration</span><span class="o">;</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.fluentlenium.adapter.cucumber.FluentCucumberTest</span><span
+                        class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.configuration.ConfigurationProperties</span><span
+                            class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.fluentlenium.configuration.FluentConfiguration</span><span class="o">;</span>
 
-<span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span class="o">=</span> <span class="s">"chrome"</span><span class="o">,</span> <span class="n">driverLifecycle</span> <span class="o">=</span> <span class="nc">ConfigurationProperties</span><span class="o">.</span><span class="na">DriverLifecycle</span><span class="o">.</span><span class="na">JVM</span><span class="o">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseTest</span> <span class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span class="o">{</span>
+<span class="nd">@FluentConfiguration</span><span class="o">(</span><span class="n">webDriver</span> <span
+                            class="o">=</span> <span class="s">"chrome"</span><span class="o">,</span> <span class="n">driverLifecycle</span> <span
+                            class="o">=</span> <span class="nc">ConfigurationProperties</span><span
+                            class="o">.</span><span class="na">DriverLifecycle</span><span class="o">.</span><span
+                            class="na">JVM</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BaseTest</span> <span
+                            class="kd">extends</span> <span class="nc">FluentCucumberTest</span> <span
+                            class="o">{</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Remember, that page objects still need to inherit <code class="language-plaintext highlighter-rouge">FluentPage</code> to run correctly.</li>
-</ul>
+            <ul>
+                <li>Remember, that page objects still need to inherit <code
+                        class="language-plaintext highlighter-rouge">FluentPage</code> to run correctly.
+                </li>
+            </ul>
 
-<p>E2E Cucumber tests are present in <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber">Cucumber example</a>.
-Enable it by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven profile.</p>
+            <p>E2E Cucumber tests are present in <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/cucumber">Cucumber
+                example</a>.
+                Enable it by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven
+                profile.</p>
 
-<ul>
-  <li>Until FLuentLenium 4.3.1, both <code class="language-plaintext highlighter-rouge">cucumber.api</code> and <code class="language-plaintext highlighter-rouge">io.cucumber</code> based classes (<code class="language-plaintext highlighter-rouge">@Given</code>, <code class="language-plaintext highlighter-rouge">@When</code>, <code class="language-plaintext highlighter-rouge">@CucumberOptions</code>, etc.) are supported,
-however the <code class="language-plaintext highlighter-rouge">FluentCucumberTest</code> based tests still use the old Cucumber <code class="language-plaintext highlighter-rouge">ObjectFactory</code> due to the Cucumber limitation of allowing only one instance of
-<code class="language-plaintext highlighter-rouge">ObjectFactory</code> to be used, and also to provide backward compatibility for projects where Cucumber version cannot be upgraded.</li>
-  <li>From FluentLenium 4.4.1 on support for <code class="language-plaintext highlighter-rouge">cucumber.api</code> package based Before and After hooks is removed. Only <code class="language-plaintext highlighter-rouge">io.cucumber</code> packages are supported.</li>
-</ul>
+            <ul>
+                <li>Until FLuentLenium 4.3.1, both <code
+                        class="language-plaintext highlighter-rouge">cucumber.api</code> and <code
+                        class="language-plaintext highlighter-rouge">io.cucumber</code> based classes (<code
+                        class="language-plaintext highlighter-rouge">@Given</code>, <code
+                        class="language-plaintext highlighter-rouge">@When</code>, <code
+                        class="language-plaintext highlighter-rouge">@CucumberOptions</code>, etc.) are supported,
+                    however the <code class="language-plaintext highlighter-rouge">FluentCucumberTest</code> based tests
+                    still use the old Cucumber <code class="language-plaintext highlighter-rouge">ObjectFactory</code>
+                    due to the Cucumber limitation of allowing only one instance of
+                    <code class="language-plaintext highlighter-rouge">ObjectFactory</code> to be used, and also to
+                    provide backward compatibility for projects where Cucumber version cannot be upgraded.
+                </li>
+                <li>From FluentLenium 4.4.1 on support for <code class="language-plaintext highlighter-rouge">cucumber.api</code>
+                    package based Before and After hooks is removed. Only <code
+                            class="language-plaintext highlighter-rouge">io.cucumber</code> packages are supported.
+                </li>
+            </ul>
 
-<h2 id="spock">Spock</h2>
+            <h2 id="spock">Spock</h2>
 
-<ul>
-  <li>Import this maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-spock<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Extends FluentSpecification instead of FluentTest.</li>
-</ul>
+            <ul>
+                <li>Extends FluentSpecification instead of FluentTest.</li>
+            </ul>
 
-<p>E2E Spock tests are present in <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock">Spock example</a>.
-Enable it by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven profile.</p>
+            <p>E2E Spock tests are present in <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spock">Spock example</a>.
+                Enable it by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven
+                profile.</p>
 
-<h2 id="spring-testng">Spring TestNG</h2>
+            <h2 id="spring-testng">Spring TestNG</h2>
 
-<ul>
-  <li>Import this maven dependency.</li>
-</ul>
+            <ul>
+                <li>Import this maven dependency.</li>
+            </ul>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
-    <span class="nt">&lt;groupId&gt;</span>org.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
+            <div class="language-xml highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>io.fluentlenium<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>fluentlenium-spring-testng<span class="nt">&lt;/artifactId&gt;</span>
     <span class="nt">&lt;version&gt;</span>4.5.1<span class="nt">&lt;/version&gt;</span>
     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<ul>
-  <li>Extends FluentTestNgSpringTest instead of FluentTest.</li>
-</ul>
+            <ul>
+                <li>Extends FluentTestNgSpringTest instead of FluentTest.</li>
+            </ul>
 
-<p>E2E Spring testNG tests are present in <a href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring">Spring example</a>.
-Enable it by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven profile.</p>
+            <p>E2E Spring testNG tests are present in <a
+                    href="https://github.com/FluentLenium/FluentLenium/tree/develop/examples/spring">Spring example</a>.
+                Enable it by activating <code class="language-plaintext highlighter-rouge">examples</code> Maven
+                profile.</p>
 
-<h2 id="standalone-mode">Standalone mode</h2>
+            <h2 id="standalone-mode">Standalone mode</h2>
 
-<p>If you want to use FluentLenium as a pure automation Framework, without any testing framework adapter,
-you can create an instance of <code class="language-plaintext highlighter-rouge">FluentStandalone</code> and use it directly, or extend <code class="language-plaintext highlighter-rouge">FluentStandaloneRunnable</code> and
-implement <code class="language-plaintext highlighter-rouge">doRun()</code> method.</p>
+            <p>If you want to use FluentLenium as a pure automation Framework, without any testing framework adapter,
+                you can create an instance of <code class="language-plaintext highlighter-rouge">FluentStandalone</code>
+                and use it directly, or extend <code class="language-plaintext highlighter-rouge">FluentStandaloneRunnable</code>
+                and
+                implement <code class="language-plaintext highlighter-rouge">doRun()</code> method.</p>
 
-<h3 id="fluentstandalone">FluentStandalone</h3>
+            <h3 id="fluentstandalone">FluentStandalone</h3>
 
-<p>Create an instance of <code class="language-plaintext highlighter-rouge">FluentStandalone</code> and use it directly. You have to manually invoke <code class="language-plaintext highlighter-rouge">init()</code> to initialize the
-WebDriver, and <code class="language-plaintext highlighter-rouge">quit()</code> to close it.</p>
+            <p>Create an instance of <code class="language-plaintext highlighter-rouge">FluentStandalone</code> and use
+                it directly. You have to manually invoke <code
+                        class="language-plaintext highlighter-rouge">init()</code> to initialize the
+                WebDriver, and <code class="language-plaintext highlighter-rouge">quit()</code> to close it.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FluentStandalone</span> <span class="n">standalone</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FluentStandalone</span><span class="o">()</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nc">FluentStandalone</span> <span
+                        class="n">standalone</span> <span class="o">=</span> <span class="k">new</span> <span
+                        class="nc">FluentStandalone</span><span class="o">()</span>
 <span class="n">standalone</span><span class="o">.</span><span class="na">init</span><span class="o">();</span>
 
-<span class="n">standalone</span><span class="o">.</span><span class="na">goTo</span><span class="o">(</span><span class="no">DEFAULT_URL</span><span class="o">);</span>
-<span class="n">standalone</span><span class="o">.</span><span class="na">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="no">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="n">test</span><span class="o">.</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">with</span><span class="o">(</span><span class="s">"name"</span><span class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"name"</span><span class="o">))).</span><span class="na">present</span><span class="o">();</span>
-<span class="n">standalone</span><span class="o">.</span><span class="na">el</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">enabled</span><span class="o">();</span>
+<span class="n">standalone</span><span class="o">.</span><span class="na">goTo</span><span class="o">(</span><span
+                            class="no">DEFAULT_URL</span><span class="o">);</span>
+<span class="n">standalone</span><span class="o">.</span><span class="na">await</span><span class="o">().</span><span
+                            class="na">atMost</span><span class="o">(</span><span class="mi">1</span><span
+                            class="o">,</span> <span class="no">SECONDS</span><span class="o">).</span><span class="na">until</span><span
+                            class="o">(</span><span class="n">test</span><span class="o">.</span><span
+                            class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">with</span><span class="o">(</span><span class="s">"name"</span><span
+                            class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"name"</span><span
+                            class="o">))).</span><span class="na">present</span><span class="o">();</span>
+<span class="n">standalone</span><span class="o">.</span><span class="na">el</span><span class="o">(</span><span
+                            class="s">"input"</span><span class="o">).</span><span class="na">enabled</span><span
+                            class="o">();</span>
 
 <span class="n">standalone</span><span class="o">.</span><span class="na">quit</span><span class="o">();</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<p>Using a <code class="language-plaintext highlighter-rouge">FluentStandalone</code> instance is quite verbose because of the need to repeat the instance name before each
-instruction. If it’s a problem for you, you should consider extending <code class="language-plaintext highlighter-rouge">FluentStandaloneRunnable</code>.</p>
+            <p>Using a <code class="language-plaintext highlighter-rouge">FluentStandalone</code> instance is quite
+                verbose because of the need to repeat the instance name before each
+                instruction. If it’s a problem for you, you should consider extending <code
+                        class="language-plaintext highlighter-rouge">FluentStandaloneRunnable</code>.</p>
 
-<h3 id="fluentstandalonerunnable">FluentStandaloneRunnable</h3>
+            <h3 id="fluentstandalonerunnable">FluentStandaloneRunnable</h3>
 
-<p>Another option is to extend <code class="language-plaintext highlighter-rouge">FluentStandaloneRunnable</code>, implement <code class="language-plaintext highlighter-rouge">doRun()</code> method and invoke <code class="language-plaintext highlighter-rouge">run()</code> method on an
-instance of this class. Fluent WebDriver is initialized before and released after <code class="language-plaintext highlighter-rouge">run()</code> method invocation.</p>
+            <p>Another option is to extend <code
+                    class="language-plaintext highlighter-rouge">FluentStandaloneRunnable</code>, implement <code
+                    class="language-plaintext highlighter-rouge">doRun()</code> method and invoke <code
+                    class="language-plaintext highlighter-rouge">run()</code> method on an
+                instance of this class. Fluent WebDriver is initialized before and released after <code
+                        class="language-plaintext highlighter-rouge">run()</code> method invocation.</p>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MyStandaloneRunnable</span> <span class="kd">extends</span> <span class="nc">FluentStandaloneRunnable</span> <span class="o">{</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span
+                        class="nc">MyStandaloneRunnable</span> <span class="kd">extends</span> <span class="nc">FluentStandaloneRunnable</span> <span
+                        class="o">{</span>
     <span class="nd">@Override</span>
-    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doRun</span><span class="o">()</span> <span class="o">{</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doRun</span><span
+                            class="o">()</span> <span class="o">{</span>
         <span class="n">goTo</span><span class="o">(</span><span class="no">DEFAULT_URL</span><span class="o">);</span>
-        <span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="no">SECONDS</span><span class="o">).</span><span class="na">until</span><span class="o">(</span><span class="n">test</span><span class="o">.</span><span class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span class="n">with</span><span class="o">(</span><span class="s">"name"</span><span class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"name"</span><span class="o">))).</span><span class="na">present</span><span class="o">();</span>
-        <span class="n">el</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span class="na">enabled</span><span class="o">();</span>
+        <span class="n">await</span><span class="o">().</span><span class="na">atMost</span><span
+                            class="o">(</span><span class="mi">1</span><span class="o">,</span> <span
+                            class="no">SECONDS</span><span class="o">).</span><span class="na">until</span><span
+                            class="o">(</span><span class="n">test</span><span class="o">.</span><span
+                            class="err">$</span><span class="o">(</span><span class="s">".fluent"</span><span class="o">,</span> <span
+                            class="n">with</span><span class="o">(</span><span class="s">"name"</span><span
+                            class="o">).</span><span class="na">equalTo</span><span class="o">(</span><span class="s">"name"</span><span
+                            class="o">))).</span><span class="na">present</span><span class="o">();</span>
+        <span class="n">el</span><span class="o">(</span><span class="s">"input"</span><span class="o">).</span><span
+                            class="na">enabled</span><span class="o">();</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MyStandaloneRunnable</span> <span class="n">runnable</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyStandaloneRunnable</span><span class="o">();</span>
+            <div class="language-java highlighter-rouge">
+                <div class="highlight"><pre class="highlight"><code><span class="nc">MyStandaloneRunnable</span> <span
+                        class="n">runnable</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyStandaloneRunnable</span><span
+                        class="o">();</span>
 <span class="n">runnable</span><span class="o">.</span><span class="na">run</span><span class="o">();</span>
-</code></pre></div></div>
+</code></pre>
+                </div>
+            </div>
 
-	    
+
+        </div>
     </div>
-  </div>
 </div>
 
 
-    <footer>
-  <div class="container beautiful-jekyll-footer">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
-          
-          
-          <li>
-            <a href="https://github.com/FluentLenium" title="GitHub">
+<footer>
+    <div class="container beautiful-jekyll-footer">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center footer-links">
+
+
+                    <li>
+                        <a href="https://github.com/FluentLenium" title="GitHub">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-		  
-          <li>
-            <a href="https://twitter.com/FluentLenium" title="Twitter">
+                        </a>
+                    </li>
+
+
+                    <li>
+                        <a href="https://twitter.com/FluentLenium" title="Twitter">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
               </span>
-            </a>
-          </li>
-          
-      
-		  
-		  
-		  
-		  
-      
-      
-      
-      
-		  
-        </ul>
-        <p class="copyright text-muted">
-		  FluentLenium
-		  &nbsp;&bull;&nbsp;
-		  2021
+                        </a>
+                    </li>
 
-		  
-		  &nbsp;&bull;&nbsp;
-		  <a href="http://fluentlenium.io">fluentlenium.io</a>
-		  
-	    </p>
-	        <!-- Please don't remove this, keep my open source work credited :) -->
-		<p class="theme-by text-muted">
-		  Theme by
-		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
-		</p>
-      </div>
+
+                </ul>
+                <p class="copyright text-muted">
+                    FluentLenium
+                    &nbsp;&bull;&nbsp;
+                    2021
+
+
+                    &nbsp;&bull;&nbsp;
+                    <a href="http://fluentlenium.io">fluentlenium.io</a>
+
+                </p>
+                <!-- Please don't remove this, keep my open source work credited :) -->
+                <p class="theme-by text-muted">
+                    Theme by
+                    <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
-  
-    
+
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script>
+    if (typeof jQuery == 'undefined') {
+        document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+    }
+</script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/bootstrap.min.js"></script>
 
 
+<!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+
+<script src="/js/main.js"></script>
 
 
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-      <script>
-      	if (typeof jQuery == 'undefined') {
-      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
-      	}
-      </script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/bootstrap.min.js"></script>
-    
-  
-    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
-    
-	<script src="/js/main.js"></script>
-    
-  
-
-
-
-
-  
-  </body>
+</body>
 </html>

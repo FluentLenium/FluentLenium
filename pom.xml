@@ -6,14 +6,13 @@
         <artifactId>oss-parent</artifactId>
         <version>9</version>
     </parent>
-    <groupId>org.fluentlenium</groupId>
+    <groupId>io.fluentlenium</groupId>
     <artifactId>fluentlenium-parent</artifactId>
-    <version>5.0.3-SNAPSHOT</version>
+    <version>6.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>fluentlenium-core</module>
-        <module>fluentlenium-integration-tests</module>
         <module>fluentlenium-assertj</module>
         <module>fluentlenium-junit</module>
         <module>fluentlenium-junit-jupiter</module>
@@ -21,6 +20,7 @@
         <module>fluentlenium-spring-testng</module>
         <module>fluentlenium-cucumber</module>
         <module>fluentlenium-spock</module>
+        <module>fluentlenium-integration-tests</module>
         <module>fluentlenium-kotest</module>
         <module>fluentlenium-kotest-assertions</module>
         <module>fluentlenium-coverage-report</module>
@@ -43,6 +43,17 @@
         <developerConnection>scm:git:git@github.com:FluentLenium/FluentLenium.git</developerConnection>
         <tag>v5.0.2</tag>
     </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <licenses>
         <license>
@@ -119,17 +130,58 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>4.1.1</selenium.version>
-        <junit.jupiter.version>5.6.1</junit.jupiter.version>
+        <selenium.version>4.9.0</selenium.version>
+        <testng.version>7.7.1</testng.version>
+        <junit5.version>5.9.3</junit5.version>
         <maven.version.rules>file:///${project.basedir}/maven-version-rules.xml</maven.version.rules>
-        <spring.version>5.3.15</spring.version>
-        <slf4j.version>1.7.33</slf4j.version>
+        <spring.version>6.0.8</spring.version>
+        <slf4j.version>2.0.7</slf4j.version>
+        <seleniumDevtools.artifactId>selenium-devtools-v111</seleniumDevtools.artifactId>
+        <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
+            "disable-dev-shm-usage"]}}
+        </fluentlenium.capabilities.default>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.fluentlenium</groupId>
+                <groupId>org.ow2.asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>9.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>31.1-jre</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.15</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>4.1.91.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit5.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.groovy</groupId>
+                <artifactId>groovy-bom</artifactId>
+                <version>4.0.11</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.fluentlenium</groupId>
                 <artifactId>fluentlenium-testing-private</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -175,23 +227,18 @@
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-opera-driver</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>3.56.0</version>
+                <version>${selenium.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.sourceforge.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>2.56.0</version>
+                <version>2.70.0</version>
             </dependency>
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>8.0.0-beta2</version>
+                <version>8.2.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -206,7 +253,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-text</artifactId>
-                <version>1.9</version>
+                <version>1.10.0</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -216,12 +263,12 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.8.2</version>
+                <version>${junit5.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-launcher</artifactId>
-                <version>1.8.2</version>
+                <version>1.9.3</version>
             </dependency>
             <dependency>
                 <groupId>com.github.stephenc.jcip</groupId>
@@ -231,8 +278,7 @@
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <!-- don't upgrade to 7.4.0 before https://github.com/apache/maven-surefire/pull/339 is available -->
-                <version>7.3.0</version>
+                <version>${testng.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -252,7 +298,7 @@
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
-                <version>3.22.0</version>
+                <version>3.24.2</version>
             </dependency>
             <dependency>
                 <groupId>org.opentest4j</groupId>
@@ -262,44 +308,44 @@
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>4.2.0</version>
+                <version>5.3.1</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
-                <version>4.2.0</version>
+                <version>5.3.1</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.12.7</version>
+                <version>1.14.4</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.atteo.classindex</groupId>
                 <artifactId>classindex</artifactId>
-                <version>3.11</version>
+                <version>3.13</version>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
                 <artifactId>spock-core</artifactId>
-                <version>2.0-groovy-3.0</version>
+                <version>2.3-groovy-4.0</version>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
                 <artifactId>spock-junit4</artifactId>
-                <version>2.0-groovy-3.0</version>
+                <version>2.3-groovy-4.0</version>
             </dependency>
             <dependency>
-                <groupId>org.codehaus.groovy</groupId>
+                <groupId>org.apache.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>3.0.9</version>
+                <version>4.0.11</version>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
-                <version>4.5.13</version>
+                <version>4.5.14</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -309,17 +355,17 @@
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-model</artifactId>
-                <version>3.8.4</version>
+                <version>3.9.1</version>
             </dependency>
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
                 <artifactId>webdrivermanager</artifactId>
-                <version>5.0.3</version>
+                <version>5.3.2</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-devtools-v95</artifactId>
+                <artifactId>${seleniumDevtools.artifactId}</artifactId>
                 <version>${selenium.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -332,19 +378,19 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.10</version>
+                <version>1.4.7</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.10</version>
+                <version>1.4.7</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.objenesis</groupId>
                 <artifactId>objenesis</artifactId>
-                <version>3.2</version>
+                <version>3.3</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -354,19 +400,23 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.9.0</version>
+                    <version>3.11.0</version>
+
+                    <configuration>
+                        <release>11</release>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.0.0-M2</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.1.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-gpg-plugin</artifactId>
@@ -374,26 +424,29 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.2</version>
+                    <version>3.3.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.5.0</version>
+                    <configuration>
+                        <additionalparam>-Xdoclint:none</additionalparam>
+                        <additionalOptions>-Xdoclint:none</additionalOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.10.0</version>
+                    <version>3.12.1</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>3.0.0</version>
                     <configuration>
-                        <useUnlimitedThreads>true</useUnlimitedThreads>
-                        <parallel>methods</parallel>
                         <excludes>
                             <exclude>**/integration/**/*</exclude>
                             <exclude>**/ignore/**/*</exclude>
@@ -406,7 +459,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0-M5</version>
+                    <version>3.0.0</version>
                     <executions>
                         <execution>
                             <goals>
@@ -416,8 +469,6 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <useUnlimitedThreads>true</useUnlimitedThreads>
-                        <parallel>methods</parallel>
                         <includes>
                             <include>**/integration/**/*</include>
                         </includes>
@@ -434,7 +485,7 @@
                 <plugin>
                     <groupId>com.github.gantsign.maven</groupId>
                     <artifactId>ktlint-maven-plugin</artifactId>
-                    <version>1.11.2</version>
+                    <version>1.16.0</version>
                     <executions>
                         <execution>
                             <id>format-and-check</id>
@@ -449,9 +500,8 @@
         </pluginManagement>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -461,8 +511,10 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>3.5</version>
+                                    <version>3.9.0</version>
                                 </requireMavenVersion>
+                                <banDuplicatePomDependencyVersions />
+                                <dependencyConvergence />
                             </rules>
                         </configuration>
                     </execution>
@@ -470,7 +522,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <version>3.0.0</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
@@ -478,7 +530,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.0</version>
                 <configuration>
                     <descriptors>src/main/assembly/dep.xml</descriptors>
                 </configuration>
@@ -486,7 +538,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.2.7</version>
+                <version>1.4.1</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
@@ -541,7 +593,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.9</version>
                 <configuration>
                     <excludes>
                         <exclude>**com.steadystate*</exclude>
@@ -563,33 +615,13 @@
 
     <profiles>
         <profile>
-            <id>java8</id>
-            <activation>
-                <jdk>1.8</jdk>
-            </activation>
-            <properties>
-                <java.version>1.8</java.version>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <configuration>
-                            <source>${java.version}</source>
-                            <target>${java.version}</target>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
             <id>java11</id>
             <activation>
                 <jdk>11</jdk>
             </activation>
             <properties>
                 <java.version>11</java.version>
+                <spring.version>5.3.23</spring.version>
             </properties>
             <build>
                 <pluginManagement>
@@ -597,9 +629,6 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
-                            <configuration>
-                                <additionalJOption>--no-module-directories</additionalJOption>
-                            </configuration>
                             <executions>
                                 <execution>
                                     <id>aggregate</id>
@@ -612,6 +641,24 @@
                         </plugin>
                     </plugins>
                 </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <release>${java.version}</release>
+                        </configuration>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>java17</id>
+            <properties>
+                <java.version>17</java.version>
+            </properties>
+            <build>
                 <plugins>
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
@@ -655,12 +702,12 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-checkstyle-plugin</artifactId>
-                        <version>3.1.2</version>
+                        <version>3.2.2</version>
                         <dependencies>
                             <dependency>
                                 <groupId>com.puppycrawl.tools</groupId>
                                 <artifactId>checkstyle</artifactId>
-                                <version>9.2.1</version>
+                                <version>10.3.4</version>
                             </dependency>
                         </dependencies>
                         <executions>
@@ -670,23 +717,23 @@
                                 <goals>
                                     <goal>check</goal>
                                 </goals>
-                                <configuration>
-                                    <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
-                                    <consoleOutput>true</consoleOutput>
-                                    <encoding>${project.build.sourceEncoding}</encoding>
-                                    <failOnViolation>true</failOnViolation>
-                                    <failsOnError>true</failsOnError>
-                                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                                    <logViolationsToConsole>true</logViolationsToConsole>
-                                    <violationSeverity>error</violationSeverity>
-                                </configuration>
                             </execution>
                         </executions>
+                        <configuration>
+                            <configLocation>dev-config/checkstyle/fluentlenium_checks.xml</configLocation>
+                            <consoleOutput>true</consoleOutput>
+                            <encoding>${project.build.sourceEncoding}</encoding>
+                            <failOnViolation>true</failOnViolation>
+                            <failsOnError>true</failsOnError>
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <logViolationsToConsole>true</logViolationsToConsole>
+                            <violationSeverity>error</violationSeverity>
+                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-pmd-plugin</artifactId>
-                        <version>3.15.0</version>
+                        <version>3.20.0</version>
                         <configuration>
                             <failOnViolation>true</failOnViolation>
                             <failurePriority>2</failurePriority>
@@ -716,7 +763,38 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.3.1</version>
+                        <version>3.5.0</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>ci</id>
+
+            <!-- this is executed at the end of each module and should kill any leftover chrome* processes -->
+            <!-- executed on github actions (workflow enables profile) -->
+            <!-- incompatible with parallel maven execution -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.1.0</version>
+
+                        <executions>
+                            <execution>
+                                <phase>post-integration-test</phase>
+
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+
+                        <configuration>
+                            <executable>${maven.multiModuleProjectDirectory}/cleanup-browser.sh</executable>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

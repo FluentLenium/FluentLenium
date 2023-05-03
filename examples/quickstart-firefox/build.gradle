@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.21'
 }
 
 repositories {
@@ -12,12 +12,15 @@ test {
     useJUnitPlatform()
 }
 
+def fluentLeniumVersion = properties["fluentlenium.version"] ?: "6.0.0"
+
 dependencies {
-    def fluentLeniumVersion = '5.0.2-SNAPSHOT'
-    implementation "org.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
-    implementation "org.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
-    testImplementation 'ch.qos.logback:logback-classic:1.2.10'
-    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.1.1'
+    implementation "io.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
+    implementation "io.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
+    testImplementation 'ch.qos.logback:logback-classic:1.4.7'
+    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.9.0'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.2'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
@@ -26,8 +29,7 @@ configurations.all {
     exclude group: 'io.netty', module: 'netty-transport-native-kqueue'
 }
 
-group = 'org.fluentlenium'
-version = '5.0.0-SNAPSHOT'
+group = 'io.fluentlenium'
 description = 'FluentLenium Examples Firefox'
 sourceCompatibility = '11'
 compileKotlin {

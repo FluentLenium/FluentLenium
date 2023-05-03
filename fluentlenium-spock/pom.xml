@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.fluentlenium</groupId>
+        <groupId>io.fluentlenium</groupId>
         <artifactId>fluentlenium-parent</artifactId>
-        <version>5.0.3-SNAPSHOT</version>
+        <version>6.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,12 +17,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-junit</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -64,7 +64,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
             <type>pom</type>
             <scope>compile</scope>
@@ -81,7 +81,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v95</artifactId>
+            <artifactId>${seleniumDevtools.artifactId}</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -96,7 +96,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.13.1</version>
+                <version>2.0.0</version>
                 <configuration>
                     <classifier>javadoc</classifier>
                 </configuration>
@@ -113,9 +113,9 @@
                 </executions>
                 <dependencies>
                     <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
+                        <groupId>org.apache.groovy</groupId>
                         <artifactId>groovy-all</artifactId>
-                        <version>3.0.9</version>
+                        <version>4.0.11</version>
                         <type>pom</type>
                         <scope>compile</scope>
                     </dependency>
@@ -160,8 +160,9 @@
                         <include>**/*Spec.java</include>
                     </includes>
                     <systemPropertyVariables>
-                        <fluentlenium.capabilities>{"chromeOptions": {"args": ["headless","no-sandbox", "disable-gpu", "disable-dev-shm-usage"]}}</fluentlenium.capabilities>
-                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <fluentlenium.capabilities>${fluentlenium.capabilities.default}</fluentlenium.capabilities>
+                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties
+                        </java.util.logging.config.file>
                         <webdriver.chrome.silentOutput>true</webdriver.chrome.silentOutput>
                     </systemPropertyVariables>
                 </configuration>

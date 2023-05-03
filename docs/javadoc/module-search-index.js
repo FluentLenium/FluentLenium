@@ -1,0 +1,2 @@
+moduleSearchIndex = [];
+updateSearchResults();

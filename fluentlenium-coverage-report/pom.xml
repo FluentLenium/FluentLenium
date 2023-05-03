@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>fluentlenium-parent</artifactId>
-        <groupId>org.fluentlenium</groupId>
-        <version>5.0.3-SNAPSHOT</version>
+        <groupId>io.fluentlenium</groupId>
+        <version>6.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,48 +16,48 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-assertj</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-integration-tests</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-cucumber</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-spock</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-junit</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-junit-jupiter</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-testng</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.fluentlenium</groupId>
+            <groupId>io.fluentlenium</groupId>
             <artifactId>fluentlenium-spring-testng</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
+                <version>0.8.9</version>
                 <configuration>
                     <excludes>
                         <exclude>**com.steadystate*</exclude>
@@ -84,6 +84,13 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-enforcer-plugin</artifactId>
+
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
