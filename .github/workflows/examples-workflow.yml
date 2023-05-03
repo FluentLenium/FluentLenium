@@ -62,9 +62,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
 
-# io.fluentlenium not released yet
       - name: Run gradle kotest quickstart as it is
-        if: ${{ false }}
         run: cd examples/kotest && ./gradlew check
 
       - name: Run gradle kotest quickstart with current branch
@@ -95,9 +93,7 @@ jobs:
       - name: Install Fluentlenium
         uses: ./.github/actions/fluentlenium-maven-install
 
-# io.fluentlenium not released yet
       - name: Run gradle firefox quickstart as it is
-        if: ${{ false }}
         run: cd examples/quickstart-firefox && ./gradlew check
 
       - name: Run gradle firefox quickstart with current branch
@@ -129,7 +125,6 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
 
       - name: Compile maven examples as they are
-        if: ${{ false }}
         run: ./mvnw -B -nsu -Pexamples clean test-compile
 
       - name: Compile maven examples with current branch
@@ -159,7 +154,6 @@ jobs:
           sudo safaridriver --enable
 
       - name: Run safari examples as they are
-        if: ${{ false }}
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
 
       - name: Run safari examples with current branch
@@ -195,9 +189,15 @@ jobs:
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
-      - name: Run windows examples as it is
-        if: ${{ false }}
+      - name: Run windows example with current branch
         run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        env:
+          MAVEN_OPTS: "-Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+
+      - name: Run windows example as it is
+        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        env:
+          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3

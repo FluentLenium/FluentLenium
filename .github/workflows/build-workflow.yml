@@ -110,7 +110,7 @@ jobs:
           report_paths: '**/target/*-reports/TEST-*.xml'
 
   java17-javadoc:
-    timeout-minutes: 5
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -120,5 +120,11 @@ jobs:
         with:
           java-version: 17
 
+      - name: Install Fluentlenium
+        uses: ./.github/actions/fluentlenium-maven-install
+
       - name: Java 17 - JavaDoc
         run: ./mvnw -B -Pjava17 javadoc:aggregate
+
+      - name: Java 17 - Dokka
+        run: ./mvnw -B -pl fluentlenium-kotest,fluentlenium-kotest-assertions -P sonatype-oss-release org.jetbrains.dokka:dokka-maven-plugin:dokka

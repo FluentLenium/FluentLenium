@@ -12,22 +12,14 @@
     <description>Kotest Adapter for FluentLenium</description>
 
     <properties>
-        <kotlin.version>1.8.20</kotlin.version>
-        <kotest.version>5.5.5</kotest.version>
-        <dokka.version>1.8.10</dokka.version>
+        <kotlin.version>1.8.21</kotlin.version>
+        <kotest.version>5.6.1</kotest.version>
+        <dokka.version>1.7.20</dokka.version>
         <maven.version.rules>file:///${project.basedir}/../maven-version-rules.xml</maven.version.rules>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.9.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <dependency>
                 <groupId>io.kotest</groupId>
                 <artifactId>kotest-bom</artifactId>
