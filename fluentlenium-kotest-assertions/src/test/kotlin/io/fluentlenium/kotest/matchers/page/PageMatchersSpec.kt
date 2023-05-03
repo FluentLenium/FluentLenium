@@ -162,5 +162,11 @@ class PageMatchersSpec : MatcherBase() {
                 indexPage should haveElements(jq("h2"))
             }
         }
+
+        "matcher in page" {
+            indexPage.verifyElement()
+            indexPage.verifyElements()
+            indexPage.verifyElementDisplayed()
+        }
     }
 }

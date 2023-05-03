@@ -58,6 +58,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
@@ -653,6 +654,7 @@ public class FluentWebElement extends Component
      * @return name value
      * @see WebElement#getAttribute(String)
      */
+    @Nullable
     public String attribute(String name) {
         return webElement.getAttribute(name);
     }

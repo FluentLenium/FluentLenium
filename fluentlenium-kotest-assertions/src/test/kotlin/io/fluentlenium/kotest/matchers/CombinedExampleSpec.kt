@@ -9,11 +9,11 @@ import io.kotest.matchers.should
 import io.fluentlenium.kotest.matchers.jq.haveTagName as jqHaveTagName
 
 class CombinedExampleSpec : MatcherBase({
-    "matchers with same name need to renamed to avoid amigbuity" {
+    "infix matchers with same name need to renamed to avoid ambiguity" {
         el("h1") should haveTagName("h1")
         jq("h1") should jqHaveTagName("h1")
 
-        // no problem using the extenstion functions
+        // no problem when using the extension functions
         el("h1").shouldHaveTagName("h1")
         jq("h1").shouldHaveTagName("h1")
     }
