@@ -155,7 +155,7 @@ fun FluentWebElement.shouldNotBeSelected() = also { it shouldNot beSelected() }
  *
  * @return the matcher object.
  */
-fun containText(expectedText: String) = matchText(expectedText)
+fun containText(expectedText: String) = matchText(contain(expectedText))
 
 /**
  * See [containText]
@@ -239,8 +239,8 @@ fun FluentWebElement.shouldHaveId(id: String) = also { it should haveId(id) }
  */
 fun FluentWebElement.shouldNotHaveId(id: String) = also { it shouldNot haveId(id) }
 
-const val CLASS_ATTRIBUTE = "class"
-const val CLASS_DELIMITER = " "
+private const val CLASS_ATTRIBUTE = "class"
+private const val CLASS_DELIMITER = " "
 
 /**
  * Checks if the element has the expected class.
