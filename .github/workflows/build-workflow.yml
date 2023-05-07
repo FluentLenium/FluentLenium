@@ -53,10 +53,10 @@ jobs:
           if [[ ! -z "$BUILD_SCAN" ]]
           then
             echo "# Gradle Enterprise Build Scan" >> $GITHUB_STEP_SUMMARY
-          
+  
             BADGE_URL=https://img.shields.io/badge/Build%20Scan%E2%84%A2-PUBLISHED-06A0CE?logo=Gradle
-            BADGE_HTML=<img src="${BADGE_URL}" alt="Build Scan Published" />
-            URL=<a href="${TARGET_URL}" rel="nofollow">${BADGE_HTML}</a>"
+            BADGE_HTML="<img src=\"${BADGE_URL}\" alt=\"Build Scan Published\" />"
+            URL="<a href=\"${TARGET_URL}\" rel=\"nofollow\">${BADGE_HTML}</a>"
           
             echo "$URL" >> $GITHUB_STEP_SUMMARY
           fi
@@ -100,8 +100,8 @@ jobs:
             echo "# Gradle Enterprise Build Scan" >> $GITHUB_STEP_SUMMARY
           
             BADGE_URL=https://img.shields.io/badge/Build%20Scan%E2%84%A2-PUBLISHED-06A0CE?logo=Gradle
-            BADGE_HTML=<img src="${BADGE_URL}" alt="Build Scan Published" />
-            URL=<a href="${TARGET_URL}" rel="nofollow">${BADGE_HTML}</a>"
+            BADGE_HTML="<img src=\"${BADGE_URL}\" alt=\"Build Scan Published\" />"
+            URL="<a href=\"${TARGET_URL}\" rel=\"nofollow\">${BADGE_HTML}</a>"
           
             echo "$URL" >> $GITHUB_STEP_SUMMARY
           fi
