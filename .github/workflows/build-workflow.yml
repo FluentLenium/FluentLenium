@@ -45,11 +45,21 @@ jobs:
         run: |
           ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan|tee build.log
 
-      - name: Gradle build scan
+      - name: Gradle build scan URL
+        if: always()
         run: |
-          echo -n "buildScanUri=" >> "$GITHUB_OUTPUT"
-          tail -2 build.log|head -n 1|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*' >> "$GITHUB_OUTPUT"
-          cat "$GITHUB_OUTPUT"          
+          BUILD_SCAN=$(tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*')
+          
+          if [[ ! -z "$BUILD_SCAN ]]
+          then
+            echo "# Gradle Enterprise Build Scan" >> $GITHUB_STEP_SUMMARY
+          
+            BADGE_URL=https://img.shields.io/badge/Build%20Scan%E2%84%A2-PUBLISHED-06A0CE?logo=Gradle
+            BADGE_HTML=<img src="${BADGE_URL}" alt="Build Scan Published" />
+            URL=<a href="${TARGET_URL}" rel="nofollow">${BADGE_HTML}</a>"
+          
+            echo "$URL" >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
@@ -79,7 +89,23 @@ jobs:
       - name: Java 17 - unit & integration tests code coverage
         run: |
           ./mvnw -B -Pjava17,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan|tee build.log
-          tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*'
+
+      - name: Gradle build scan URL
+        if: always()
+        run: |
+          BUILD_SCAN=$(tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*')
+          
+          if [[ ! -z "$BUILD_SCAN ]]
+          then
+            echo "# Gradle Enterprise Build Scan" >> $GITHUB_STEP_SUMMARY
+          
+            BADGE_URL=https://img.shields.io/badge/Build%20Scan%E2%84%A2-PUBLISHED-06A0CE?logo=Gradle
+            BADGE_HTML=<img src="${BADGE_URL}" alt="Build Scan Published" />
+            URL=<a href="${TARGET_URL}" rel="nofollow">${BADGE_HTML}</a>"
+          
+            echo "$URL" >> $GITHUB_STEP_SUMMARY
+          fi
+
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
