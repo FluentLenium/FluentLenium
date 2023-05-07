@@ -56,7 +56,7 @@ jobs:
   
             BADGE_URL=https://img.shields.io/badge/Build%20Scan%E2%84%A2-PUBLISHED-06A0CE?logo=Gradle
             BADGE_HTML="<img src=\"${BADGE_URL}\" alt=\"Build Scan Published\" />"
-            URL="<a href=\"${TARGET_URL}\" rel=\"nofollow\">${BADGE_HTML}</a>"
+            URL="<a href=\"${BUILD_SCAN}\" rel=\"nofollow\">${BADGE_HTML}</a>"
           
             echo "$URL" >> $GITHUB_STEP_SUMMARY
           fi
@@ -101,7 +101,7 @@ jobs:
           
             BADGE_URL=https://img.shields.io/badge/Build%20Scan%E2%84%A2-PUBLISHED-06A0CE?logo=Gradle
             BADGE_HTML="<img src=\"${BADGE_URL}\" alt=\"Build Scan Published\" />"
-            URL="<a href=\"${TARGET_URL}\" rel=\"nofollow\">${BADGE_HTML}</a>"
+            URL="<a href=\"${BUILD_SCAN}\" rel=\"nofollow\">${BADGE_HTML}</a>"
           
             echo "$URL" >> $GITHUB_STEP_SUMMARY
           fi
