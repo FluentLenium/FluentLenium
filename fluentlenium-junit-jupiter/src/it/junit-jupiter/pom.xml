@@ -18,9 +18,9 @@
 
     <properties>
         <it.project.version>6.0.0-SNAPSHOT</it.project.version>
-        <selenium.version>4.2.2</selenium.version>
+        <selenium.version>4.9.0</selenium.version>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
-            "disable-dev-shm-usage", "remote-allow-origins=*"]}}
+            "disable-dev-shm-usage"]}}
         </fluentlenium.capabilities.default>
     </properties>
 
@@ -50,7 +50,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-chrome-driver</artifactId>
-                <version>4.8.3</version>
+                <version>4.9.0</version>
             </dependency>
             <dependency>
                 <groupId>io.github.bonigarcia</groupId>
@@ -60,7 +60,7 @@
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>5.9.2</version>
+                <version>5.9.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

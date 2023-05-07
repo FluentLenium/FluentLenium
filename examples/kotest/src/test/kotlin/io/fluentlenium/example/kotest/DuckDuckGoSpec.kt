@@ -3,9 +3,9 @@ package io.fluentlenium.example.kotest
 import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.core.hook.wait.Wait
+import io.fluentlenium.kotest.matchers.el.containText
 import io.fluentlenium.kotest.matchers.el.haveClass
-import io.fluentlenium.kotest.matchers.el.haveDimension
-import io.fluentlenium.kotest.matchers.el.shouldHaveDimension
+import io.fluentlenium.kotest.matchers.el.shouldContainText
 import io.fluentlenium.kotest.matchers.jq.haveTagName
 import io.fluentlenium.kotest.matchers.jq.shouldHaveTagName
 import io.kotest.engine.spec.tempdir
@@ -33,7 +33,6 @@ class DuckDuckGoSpec : FluentFreeSpec() {
 
     override fun getCapabilities(): Capabilities {
         return ChromeOptions().apply {
-            addArguments("--remote-allow-origins=*")
             addArguments("--headless=new")
         }
     }
@@ -75,24 +74,24 @@ class DuckDuckGoSpec : FluentFreeSpec() {
 
         "Kotest assertion" - {
             "can use extension functions" {
-                goTo("https://awesome-testing.com")
+                goTo("https://fluentlenium.io/quickstart/")
 
-                jq(".post-title").shouldHaveTagName("h1")
-                el("img#Header1_headerimg").shouldHaveDimension(1000 to 402)
+                jq(".highlight").shouldHaveTagName("div")
+                el("h1").shouldContainText("Quick Start")
             }
 
             "alternatively can use infix syntax" {
-                goTo("https://awesome-testing.com")
+                goTo("https://fluentlenium.io/quickstart/")
 
-                jq(".post-title") should haveTagName("h1")
-                el("img#Header1_headerimg") should haveDimension(1000 to 402)
+                jq(".highlight") should haveTagName("div")
+                el("h1") should containText("Quick Start")
             }
 
             "infix matchers can be aliased to to prevent name ambiguities" {
-                goTo("https://awesome-testing.com")
+                goTo("https://fluentlenium.io/quickstart/")
 
-                el(".post-title") should haveClass("post-title")
-                jq(".post-title") should listHaveClass("post-title")
+                el(".language-java") should haveClass("highlighter-rouge")
+                jq(".language-java") should listHaveClass("highlighter-rouge")
             }
         }
     }

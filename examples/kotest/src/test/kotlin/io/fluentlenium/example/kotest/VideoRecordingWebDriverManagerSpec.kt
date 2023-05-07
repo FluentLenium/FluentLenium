@@ -30,7 +30,6 @@ class VideoRecordingWebDriverManagerSpec : FluentFreeSpec() {
     private val wdm =
         WebDriverManager.chromedriver()
             .capabilities(ChromeOptions().apply {
-                addArguments("--remote-allow-origins=*")
                 addArguments("--headless=new")
             })
             .browserInDocker()

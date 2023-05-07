@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.8.20'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.21'
 }
 
 repositories {
@@ -12,13 +12,13 @@ test {
     useJUnitPlatform()
 }
 
-dependencies {
-    def fluentLeniumVersion = properties["fluentlenium.version"] ?: "6.0.0-SNAPSHOT"
+def fluentLeniumVersion = properties["fluentlenium.version"] ?: "6.0.0"
 
+dependencies {
     implementation "io.fluentlenium:fluentlenium-junit-jupiter:$fluentLeniumVersion"
     implementation "io.fluentlenium:fluentlenium-assertj:$fluentLeniumVersion"
-    testImplementation 'ch.qos.logback:logback-classic:1.4.5'
-    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.8.3'
+    testImplementation 'ch.qos.logback:logback-classic:1.4.7'
+    testImplementation 'org.seleniumhq.selenium:selenium-firefox-driver:4.9.0'
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.2'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
@@ -30,7 +30,6 @@ configurations.all {
 }
 
 group = 'io.fluentlenium'
-version = '6.0.0-SNAPSHOT'
 description = 'FluentLenium Examples Firefox'
 sourceCompatibility = '11'
 compileKotlin {

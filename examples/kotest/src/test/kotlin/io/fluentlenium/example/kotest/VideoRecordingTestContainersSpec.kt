@@ -36,7 +36,6 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
         // https://github.com/testcontainers/testcontainers-java/issues/318
 
         withCapabilities(ChromeOptions().apply {
-            addArguments("--remote-allow-origins=*")
             addArguments("--headless=new")
         })
         withRecordingMode(
