@@ -43,7 +43,9 @@ jobs:
 
       - name: Java 11 - unit & integration tests code coverage
         run: |
-          ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan
+          ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan|tee build.log
+          tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*'
+
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
@@ -71,7 +73,8 @@ jobs:
 
       - name: Java 17 - unit & integration tests code coverage
         run: |
-          ./mvnw -B -Pjava17,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan
+          ./mvnw -B -Pjava17,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan|tee build.log
+          tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*'
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
