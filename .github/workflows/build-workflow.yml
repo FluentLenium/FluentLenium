@@ -44,7 +44,12 @@ jobs:
       - name: Java 11 - unit & integration tests code coverage
         run: |
           ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan|tee build.log
-          tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*'
+
+      - name: Gradle build scan
+        run: |
+          echo -n "buildScanUri=" >> "$GITHUB_OUTPUT"
+          tail -2 build.log|head -n 1|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*' >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"          
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
