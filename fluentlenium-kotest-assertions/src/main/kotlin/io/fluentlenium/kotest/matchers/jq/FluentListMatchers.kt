@@ -81,6 +81,13 @@ fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
 fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
     also { it shouldNot haveTextMatching(text) }
 
+
+/**
+ * Checks if at least one element in a list of elements, has a text that matches the given matcher.
+ *
+ * @param matcher to use on the list elements
+ * @return the matcher object
+ */
 fun haveTextMatching(matcher: Matcher<String>) = object : Matcher<FluentList<FluentWebElement>> {
     override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualTexts = value.texts()
@@ -139,7 +146,7 @@ private const val CLASS_DELIMITER = " "
  * jq(".myClass") should haveClass("class1", "class2")
  * ```
  *
- * @param expectedText expected classes
+ * @param expectedClasses expected classes
  * @return the matcher object
  */
 fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentList<FluentWebElement>> {
