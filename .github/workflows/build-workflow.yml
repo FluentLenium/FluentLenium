@@ -50,7 +50,7 @@ jobs:
         run: |
           BUILD_SCAN=$(tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*')
           
-          if [[ ! -z "$BUILD_SCAN ]]
+          if [[ ! -z "$BUILD_SCAN" ]]
           then
             echo "# Gradle Enterprise Build Scan" >> $GITHUB_STEP_SUMMARY
           
@@ -95,7 +95,7 @@ jobs:
         run: |
           BUILD_SCAN=$(tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*')
           
-          if [[ ! -z "$BUILD_SCAN ]]
+          if [[ ! -z "$BUILD_SCAN" ]]
           then
             echo "# Gradle Enterprise Build Scan" >> $GITHUB_STEP_SUMMARY
           
