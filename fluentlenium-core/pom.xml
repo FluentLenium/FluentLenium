@@ -164,9 +164,15 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <annotationProcessors>
-                        <annotationProcessor>org.atteo.classindex.processor.ClassIndexProcessor</annotationProcessor>
-                    </annotationProcessors>
+                    <!-- proc is set to none in parent pom, override element here to re-enable processing -->
+                    <proc combine.self="override"/>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.atteo.classindex</groupId>
+                            <artifactId>classindex</artifactId>
+                            <version>3.13</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
