@@ -494,6 +494,52 @@
                         <rulesUri>file:///${maven.multiModuleProjectDirectory}/maven-version-rules.xml</rulesUri>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>com.gradle</groupId>
+                    <artifactId>gradle-enterprise-maven-extension</artifactId>
+
+                    <configuration>
+                        <gradleEnterprise>
+                            <plugins>
+                                <plugin>
+                                    <artifactId>maven-surefire-plugin</artifactId>
+                                    <inputs>
+                                        <fileSets>
+                                            <fileSet>
+                                                <name>logging.properties</name>
+                                                <paths>
+                                                    <path>src/test/resources</path>
+                                                </paths>
+                                                <includes>
+                                                    <include>logging.properties</include>
+                                                </includes>
+                                                <normalization>IGNORED_PATH</normalization>
+                                            </fileSet>
+                                        </fileSets>
+                                    </inputs>
+                                </plugin>
+
+                                <plugin>
+                                    <artifactId>maven-failsafe-plugin</artifactId>
+                                    <inputs>
+                                        <fileSets>
+                                            <fileSet>
+                                                <name>logging.properties</name>
+                                                <paths>
+                                                    <path>src/test/resources</path>
+                                                </paths>
+                                                <includes>
+                                                    <include>logging.properties</include>
+                                                </includes>
+                                                <normalization>IGNORED_PATH</normalization>
+                                            </fileSet>
+                                        </fileSets>
+                                    </inputs>
+                                </plugin>
+                            </plugins>
+                        </gradleEnterprise>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
