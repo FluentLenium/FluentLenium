@@ -11,7 +11,10 @@ on:
     branches: [ develop ]
 
 env:
-  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Didea.ignore.disabled.plugins=true -Didea.home.path=/tmp"
+  MAVEN_OPTS: >- 
+    -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn 
+    -Didea.ignore.disabled.plugins=true 
+    -Didea.home.path=/tmp"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -42,8 +45,10 @@ jobs:
           java-version: 11
 
       - name: Java 11 - unit & integration tests code coverage
-        run: |
-          ./mvnw -B -Pjava11,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java11|tee build.log
+        run: >-
+          ./mvnw -B -Pjava11,ci 
+          -Dfailsafe.rerunFailingTestsCount=1 
+          clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java11|tee build.log
 
       - name: Gradle build scan URL
         if: always()
@@ -87,8 +92,10 @@ jobs:
           java-version: 17
 
       - name: Java 17 - unit & integration tests code coverage
-        run: |
-          ./mvnw -B -Pjava17,ci -Dfailsafe.rerunFailingTestsCount=1 clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java17|tee build.log
+        run: >-
+          ./mvnw -B -Pjava17,ci 
+          -Dfailsafe.rerunFailingTestsCount=1 
+          clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java17|tee build.log
 
       - name: Gradle build scan URL
         if: always()
@@ -134,7 +141,14 @@ jobs:
         uses: ./.github/actions/determine-fluentlenium-version
 
       - name: Java 17 - unit & integration tests
-        run: ./mvnw -Dit.project.version=$FLUENTLENIUM_VERSION -B -Pframework-integration-tests,java17 -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,!fluentlenium-kotest-assertions,!fluentlenium-cucumber,!fluentlenium-spock,!fluentlenium-coverage-report,!fluentlenium-spring-testng' clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
+        run: >-
+          ./mvnw -Dit.project.version=$FLUENTLENIUM_VERSION 
+          -B -Pframework-integration-tests,java17 
+          -pl '!fluentlenium-integration-tests,!fluentlenium-kotest,
+          !fluentlenium-kotest-assertions,!fluentlenium-cucumber,
+          !fluentlenium-spock,!fluentlenium-coverage-report,
+          !fluentlenium-spring-testng' 
+          clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
@@ -161,4 +175,6 @@ jobs:
         run: ./mvnw -B -Pjava17 javadoc:aggregate
 
       - name: Java 17 - Dokka
-        run: ./mvnw -B -pl fluentlenium-kotest,fluentlenium-kotest-assertions -P sonatype-oss-release org.jetbrains.dokka:dokka-maven-plugin:dokka
+        run: >-
+          ./mvnw -B -pl fluentlenium-kotest,fluentlenium-kotest-assertions 
+          -P sonatype-oss-release org.jetbrains.dokka:dokka-maven-plugin:dokka
