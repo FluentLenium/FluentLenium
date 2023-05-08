@@ -126,7 +126,7 @@
         <junit5.version>5.9.3</junit5.version>
         <spring.version>6.0.8</spring.version>
         <slf4j.version>2.0.7</slf4j.version>
-        <seleniumDevtools.artifactId>selenium-devtools-v111</seleniumDevtools.artifactId>
+        <seleniumDevtools.artifactId>selenium-devtools-v112</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
             "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
     </properties>
