@@ -121,7 +121,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>4.9.0</selenium.version>
+        <selenium.version>4.9.1</selenium.version>
         <testng.version>7.7.1</testng.version>
         <junit5.version>5.9.3</junit5.version>
         <spring.version>6.0.8</spring.version>
@@ -167,7 +167,7 @@
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>8.2.1</version>
+                <version>8.5.0</version>
             </dependency>
             <dependency>
                 <groupId>io.fluentlenium</groupId>
@@ -298,7 +298,7 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>htmlunit-driver</artifactId>
-                <version>${selenium.version}</version>
+                <version>4.9.0</version>
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
