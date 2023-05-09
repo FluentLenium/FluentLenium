@@ -184,6 +184,15 @@ jobs:
           distribution: 'zulu'
           java-version: 17
 
+      - name: Use the reusable workflow
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 2
+          timeout_minutes: 4
+          retry_on: error
+          command: |
+            .\mvnw.cmd -B clean install -DskipTests=true
+
       - name: run maven install
         run: .\mvnw.cmd -B clean install -DskipTests=true
         env:
