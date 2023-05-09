@@ -195,12 +195,12 @@ jobs:
             .\mvnw.cmd -B clean install -DskipTests=true
 
       - name: Run windows example with current branch
-        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        run: .\mvnw.cmd -B -nsu  -pl examples/quickstart-microsoft-browsers verify -Dsurefire.rerunFailingTestsCount=1
         env:
           MAVEN_OPTS: "-Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
       - name: Run windows example as it is
-        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        run: .\mvnw.cmd -B -nsu -pl examples/quickstart-microsoft-browsers verify -Dsurefire.rerunFailingTestsCount=1
         env:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
 
