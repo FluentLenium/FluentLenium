@@ -126,7 +126,7 @@
         <junit5.version>5.9.3</junit5.version>
         <spring.version>6.0.8</spring.version>
         <slf4j.version>2.0.7</slf4j.version>
-        <seleniumDevtools.artifactId>selenium-devtools-v111</seleniumDevtools.artifactId>
+        <seleniumDevtools.artifactId>selenium-devtools-v112</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
             "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
     </properties>
@@ -216,13 +216,13 @@
             <dependency>
                 <groupId>org.apache.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>4.0.11</version>
+                <version>4.0.12</version>
                 <type>pom</type>
             </dependency>
             <dependency>
                 <groupId>org.apache.groovy</groupId>
                 <artifactId>groovy-bom</artifactId>
-                <version>4.0.11</version>
+                <version>4.0.12</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -409,7 +409,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.1.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -434,7 +434,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <excludes>
                             <exclude>**/integration/**/*</exclude>
@@ -448,7 +448,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.1.0</version>
                     <configuration>
                         <includes>
                             <include>**/integration/**/*</include>
