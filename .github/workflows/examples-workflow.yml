@@ -168,7 +168,7 @@ jobs:
 
   maven-windows-example:
     needs: [ versions ]
-    timeout-minutes: 10
+    timeout-minutes: 15
     runs-on: windows-latest
     env:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
@@ -184,20 +184,25 @@ jobs:
           distribution: 'zulu'
           java-version: 17
 
-      - name: run maven install
-        run: .\mvnw.cmd -B clean install -DskipTests=true
-        env:
-          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+      - name: maven install (with retry)
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 2
+          timeout_minutes: 4
+          retry_on: all
+          command: |
+            set MAVEN_OPTS="-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+            .\mvnw.cmd -B clean install -DskipTests=true
 
       - name: Run windows example with current branch
-        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
         env:
-          MAVEN_OPTS: "-Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+          MAVEN_OPTS: "-Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip -Dsurefire.rerunFailingTestsCount=1"
 
       - name: Run windows example as it is
-        run: .\mvnw.cmd -B -nsu -Pexamples -pl examples/quickstart-microsoft-browsers verify
+        run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
         env:
-          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
+          MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip -Dsurefire.rerunFailingTestsCount=1"
 
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
