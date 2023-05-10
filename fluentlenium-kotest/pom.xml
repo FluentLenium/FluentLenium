@@ -53,13 +53,6 @@
             <artifactId>webdrivermanager</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-http-jdk-client</artifactId>
-            <version>4.9.0</version>
-        </dependency>
--->
         <dependency>
             <groupId>io.kotest</groupId>
             <artifactId>kotest-framework-datatest-jvm</artifactId>

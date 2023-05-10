@@ -39,16 +39,14 @@ public class ExampleFluentTest extends FluentTest {
     @BeforeClass
     public static void startServer() {
         DesiredCapabilities cap = new DesiredCapabilities();
-        cap.setCapability("appium:noReset", "false");
         AppiumServiceBuilder builder = new AppiumServiceBuilder()
                 .withIPAddress("127.0.0.1")
                 .usingPort(4723)
                 .withCapabilities(cap)
                 .withArgument(GeneralServerFlag.RELAXED_SECURITY)
                 .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
-                .withArgument(GeneralServerFlag.LOG_LEVEL, "info");
-
-        builder = builder.withAppiumJS(new File("node_modules/.bin/appium"));
+                .withArgument(GeneralServerFlag.LOG_LEVEL, "info")
+                .withAppiumJS(new File("node_modules/.bin/appium"));
 
         service = AppiumDriverLocalService.buildService(builder);
         service.start();

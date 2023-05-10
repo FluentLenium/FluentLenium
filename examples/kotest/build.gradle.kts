@@ -49,7 +49,7 @@ dependencies {
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.3.2")
 
-    val seleniumVersion = properties["selenium.version"] ?: "4.9.0"
+    val seleniumVersion = properties["selenium.version"] ?: "4.9.1"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v112:$seleniumVersion")
