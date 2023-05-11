@@ -11,7 +11,6 @@ import io.kotest.matchers.string.shouldContain
 import java.io.File
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
-import org.openqa.selenium.remote.RemoteWebDriver
 import org.testcontainers.containers.BrowserWebDriverContainer
 import org.testcontainers.containers.VncRecordingContainer
 
@@ -60,7 +59,7 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
     }
 
     override fun newWebDriver(): WebDriver =
-        RemoteWebDriver(dockerChrome.seleniumAddress, ChromeOptions())
+        dockerChrome.webDriver
 
     private val SEARCH_TEXT = "FluentLenium"
 
