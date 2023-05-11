@@ -3,12 +3,25 @@ package io.fluentlenium.kotest.matchers.el
 import io.fluentlenium.kotest.matchers.config.MatcherBase
 import io.kotest.assertions.shouldFail
 import io.kotest.inspectors.forOne
+import io.kotest.matchers.be
+import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
+import io.kotest.matchers.string.endWith
+import io.kotest.matchers.string.startWith
 import org.openqa.selenium.By
 import org.openqa.selenium.Dimension
 
 class FluentWebElementMatchersSpec : MatcherBase({
+
+    "el without text: text() is not null" {
+        el("#empty").text().shouldNotBeNull()
+    }
+
+    "el without text: textContent() is not null" {
+        el("#empty").textContent().shouldNotBeNull()
+    }
+
     "present" {
         el("#doesNotExist") shouldNot bePresent()
         el("#doesNotExist").shouldNotBePresent()
@@ -119,12 +132,20 @@ class FluentWebElementMatchersSpec : MatcherBase({
         }
     }
 
-    "matchText" {
+    "matchText with regexp" {
         el("#oneline") should matchText("A single.*text")
         el("#oneline").shouldMatchText("A single.*text")
 
         el("#oneline") shouldNot matchText("foo.*abc")
         el("#oneline").shouldNotMatchText("foo.*abc")
+    }
+
+    "matchText with matcher" {
+        el("#oneline") should matchText(startWith("A single"))
+        el("#oneline").shouldMatchText(startWith("A single"))
+
+        el("#oneline") shouldNot matchText(endWith("abc"))
+        el("#oneline").shouldNotMatchText(endWith("abc"))
     }
 
     "matchTextNegative" {
@@ -272,6 +293,10 @@ class FluentWebElementMatchersSpec : MatcherBase({
         el("#choice #first") shouldNot haveAttributeValue("value", "other")
         el("#choice #first").shouldNotHaveAttributeValue("value", "other")
         el("#choice #first").shouldNotHaveAttributeValue("value" to "other")
+
+        el("#choice #first") should matchAttributeValue("value", be("first"))
+        el("#choice #first").shouldMatchAttributeValue("value", be("first"))
+        el("#choice #first").shouldNotMatchAttributeValue("value", be("other"))
     }
 
     "haveAttributeNegative" {
