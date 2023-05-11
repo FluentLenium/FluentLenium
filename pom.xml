@@ -247,6 +247,11 @@
                 <version>3.13</version>
             </dependency>
             <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>23.0.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit5.version}</version>
@@ -486,7 +491,6 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-
                     <configuration>
                         <processDependencyManagement>false</processDependencyManagement>
                         <rulesUri>file:///${maven.multiModuleProjectDirectory}/maven-version-rules.xml</rulesUri>
