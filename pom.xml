@@ -450,6 +450,8 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.1.0</version>
                     <configuration>
+                        <argLine>${failsafe.jacoco.args}</argLine>
+
                         <includes>
                             <include>**/integration/**/*</include>
                         </includes>
@@ -648,8 +650,21 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>before-integration-test-execution</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco-output/jacoco-integration-tests.exec</destFile>
+                            <propertyName>failsafe.jacoco.args</propertyName>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
