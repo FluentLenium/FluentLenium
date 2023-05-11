@@ -3,8 +3,10 @@ package io.fluentlenium.kotest.matchers.el
 import io.fluentlenium.core.domain.FluentWebElement
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
+import io.kotest.matchers.equalityMatcher
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
+import io.kotest.matchers.string.contain
 import org.openqa.selenium.Dimension
 
 /**
@@ -19,12 +21,8 @@ fun bePresent() = object : Matcher<FluentWebElement> {
     override fun test(value: FluentWebElement): MatcherResult =
         MatcherResult(
             value.present(),
-            {
-                "Element '$value' should be present"
-            },
-            {
-                "Element '$value' should not be present"
-            },
+            { "Element '$value' should be present" },
+            { "Element '$value' should not be present" },
         )
 }
 
@@ -53,9 +51,7 @@ fun beEnabled() = object : Matcher<FluentWebElement> {
         MatcherResult(
             value.enabled(),
             { "Element $value should be enabled" },
-            {
-                "Element $value should not be enabled"
-            },
+            { "Element $value should not be enabled" },
         )
 }
 
@@ -83,9 +79,7 @@ fun beDisplayed() = object : Matcher<FluentWebElement> {
         MatcherResult(
             value.displayed(),
             { "Element $value should be displayed" },
-            {
-                "Element $value should not be displayed"
-            },
+            { "Element $value should not be displayed" },
         )
 }
 
@@ -112,9 +106,7 @@ fun beClickable() = object : Matcher<FluentWebElement> {
         MatcherResult(
             value.clickable(),
             { "Element $value should be clickable" },
-            {
-                "Element $value should not be clickable"
-            },
+            { "Element $value should not be clickable" },
         )
 }
 
@@ -141,9 +133,7 @@ fun beSelected() = object : Matcher<FluentWebElement> {
         MatcherResult(
             value.selected(),
             { "Element $value should be selected" },
-            {
-                "Element $value should not be selected"
-            },
+            { "Element $value should not be selected" },
         )
 }
 
@@ -165,19 +155,7 @@ fun FluentWebElement.shouldNotBeSelected() = also { it shouldNot beSelected() }
  *
  * @return the matcher object.
  */
-fun containText(expectedText: String) = object : Matcher<FluentWebElement> {
-    override fun test(value: FluentWebElement): MatcherResult {
-        val actualText = value.text()
-
-        return MatcherResult(
-            actualText.contains(expectedText),
-            { "Expected element to contain text '$expectedText', actual text is '$actualText'." },
-            {
-                "Expected element to not contain text '$expectedText', actual text is '$actualText'."
-            },
-        )
-    }
-}
+fun containText(expectedText: String) = matchText(contain(expectedText))
 
 /**
  * See [containText]
@@ -197,19 +175,8 @@ fun FluentWebElement.shouldNotContainText(text: String) = also { it shouldNot co
  *
  * @return the matcher object.
  */
-fun matchText(pattern: String) = object : Matcher<FluentWebElement> {
-    override fun test(value: FluentWebElement): MatcherResult {
-        val actualText = value.text()
-
-        return MatcherResult(
-            actualText.matches(pattern.toRegex()),
-            { "Expected element text to match pattern '$pattern', actual text is '$actualText'." },
-            {
-                "Expected element text to not match pattern '$pattern', actual text is '$actualText'."
-            },
-        )
-    }
-}
+fun matchText(regexp: String): Matcher<FluentWebElement> =
+    matchText(contain(Regex(regexp)))
 
 /**
  * See [matchText]
@@ -220,6 +187,27 @@ fun FluentWebElement.shouldMatchText(pattern: String) = also { it should matchTe
  * See [matchText]
  */
 fun FluentWebElement.shouldNotMatchText(pattern: String) = also { it shouldNot matchText(pattern) }
+
+/**
+ * Checks if the element has text that can be matched with the given matcher.
+ *
+ * Example:
+ * `el("button") should matchText(startWith("text"))`
+ *
+ * @return the matcher object.
+ */
+fun matchText(matcher: Matcher<String>): Matcher<FluentWebElement> =
+    matcher.contramap { it.text() }
+
+/**
+ * See [matchText]
+ */
+fun FluentWebElement.shouldMatchText(matcher: Matcher<String>) = also { it should matchText(matcher) }
+
+/**
+ * See [matchText]
+ */
+fun FluentWebElement.shouldNotMatchText(matcher: Matcher<String>) = also { it shouldNot matchText(matcher) }
 
 /**
  * Checks if the element has the expected id.
@@ -236,9 +224,7 @@ fun haveId(id: String) = object : Matcher<FluentWebElement> {
         return MatcherResult(
             actualId == id,
             { "Expected element to have id '$id', actual id is '$actualId'." },
-            {
-                "Expected element to not have id '$id'."
-            },
+            { "Expected element to not have id '$id'." },
         )
     }
 }
@@ -253,8 +239,8 @@ fun FluentWebElement.shouldHaveId(id: String) = also { it should haveId(id) }
  */
 fun FluentWebElement.shouldNotHaveId(id: String) = also { it shouldNot haveId(id) }
 
-const val CLASS_ATTRIBUTE = "class"
-const val CLASS_DELIMITER = " "
+private const val CLASS_ATTRIBUTE = "class"
+private const val CLASS_DELIMITER = " "
 
 /**
  * Checks if the element has the expected class.
@@ -266,16 +252,14 @@ const val CLASS_DELIMITER = " "
  */
 fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentWebElement> {
     override fun test(value: FluentWebElement): MatcherResult {
-        val actualAttribute: String? = value.attribute(CLASS_ATTRIBUTE)
+        val actualAttribute = value.attribute(CLASS_ATTRIBUTE)
         val actualClasses = actualAttribute?.split(CLASS_DELIMITER) ?: emptyList()
         val expectedList = expectedClasses.toList()
 
         return MatcherResult(
             actualClasses.containsAll(expectedList),
             { "Expected element to have classes $expectedList, actual classes are $actualClasses." },
-            {
-                "Expected element to not have classes $expectedList, actual classes are $actualClasses."
-            },
+            { "Expected element to not have classes $expectedList, actual classes are $actualClasses." },
         )
     }
 }
@@ -305,9 +289,7 @@ fun haveValue(expectedValue: String) = object : Matcher<FluentWebElement> {
         return MatcherResult(
             actualValue == expectedValue,
             { "Expected element to have value '$expectedValue', actual value is '$actualValue'." },
-            {
-                "Expected element to not have value '$actualValue'."
-            },
+            { "Expected element to not have value '$actualValue'." },
         )
     }
 }
@@ -336,9 +318,7 @@ fun haveName(expectedName: String) = object : Matcher<FluentWebElement> {
         return MatcherResult(
             actualName == expectedName,
             { "Expected element to have name '$expectedName', actual name is '$actualName'." },
-            {
-                "Expected element to not have name '$actualName'."
-            },
+            { "Expected element to not have name '$actualName'." },
         )
     }
 }
@@ -367,9 +347,7 @@ fun haveTagName(expectedTagName: String) = object : Matcher<FluentWebElement> {
         return MatcherResult(
             actualTagName == expectedTagName,
             { "Expected element to be a '$expectedTagName' tag, actually it is a '$actualTagName' tag." },
-            {
-                "Expected element to not to be a '$actualTagName' tag."
-            },
+            { "Expected element to not to be a '$actualTagName' tag." },
         )
     }
 }
@@ -398,9 +376,7 @@ fun haveDimension(expectedDimension: Dimension) = object : Matcher<FluentWebElem
         return MatcherResult(
             actualDimension == expectedDimension,
             { "Expected element to have dimension '$expectedDimension', actual dimension is '$actualDimension'." },
-            {
-                "Expected element to not have dimension '$actualDimension'."
-            },
+            { "Expected element to not have dimension '$actualDimension'." },
         )
     }
 }
@@ -456,9 +432,7 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentWebElement
         return MatcherResult(
             actualAttributeValue != null,
             { "Expected element to have attribute '$expectedAttribute'." },
-            {
-                "Expected element to not have attribute '$expectedAttribute'. attribute exists and has value '$actualAttributeValue'."
-            },
+            { "Expected element to not have attribute '$expectedAttribute'. attribute exists and has value '$actualAttributeValue'." },
         )
     }
 }
@@ -483,18 +457,8 @@ fun FluentWebElement.shouldNotHaveAttribute(expectedAttribute: String) =
  *
  * @return the matcher object.
  */
-fun haveAttributeValue(attribute: String, expectedValue: String?) = object : Matcher<FluentWebElement> {
-    override fun test(value: FluentWebElement): MatcherResult {
-        val actualAttributeValue = value.attribute(attribute)
-        return MatcherResult(
-            actualAttributeValue == expectedValue,
-            { "Expected element to have attribute '$attribute' with value '$expectedValue'. actual value is '$actualAttributeValue'" },
-            {
-                "Expected element to not have attribute '$attribute' with value '$expectedValue'."
-            },
-        )
-    }
-}
+fun haveAttributeValue(attribute: String, expectedValue: String?): Matcher<FluentWebElement> =
+    matchAttributeValue(attribute, equalityMatcher(expectedValue))
 
 /**
  * See [haveAttributeValue]
@@ -519,3 +483,29 @@ fun FluentWebElement.shouldNotHaveAttributeValue(attribute: String, expectedValu
  */
 fun FluentWebElement.shouldNotHaveAttributeValue(pair: Pair<String, String?>) =
     also { it shouldNot haveAttributeValue(pair.first, pair.second) }
+
+/**
+ * Checks if the element has the expected attribute that matches the given matcher
+ *
+ * Example:
+ * `el("button") should matchAttributeValue("key", be("myValue"))`
+ *
+ * @return the matcher object.
+ */
+
+fun matchAttributeValue(attribute: String, matcher: Matcher<String?>): Matcher<FluentWebElement> =
+    matcher.contramap {
+        it.attribute(attribute)
+    }
+
+/**
+ * See [matchAttributeValue]
+ */
+fun FluentWebElement.shouldMatchAttributeValue(attribute: String, matcher: Matcher<String?>) =
+    also { it should matchAttributeValue(attribute, matcher) }
+
+/**
+ * See [matchAttributeValue]
+ */
+fun FluentWebElement.shouldNotMatchAttributeValue(attribute: String, matcher: Matcher<String?>) =
+    also { it shouldNot matchAttributeValue(attribute, matcher) }

@@ -4,8 +4,10 @@ import io.fluentlenium.core.domain.FluentList
 import io.fluentlenium.core.domain.FluentWebElement
 import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
+import io.kotest.matchers.equalityMatcher
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
+import io.kotest.matchers.string.contain
 import org.openqa.selenium.Dimension
 
 /**
@@ -17,19 +19,8 @@ import org.openqa.selenium.Dimension
  * @param expectedText text to find
  * @return the matcher object
  */
-fun haveText(expectedText: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTexts = value.texts()
-
-        return MatcherResult(
-            actualTexts.contains(expectedText),
-            { "No selected elements has text '$expectedText', found texts $actualTexts" },
-            {
-                "No selected elements should have '$expectedText',"
-            },
-        )
-    }
-}
+fun haveText(expectedText: String) =
+    haveTextMatching(equalityMatcher(expectedText))
 
 /**
  * See [haveText]
@@ -51,19 +42,8 @@ fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) =
  * @param expectedText substring to find
  * @return the matcher object
  */
-fun haveTextContaining(expectedText: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTexts = value.texts()
-
-        return MatcherResult(
-            actualTexts.any { it.contains(expectedText) },
-            { "No selected elements text contains '$expectedText', found texts $actualTexts" },
-            {
-                "No selected elements should contain '$expectedText',"
-            },
-        )
-    }
-}
+fun haveTextContaining(expectedText: String) =
+    haveTextMatching(contain(expectedText))
 
 /**
  * See [haveTextContaining]
@@ -86,19 +66,8 @@ fun FluentList<FluentWebElement>.shouldNotHaveTextContaining(text: String) =
  * @param expectedPattern pattern to match
  * @return the matcher object
  */
-fun haveTextMatching(expectedPattern: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTexts = value.texts()
-
-        return MatcherResult(
-            actualTexts.any { it.matches(expectedPattern.toRegex()) },
-            { "No selected elements text matches '$expectedPattern', found texts $actualTexts" },
-            {
-                "No selected elements should match '$expectedPattern',"
-            },
-        )
-    }
-}
+fun haveTextMatching(expectedPattern: String) =
+    haveTextMatching(contain(Regex(expectedPattern)))
 
 /**
  * See [haveTextMatching]
@@ -111,6 +80,26 @@ fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
  */
 fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
     also { it shouldNot haveTextMatching(text) }
+
+
+/**
+ * Checks if at least one element in a list of elements, has a text that matches the given matcher.
+ *
+ * @param matcher to use on the list elements
+ * @return the matcher object
+ */
+fun haveTextMatching(matcher: Matcher<String>) = object : Matcher<FluentList<FluentWebElement>> {
+    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+        val actualTexts = value.texts()
+        val matches = actualTexts.map { matcher.test(it) }
+
+        return MatcherResult(
+            matches.any { it.passed() },
+            { "No selected elements text matches '$matcher', actual texts $actualTexts" },
+            { "No selected elements should match '$matcher'," },
+        )
+    }
+}
 
 /**
  * Checks if at least one element in a list of elements, has the given id.
@@ -128,9 +117,7 @@ fun haveId(id: String) = object : Matcher<FluentList<FluentWebElement>> {
         return MatcherResult(
             actualIds.contains(id),
             { "No selected elements has id '$id', found ids $actualIds" },
-            {
-                "No selected elements should have id '$id',"
-            },
+            { "No selected elements should have id '$id'," },
         )
     }
 }
@@ -159,7 +146,7 @@ private const val CLASS_DELIMITER = " "
  * jq(".myClass") should haveClass("class1", "class2")
  * ```
  *
- * @param expectedText expected classes
+ * @param expectedClasses expected classes
  * @return the matcher object
  */
 fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentList<FluentWebElement>> {
@@ -175,9 +162,7 @@ fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentList<Flue
         return MatcherResult(
             anyMatch,
             { "No selected elements has expected classes $expectedList, found $actualClasses" },
-            {
-                "No selected elements should have classes $expectedList"
-            },
+            { "No selected elements should have classes $expectedList" },
         )
     }
 }
@@ -210,9 +195,7 @@ fun haveName(expectedName: String) = object : Matcher<FluentList<FluentWebElemen
         return MatcherResult(
             actualNames.contains(expectedName),
             { "No selected elements with name '$expectedName', found $actualNames." },
-            {
-                "No selected elements should have name '$expectedName'."
-            },
+            { "No selected elements should have name '$expectedName'." },
         )
     }
 }
@@ -247,9 +230,7 @@ fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentList<Fluen
         return MatcherResult(
             anyPresent.isNotEmpty(),
             { "No selected elements with name attribute '$expectedAttribute'." },
-            {
-                "No selected elements should have name '$expectedAttribute'. found $anyPresent"
-            },
+            { "No selected elements should have name '$expectedAttribute'. found $anyPresent" },
         )
     }
 }
@@ -282,9 +263,7 @@ fun haveValue(expectedValue: String) = object : Matcher<FluentList<FluentWebElem
         return MatcherResult(
             actualAttributes.contains(expectedValue),
             { "No selected elements with value '$expectedValue'." },
-            {
-                "No selected elements should have value '$expectedValue'."
-            },
+            { "No selected elements should have value '$expectedValue'." },
         )
     }
 }
@@ -318,9 +297,7 @@ fun haveAttributeValue(key: String, expectedValue: String) = object : Matcher<Fl
         return MatcherResult(
             actualValues.contains(expectedValue),
             { "No selected elements with attribute value '$key' = '$expectedValue'. found values $actualValues" },
-            {
-                "No selected elements should have attribute value '$key' = '$expectedValue'."
-            },
+            { "No selected elements should have attribute value '$key' = '$expectedValue'." },
         )
     }
 }
@@ -365,9 +342,7 @@ fun haveTagName(expectedTag: String) = object : Matcher<FluentList<FluentWebElem
         return MatcherResult(
             actualTags.contains(expectedTag),
             { "No selected elements with tag '$expectedTag'. found tags $actualTags" },
-            {
-                "No selected elements should be a '$expectedTag'."
-            },
+            { "No selected elements should be a '$expectedTag'." },
         )
     }
 }
@@ -400,9 +375,7 @@ fun haveDimension(expectedDimension: Dimension) = object : Matcher<FluentList<Fl
         return MatcherResult(
             actualDimensions.any { it == expectedDimension },
             { "No selected elements with dimension '$expectedDimension'. found $actualDimensions" },
-            {
-                "No selected elements should have dimension '$expectedDimension'."
-            },
+            { "No selected elements should have dimension '$expectedDimension'." },
         )
     }
 }
@@ -438,9 +411,7 @@ fun bePresent() = object : Matcher<FluentList<FluentWebElement>> {
         MatcherResult(
             value.present(),
             { "Elements '$value' should be present" },
-            {
-                "Elements '$value' should not be present"
-            },
+            { "Elements '$value' should not be present" },
         )
 }
 
