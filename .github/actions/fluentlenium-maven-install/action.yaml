@@ -4,7 +4,10 @@ runs:
   using: "composite"
   steps:
     - name: run maven install
-      run: ./mvnw -B clean install -DskipTests=true -pl '!fluentlenium-coverage-report,!fluentlenium-integration-tests'
+      run: |
+        echo "::group::mvn install"
+        ./mvnw -B clean install -DskipTests=true -pl '!fluentlenium-coverage-report,!fluentlenium-integration-tests'
+        echo "::endgroup::"
       shell: bash
       env:
         MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
