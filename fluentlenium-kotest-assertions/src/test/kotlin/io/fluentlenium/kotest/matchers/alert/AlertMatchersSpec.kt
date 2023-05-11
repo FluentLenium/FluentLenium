@@ -4,11 +4,16 @@ import io.fluentlenium.adapter.kotest.jq
 import io.fluentlenium.kotest.matchers.config.MatcherBase
 import io.kotest.assertions.shouldFail
 import io.kotest.matchers.should
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNot
 
 class AlertMatchersSpec : MatcherBase({
     "present" {
         alert() shouldNot bePresent()
+
+        shouldFail {
+            alert() should bePresent()
+        }.message shouldBe "Alert should be present"
 
         jq("#alertButton").click()
         alert() should bePresent()
@@ -24,7 +29,7 @@ class AlertMatchersSpec : MatcherBase({
 
         shouldFail {
             alert().shouldNotBePresent()
-        }
+        }.message shouldBe "Alert should not be present"
 
         shouldFail {
             alert() shouldNot bePresent()
