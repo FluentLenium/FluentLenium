@@ -2,9 +2,8 @@ package io.fluentlenium.example.kotest
 
 import io.fluentlenium.adapter.kotest.FluentFreeSpec
 import io.kotest.core.annotation.EnabledIf
-import io.kotest.core.extensions.Extension
+import io.kotest.core.extensions.install
 import io.kotest.core.spec.Spec
-import io.kotest.extensions.testcontainers.LifecycleMode
 import io.kotest.extensions.testcontainers.TestContainerExtension
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -28,13 +27,10 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
     private val videoDirectory = File("build/videos")
 
     /**
-     * start Browser inside Docker container that is also capable of recrding videos
+     * start Browser inside Docker container that is also capable of recording videos
      * https://www.testcontainers.org/modules/webdriver_containers/
      */
-    private val dockerChrome = BrowserWebDriverContainer<Nothing>().apply {
-        // this is a workaround to avoid kotlin/generics issue:
-        // https://github.com/testcontainers/testcontainers-java/issues/318
-
+    private val dockerChrome = install(TestContainerExtension(BrowserWebDriverContainer())) {
         withCapabilities(ChromeOptions().apply {
             addArguments("--headless=new")
         })
@@ -44,14 +40,6 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
             VncRecordingContainer.VncRecordingFormat.MP4
         )
     }
-
-    /**
-     * use the Kotest testcontainers extension so Kotest can manage the lifecycle of the docker container.
-     *
-     * https://kotest.io/docs/extensions/test_containers.html
-     */
-    override fun extensions(): List<Extension> =
-        listOf(TestContainerExtension(dockerChrome, LifecycleMode.Leaf))
 
     override suspend fun beforeSpec(spec: Spec) {
         videoDirectory.mkdirs()
