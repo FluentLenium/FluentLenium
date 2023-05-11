@@ -126,7 +126,7 @@
         <junit5.version>5.9.3</junit5.version>
         <spring.version>6.0.8</spring.version>
         <slf4j.version>2.0.7</slf4j.version>
-        <seleniumDevtools.artifactId>selenium-devtools-v112</seleniumDevtools.artifactId>
+        <seleniumDevtools.artifactId>selenium-devtools-v113</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
             "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
     </properties>
@@ -399,6 +399,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.11.0</version>
                     <configuration>
+                        <!-- disable compiler plugins by default, enable if needed (see fluentlenium-core) in module -->
+                        <proc>none</proc>
                         <release>11</release>
                     </configuration>
                 </plugin>
@@ -453,6 +455,8 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>3.1.0</version>
                     <configuration>
+                        <argLine>${failsafe.jacoco.args}</argLine>
+
                         <includes>
                             <include>**/integration/**/*</include>
                         </includes>
@@ -494,6 +498,52 @@
                     <configuration>
                         <processDependencyManagement>false</processDependencyManagement>
                         <rulesUri>file:///${maven.multiModuleProjectDirectory}/maven-version-rules.xml</rulesUri>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>com.gradle</groupId>
+                    <artifactId>gradle-enterprise-maven-extension</artifactId>
+
+                    <configuration>
+                        <gradleEnterprise>
+                            <plugins>
+                                <plugin>
+                                    <artifactId>maven-surefire-plugin</artifactId>
+                                    <inputs>
+                                        <fileSets>
+                                            <fileSet>
+                                                <name>logging.properties</name>
+                                                <paths>
+                                                    <path>src/test/resources</path>
+                                                </paths>
+                                                <includes>
+                                                    <include>logging.properties</include>
+                                                </includes>
+                                                <normalization>IGNORED_PATH</normalization>
+                                            </fileSet>
+                                        </fileSets>
+                                    </inputs>
+                                </plugin>
+
+                                <plugin>
+                                    <artifactId>maven-failsafe-plugin</artifactId>
+                                    <inputs>
+                                        <fileSets>
+                                            <fileSet>
+                                                <name>logging.properties</name>
+                                                <paths>
+                                                    <path>src/test/resources</path>
+                                                </paths>
+                                                <includes>
+                                                    <include>logging.properties</include>
+                                                </includes>
+                                                <normalization>IGNORED_PATH</normalization>
+                                            </fileSet>
+                                        </fileSets>
+                                    </inputs>
+                                </plugin>
+                            </plugins>
+                        </gradleEnterprise>
                     </configuration>
                 </plugin>
             </plugins>
@@ -604,8 +654,21 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+
+                    <execution>
+                        <id>before-integration-test-execution</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco-output/jacoco-integration-tests.exec</destFile>
+                            <propertyName>failsafe.jacoco.args</propertyName>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>

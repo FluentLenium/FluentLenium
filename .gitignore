@@ -206,3 +206,5 @@ examples/spring/gridurl.txt
 
 node_modules/
 node/
+
+.mvn/.gradle-enterprise/
