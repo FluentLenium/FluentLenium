@@ -164,16 +164,22 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <annotationProcessors>
-                        <annotationProcessor>org.atteo.classindex.processor.ClassIndexProcessor</annotationProcessor>
-                    </annotationProcessors>
+                    <!-- proc is set to none in parent pom, override element here to re-enable processing -->
+                    <proc combine.self="override"/>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.atteo.classindex</groupId>
+                            <artifactId>classindex</artifactId>
+                            <version>3.13</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
-                        <java.util.logging.config.file>${project.basedir}/src/test/resources/logging.properties</java.util.logging.config.file>
+                        <java.util.logging.config.file>src/test/resources/logging.properties</java.util.logging.config.file>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

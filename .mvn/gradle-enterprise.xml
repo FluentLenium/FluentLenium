@@ -1,0 +1,14 @@
+<gradleEnterprise
+        xmlns="https://www.gradle.com/gradle-enterprise-maven" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.gradle.com/gradle-enterprise-maven https://www.gradle.com/schema/gradle-enterprise-maven.xsd">
+    <buildScan>
+        <publish>ON_DEMAND</publish>
+
+        <termsOfService>
+            <url>https://gradle.com/terms-of-service</url>
+            <accept>true</accept>
+        </termsOfService>
+
+        <backgroundBuildScanUpload>#{env['CI'] == null}</backgroundBuildScanUpload>
+    </buildScan>
+</gradleEnterprise>
