@@ -5,7 +5,6 @@ import io.kotest.matchers.Matcher
 import io.kotest.matchers.MatcherResult
 import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
-import org.openqa.selenium.NoAlertPresentException
 
 /**
  * Check that the alert box contains the given text.
@@ -17,13 +16,11 @@ import org.openqa.selenium.NoAlertPresentException
  * @return the matcher object
  */
 fun haveText(text: String) = object : Matcher<Alert> {
-    override fun test(value: Alert): MatcherResult =
+    override fun test(value: Alert) =
         MatcherResult(
             value.text.contains(text),
             { "The alert box is expected to contain the text '${value.text}', actual text is '$text'" },
-            {
-                "The alert box is expected to not contain the text '${value.text}'"
-            },
+            { "The alert box is expected to not contain the text '${value.text}'" },
         )
 }
 
@@ -43,21 +40,11 @@ fun Alert.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
  * @return the matcher object
  */
 fun bePresent() = object : Matcher<Alert> {
-    override fun test(value: Alert): MatcherResult {
-        val isAlertPresent = try {
-            value.present()
-        } catch (e: NoAlertPresentException) {
-            false
-        }
-
-        return MatcherResult(
-            isAlertPresent,
-            { "Alert should be present" },
-            {
-                "Alert should not be present"
-            },
-        )
-    }
+    override fun test(value: Alert) = MatcherResult(
+        value.present(),
+        { "Alert should be present" },
+        { "Alert should not be present" },
+    )
 }
 
 /**
