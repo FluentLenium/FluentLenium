@@ -2,6 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.8.21"
+    id("com.adarshr.test-logger") version "3.2.0"
+
 }
 
 repositories {
@@ -11,6 +13,13 @@ repositories {
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
+
+testlogger {
+    showStandardStreams = true
+    showPassedStandardStreams = false
+    showSkippedStandardStreams = false
+    showFailedStandardStreams = true
+}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
