@@ -1,0 +1,24 @@
+name: 'Publish Buildscan'
+description: "publish build in Github Action summary"
+
+runs:
+  using: "composite"
+  steps:
+    - name: show build scan URL in summary
+      shell: bash
+      run: |
+        cat build.log
+        BUILD_SCAN=$(tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*')
+    
+        echo "Build scan url is $BUILD_SCAN"
+    
+        if [[ ! -z "$BUILD_SCAN" ]]
+        then
+          echo "# Gradle Enterprise Build Scan" >> $GITHUB_STEP_SUMMARY
+    
+          BADGE_URL=https://img.shields.io/badge/Build%20Scan%E2%84%A2-PUBLISHED-06A0CE?logo=Gradle
+          BADGE_HTML="<img src=\"${BADGE_URL}\" alt=\"Build Scan Published\" />"
+          URL="<a href=\"${BUILD_SCAN}\" rel=\"nofollow\">${BADGE_HTML}</a>"
+    
+          echo "$URL" >> $GITHUB_STEP_SUMMARY
+        fi
