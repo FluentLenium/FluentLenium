@@ -7,8 +7,8 @@ runs:
     - name: show build scan URL in summary
       shell: bash
       run: |
-        cat build.log
-        BUILD_SCAN=$(tail -3 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*')
+        tail -100 build.log
+        BUILD_SCAN=$(tail -100 build.log|grep -oP '\[INFO\] \Khttps://gradle.com/[\w\/.]*')
     
         echo "Build scan url is $BUILD_SCAN"
     
