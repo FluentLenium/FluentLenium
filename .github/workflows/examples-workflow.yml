@@ -159,6 +159,14 @@ jobs:
       - name: Run safari examples with current branch
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        if: always() # always run even if the previous step fails
+        with:
+          name: screenshots
+          path: |
+            examples/quickstart-safari/target/screenshots
+
       - name: Publish Test reports
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
