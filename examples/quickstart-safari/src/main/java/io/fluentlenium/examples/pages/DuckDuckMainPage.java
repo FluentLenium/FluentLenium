@@ -20,6 +20,18 @@ public class DuckDuckMainPage extends FluentPage {
     private FluentWebElement searchButton;
 
     public DuckDuckMainPage typeSearchPhraseIn(String searchPhrase) {
+
+        $("input").forEach(we -> {
+
+                    System.out.print("<input");
+                    System.out.print(" id=" + we.id());
+                    System.out.print(" name=" + we.name());
+                    System.out.println(" />");
+                }
+
+
+                );
+
         await().until(searchInput).enabled();
         searchInput.write(searchPhrase);
         return this;
