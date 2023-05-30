@@ -1,25 +1,26 @@
 package io.fluentlenium.examples.pages;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.concurrent.TimeUnit;
-
 import io.fluentlenium.core.FluentPage;
 import io.fluentlenium.core.annotation.PageUrl;
 import io.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.concurrent.TimeUnit;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 @PageUrl("https://duckduckgo.com")
 public class DuckDuckMainPage extends FluentPage {
     private static final String SEARCH_FORM_HOMEPAGE = "#search_form_homepage";
 
-    @FindBy(css = "#search_form_input_homepage")
+    @FindBy(css = "[name=q]")
     private FluentWebElement searchInput;
 
-    @FindBy(css = "#search_button_homepage")
+    @FindBy(css = "[type=submit]")
     private FluentWebElement searchButton;
 
     public DuckDuckMainPage typeSearchPhraseIn(String searchPhrase) {
+        await().until(searchInput).enabled();
         searchInput.write(searchPhrase);
         return this;
     }
@@ -31,7 +32,9 @@ public class DuckDuckMainPage extends FluentPage {
     }
 
     public void assertIsPhrasePresentInTheResults(String searchPhrase) {
-        assertThat(window().title()).contains(searchPhrase);
+        await().untilAsserted(() ->
+                assertThat(window().title()).contains(searchPhrase)
+        );
     }
 
     private DuckDuckMainPage awaitUntilSearchFormDisappear() {
