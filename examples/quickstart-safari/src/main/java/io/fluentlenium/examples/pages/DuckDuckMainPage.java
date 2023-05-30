@@ -32,7 +32,9 @@ public class DuckDuckMainPage extends FluentPage {
     }
 
     public void assertIsPhrasePresentInTheResults(String searchPhrase) {
-        assertThat(window().title()).contains(searchPhrase);
+        await().untilAsserted(() ->
+                assertThat(window().title()).contains(searchPhrase)
+        );
     }
 
     private DuckDuckMainPage awaitUntilSearchFormDisappear() {
