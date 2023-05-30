@@ -23,4 +23,4 @@ d) Run test
 
 `mvn clean verify -PAndroid` (Android)
 
-`mvn clean verify -iOS` (iOS)
+`mvn clean verify -PiOS` (iOS)
