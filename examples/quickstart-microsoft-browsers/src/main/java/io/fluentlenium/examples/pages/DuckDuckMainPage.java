@@ -16,7 +16,7 @@ public class DuckDuckMainPage extends FluentPage {
     @FindBy(css = "[name=q]")
     private FluentWebElement searchInput;
 
-    @FindBy(css = "#search_button_homepage")
+    @FindBy(css = "[type=submit]")
     private FluentWebElement searchButton;
 
     public DuckDuckMainPage typeSearchPhraseIn(String searchPhrase) {
