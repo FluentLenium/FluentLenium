@@ -13,25 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DuckDuckMainPage extends FluentPage {
     private static final String SEARCH_FORM_HOMEPAGE = "#search_form_homepage";
 
-    @FindBy(css = "#search_form_input_homepage")
+    @FindBy(css = "[name=q]")
     private FluentWebElement searchInput;
 
     @FindBy(css = "#search_button_homepage")
     private FluentWebElement searchButton;
 
     public DuckDuckMainPage typeSearchPhraseIn(String searchPhrase) {
-
-        $("input").forEach(we -> {
-
-                    System.out.print("<input");
-                    System.out.print(" id=" + we.id());
-                    System.out.print(" name=" + we.name());
-                    System.out.println(" />");
-                }
-
-
-                );
-
         await().until(searchInput).enabled();
         searchInput.write(searchPhrase);
         return this;
