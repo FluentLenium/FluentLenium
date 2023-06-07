@@ -192,10 +192,8 @@ public class ComposedConfigurationTest {
     @Test
     public void capabilities() {
         DesiredCapabilities cap1 = new DesiredCapabilities();
-        cap1.setJavascriptEnabled(true);
 
         DesiredCapabilities cap2 = new DesiredCapabilities();
-        cap2.setJavascriptEnabled(false);
 
         testImpl(ConfigurationProperties::getCapabilities, input -> {
             composed.setCapabilities(input);

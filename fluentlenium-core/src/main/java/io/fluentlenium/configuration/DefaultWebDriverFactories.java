@@ -151,7 +151,6 @@ public class DefaultWebDriverFactories {
         @Override
         protected DesiredCapabilities newDefaultCapabilities() {
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-            desiredCapabilities.setJavascriptEnabled(true);
             desiredCapabilities.setBrowserName(Browser.HTMLUNIT.browserName());
             return desiredCapabilities;
         }

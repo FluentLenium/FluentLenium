@@ -25,7 +25,6 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
     @Test
     public void capabilities() {
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
-        capabilitiesJSEnabled.setJavascriptEnabled(true);
 
         Capabilities capabilities = retriever.getCapabilitiesProperty("{\"javascriptEnabled\": true}", null);
 
@@ -66,7 +65,6 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
     public void capabilitiesURL() {
         URL capabilitiesURLJSEnabled = getClass().getResource("/io/fluentlenium/configuration/capabilities.json");
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
-        capabilitiesJSEnabled.setJavascriptEnabled(true);
 
         Capabilities capabilities = retriever.getCapabilitiesProperty(capabilitiesURLJSEnabled.toString(), null);
 

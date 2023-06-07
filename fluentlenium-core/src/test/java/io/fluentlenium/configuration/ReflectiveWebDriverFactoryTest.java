@@ -137,13 +137,11 @@ public class ReflectiveWebDriverFactoryTest {
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities(HTMLUNIT.browserName(), "", Platform.ANY);
-        desiredCapabilities.setJavascriptEnabled(false);
         desiredCapabilities.setBrowserName(Browser.HTMLUNIT.browserName());
 
         WebDriver webDriver = webDriverFactory.newWebDriver(desiredCapabilities, null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
-            assertThat(((HasCapabilities) webDriver).getCapabilities().is("javascriptEnabled")).isFalse();
         } finally {
             webDriver.quit();
         }
