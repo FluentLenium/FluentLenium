@@ -56,6 +56,10 @@ class PageMatchersSpec : MatcherBase() {
 
         "haveExpectedUrlNegative" {
             shouldFail {
+                indexPage.shouldHaveExpectedUrl()
+            }
+
+            shouldFail {
                 fluentleniumPage should haveExpectedUrl()
             }
 
