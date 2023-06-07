@@ -110,7 +110,6 @@ public class AnnotationConfigurationTest {
         Assertions.assertThat(defaultConfiguration.getCapabilities()).isNull();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setJavascriptEnabled(true);
 
         Assertions.assertThat(configuration.getCapabilities()).isEqualTo(capabilities);
     }
