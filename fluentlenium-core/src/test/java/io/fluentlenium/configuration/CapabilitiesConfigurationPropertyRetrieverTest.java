@@ -26,7 +26,7 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
     public void capabilities() {
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
 
-        Capabilities capabilities = retriever.getCapabilitiesProperty("{\"javascriptEnabled\": true}", null);
+        Capabilities capabilities = retriever.getCapabilitiesProperty("{}", null);
 
         assertThat(capabilities).isEqualTo(capabilitiesJSEnabled);
     }
