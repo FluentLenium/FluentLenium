@@ -46,10 +46,14 @@ jobs:
 
       - name: Java 11 - unit & integration tests code coverage
         run: >-
+          set -o pipefail
+          
           ./mvnw -B -Pjava11,ci 
           -Dfailsafe.rerunFailingTestsCount=1
           -Dsurefire.rerunFailingTestsCount=1
           clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java11|tee build.log
+          
+          set +o pipefail
 
       - name: Gradle build scan URL
         if: always()
@@ -82,10 +86,14 @@ jobs:
 
       - name: Java 17 - unit & integration tests code coverage
         run: >-
+          set -o pipefail
+
           ./mvnw -B -Pjava17,ci 
           -Dfailsafe.rerunFailingTestsCount=1
           -Dsurefire.rerunFailingTestsCount=1
           clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java17|tee build.log
+
+          set +o pipefail
 
       - name: Gradle build scan URL
         if: always()
