@@ -87,6 +87,7 @@ public class PropertiesBackendConfigurationTest {
     @Test
     public void capabilities() {
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
+        capabilitiesJSEnabled.setJavascriptEnabled(true);
         when(retriever.getCapabilitiesProperty("{\"javascriptEnabled\": true}", null)).thenReturn(capabilitiesJSEnabled);
         DesiredCapabilities capabilitiesJSDisabled = new DesiredCapabilities();
         when(retriever.getCapabilitiesProperty("{\"javascriptEnabled\": false}", null)).thenReturn(capabilitiesJSDisabled);
@@ -141,6 +142,7 @@ public class PropertiesBackendConfigurationTest {
     public void capabilitiesURL() {
         URL capabilitiesURL = getClass().getResource("/io/fluentlenium/configuration/capabilities.json");
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
+        capabilitiesJSEnabled.setJavascriptEnabled(true);
         when(retriever.getCapabilitiesProperty(capabilitiesURL.toString(), null)).thenReturn(capabilitiesJSEnabled);
         URL capabilitiesFalseURL = getClass().getResource("/io/fluentlenium/configuration/capabilities-false.json");
         DesiredCapabilities capabilitiesJSDisabled = new DesiredCapabilities();
