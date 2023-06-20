@@ -85,23 +85,6 @@ public class PropertiesBackendConfigurationTest {
     }
 
     @Test
-    public void capabilities() {
-        DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
-        capabilitiesJSEnabled.setJavascriptEnabled(true);
-        when(retriever.getCapabilitiesProperty("{\"javascriptEnabled\": true}", null)).thenReturn(capabilitiesJSEnabled);
-        DesiredCapabilities capabilitiesJSDisabled = new DesiredCapabilities();
-        when(retriever.getCapabilitiesProperty("{\"javascriptEnabled\": false}", null)).thenReturn(capabilitiesJSDisabled);
-
-        assertThat(getConfiguration().getWebDriver()).isNull();
-
-        mockProperty("capabilities", "{\"javascriptEnabled\": true}");
-        assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilitiesJSEnabled);
-
-        mockProperty("capabilities", "{\"javascriptEnabled\": false}");
-        assertThat(getConfiguration().getCapabilities()).isEqualTo(capabilitiesJSDisabled);
-    }
-
-    @Test
     public void desiredCapabilities() {
         DesiredCapabilities capabilitiesFirefox = PredefinedDesiredCapabilities.firefox();
         when(retriever.getCapabilitiesProperty("firefox", null)).thenReturn(capabilitiesFirefox);
@@ -142,7 +125,6 @@ public class PropertiesBackendConfigurationTest {
     public void capabilitiesURL() {
         URL capabilitiesURL = getClass().getResource("/io/fluentlenium/configuration/capabilities.json");
         DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
-        capabilitiesJSEnabled.setJavascriptEnabled(true);
         when(retriever.getCapabilitiesProperty(capabilitiesURL.toString(), null)).thenReturn(capabilitiesJSEnabled);
         URL capabilitiesFalseURL = getClass().getResource("/io/fluentlenium/configuration/capabilities-false.json");
         DesiredCapabilities capabilitiesJSDisabled = new DesiredCapabilities();

@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.net.URL;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -20,16 +18,6 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
     @Before
     public void setup() {
         retriever = new CapabilitiesConfigurationPropertyRetriever();
-    }
-
-    @Test
-    public void capabilities() {
-        DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
-        capabilitiesJSEnabled.setJavascriptEnabled(true);
-
-        Capabilities capabilities = retriever.getCapabilitiesProperty("{\"javascriptEnabled\": true}", null);
-
-        assertThat(capabilities).isEqualTo(capabilitiesJSEnabled);
     }
 
     @Test
@@ -60,17 +48,6 @@ public class CapabilitiesConfigurationPropertyRetrieverTest {
         Capabilities capabilities = retriever.getCapabilitiesProperty("test-capabilities-factory", null);
 
         assertThat(capabilities).isExactlyInstanceOf(TestCapabilities.class);
-    }
-
-    @Test
-    public void capabilitiesURL() {
-        URL capabilitiesURLJSEnabled = getClass().getResource("/io/fluentlenium/configuration/capabilities.json");
-        DesiredCapabilities capabilitiesJSEnabled = new DesiredCapabilities();
-        capabilitiesJSEnabled.setJavascriptEnabled(true);
-
-        Capabilities capabilities = retriever.getCapabilitiesProperty(capabilitiesURLJSEnabled.toString(), null);
-
-        assertThat(capabilities).isEqualTo(capabilitiesJSEnabled);
     }
 
     @Test
