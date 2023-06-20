@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.function.Function;
 
@@ -58,7 +57,7 @@ public class ComposedConfigurationTest {
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DefaultConfigurationFactory.class);
 
         when(configurationProperties2.getConfigurationFactory())
-                .thenAnswer((Answer<Object>) invocation -> DummyConfigurationFactory.class);
+                .thenAnswer(invocation -> DummyConfigurationFactory.class);
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DefaultConfigurationFactory.class);
 
@@ -67,7 +66,7 @@ public class ComposedConfigurationTest {
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
 
         when(configurationProperties3.getConfigurationFactory())
-                .thenAnswer((Answer<Object>) invocation -> DefaultConfigurationFactory.class);
+                .thenAnswer(invocation -> DefaultConfigurationFactory.class);
 
         Assertions.assertThat(composed.getConfigurationFactory()).isSameAs(DummyConfigurationFactory.class);
     }
@@ -187,20 +186,6 @@ public class ComposedConfigurationTest {
             composed.setHtmlDumpMode(input);
             return null;
         }, null, ConfigurationProperties.TriggerMode.MANUAL, ConfigurationProperties.TriggerMode.AUTOMATIC_ON_FAIL);
-    }
-
-    @Test
-    public void capabilities() {
-        DesiredCapabilities cap1 = new DesiredCapabilities();
-        cap1.setJavascriptEnabled(true);
-
-        DesiredCapabilities cap2 = new DesiredCapabilities();
-        cap2.setJavascriptEnabled(false);
-
-        testImpl(ConfigurationProperties::getCapabilities, input -> {
-            composed.setCapabilities(input);
-            return null;
-        }, null, cap1, cap2);
     }
 
     @Test

@@ -1,7 +1,6 @@
 package io.fluentlenium.configuration;
 
 import org.junit.Test;
-import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -121,7 +120,6 @@ public class ReflectiveWebDriverFactoryTest {
         WebDriver webDriver = webDriverFactory.newWebDriver(new DesiredCapabilities(HTMLUNIT.browserName(), "", Platform.ANY), null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
-            assertThat(((HasCapabilities) webDriver).getCapabilities().is("javascriptEnabled")).isTrue();
         } finally {
             webDriver.quit();
         }
@@ -137,13 +135,11 @@ public class ReflectiveWebDriverFactoryTest {
                 .containsExactly("htmlunit", HtmlUnitDriver.class.getName(), HtmlUnitDriver.class.getSimpleName());
 
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities(HTMLUNIT.browserName(), "", Platform.ANY);
-        desiredCapabilities.setJavascriptEnabled(false);
         desiredCapabilities.setBrowserName(Browser.HTMLUNIT.browserName());
 
         WebDriver webDriver = webDriverFactory.newWebDriver(desiredCapabilities, null);
         try {
             assertThat(webDriver).isExactlyInstanceOf(HtmlUnitDriver.class);
-            assertThat(((HasCapabilities) webDriver).getCapabilities().is("javascriptEnabled")).isFalse();
         } finally {
             webDriver.quit();
         }

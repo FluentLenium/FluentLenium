@@ -81,7 +81,6 @@ fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
 fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
     also { it shouldNot haveTextMatching(text) }
 
-
 /**
  * Checks if at least one element in a list of elements, has a text that matches the given matcher.
  *
