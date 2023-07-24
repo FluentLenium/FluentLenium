@@ -12,10 +12,10 @@ class DuckDuckMainPage : FluentPage() {
 
     fun perform(fn: DuckDuckMainPage.() -> Unit) = this.apply(fn)
 
-    @FindBy(css = "#search_form_input_homepage")
+    @FindBy(css = "#searchbox_input")
     private lateinit var searchInput: FluentWebElement
 
-    @FindBy(css = "#search_button_homepage")
+    @FindBy(css = "button[type=submit]")
     private lateinit var searchButton: FluentWebElement
 
     fun typeSearchPhraseIn(searchPhrase: String) {
