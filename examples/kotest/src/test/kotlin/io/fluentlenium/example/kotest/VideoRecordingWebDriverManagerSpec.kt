@@ -53,8 +53,8 @@ class VideoRecordingWebDriverManagerSpec : FluentFreeSpec() {
         "Title of duck duck go" {
             goTo("https://duckduckgo.com")
 
-            el("#search_form_input_homepage").fill().with(SEARCH_TEXT)
-            el("#search_button_homepage").submit()
+            el("#searchbox_input").fill().with(SEARCH_TEXT)
+            el("button[type=submit]").submit()
             await().untilWindow(SEARCH_TEXT)
 
             window().title() shouldContain SEARCH_TEXT
