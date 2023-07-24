@@ -55,6 +55,10 @@ jobs:
           
           set +o pipefail
 
+      - name: Gradle build cache
+        run: >-
+          ls -R ~/.m2/.gradle-enterprise/build-cache
+
       - name: Gradle build scan URL
         if: always()
         uses: ./.github/actions/publish-buildscan
