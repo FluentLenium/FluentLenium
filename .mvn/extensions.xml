@@ -2,6 +2,6 @@
     <extension>
         <groupId>com.gradle</groupId>
         <artifactId>gradle-enterprise-maven-extension</artifactId>
-        <version>1.17.4</version>
+        <version>1.18</version>
     </extension>
 </extensions>
