@@ -25,5 +25,8 @@ runs:
     - name: Gradle local build cache
       uses: actions/cache@v3
       with:
-        key: gradleLocalBuildCache
+        key: gradleLocalBuildCache-${{env.GITHUB_REF_NAME}}
         path: ~/.m2/.gradle-enterprise/build-cache
+        restore-keys: |
+          gradleLocalBuildCache-${{env.GITHUB_REF_NAME}}
+          gradleLocalBuildCache-develop
