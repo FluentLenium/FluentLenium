@@ -51,7 +51,7 @@ jobs:
           ./mvnw -B -Pjava11,ci 
           -Dfailsafe.rerunFailingTestsCount=1
           -Dsurefire.rerunFailingTestsCount=1
-          clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java11|tee build.log
+          clean verify jacoco:report -Dscan -Dscan.tag.Java11|tee build.log
           
           set +o pipefail
 
@@ -91,7 +91,7 @@ jobs:
           ./mvnw -B -Pjava17,ci 
           -Dfailsafe.rerunFailingTestsCount=1
           -Dsurefire.rerunFailingTestsCount=1
-          clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java17|tee build.log
+          clean verify jacoco:report -Dscan -Dscan.tag.Java17|tee build.log
 
           set +o pipefail
 
