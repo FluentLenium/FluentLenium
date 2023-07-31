@@ -208,4 +208,3 @@ node_modules/
 node/
 
 .mvn/.gradle-enterprise/
-.gradle_build_scan
