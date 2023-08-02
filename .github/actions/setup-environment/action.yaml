@@ -21,12 +21,3 @@ runs:
       with:
         key: mavenWrapper-${{ hashfiles('.mvn/wrapper/maven-wrapper.*') }}
         path: ~/.m2/wrapper
-
-    - name: Gradle local build cache
-      uses: actions/cache@v3
-      with:
-        key: gradleLocalBuildCache-${{github.ref_name}}-${{github.job}}-${{github.run_attempt}}
-        path: ~/.m2/.gradle-enterprise/build-cache
-        restore-keys: |
-          gradleLocalBuildCache-${{github.ref_name}}
-          gradleLocalBuildCache-develop

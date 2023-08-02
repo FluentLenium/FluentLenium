@@ -44,10 +44,6 @@ jobs:
         with:
           java-version: 11
 
-      - name: Gradle build cache before
-        run: >-
-          ls -lR ~/.m2/.gradle-enterprise/build-cache
-
       - name: Java 11 - unit & integration tests code coverage
         run: >-
           set -o pipefail
@@ -58,10 +54,6 @@ jobs:
           clean verify jacoco:report -Dscan -Dscan.tag.CI -Dscan.tag.Java11|tee build.log
           
           set +o pipefail
-
-      - name: Gradle build cache after
-        run: >-
-          ls -lR ~/.m2/.gradle-enterprise/build-cache
 
       - name: Gradle build scan URL
         if: always()
