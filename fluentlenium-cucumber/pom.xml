@@ -11,7 +11,7 @@
     <name>FluentLenium Cucumber</name>
     <description>Cucumber Extension for FluentLenium</description>
     <properties>
-        <cucumber.version>7.12.0</cucumber.version>
+        <cucumber.version>7.13.0</cucumber.version>
     </properties>
     <dependencyManagement>
         <dependencies>
