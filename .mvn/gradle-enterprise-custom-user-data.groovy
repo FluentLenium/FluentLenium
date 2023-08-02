@@ -2,8 +2,8 @@ def isCI = System.getenv("CI") as Boolean
 
 def GITHUB_STEP_SUMMARY = System.getenv("GITHUB_STEP_SUMMARY")
 
-println "gradle custom user data: $isCI"
-println GITHUB_STEP_SUMMARY
+println "[INFO] gradle custom user data: $isCI"
+println "[INFO] GITHUB_STEP_SUMMARY=$GITHUB_STEP_SUMMARY"
 
 if (isCI) {
     buildScan.buildScanPublished {
@@ -16,9 +16,7 @@ if (isCI) {
 
         def file = new File(GITHUB_STEP_SUMMARY)
 
-        println file
-
         file.append(url)
-        println "appended $url to $file"
+        println "[INFO] appended $url to $file"
     }
 }
