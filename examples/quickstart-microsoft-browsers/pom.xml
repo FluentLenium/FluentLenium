@@ -73,7 +73,7 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-devtools-v112</artifactId>
+            <artifactId>selenium-devtools-v115</artifactId>
             <version>${selenium.version}</version>
             <scope>test</scope>
         </dependency>
