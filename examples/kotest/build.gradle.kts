@@ -57,7 +57,7 @@ dependencies {
 
     testImplementation("io.github.bonigarcia:webdrivermanager:5.4.1")
 
-    val seleniumVersion = properties["selenium.version"] ?: "4.10.0"
+    val seleniumVersion = properties["selenium.version"] ?: "4.11.0"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
     testRuntimeOnly("org.seleniumhq.selenium:selenium-devtools-v113:$seleniumVersion")
@@ -65,7 +65,7 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-extensions-testcontainers:2.0.2")
     testImplementation("org.testcontainers:selenium:1.18.3")
 
-    testImplementation("ch.qos.logback:logback-classic:1.4.8")
+    testImplementation("ch.qos.logback:logback-classic:1.4.9")
     testRuntimeOnly("org.slf4j:jul-to-slf4j:2.0.7")
 }
 
