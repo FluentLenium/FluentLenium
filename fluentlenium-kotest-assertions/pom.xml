@@ -95,6 +95,8 @@
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
                 <configuration>
+                    <jvmTarget>11</jvmTarget>
+
                     <args>
                         <arg>-opt-in=kotlin.RequiresOptIn</arg>
                     </args>
