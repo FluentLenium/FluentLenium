@@ -48,7 +48,7 @@ dependencies {
     testImplementation("io.fluentlenium:fluentlenium-kotest:$fluentleniumVersion")
     testImplementation("io.fluentlenium:fluentlenium-kotest-assertions:$fluentleniumVersion")
 
-    val koTestVersion = "5.6.2"
+    val koTestVersion = "5.7.0"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
     implementation(platform("org.junit:junit-bom:5.10.0"))
 

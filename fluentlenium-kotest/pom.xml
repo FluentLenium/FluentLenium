@@ -11,7 +11,7 @@
     <description>Kotest Adapter for FluentLenium</description>
     <properties>
         <kotlin.version>1.9.0</kotlin.version>
-        <kotest.version>5.6.2</kotest.version>
+        <kotest.version>5.7.0</kotest.version>
         <dokka.version>1.7.20</dokka.version>
     </properties>
     <dependencyManagement>
@@ -94,6 +94,7 @@
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
                 <configuration>
+                    <jvmTarget>11</jvmTarget>
                     <args>
                         <arg>-opt-in=kotlin.RequiresOptIn</arg>
                     </args>
