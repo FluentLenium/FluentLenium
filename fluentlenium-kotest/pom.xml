@@ -10,7 +10,7 @@
     <name>FluentLenium Kotest</name>
     <description>Kotest Adapter for FluentLenium</description>
     <properties>
-        <kotlin.version>1.9.0</kotlin.version>
+        <kotlin.version>1.9.10</kotlin.version>
         <kotest.version>5.7.0</kotest.version>
         <dokka.version>1.7.20</dokka.version>
     </properties>
