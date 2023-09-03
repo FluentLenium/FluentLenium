@@ -55,7 +55,7 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.4.1")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.5.3")
 
     val seleniumVersion = properties["selenium.version"] ?: "4.10.0"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
