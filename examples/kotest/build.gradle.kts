@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.10"
+    kotlin("jvm") version "1.9.21"
     id("com.adarshr.test-logger") version "3.2.0"
 }
 
@@ -50,12 +50,12 @@ dependencies {
 
     val koTestVersion = "5.7.0"
     implementation(platform("io.kotest:kotest-bom:$koTestVersion"))
-    implementation(platform("org.junit:junit-bom:5.10.0"))
+    implementation(platform("org.junit:junit-bom:5.10.1"))
 
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest:kotest-assertions-core")
 
-    testImplementation("io.github.bonigarcia:webdrivermanager:5.5.3")
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.6.2")
 
     val seleniumVersion = properties["selenium.version"] ?: "4.10.0"
     testImplementation("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
