@@ -57,7 +57,7 @@ class VideoRecordingTestContainersSpec : FluentFreeSpec() {
 
             el("#searchbox_input").fill().with(SEARCH_TEXT)
             el("button[type=submit]").submit()
-            await().untilWindow(SEARCH_TEXT)
+            await().untilWindow(SEARCH_TEXT).displayed()
 
             window().title() shouldContain SEARCH_TEXT
         }
