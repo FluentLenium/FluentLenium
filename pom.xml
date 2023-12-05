@@ -167,7 +167,7 @@
             <dependency>
                 <groupId>io.appium</groupId>
                 <artifactId>java-client</artifactId>
-                <version>8.5.1</version>
+                <version>9.0.0</version>
             </dependency>
             <dependency>
                 <groupId>io.fluentlenium</groupId>
