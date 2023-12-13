@@ -11,7 +11,6 @@ import io.kotest.matchers.shouldBe
     custom = [CustomProperty(name = "foo", value = "bar")],
 )
 class ConfigurationSpec : FluentDescribeSpec() {
-
     override fun getBrowserTimeout(): Long = 4711
 
     init {

@@ -8,14 +8,15 @@ import io.kotest.core.test.TestResult
 import io.kotest.matchers.shouldBe
 
 class ExtensionSpec : FluentDescribeSpec() {
-
     var extensionWasUsed = 0
 
-    override fun extensions(): List<Extension> =
-        listOf(MyExtension)
+    override fun extensions(): List<Extension> = listOf(MyExtension)
 
     object MyExtension : TestCaseExtension {
-        override suspend fun intercept(testCase: TestCase, execute: suspend (TestCase) -> TestResult): TestResult {
+        override suspend fun intercept(
+            testCase: TestCase,
+            execute: suspend (TestCase) -> TestResult,
+        ): TestResult {
             (testCase.spec as ExtensionSpec).extensionWasUsed++
 
             return execute(testCase)

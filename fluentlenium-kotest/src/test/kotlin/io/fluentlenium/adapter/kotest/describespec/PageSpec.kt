@@ -10,7 +10,6 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 
 class PageSpec : FluentDescribeSpec() {
-
     @Page
     lateinit var defaultPage: DefaultPage
 

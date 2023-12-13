@@ -13,42 +13,41 @@ abstract class FluentAnnotationSpec internal constructor(
     private val fluentAdapter: KoTestFluentAdapter,
 ) :
     AnnotationSpec(),
-    IFluentAdapter by fluentAdapter,
-    TestRunnerAdapter {
+        IFluentAdapter by fluentAdapter,
+        TestRunnerAdapter {
+        constructor() : this(KoTestFluentAdapter())
 
-    constructor() : this(KoTestFluentAdapter())
+        init {
+            fluentAdapter.useConfigurationOverride = { configuration }
 
-    init {
-        fluentAdapter.useConfigurationOverride = { configuration }
+            register(fluentAdapter.extension)
+        }
 
-        register(fluentAdapter.extension)
+        private val config: Configuration by lazy {
+            ConfigurationFactoryProvider.newConfiguration(javaClass)
+        }
+
+        override fun getConfiguration(): Configuration = config
+
+        override fun getTestClass(): Class<*> = javaClass
+
+        override fun getTestMethodName(): String = fluentAdapter.currentTestName.get()
+
+        override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>): T =
+            javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
+
+        override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>): T {
+            val currentTestMethod =
+                javaClass.declaredMethods.find {
+                    it.name == fluentAdapter.currentTestName.get()
+                } ?: throw IllegalStateException()
+
+            return currentTestMethod.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
+        }
+
+        override fun getFluentControl(): ContainerFluentControl {
+            fluentAdapter.ensureTestStarted()
+
+            return super.getFluentControl()
+        }
     }
-
-    private val config: Configuration by lazy {
-        ConfigurationFactoryProvider.newConfiguration(javaClass)
-    }
-
-    override fun getConfiguration(): Configuration = config
-
-    override fun getTestClass(): Class<*> = javaClass
-
-    override fun getTestMethodName(): String =
-        fluentAdapter.currentTestName.get()
-
-    override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>): T =
-        javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
-
-    override fun <T : Annotation?> getMethodAnnotation(annotation: Class<T>): T {
-        val currentTestMethod = javaClass.declaredMethods.find {
-            it.name == fluentAdapter.currentTestName.get()
-        } ?: throw IllegalStateException()
-
-        return currentTestMethod.getAnnotation(annotation) ?: throw AnnotationNotFoundException()
-    }
-
-    override fun getFluentControl(): ContainerFluentControl {
-        fluentAdapter.ensureTestStarted()
-
-        return super.getFluentControl()
-    }
-}

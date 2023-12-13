@@ -9,7 +9,6 @@ import io.kotest.matchers.shouldBe
 import org.openqa.selenium.WebDriver
 
 class CanUseAdditionalExtensionSpec : FluentDescribeSpec() {
-
     var beforeTestListenerRun = false
 
     override fun newWebDriver(): WebDriver {
@@ -33,11 +32,13 @@ class CanUseAdditionalExtensionSpec : FluentDescribeSpec() {
 
     init {
         // when using register here the extensions will be run in a wrong order
-        registerFirst(object : BeforeTestListener {
-            override suspend fun beforeTest(testCase: TestCase) {
-                beforeTestListenerRun = true
-            }
-        })
+        registerFirst(
+            object : BeforeTestListener {
+                override suspend fun beforeTest(testCase: TestCase) {
+                    beforeTestListenerRun = true
+                }
+            },
+        )
 
         it("additional extension") {
         }

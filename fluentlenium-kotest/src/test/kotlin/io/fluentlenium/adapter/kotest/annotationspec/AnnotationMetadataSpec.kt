@@ -10,7 +10,6 @@ import io.kotest.matchers.shouldBe
 
 @MyAnnotation
 class AnnotationMetadataSpec : FluentAnnotationSpec() {
-
     @Test
     fun testClass() {
         testClass shouldBe javaClass

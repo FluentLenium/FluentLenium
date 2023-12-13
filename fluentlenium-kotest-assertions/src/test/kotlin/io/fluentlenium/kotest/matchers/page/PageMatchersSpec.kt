@@ -11,7 +11,6 @@ import io.kotest.matchers.should
 import io.kotest.matchers.shouldNot
 
 class PageMatchersSpec : MatcherBase() {
-
     @Page
     lateinit var indexPage: IndexPage
 

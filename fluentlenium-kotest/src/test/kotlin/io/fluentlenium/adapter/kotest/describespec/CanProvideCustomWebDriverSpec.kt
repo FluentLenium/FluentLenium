@@ -6,7 +6,6 @@ import io.kotest.matchers.shouldBe
 import org.openqa.selenium.WebDriver
 
 class CanProvideCustomWebDriverSpec : FluentDescribeSpec() {
-
     var createCount = 0
 
     override fun newWebDriver(): WebDriver {

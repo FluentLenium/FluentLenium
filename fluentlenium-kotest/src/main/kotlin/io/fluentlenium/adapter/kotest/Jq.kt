@@ -15,8 +15,10 @@ import org.openqa.selenium.WebElement
  * @param filters  set of filters
  * @return list of element
  */
-fun <E : FluentWebElement> SearchControl<E>.jq(selector: String, vararg filters: SearchFilter): FluentList<E> =
-    `$`(selector, *filters)
+fun <E : FluentWebElement> SearchControl<E>.jq(
+    selector: String,
+    vararg filters: SearchFilter,
+): FluentList<E> = `$`(selector, *filters)
 
 /**
  * Wrap raw selenium elements into a list of elements.
@@ -24,8 +26,7 @@ fun <E : FluentWebElement> SearchControl<E>.jq(selector: String, vararg filters:
  * @param rawElements raw selenium elements
  * @return list of element
  */
-fun <E : FluentWebElement> SearchControl<E>.jq(rawElements: List<WebElement>): FluentList<E> =
-    `$`(rawElements)
+fun <E : FluentWebElement> SearchControl<E>.jq(rawElements: List<WebElement>): FluentList<E> = `$`(rawElements)
 
 /**
  * Find list of elements with filters.
@@ -33,8 +34,7 @@ fun <E : FluentWebElement> SearchControl<E>.jq(rawElements: List<WebElement>): F
  * @param filters set of filters in the current context
  * @return list of elements
  */
-fun <E : FluentWebElement> SearchControl<E>.jq(vararg filters: SearchFilter): FluentList<E> =
-    `$`(*filters)
+fun <E : FluentWebElement> SearchControl<E>.jq(vararg filters: SearchFilter): FluentList<E> = `$`(*filters)
 
 /**
  * Find list of elements with Selenium locator and filters.
@@ -43,8 +43,10 @@ fun <E : FluentWebElement> SearchControl<E>.jq(vararg filters: SearchFilter): Fl
  * @param filters filters set
  * @return list of elements
  */
-fun <E : FluentWebElement> SearchControl<E>.jq(locator: By, vararg filters: SearchFilter): FluentList<E> =
-    `$`(locator, *filters)
+fun <E : FluentWebElement> SearchControl<E>.jq(
+    locator: By,
+    vararg filters: SearchFilter,
+): FluentList<E> = `$`(locator, *filters)
 
 /**
  * Find list of elements with Appium locator and filters.
@@ -53,5 +55,7 @@ fun <E : FluentWebElement> SearchControl<E>.jq(locator: By, vararg filters: Sear
  * @param filters filters set
  * @return list of elements
  */
-fun <E : FluentWebElement> SearchControl<E>.jq(locator: AppiumBy, vararg filters: SearchFilter): FluentList<E> =
-    `$`(locator, *filters)
+fun <E : FluentWebElement> SearchControl<E>.jq(
+    locator: AppiumBy,
+    vararg filters: SearchFilter,
+): FluentList<E> = `$`(locator, *filters)

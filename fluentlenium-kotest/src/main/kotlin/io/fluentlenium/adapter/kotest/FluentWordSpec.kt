@@ -15,7 +15,6 @@ abstract class FluentWordSpec internal constructor(
 ) : WordSpec({}),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
-
     constructor(body: FluentWordSpec.() -> Unit = {}) : this(KoTestFluentAdapter(), body)
 
     init {
@@ -34,8 +33,7 @@ abstract class FluentWordSpec internal constructor(
 
     override fun getTestClass(): Class<*> = javaClass
 
-    override fun getTestMethodName(): String =
-        fluentAdapter.currentTestName.get()
+    override fun getTestMethodName(): String = fluentAdapter.currentTestName.get()
 
     override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>): T =
         javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()

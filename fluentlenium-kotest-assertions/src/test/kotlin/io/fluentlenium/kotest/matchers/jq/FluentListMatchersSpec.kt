@@ -179,17 +179,19 @@ class FluentListMatchersSpec : MatcherBase(
             jq("#choice option") shouldNot haveAttribute("other")
             jq("#choice option").shouldNotHaveAttribute("other")
 
-            jq("#choice option") should haveAttributeValue(
-                "value",
-                "first",
-            )
+            jq("#choice option") should
+                haveAttributeValue(
+                    "value",
+                    "first",
+                )
             jq("#choice option").shouldHaveAttributeValue("value", "first")
             jq("#choice option").shouldHaveAttributeValue("value" to "first")
 
-            jq("#choice option") shouldNot haveAttributeValue(
-                "value",
-                "other",
-            )
+            jq("#choice option") shouldNot
+                haveAttributeValue(
+                    "value",
+                    "other",
+                )
             jq("#choice #first").shouldNotHaveAttributeValue("value", "other")
             jq("#choice #first").shouldNotHaveAttributeValue("value" to "other")
         }
@@ -199,19 +201,21 @@ class FluentListMatchersSpec : MatcherBase(
                 jq("#choice option") shouldNot haveAttribute("value")
             }
             shouldFail {
-                jq("#choice option") shouldNot haveAttributeValue(
-                    "value",
-                    "first",
-                )
+                jq("#choice option") shouldNot
+                    haveAttributeValue(
+                        "value",
+                        "first",
+                    )
             }
             shouldFail {
                 jq("#choice option") should haveAttribute("other")
             }
             shouldFail {
-                jq("#choice option") should haveAttributeValue(
-                    "value",
-                    "other",
-                )
+                jq("#choice option") should
+                    haveAttributeValue(
+                        "value",
+                        "other",
+                    )
             }
         }
 

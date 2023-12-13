@@ -9,7 +9,6 @@ import io.kotest.matchers.string.shouldContain
 import org.openqa.selenium.support.FindBy
 
 class CanInjectElementsSpec : FluentDescribeSpec() {
-
     @FindBy(id = "name")
     lateinit var names: FluentList<FluentWebElement>
 

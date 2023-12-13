@@ -19,20 +19,17 @@ import org.openqa.selenium.Dimension
  * @param expectedText text to find
  * @return the matcher object
  */
-fun haveText(expectedText: String) =
-    haveTextMatching(equalityMatcher(expectedText))
+fun haveText(expectedText: String) = haveTextMatching(equalityMatcher(expectedText))
 
 /**
  * See [haveText]
  */
-fun FluentList<FluentWebElement>.shouldHaveText(text: String) =
-    also { it should haveText(text) }
+fun FluentList<FluentWebElement>.shouldHaveText(text: String) = also { it should haveText(text) }
 
 /**
  * See [haveText]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) =
-    also { it shouldNot haveText(text) }
+fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
 
 /**
  * Checks if at least one element in a list of elements, contains the expected text as a substring.
@@ -42,20 +39,17 @@ fun FluentList<FluentWebElement>.shouldNotHaveText(text: String) =
  * @param expectedText substring to find
  * @return the matcher object
  */
-fun haveTextContaining(expectedText: String) =
-    haveTextMatching(contain(expectedText))
+fun haveTextContaining(expectedText: String) = haveTextMatching(contain(expectedText))
 
 /**
  * See [haveTextContaining]
  */
-fun FluentList<FluentWebElement>.shouldHaveTextContaining(text: String) =
-    also { it should haveTextContaining(text) }
+fun FluentList<FluentWebElement>.shouldHaveTextContaining(text: String) = also { it should haveTextContaining(text) }
 
 /**
  * See [haveTextContaining]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveTextContaining(text: String) =
-    also { it shouldNot haveTextContaining(text) }
+fun FluentList<FluentWebElement>.shouldNotHaveTextContaining(text: String) = also { it shouldNot haveTextContaining(text) }
 
 /**
  * Checks if at least one element in a list of elements, has a text that matches the given pattern.
@@ -66,20 +60,17 @@ fun FluentList<FluentWebElement>.shouldNotHaveTextContaining(text: String) =
  * @param expectedPattern pattern to match
  * @return the matcher object
  */
-fun haveTextMatching(expectedPattern: String) =
-    haveTextMatching(contain(Regex(expectedPattern)))
+fun haveTextMatching(expectedPattern: String) = haveTextMatching(contain(Regex(expectedPattern)))
 
 /**
  * See [haveTextMatching]
  */
-fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) =
-    also { it should haveTextMatching(text) }
+fun FluentList<FluentWebElement>.shouldHaveTextMatching(text: String) = also { it should haveTextMatching(text) }
 
 /**
  * See [haveTextMatching]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
-    also { it shouldNot haveTextMatching(text) }
+fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) = also { it shouldNot haveTextMatching(text) }
 
 /**
  * Checks if at least one element in a list of elements, has a text that matches the given matcher.
@@ -87,18 +78,19 @@ fun FluentList<FluentWebElement>.shouldNotHaveTextMatching(text: String) =
  * @param matcher to use on the list elements
  * @return the matcher object
  */
-fun haveTextMatching(matcher: Matcher<String>) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTexts = value.texts()
-        val matches = actualTexts.map { matcher.test(it) }
+fun haveTextMatching(matcher: Matcher<String>) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val actualTexts = value.texts()
+            val matches = actualTexts.map { matcher.test(it) }
 
-        return MatcherResult(
-            matches.any { it.passed() },
-            { "No selected elements text matches '$matcher', actual texts $actualTexts" },
-            { "No selected elements should match '$matcher'," },
-        )
+            return MatcherResult(
+                matches.any { it.passed() },
+                { "No selected elements text matches '$matcher', actual texts $actualTexts" },
+                { "No selected elements should match '$matcher'," },
+            )
+        }
     }
-}
 
 /**
  * Checks if at least one element in a list of elements, has the given id.
@@ -109,29 +101,28 @@ fun haveTextMatching(matcher: Matcher<String>) = object : Matcher<FluentList<Flu
  * @param id id to find
  * @return the matcher object
  */
-fun haveId(id: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualIds = value.ids()
+fun haveId(id: String) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val actualIds = value.ids()
 
-        return MatcherResult(
-            actualIds.contains(id),
-            { "No selected elements has id '$id', found ids $actualIds" },
-            { "No selected elements should have id '$id'," },
-        )
+            return MatcherResult(
+                actualIds.contains(id),
+                { "No selected elements has id '$id', found ids $actualIds" },
+                { "No selected elements should have id '$id'," },
+            )
+        }
     }
-}
 
 /**
  * See [haveId]
  */
-fun FluentList<FluentWebElement>.shouldHaveId(id: String) =
-    also { it should haveId(id) }
+fun FluentList<FluentWebElement>.shouldHaveId(id: String) = also { it should haveId(id) }
 
 /**
  * See [haveId]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveId(id: String) =
-    also { it shouldNot haveId(id) }
+fun FluentList<FluentWebElement>.shouldNotHaveId(id: String) = also { it shouldNot haveId(id) }
 
 private const val CLASS_ATTRIBUTE = "class"
 private const val CLASS_DELIMITER = " "
@@ -148,35 +139,36 @@ private const val CLASS_DELIMITER = " "
  * @param expectedClasses expected classes
  * @return the matcher object
  */
-fun haveClass(vararg expectedClasses: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val expectedList = expectedClasses.toList()
-        val actualClasses = value.attributes(CLASS_ATTRIBUTE)
-            .map { it.split(CLASS_DELIMITER) }
+fun haveClass(vararg expectedClasses: String) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val expectedList = expectedClasses.toList()
+            val actualClasses =
+                value.attributes(CLASS_ATTRIBUTE)
+                    .map { it.split(CLASS_DELIMITER) }
 
-        val anyMatch = actualClasses.any {
-            it.containsAll(expectedClasses.toList())
+            val anyMatch =
+                actualClasses.any {
+                    it.containsAll(expectedClasses.toList())
+                }
+
+            return MatcherResult(
+                anyMatch,
+                { "No selected elements has expected classes $expectedList, found $actualClasses" },
+                { "No selected elements should have classes $expectedList" },
+            )
         }
-
-        return MatcherResult(
-            anyMatch,
-            { "No selected elements has expected classes $expectedList, found $actualClasses" },
-            { "No selected elements should have classes $expectedList" },
-        )
     }
-}
 
 /**
  * See [haveClass]
  */
-fun FluentList<FluentWebElement>.shouldHaveClass(vararg classes: String) =
-    also { it should haveClass(*classes) }
+fun FluentList<FluentWebElement>.shouldHaveClass(vararg classes: String) = also { it should haveClass(*classes) }
 
 /**
  * See [haveClass]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveClass(vararg classes: String) =
-    also { it shouldNot haveClass(*classes) }
+fun FluentList<FluentWebElement>.shouldNotHaveClass(vararg classes: String) = also { it shouldNot haveClass(*classes) }
 
 /**
  * Checks if at least one element in a list of elements, has the expected name.
@@ -187,29 +179,28 @@ fun FluentList<FluentWebElement>.shouldNotHaveClass(vararg classes: String) =
  * @param expectedName name to find
  * @return the matcher object
  */
-fun haveName(expectedName: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualNames = value.names()
+fun haveName(expectedName: String) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val actualNames = value.names()
 
-        return MatcherResult(
-            actualNames.contains(expectedName),
-            { "No selected elements with name '$expectedName', found $actualNames." },
-            { "No selected elements should have name '$expectedName'." },
-        )
+            return MatcherResult(
+                actualNames.contains(expectedName),
+                { "No selected elements with name '$expectedName', found $actualNames." },
+                { "No selected elements should have name '$expectedName'." },
+            )
+        }
     }
-}
 
 /**
  * See [haveName]
  */
-fun FluentList<FluentWebElement>.shouldHaveName(name: String) =
-    also { it should haveName(name) }
+fun FluentList<FluentWebElement>.shouldHaveName(name: String) = also { it should haveName(name) }
 
 /**
  * See [haveName]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveName(name: String) =
-    also { it shouldNot haveName(name) }
+fun FluentList<FluentWebElement>.shouldNotHaveName(name: String) = also { it shouldNot haveName(name) }
 
 /**
  * Checks if at least one element in a list of elements, has the expected attribute.
@@ -220,31 +211,30 @@ fun FluentList<FluentWebElement>.shouldNotHaveName(name: String) =
  * @param expectedAttribute attribute to find
  * @return the matcher object
  */
-fun haveAttribute(expectedAttribute: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualAttributes = value.attributes(expectedAttribute)
+fun haveAttribute(expectedAttribute: String) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val actualAttributes = value.attributes(expectedAttribute)
 
-        val anyPresent = actualAttributes.filterNotNull()
+            val anyPresent = actualAttributes.filterNotNull()
 
-        return MatcherResult(
-            anyPresent.isNotEmpty(),
-            { "No selected elements with name attribute '$expectedAttribute'." },
-            { "No selected elements should have name '$expectedAttribute'. found $anyPresent" },
-        )
+            return MatcherResult(
+                anyPresent.isNotEmpty(),
+                { "No selected elements with name attribute '$expectedAttribute'." },
+                { "No selected elements should have name '$expectedAttribute'. found $anyPresent" },
+            )
+        }
     }
-}
 
 /**
  * See [haveAttribute]
  */
-fun FluentList<FluentWebElement>.shouldHaveAttribute(attribute: String) =
-    also { it should haveAttribute(attribute) }
+fun FluentList<FluentWebElement>.shouldHaveAttribute(attribute: String) = also { it should haveAttribute(attribute) }
 
 /**
  * See [haveAttribute]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveAttribute(attribute: String) =
-    also { it shouldNot haveAttribute(attribute) }
+fun FluentList<FluentWebElement>.shouldNotHaveAttribute(attribute: String) = also { it shouldNot haveAttribute(attribute) }
 
 /**
  * Checks if at least one element in a list of elements, contains the expected value in its value attribute.
@@ -255,29 +245,28 @@ fun FluentList<FluentWebElement>.shouldNotHaveAttribute(attribute: String) =
  * @param expectedValue value to find
  * @return the matcher object
  */
-fun haveValue(expectedValue: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualAttributes = value.values()
+fun haveValue(expectedValue: String) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val actualAttributes = value.values()
 
-        return MatcherResult(
-            actualAttributes.contains(expectedValue),
-            { "No selected elements with value '$expectedValue'." },
-            { "No selected elements should have value '$expectedValue'." },
-        )
+            return MatcherResult(
+                actualAttributes.contains(expectedValue),
+                { "No selected elements with value '$expectedValue'." },
+                { "No selected elements should have value '$expectedValue'." },
+            )
+        }
     }
-}
 
 /**
  * See [haveValue]
  */
-fun FluentList<FluentWebElement>.shouldHaveValue(value: String) =
-    also { it should haveValue(value) }
+fun FluentList<FluentWebElement>.shouldHaveValue(value: String) = also { it should haveValue(value) }
 
 /**
  * See [haveValue]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveValue(value: String) =
-    also { it shouldNot haveValue(value) }
+fun FluentList<FluentWebElement>.shouldNotHaveValue(value: String) = also { it shouldNot haveValue(value) }
 
 /**
  * Checks if at least one element in a list of elements, contains the expected attribute key and value.
@@ -289,7 +278,10 @@ fun FluentList<FluentWebElement>.shouldNotHaveValue(value: String) =
  * @param expectedValue attribute value
  * @return the matcher object
  */
-fun haveAttributeValue(key: String, expectedValue: String) = object : Matcher<FluentList<FluentWebElement>> {
+fun haveAttributeValue(
+    key: String,
+    expectedValue: String,
+) = object : Matcher<FluentList<FluentWebElement>> {
     override fun test(value: FluentList<FluentWebElement>): MatcherResult {
         val actualValues = value.attributes(key)
 
@@ -304,14 +296,15 @@ fun haveAttributeValue(key: String, expectedValue: String) = object : Matcher<Fl
 /**
  * See [haveAttributeValue]
  */
-fun FluentList<FluentWebElement>.shouldHaveAttributeValue(key: String, attribute: String) =
-    also { it should haveAttributeValue(key, attribute) }
+fun FluentList<FluentWebElement>.shouldHaveAttributeValue(
+    key: String,
+    attribute: String,
+) = also { it should haveAttributeValue(key, attribute) }
 
 /**
  * See [haveAttributeValue]
  */
-fun FluentList<FluentWebElement>.shouldHaveAttributeValue(pair: Pair<String, String>) =
-    shouldHaveAttributeValue(pair.first, pair.second)
+fun FluentList<FluentWebElement>.shouldHaveAttributeValue(pair: Pair<String, String>) = shouldHaveAttributeValue(pair.first, pair.second)
 
 /**
  * See [haveAttributeValue]
@@ -322,8 +315,10 @@ fun FluentList<FluentWebElement>.shouldNotHaveAttributeValue(pair: Pair<String, 
 /**
  * See [haveAttributeValue]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveAttributeValue(key: String, attribute: String) =
-    also { it shouldNot haveAttributeValue(key, attribute) }
+fun FluentList<FluentWebElement>.shouldNotHaveAttributeValue(
+    key: String,
+    attribute: String,
+) = also { it shouldNot haveAttributeValue(key, attribute) }
 
 /**
  * Checks if at least one element in a list of elements, is of the expected tag.
@@ -334,29 +329,28 @@ fun FluentList<FluentWebElement>.shouldNotHaveAttributeValue(key: String, attrib
  * @param expectedTag tagname to find
  * @return the matcher object
  */
-fun haveTagName(expectedTag: String) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualTags = value.tagNames()
+fun haveTagName(expectedTag: String) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val actualTags = value.tagNames()
 
-        return MatcherResult(
-            actualTags.contains(expectedTag),
-            { "No selected elements with tag '$expectedTag'. found tags $actualTags" },
-            { "No selected elements should be a '$expectedTag'." },
-        )
+            return MatcherResult(
+                actualTags.contains(expectedTag),
+                { "No selected elements with tag '$expectedTag'. found tags $actualTags" },
+                { "No selected elements should be a '$expectedTag'." },
+            )
+        }
     }
-}
 
 /**
  * See [haveTagName]
  */
-fun FluentList<FluentWebElement>.shouldHaveTagName(tagName: String) =
-    also { it should haveTagName(tagName) }
+fun FluentList<FluentWebElement>.shouldHaveTagName(tagName: String) = also { it should haveTagName(tagName) }
 
 /**
  * See [haveTagName]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveTagName(tagName: String) =
-    also { it shouldNot haveTagName(tagName) }
+fun FluentList<FluentWebElement>.shouldNotHaveTagName(tagName: String) = also { it shouldNot haveTagName(tagName) }
 
 /**
  * Checks if at least one element in a list of elements, has the expected dimension.
@@ -367,35 +361,33 @@ fun FluentList<FluentWebElement>.shouldNotHaveTagName(tagName: String) =
  * @param expectedDimension dimension to check for
  * @return the matcher object
  */
-fun haveDimension(expectedDimension: Dimension) = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult {
-        val actualDimensions = value.dimensions()
+fun haveDimension(expectedDimension: Dimension) =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult {
+            val actualDimensions = value.dimensions()
 
-        return MatcherResult(
-            actualDimensions.any { it == expectedDimension },
-            { "No selected elements with dimension '$expectedDimension'. found $actualDimensions" },
-            { "No selected elements should have dimension '$expectedDimension'." },
-        )
+            return MatcherResult(
+                actualDimensions.any { it == expectedDimension },
+                { "No selected elements with dimension '$expectedDimension'. found $actualDimensions" },
+                { "No selected elements should have dimension '$expectedDimension'." },
+            )
+        }
     }
-}
 
 /**
  * See [haveDimension]
  */
-fun haveDimension(expectedDimension: Pair<Int, Int>) =
-    haveDimension(Dimension(expectedDimension.first, expectedDimension.second))
+fun haveDimension(expectedDimension: Pair<Int, Int>) = haveDimension(Dimension(expectedDimension.first, expectedDimension.second))
 
 /**
  * See [haveDimension]
  */
-fun FluentList<FluentWebElement>.shouldHaveDimension(dimension: Dimension) =
-    also { it should haveDimension(dimension) }
+fun FluentList<FluentWebElement>.shouldHaveDimension(dimension: Dimension) = also { it should haveDimension(dimension) }
 
 /**
  * See [haveDimension]
  */
-fun FluentList<FluentWebElement>.shouldNotHaveDimension(dimension: Dimension) =
-    also { it shouldNot haveDimension(dimension) }
+fun FluentList<FluentWebElement>.shouldNotHaveDimension(dimension: Dimension) = also { it shouldNot haveDimension(dimension) }
 
 /**
  * Checks if any element is present.
@@ -405,25 +397,28 @@ fun FluentList<FluentWebElement>.shouldNotHaveDimension(dimension: Dimension) =
  *
  * @return the matcher object.
  */
-fun bePresent() = object : Matcher<FluentList<FluentWebElement>> {
-    override fun test(value: FluentList<FluentWebElement>): MatcherResult =
-        MatcherResult(
-            value.present(),
-            { "Elements '$value' should be present" },
-            { "Elements '$value' should not be present" },
-        )
-}
+fun bePresent() =
+    object : Matcher<FluentList<FluentWebElement>> {
+        override fun test(value: FluentList<FluentWebElement>): MatcherResult =
+            MatcherResult(
+                value.present(),
+                { "Elements '$value' should be present" },
+                { "Elements '$value' should not be present" },
+            )
+    }
 
 /**
  * @see bePresent
  */
-fun FluentList<FluentWebElement>.shouldBePresent() = also {
-    it should bePresent()
-}
+fun FluentList<FluentWebElement>.shouldBePresent() =
+    also {
+        it should bePresent()
+    }
 
 /**
  * @see bePresent
  */
-fun FluentList<FluentWebElement>.shouldNotBePresent() = also {
-    it shouldNot bePresent()
-}
+fun FluentList<FluentWebElement>.shouldNotBePresent() =
+    also {
+        it shouldNot bePresent()
+    }

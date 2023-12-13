@@ -15,7 +15,6 @@ abstract class FluentFreeSpec internal constructor(
 ) : FreeSpec({}),
     IFluentAdapter by fluentAdapter,
     TestRunnerAdapter {
-
     constructor(body: FluentFreeSpec.() -> Unit = {}) : this(KoTestFluentAdapter(), body)
 
     init {
@@ -34,8 +33,7 @@ abstract class FluentFreeSpec internal constructor(
 
     override fun getTestClass(): Class<*> = javaClass
 
-    override fun getTestMethodName(): String =
-        fluentAdapter.currentTestName.get()
+    override fun getTestMethodName(): String = fluentAdapter.currentTestName.get()
 
     override fun <T : Annotation?> getClassAnnotation(annotation: Class<T>): T =
         javaClass.getAnnotation(annotation) ?: throw AnnotationNotFoundException()

@@ -1,7 +1,6 @@
 package io.fluentlenium.adapter.kotest.hooks
 
 class ExampleHookOptions {
-
     var message = "ExampleHook"
 
     constructor() {
