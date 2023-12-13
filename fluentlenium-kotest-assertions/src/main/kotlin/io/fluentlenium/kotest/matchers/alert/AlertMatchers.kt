@@ -15,14 +15,15 @@ import io.kotest.matchers.shouldNot
  * @param text text to search for
  * @return the matcher object
  */
-fun haveText(text: String) = object : Matcher<Alert> {
-    override fun test(value: Alert) =
-        MatcherResult(
-            value.text.contains(text),
-            { "The alert box is expected to contain the text '${value.text}', actual text is '$text'" },
-            { "The alert box is expected to not contain the text '${value.text}'" },
-        )
-}
+fun haveText(text: String) =
+    object : Matcher<Alert> {
+        override fun test(value: Alert) =
+            MatcherResult(
+                value.text.contains(text),
+                { "The alert box is expected to contain the text '${value.text}', actual text is '$text'" },
+                { "The alert box is expected to not contain the text '${value.text}'" },
+            )
+    }
 
 /**
  * See [haveText]
@@ -39,13 +40,15 @@ fun Alert.shouldNotHaveText(text: String) = also { it shouldNot haveText(text) }
  *
  * @return the matcher object
  */
-fun bePresent() = object : Matcher<Alert> {
-    override fun test(value: Alert) = MatcherResult(
-        value.present(),
-        { "Alert should be present" },
-        { "Alert should not be present" },
-    )
-}
+fun bePresent() =
+    object : Matcher<Alert> {
+        override fun test(value: Alert) =
+            MatcherResult(
+                value.present(),
+                { "Alert should be present" },
+                { "Alert should not be present" },
+            )
+    }
 
 /**
  * See [bePresent]

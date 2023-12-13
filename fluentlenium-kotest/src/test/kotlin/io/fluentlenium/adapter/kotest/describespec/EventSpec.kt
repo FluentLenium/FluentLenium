@@ -7,7 +7,6 @@ import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 
 class EventSpec : FluentDescribeSpec() {
-
     var url: String? = null
 
     @AfterNavigateTo

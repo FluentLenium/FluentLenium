@@ -6,9 +6,7 @@ import io.kotest.core.test.TestCase
 import io.kotest.matchers.shouldBe
 
 class ListenerSpec : FluentDescribeSpec() {
-
-    override fun listeners(): List<TestListener> =
-        listOf(MyListener)
+    override fun listeners(): List<TestListener> = listOf(MyListener)
 
     object MyListener : TestListener {
         var beforeTestCalled = 0

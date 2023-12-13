@@ -6,7 +6,6 @@ import io.kotest.matchers.shouldBe
 import org.openqa.selenium.support.FindBy
 
 class Page2 : FluentPage() {
-
     @FindBy(id = "link")
     private lateinit var link: FluentWebElement
 

@@ -9,11 +9,13 @@ import kotlinx.coroutines.withContext
 
 class KoTestConfig : AbstractProjectConfig() {
     override fun extensions(): List<Extension> =
-        listOf(object : ProjectListener {
-            override suspend fun beforeProject() {
-                withContext(Dispatchers.IO) {
-                    WebDriverManager.chromedriver().setup()
+        listOf(
+            object : ProjectListener {
+                override suspend fun beforeProject() {
+                    withContext(Dispatchers.IO) {
+                        WebDriverManager.chromedriver().setup()
+                    }
                 }
-            }
-        })
+            },
+        )
 }

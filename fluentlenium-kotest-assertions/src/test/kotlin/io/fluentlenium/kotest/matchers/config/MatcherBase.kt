@@ -6,9 +6,7 @@ import io.fluentlenium.utils.UrlUtils
 abstract class MatcherBase(
     body: FluentStringSpec.() -> Unit = {},
 ) : FluentStringSpec(body) {
-
-    fun goToFile(file: String) =
-        goTo(UrlUtils.getAbsoluteUrlFromFile(file))
+    fun goToFile(file: String) = goTo(UrlUtils.getAbsoluteUrlFromFile(file))
 
     init {
         beforeTest {

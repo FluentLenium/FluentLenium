@@ -24,14 +24,13 @@ import io.kotest.core.spec.Spec
 import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 import io.kotest.core.test.TestType
+import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.concurrent.atomic.AtomicReference
 
 internal class KoTestFluentAdapter(var useConfigurationOverride: () -> Configuration = { throw IllegalStateException() }) :
     IFluentAdapter,
     FluentAdapter() {
-
     val sharedMutator = DefaultSharedMutator()
 
     /**
@@ -48,9 +47,7 @@ internal class KoTestFluentAdapter(var useConfigurationOverride: () -> Configura
 
     val extension: Extension =
         object : BeforeSpecListener, AfterSpecListener, BeforeTestListener, AfterEachListener, AfterTestListener {
-
-            override suspend fun beforeSpec(spec: Spec) =
-                this@KoTestFluentAdapter.beforeSpec()
+            override suspend fun beforeSpec(spec: Spec) = this@KoTestFluentAdapter.beforeSpec()
 
             override suspend fun afterSpec(spec: Spec) {
                 this@KoTestFluentAdapter.afterSpec(spec)
@@ -60,11 +57,17 @@ internal class KoTestFluentAdapter(var useConfigurationOverride: () -> Configura
                 this@KoTestFluentAdapter.beforeTest(testCase)
             }
 
-            override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+            override suspend fun afterEach(
+                testCase: TestCase,
+                result: TestResult,
+            ) {
                 // is not invoked for dynamic tests https://kotlinlang.slack.com/archives/CT0G9SD7Z/p1666788639534289
             }
 
-            override suspend fun afterAny(testCase: TestCase, result: TestResult) {
+            override suspend fun afterAny(
+                testCase: TestCase,
+                result: TestResult,
+            ) {
                 this@KoTestFluentAdapter.afterEach(testCase, result)
             }
         }
@@ -114,7 +117,10 @@ internal class KoTestFluentAdapter(var useConfigurationOverride: () -> Configura
         FluentTestRunnerAdapter.classDriverCleanup(spec.javaClass)
     }
 
-    fun afterEach(testCase: TestCase, result: TestResult) {
+    fun afterEach(
+        testCase: TestCase,
+        result: TestResult,
+    ) {
         if (testCase.type == TestType.Container) {
             return
         }
@@ -128,8 +134,9 @@ internal class KoTestFluentAdapter(var useConfigurationOverride: () -> Configura
             else -> Unit
         }
 
-        val sharedWebDriver = SharedWebDriverContainer.INSTANCE
-            .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
+        val sharedWebDriver =
+            SharedWebDriverContainer.INSTANCE
+                .getDriver(sharedMutator.getEffectiveParameters(testClass, testName, driverLifecycle))
 
         quitMethodAndThreadDrivers(driverLifecycle, sharedWebDriver)
         deleteCookies(sharedWebDriver, configuration)
@@ -138,13 +145,18 @@ internal class KoTestFluentAdapter(var useConfigurationOverride: () -> Configura
         currentTestName.set(null)
     }
 
-    private fun failed(error: Throwable?, testClass: Class<*>, testName: String) {
+    private fun failed(
+        error: Throwable?,
+        testClass: Class<*>,
+        testName: String,
+    ) {
         if (isFluentControlAvailable && !ScreenshotUtil.isIgnoredException(error)) {
             doScreenshot(testClass, testName, this@KoTestFluentAdapter, configuration)
             doHtmlDump(testClass, testName, this@KoTestFluentAdapter, configuration)
         }
     }
 
+    @Suppress("ktlint:standard:max-line-length")
     fun ensureTestStarted() {
         checkNotNull(currentTestName.get()) {
             "FluentLenium is not available here! Make sure to use FluentLenium only within the innermost Kotest test block and in beforeTest/afterTest!"

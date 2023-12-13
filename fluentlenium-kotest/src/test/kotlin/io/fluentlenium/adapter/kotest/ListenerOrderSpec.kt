@@ -10,7 +10,6 @@ import io.kotest.core.test.TestCase
 import io.kotest.core.test.TestResult
 
 class ListenerOrderSpec : StringSpec() {
-
     override suspend fun beforeEach(testCase: TestCase) {
         println("f beforeEach")
     }
@@ -23,15 +22,24 @@ class ListenerOrderSpec : StringSpec() {
         println("f beforeTest")
     }
 
-    override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+    override suspend fun afterEach(
+        testCase: TestCase,
+        result: TestResult,
+    ) {
         println("f afterEach")
     }
 
-    override suspend fun afterAny(testCase: TestCase, result: TestResult) {
+    override suspend fun afterAny(
+        testCase: TestCase,
+        result: TestResult,
+    ) {
         println("f afterAny")
     }
 
-    override suspend fun afterTest(testCase: TestCase, result: TestResult) {
+    override suspend fun afterTest(
+        testCase: TestCase,
+        result: TestResult,
+    ) {
         println("f afterTest")
     }
 
@@ -55,19 +63,30 @@ class ListenerOrderSpec : StringSpec() {
 
         extension(beforeTestListener("extension"))
 
-        register(object : AfterTestListener, AfterEachListener {
-            override suspend fun afterAny(testCase: TestCase, result: TestResult) {
-                println("e afterAny")
-            }
+        register(
+            object : AfterTestListener, AfterEachListener {
+                override suspend fun afterAny(
+                    testCase: TestCase,
+                    result: TestResult,
+                ) {
+                    println("e afterAny")
+                }
 
-            override suspend fun afterTest(testCase: TestCase, result: TestResult) {
-                println("e afterTest")
-            }
+                override suspend fun afterTest(
+                    testCase: TestCase,
+                    result: TestResult,
+                ) {
+                    println("e afterTest")
+                }
 
-            override suspend fun afterEach(testCase: TestCase, result: TestResult) {
-                println("e afterEach")
-            }
-        })
+                override suspend fun afterEach(
+                    testCase: TestCase,
+                    result: TestResult,
+                ) {
+                    println("e afterEach")
+                }
+            },
+        )
 
         "test" {
             println("run test")
@@ -86,17 +105,18 @@ class ListenerOrderSpec : StringSpec() {
         }
     }
 
-    private fun beforeTestListener(suffix: String = "") = object : BeforeTestListener, BeforeEachListener {
-        override suspend fun beforeAny(testCase: TestCase) {
-            println("e beforeAny $suffix")
-        }
+    private fun beforeTestListener(suffix: String = "") =
+        object : BeforeTestListener, BeforeEachListener {
+            override suspend fun beforeAny(testCase: TestCase) {
+                println("e beforeAny $suffix")
+            }
 
-        override suspend fun beforeTest(testCase: TestCase) {
-            println("e beforeTest $suffix")
-        }
+            override suspend fun beforeTest(testCase: TestCase) {
+                println("e beforeTest $suffix")
+            }
 
-        override suspend fun beforeEach(testCase: TestCase) {
-            println("e beforeEach $suffix")
+            override suspend fun beforeEach(testCase: TestCase) {
+                println("e beforeEach $suffix")
+            }
         }
-    }
 }
