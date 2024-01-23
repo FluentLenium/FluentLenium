@@ -14,7 +14,7 @@
 
     <properties>
         <fluentlenium.version>6.0.0</fluentlenium.version>
-        <spring.version>6.1.1</spring.version>
+        <spring.version>6.1.2</spring.version>
         <appium.selenium.version>4.10.0</appium.selenium.version>
     </properties>
 
