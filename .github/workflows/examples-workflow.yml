@@ -209,7 +209,7 @@ jobs:
 
       - name: Select current FluentLenium
         working-directory: examples/quickstart-microsoft-browsers
-        run: ..\..\mvnw.cmd -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION versions:set-property
+        run: ..\..\mvnw.cmd -Dproperty="fluentlenium.version" -DnewVersion=$FLUENTLENIUM_VERSION versions:set-property
 
       - name: List changes
         run: git diff
