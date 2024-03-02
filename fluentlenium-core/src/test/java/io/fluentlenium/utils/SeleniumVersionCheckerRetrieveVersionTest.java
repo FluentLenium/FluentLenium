@@ -25,7 +25,7 @@ public class SeleniumVersionCheckerRetrieveVersionTest {
 
         String actualVersion = SeleniumVersionChecker.retrieveVersionFromPom(model);
 
-        assertThat(actualVersion).isEqualTo("4.9.0");
+        assertThat(actualVersion).isEqualTo("4.16.0");
     }
 
     @Test
