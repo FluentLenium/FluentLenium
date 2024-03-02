@@ -208,9 +208,17 @@ jobs:
           command: .\mvnw.cmd -B clean install -DskipTests=true
 
       - name: Select current FluentLenium
-        run: |
-          .\mvnw.cmd -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property 
-          git diff
+        run: >
+          .\mvnw.cmd 
+          -Pexamples 
+          -B 
+          -nsu 
+          -pl examples/quickstart-microsoft-browsers versions:set-property
+          -Dproperty=fluentlenium.version 
+          -DnewVersion=$FLUENTLENIUM_VERSION 
+
+      - name: List changes
+        run: git diff
 
       - name: Run windows example (current branch)
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
