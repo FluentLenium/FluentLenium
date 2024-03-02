@@ -177,7 +177,9 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
     }
 
     private boolean isNullOrEmpty(String input) {
-        if (input == null) return true;
+        if (input == null) {
+            return true;
+        }
 
         return StringUtils.isEmpty(input);
     }
