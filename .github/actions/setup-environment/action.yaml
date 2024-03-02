@@ -10,14 +10,14 @@ runs:
   using: "composite"
   steps:
     - name: Set up JDK ${{ inputs.java-version }}
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: ${{ inputs.java-version }}
         distribution: 'zulu'
         cache: "maven"
 
     - name: Cache Maven Wrapper
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: mavenWrapper-${{ hashfiles('.mvn/wrapper/maven-wrapper.*') }}
         path: ~/.m2/wrapper

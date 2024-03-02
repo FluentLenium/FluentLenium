@@ -37,7 +37,7 @@ jobs:
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -56,7 +56,7 @@ jobs:
           set +o pipefail
 
       - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           check_name: Java 11 Test Reports
@@ -73,7 +73,7 @@ jobs:
     needs: [ check-env ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -92,7 +92,7 @@ jobs:
           set +o pipefail
 
       - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           check_name: Java 17 Test Reports
@@ -108,7 +108,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -129,7 +129,7 @@ jobs:
           clean test -Dtest=*/it/* -Dsurefire.failIfNoSpecifiedTests=false
 
       - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           check_name: Java 17 Parallelism Test Reports
@@ -139,7 +139,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
