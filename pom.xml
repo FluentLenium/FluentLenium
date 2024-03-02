@@ -199,11 +199,6 @@
                 <scope>compile</scope>
             </dependency>
             <dependency>
-                <groupId>org.htmlunit</groupId>
-                <artifactId>htmlunit</artifactId>
-                <version>3.11.0</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.14.0</version>
@@ -245,6 +240,11 @@
                 <groupId>org.atteo.classindex</groupId>
                 <artifactId>classindex</artifactId>
                 <version>3.13</version>
+            </dependency>
+            <dependency>
+                <groupId>org.htmlunit</groupId>
+                <artifactId>htmlunit</artifactId>
+                <version>3.11.0</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains</groupId>
@@ -456,7 +456,6 @@
                     <version>3.2.3</version>
                     <configuration>
                         <argLine>${failsafe.jacoco.args}</argLine>
-
                         <includes>
                             <include>**/integration/**/*</include>
                         </includes>
@@ -503,7 +502,6 @@
                 <plugin>
                     <groupId>com.gradle</groupId>
                     <artifactId>gradle-enterprise-maven-extension</artifactId>
-
                     <configuration>
                         <gradleEnterprise>
                             <plugins>
@@ -524,7 +522,6 @@
                                         </fileSets>
                                     </inputs>
                                 </plugin>
-
                                 <plugin>
                                     <artifactId>maven-failsafe-plugin</artifactId>
                                     <inputs>
@@ -654,7 +651,6 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-
                     <execution>
                         <id>before-integration-test-execution</id>
                         <goals>
@@ -668,7 +664,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
