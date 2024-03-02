@@ -202,6 +202,11 @@ jobs:
             set MAVEN_OPTS="-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip"
             .\mvnw.cmd -B clean install -DskipTests=true
 
+      - name: Update property
+        run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property
+        env:
+          MAVEN_OPTS: "-Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip -Dsurefire.rerunFailingTestsCount=1"
+
       - name: Show dependencies
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers dependency:tree
         env:
@@ -211,6 +216,11 @@ jobs:
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
         env:
           MAVEN_OPTS: "-Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip -Dsurefire.rerunFailingTestsCount=1"
+
+      - name: Revert pom
+        run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:revert
+        env:
+          MAVEN_OPTS: "-Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip -Dsurefire.rerunFailingTestsCount=1"
 
       - name: Run windows example as it is
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
