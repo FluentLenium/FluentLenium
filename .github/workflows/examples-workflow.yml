@@ -211,7 +211,8 @@ jobs:
 
       - name: Select current FluentLenium
         run: |
-          .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION
+          set MAVEN_OPTS="-Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION"
+          .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property 
           git diff
 
       - name: Run windows example (current branch)
