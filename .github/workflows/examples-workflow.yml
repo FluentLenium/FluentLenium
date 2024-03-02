@@ -154,8 +154,8 @@ jobs:
 
       - name: Select current FluentLenium
         run: >
-          ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari 
-          versions:set-property 
+          ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari
+          versions:set-property
           -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION
 
       - name: List changes
