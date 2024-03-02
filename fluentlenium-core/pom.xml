@@ -46,32 +46,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-lang3</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-net</groupId>
-                    <artifactId>commons-net</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.commons</groupId>
-                    <artifactId>commons-text</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
@@ -95,6 +69,32 @@
         <dependency>
             <groupId>org.atteo.classindex</groupId>
             <artifactId>classindex</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-io</groupId>
+                    <artifactId>commons-io</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-lang3</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-net</groupId>
+                    <artifactId>commons-net</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.commons</groupId>
+                    <artifactId>commons-text</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -165,7 +165,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- proc is set to none in parent pom, override element here to re-enable processing -->
-                    <proc combine.self="override"/>
+                    <proc combine.self="override"></proc>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.atteo.classindex</groupId>
