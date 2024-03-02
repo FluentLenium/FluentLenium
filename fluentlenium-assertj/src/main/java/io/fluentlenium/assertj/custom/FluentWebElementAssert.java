@@ -1,7 +1,7 @@
 package io.fluentlenium.assertj.custom;
 
 import io.fluentlenium.core.domain.FluentWebElement;
-import io.netty.util.internal.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.AbstractStringAssert;
 import org.assertj.core.api.StringAssert;
 import org.openqa.selenium.Dimension;
@@ -165,7 +165,7 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
     public FluentWebElementAssert hasClasses(String... classesToFind) {
         String actualClasses = actual.attribute(CLASS_ATTRIBUTE);
 
-        if (StringUtil.isNullOrEmpty(actualClasses)) {
+        if (isNullOrEmpty(actualClasses)) {
             failWithMessage("The element has no class attribute.");
         }
 
@@ -174,6 +174,14 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
                     + ". Actual classes found : " + actualClasses);
         }
         return this;
+    }
+
+    private boolean isNullOrEmpty(String input) {
+        if (input == null) {
+            return true;
+        }
+
+        return StringUtils.isEmpty(input);
     }
 
     @Override
@@ -249,7 +257,7 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
     public AbstractStringAssert hasAttribute(String attribute) {
         String actualValue = actual.attribute(attribute);
 
-        if (StringUtil.isNullOrEmpty(actualValue)) {
+        if (isNullOrEmpty(actualValue)) {
             failWithMessage("The element does not have attribute " + attribute);
         }
 
@@ -258,7 +266,7 @@ public class FluentWebElementAssert extends AbstractFluentAssert<FluentWebElemen
 
     @Override
     public FluentWebElementAssert hasNotAttribute(String attribute) {
-        if (!StringUtil.isNullOrEmpty(actual.attribute(attribute))) {
+        if (!isNullOrEmpty(actual.attribute(attribute))) {
             failWithMessage("The element has attribute " + attribute);
         }
         return this;
