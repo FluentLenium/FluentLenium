@@ -26,7 +26,7 @@ jobs:
       fluentlenium: ${{ steps.fluentlenium.outputs.version }}
       selenium: ${{ steps.selenium.outputs.version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -52,7 +52,7 @@ jobs:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -69,7 +69,7 @@ jobs:
         run: cd examples/kotest && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           check_name: Gradle Kotest examples Test Reports
@@ -83,7 +83,7 @@ jobs:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -100,7 +100,7 @@ jobs:
         run: cd examples/quickstart-firefox && ./gradlew check -Pfluentlenium.version=$FLUENTLENIUM_VERSION -Pselenium.version=$SELENIUM_VERSION
 
       - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           check_name: Gradle Firefox example Test Reports
@@ -114,7 +114,7 @@ jobs:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -139,7 +139,7 @@ jobs:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: setup environment
         uses: ./.github/actions/setup-environment
@@ -160,7 +160,7 @@ jobs:
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
 
       - name: Upload screenshots
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: examples-safari-screenshots
@@ -168,7 +168,7 @@ jobs:
             examples/quickstart-safari/target/screenshots
 
       - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           check_name: Safari example
@@ -182,12 +182,12 @@ jobs:
       FLUENTLENIUM_VERSION: ${{ needs.versions.outputs.fluentlenium }}
       SELENIUM_VERSION: ${{ needs.versions.outputs.selenium }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: 17
@@ -213,7 +213,7 @@ jobs:
           MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn -Dmaven.javadoc.skip -Dsurefire.rerunFailingTestsCount=1"
 
       - name: Publish Test reports
-        uses: mikepenz/action-junit-report@v3
+        uses: mikepenz/action-junit-report@v4
         if: always() # always run even if the previous step fails
         with:
           check_name: Microsoft example
