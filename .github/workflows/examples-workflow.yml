@@ -154,9 +154,7 @@ jobs:
           sudo safaridriver --enable
 
       - name: Update property
-        run: ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:set-property
-        env:
-          MAVEN_OPTS: "-Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION"
+        run: ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:set-property -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION
 
       - name: Show dependencies
         run: |
@@ -212,9 +210,7 @@ jobs:
             .\mvnw.cmd -B clean install -DskipTests=true
 
       - name: Update property
-        run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property
-        env:
-          MAVEN_OPTS: "-Dproperty=fluentlenium.version -DnewVersion=%FLUENTLENIUM_VERSION%"
+        run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=fluentlenium.version -DnewVersion=%FLUENTLENIUM_VERSION%
 
       - name: Show dependencies
         run: |
