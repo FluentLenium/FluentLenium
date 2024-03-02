@@ -150,8 +150,7 @@ jobs:
         uses: ./.github/actions/fluentlenium-maven-install
 
       - name: Enable Safari Driver
-        run: |
-          sudo safaridriver --enable
+        run: sudo safaridriver --enable
 
       - name: Select current FluentLenium
         run: |
@@ -206,8 +205,7 @@ jobs:
           max_attempts: 2
           timeout_minutes: 4
           retry_on: all
-          command: |
-            .\mvnw.cmd -B clean install -DskipTests=true
+          command: .\mvnw.cmd -B clean install -DskipTests=true
 
       - name: Select current FluentLenium
         run: |
