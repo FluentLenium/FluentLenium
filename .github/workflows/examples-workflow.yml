@@ -153,18 +153,20 @@ jobs:
         run: |
           sudo safaridriver --enable
 
-      - name: Use current Fluentlenium
+      - name: Select current FluentLenium
         run: |
-          ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:set-property -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION
+          ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:set-property
           git diff
+        env:
+          MAVEN_OPTS: "-Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION"
 
-      - name: Run safari examples with current branch
+      - name: Run safari examples (current branch)
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
 
-      - name: Reset dependencies
+      - name: Reset FluentLenium dependency
         run: ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:revert
 
-      - name: Run safari examples as they are
+      - name: Run safari examples (latest release)
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
 
       - name: Upload screenshots
@@ -209,18 +211,18 @@ jobs:
           command: |
             .\mvnw.cmd -B clean install -DskipTests=true
 
-      - name: Use current Fluentlenium
+      - name: Select current FluentLenium
         run: |
           .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION
           git diff
 
-      - name: Run windows example with current branch
+      - name: Run windows example (current branch)
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
 
-      - name: Revert pom
+      - name: Reset FluentLenium dependency
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:revert
 
-      - name: Run windows example as it is
+      - name: Run windows example (latest release)
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
 
       - name: Publish Test reports
