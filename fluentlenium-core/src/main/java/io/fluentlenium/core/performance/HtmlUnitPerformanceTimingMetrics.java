@@ -1,6 +1,6 @@
 package io.fluentlenium.core.performance;
 
-import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
+import org.htmlunit.javascript.host.performance.PerformanceTiming;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;

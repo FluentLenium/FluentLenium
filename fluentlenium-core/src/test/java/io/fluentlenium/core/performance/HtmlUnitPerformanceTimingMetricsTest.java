@@ -1,6 +1,6 @@
 package io.fluentlenium.core.performance;
 
-import com.gargoylesoftware.htmlunit.javascript.host.performance.PerformanceTiming;
+import org.htmlunit.javascript.host.performance.PerformanceTiming;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
