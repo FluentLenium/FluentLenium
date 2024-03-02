@@ -208,9 +208,9 @@ jobs:
           command: .\mvnw.cmd -B clean install -DskipTests=true
 
       - name: Select current FluentLenium
-        run: > 
-          .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers 
-          -Dproperty="fluentlenium.version" -DnewVersion="${{ needs.versions.outputs.fluentlenium }}" 
+        run: >
+          .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers
+          -Dproperty="fluentlenium.version" -DnewVersion="${{ needs.versions.outputs.fluentlenium }}"
           versions:set-property
 
       - name: List changes
