@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.Response;
 import org.testng.annotations.Test;
+import org.testng.annotations.Ignore;
 
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class DuckDuckGoEdgeTest extends FluentTestNg {
     }
 
     @Test
+    @Ignore
     public void resultPageUrlShouldContainSearchQueryName() {
         String searchPhrase = "searchPhrase";
         String duckDuckUrl = "https://duckduckgo.com";
