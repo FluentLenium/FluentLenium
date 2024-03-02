@@ -153,11 +153,11 @@ jobs:
         run: |
           sudo safaridriver --enable
 
-      - name: Run safari examples as they are
-        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
-
       - name: Run safari examples with current branch
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify -Dfluentlenium.version=$FLUENTLENIUM_VERSION -Dselenium.version=$SELENIUM_VERSION
+
+      - name: Run safari examples as they are
+        run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v3
