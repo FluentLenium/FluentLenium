@@ -153,16 +153,16 @@ jobs:
         run: |
           sudo safaridriver --enable
 
-      - name: Update property
-        run: ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:set-property -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION
-
-      - name: Show dependencies
+      - name: Use current Fluentlenium
         run: |
+          ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:set-property -Dproperty=fluentlenium.version -DnewVersion=$FLUENTLENIUM_VERSION
           git diff
-          ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari dependency:tree
 
       - name: Run safari examples with current branch
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
+
+      - name: Reset dependencies
+        run: ./mvnw -Pexamples -B -nsu -pl examples/quickstart-safari versions:revert
 
       - name: Run safari examples as they are
         run: ./mvnw -B -nsu -Pexamples -pl examples/quickstart-safari verify
@@ -209,13 +209,10 @@ jobs:
           command: |
             .\mvnw.cmd -B clean install -DskipTests=true
 
-      - name: Update property
-        run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=fluentlenium.version -DnewVersion=%FLUENTLENIUM_VERSION%
-
-      - name: Show dependencies
+      - name: Use current Fluentlenium
         run: |
+          .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers versions:set-property -Dproperty=fluentlenium.version -DnewVersion=%FLUENTLENIUM_VERSION%
           git diff
-          .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers dependency:tree
 
       - name: Run windows example with current branch
         run: .\mvnw.cmd -Pexamples -B -nsu -pl examples/quickstart-microsoft-browsers verify
