@@ -165,7 +165,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- proc is set to none in parent pom, override element here to re-enable processing -->
-                    <proc combine.self="override"></proc>
+                    <proc combine.self="override"/>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.atteo.classindex</groupId>

@@ -80,6 +80,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.4.1</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
