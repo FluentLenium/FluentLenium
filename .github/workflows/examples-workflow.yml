@@ -210,7 +210,7 @@ jobs:
       - name: Select current FluentLenium
         working-directory: examples/quickstart-microsoft-browsers
         run: >
-          .\mvnw.cmd 
+          ..\..\mvnw.cmd 
           -Pexamples 
           -B 
           -nsu 
