@@ -439,7 +439,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.3</version>
+                    <version>3.2.5</version>
                     <configuration>
                         <excludes>
                             <exclude>**/integration/**/*</exclude>
@@ -453,7 +453,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
-                    <version>3.2.3</version>
+                    <version>3.2.5</version>
                     <configuration>
                         <argLine>${failsafe.jacoco.args}</argLine>
                         <includes>
@@ -560,8 +560,8 @@
                                 <requireMavenVersion>
                                     <version>3.9.0</version>
                                 </requireMavenVersion>
-                                <banDuplicatePomDependencyVersions></banDuplicatePomDependencyVersions>
-                                <dependencyConvergence></dependencyConvergence>
+                                <banDuplicatePomDependencyVersions/>
+                                <dependencyConvergence/>
                             </rules>
                         </configuration>
                     </execution>
@@ -585,7 +585,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.5.0</version>
+                <version>1.6.0</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
                     <flattenMode>resolveCiFriendliesOnly</flattenMode>
@@ -667,13 +667,14 @@
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.4.0</version>
                 <configuration>
                     <sortDependencies>groupId,artifactId</sortDependencies>
                     <keepBlankLines>false</keepBlankLines>
                     <verifyFail>Stop</verifyFail>
                     <nrOfIndentSpace>4</nrOfIndentSpace>
                     <createBackupFile>false</createBackupFile>
+                    <expandEmptyElements>false</expandEmptyElements>
                 </configuration>
                 <executions>
                     <execution>
@@ -843,7 +844,7 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
-                        <version>3.1.1</version>
+                        <version>3.2.0</version>
                         <configuration>
                             <executable>${maven.multiModuleProjectDirectory}/cleanup-browser.sh</executable>
                         </configuration>
