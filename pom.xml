@@ -125,7 +125,7 @@
         <testng.version>7.9.0</testng.version>
         <junit5.version>5.10.2</junit5.version>
         <spring.version>6.1.4</spring.version>
-        <slf4j.version>2.0.9</slf4j.version>
+        <slf4j.version>2.0.12</slf4j.version>
         <seleniumDevtools.artifactId>selenium-devtools-v120</seleniumDevtools.artifactId>
         <fluentlenium.capabilities.default>{"goog:chromeOptions": {"args": ["headless=new","no-sandbox", "disable-gpu",
             "disable-dev-shm-usage"]}}</fluentlenium.capabilities.default>
