@@ -121,7 +121,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>4.16.0</selenium.version>
+        <selenium.version>4.18.1</selenium.version>
         <testng.version>7.9.0</testng.version>
         <junit5.version>5.10.2</junit5.version>
         <spring.version>6.1.4</spring.version>
