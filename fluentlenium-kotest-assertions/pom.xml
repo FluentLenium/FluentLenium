@@ -10,7 +10,7 @@
     <name>FluentLenium Kotest Assertions</name>
     <description>Kotest FluentLenium Assertions</description>
     <properties>
-        <kotlin.version>1.9.22</kotlin.version>
+        <kotlin.version>1.9.23</kotlin.version>
         <kotest.version>5.8.0</kotest.version>
         <dokka.version>1.9.20</dokka.version>
     </properties>
