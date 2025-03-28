@@ -7,8 +7,8 @@
   "license": "ISC",
   "devDependencies": {
     "appium": "next",
-    "appium-uiautomator2-driver": "^2.12.7",
-    "appium-xcuitest-driver": "^4.21.4"
+    "appium-uiautomator2-driver": "^4.1.5",
+    "appium-xcuitest-driver": "^9.0.2"
   },
   "scripts": {
     "xcuitest": "appium driver install xcuitest || echo \"xcuitest already installed\"",
