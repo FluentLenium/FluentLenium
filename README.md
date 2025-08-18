@@ -1,3 +1,7 @@
+# FluentLenium End of Lifecycle
+
+Dear all thank you for using FluentLenium for a such long time :) If you are interested to become maintainers of this great project please feel free to contact filipcynarski -> I'm going to officially stop maintaining FluentLenium at the end of this year 2025.
+
 # What is FluentLenium ?
 
 ![FluentLenium CI pipeline](https://github.com/FluentLenium/FluentLenium/workflows/FluentLenium%20CI%20pipeline/badge.svg)
