@@ -112,7 +112,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <selenium.version>4.16.1</selenium.version>
+        <selenium.version>4.28.1</selenium.version>
         <testng.version>7.9.0</testng.version>
         <junit5.version>5.10.2</junit5.version>
         <spring.version>6.2.2</spring.version>
@@ -236,7 +236,7 @@
             <dependency>
                 <groupId>org.htmlunit</groupId>
                 <artifactId>htmlunit</artifactId>
-                <version>4.1.0</version>
+                <version>4.9.0</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains</groupId>

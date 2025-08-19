@@ -38,7 +38,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver; // TODO
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,7 +91,7 @@ public class FluentDriver extends AbstractFluentDriverSearchControl { // NOPMD G
         driverWait = new FluentDriverWait(configuration);
         this.driver = driver;
         search = new Search(driver, this, componentsManager, adapter);
-        if (driver instanceof EventFiringWebDriver) {
+        if (driver instanceof EventFiringWebDriver) { // TODO
             events = new EventsRegistry(this);
             componentsEventsRegistry = new ComponentsEventsRegistry(events, componentsManager);
         } else {

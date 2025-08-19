@@ -7,7 +7,7 @@ import io.fluentlenium.configuration.ConfigurationProperties.DriverLifecycle;
 import io.fluentlenium.configuration.WebDrivers;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver; // TODO
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -227,7 +227,7 @@ class SharedWebdriverSingletonImpl {
     public WebDriver newWebDriver(String name, Capabilities capabilities, Configuration configuration) {
         WebDriver webDriver = WebDrivers.INSTANCE.newWebDriver(name, capabilities, configuration);
         if (Boolean.TRUE.equals(configuration.getEventsEnabled())) {
-            webDriver = new EventFiringWebDriver(webDriver);
+            webDriver = new EventFiringWebDriver(webDriver); // TODO new EventFiringDecorator().decorate(webDriver)
         }
         return webDriver;
     }

@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WrapsDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver; // TODO
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -114,8 +114,8 @@ public class FluentAdapterTest {
             newWebDriver = adapter.newWebDriver();
             newWebDriver2 = adapter.newWebDriver();
 
-            assertThat(newWebDriver).isNotSameAs(newWebDriver2).isInstanceOf(EventFiringWebDriver.class);
-            assertThat(newWebDriver2).isInstanceOf(EventFiringWebDriver.class);
+            assertThat(newWebDriver).isNotSameAs(newWebDriver2).isInstanceOf(EventFiringWebDriver.class); // TODO
+            assertThat(newWebDriver2).isInstanceOf(EventFiringWebDriver.class); // TODO
 
             assertThat(((WrapsDriver) newWebDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);
             assertThat(((WrapsDriver) newWebDriver).getWrappedDriver()).isInstanceOf(HtmlUnitDriver.class);

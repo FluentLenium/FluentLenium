@@ -13,8 +13,8 @@ public class ChromiumControlImpl implements ChromiumControl {
     }
 
     public final ChromiumApi getChromiumApi() {
-        if (driver instanceof EventFiringWebDriver) {
-            driver = ((EventFiringWebDriver) driver).getWrappedDriver();
+        if (driver instanceof EventFiringWebDriver) { // TODO
+            driver = ((EventFiringWebDriver) driver).getWrappedDriver(); // TODO
         }
 
         RemoteWebDriver remoteWebDriver;
