@@ -209,7 +209,7 @@
             <dependency>
                 <groupId>org.apache.groovy</groupId>
                 <artifactId>groovy-bom</artifactId>
-                <version>4.0.21</version>
+                <version>4.0.26</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
