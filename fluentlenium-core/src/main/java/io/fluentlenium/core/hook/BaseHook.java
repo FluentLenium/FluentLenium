@@ -186,6 +186,10 @@ public class BaseHook<T> extends DefaultFluentContainer implements FluentHook<T>
         return getElement().getAttribute(name);
     }
 
+    public String getDomAttribute(String name) {
+        return getElement().getDomAttribute(name);
+    }
+
     public void clear() {
         getElement().clear();
     }
